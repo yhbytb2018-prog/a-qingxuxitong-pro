@@ -1,0 +1,45 @@
+{
+  "commit": "bd77fed",
+  "extractedAt": "2026-10-05T17:35:43.255Z",
+  "params": {
+    "weights": {
+      "s_net20": 0.2,
+      "s_pos10": 0.1,
+      "s_brd20": 0.2,
+      "s_hot10": 0.1,
+      "s_zdt15": 0.15,
+      "s_zbl10": 0.1,
+      "s_amt15": 0.15
+    },
+    "thresholds": {
+      "panic": 24,
+      "hi": 44,
+      "lo": 65,
+      "overheat": 80
+    },
+    "stops": {
+      "maxPos": 1,
+      "stopLoss": -0.08,
+      "ddTrigger": -0.15,
+      "maxPosChg": 0.2
+    },
+    "lookback": {
+      "rolling": {
+        "trainWindow": 20,
+        "testWindow": 6
+      },
+      "momentumRecent": 5,
+      "momentumPrev": 5,
+      "rankWindow": 60,
+      "rankMin": 20
+    },
+    "costModel": {
+      "comm": 0.0003,
+      "stamp": 0.0005,
+      "slip": 0.0002,
+      "priceLimit": {
+        "enabled": false
+      }
+    }
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "$comment": [
+    "前后端接口契约 · global.json（V5.3 同步机制 · 2026-10-05）",
+    "生产方：scripts/fetch_global.mjs（结构与阈值在 src/global.js，WATCH_THRESHOLDS 构建期随档下发）",
+    "消费方：app.js loadGlobal/renderGlobal + 详情抽屉。注意 check_frontend 用盘前夹具跑本档——",
+    "契约须同时容纳「盘前/收盘/盘中」三种相位（quotes[].state、watch.verdict.key 的枚举面按超集声明）。",
+    "2026-10-01 事故教训：insufficient 必须是独立取值（前端独立色调），枚举里不可合并进 neutral。"
+  ],
+  "type": "object",
+  "required": ["meta", "quotes", "watch", "anchors", "thresholds"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["generatedAt", "source", "usSessionDate"],
+      "properties": {
+        "generatedAt": { "type": "string" },
+        "source": { "type": "string" },
+        "usSessionDate": { "type": ["string", "null"] },
+        "aShareNextOpen": { "type": ["string", "null"] },
+        "aShareTradeDate": { "type": ["string", "null"] },
+        "aShareHoliday": { "type": ["boolean", "null"] },
+        "usSessionsBeforeOpen": { "type": ["number", "null"] },
+        "usReadiness": { "type": ["object", "null"] },
+        "usNoSession": { "type": ["array", "null"] },
+        "failed": { "type": ["array", "null"] },
+        "note": { "type": ["string", "null"] },
+        "lastAttempt": { "type": ["object", "null"] }
+      }
+    },
+    "quotes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "name", "state", "ok"],
+        "properties": {
+          "key": { "type": "string" },
+          "name": { "type": "string" },
+          "code": { "type": ["string", "null"] },
+          "kind": { "type": ["string", "null"] },
+          "role": { "type": ["string", "null"] },
+          "ok": { "type": "boolean" },
+          "state": { "type": "string", "enum": ["ok", "preopen", "no-trade", "stale", "unknown"] },
+          "stateText": { "type": ["string", "null"] },
+          "last": { "type": ["number", "null"] },
+          "prevClose": { "type": ["number", "null"] },
+          "chg": { "type": ["number", "null"] },
+          "chgPct": { "type": ["number", "null"] },
+          "chgPctText": { "type": ["string", "null"] },
+          "lastText": { "type": ["string", "null"] },
+          "chgPctReported": { "type": ["number", "null"] },
+          "sessionDate": { "type": ["string", "null"] },
+          "quoteTime": { "type": ["string", "null"] },
+          "hi52": { "type": ["number", "null"] },
+          "lo52": { "type": ["number", "null"] },
+          "note": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "watch": {
+      "type": "object",
+      "required": ["verdict", "bias", "signals"],
+      "properties": {
+        "verdict": {
+          "type": "object",
+          "required": ["key", "label", "hint"],
+          "properties": {
+            "key": { "type": "string", "enum": ["positive", "negative", "insufficient", "neutral"] },
+            "label": { "type": "string" },
+            "hint": { "type": "string" }
+          }
+        },
+        "bias": { "type": ["number", "null"] },
+        "biasGate": { "type": ["number", "string", "null"] },
+        "missingNote": { "type": ["string", "null"] },
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["level", "text"],
+            "properties": {
+              "level": { "type": "string", "enum": ["info", "pos", "neg", "warn", "ok", "unknown"] },
+              "key": { "type": ["string", "null"] },
+              "text": { "type": "string" },
+              "missing": { "type": "boolean" }
+            }
+          }
+        }
+      }
+    },
+    "anchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "sign", "aSectors", "why"],
+        "properties": {
+          "from": { "type": "string" },
+          "sign": { "type": "number" },
+          "aSectors": { "type": "array", "items": { "type": "string" } },
+          "why": { "type": "string" }
+        }
+      }
+    },
+    "thresholds": {
+      "type": "object",
+      "required": ["a50Up", "soxDown", "soxUp", "ixicUp", "hxcDown", "hxcUp", "dxyUp", "rmbDep"],
+      "properties": {
+        "a50Up": { "type": "number" },
+        "soxDown": { "type": "number" },
+        "soxUp": { "type": "number" },
+        "ixicUp": { "type": "number" },
+        "hxcDown": { "type": "number" },
+        "hxcUp": { "type": "number" },
+        "dxyUp": { "type": "number" },
+        "rmbDep": { "type": "number" }
+      }
+    },
+    "rmb": { "type": ["object", "null"] }
+  }
+}

@@ -1,0 +1,437 @@
+name: daily-sentiment
+
+on:
+  schedule:
+    - cron: '30 10 * * 1-5'   # 北京 18:30（UTC 10:30），仅周一至五；盘后首抓（部分源可能未出当日数据）
+    - cron: '0 13 * * 1-5'    # 北京 21:00（UTC 13:00），晚间补抓：深证日K/龙虎榜等延迟数据齐后重抓当日并覆盖，合并时同日替换 + 全档重算
+    # ★ 美股收盘档（2026-10-01 事故修复）：北京次日 04:30 = 美东 16:30（收盘 + 30 分钟结算缓冲）。
+    #   为什么必须单独一条：上面 21:00 那次跑在北京 21:00 = 美东 09:00，**美股还没开盘**
+    #   （09:30 开），数据源给的是盘前占位（last==prevClose、open/high/low=0）。
+    #   旧代码把它当"当日收平 0%"渲染，用户读成"外围没动"——而真相是"这一场还没开"。
+    #   修法是两层：① 行情层未成交一律 null（硬防线，与时刻无关，见 src/global.js）；
+    #   ② 时刻层把美股收盘态那一份快照**单独抓好**，这就是本 cron。
+    #   UTC 20:30 = 北京 04:30（次日）。周一至五 UTC 20:30 对应美股周一至五收盘。
+    #   为什么取 20:30（16:30 ET）而不是 20:00（16:00 ET）：收盘瞬间数据源仍在回填，
+    #   留 30 分钟让结算价稳定，避免抓到"半成品收盘价"。
+    - cron: '30 20 * * 1-5'
+    # 盘中轻量快照：北京 09:30~15:00 每 30 分钟（UTC 01:30~07:00 的 :00/:30）。
+    # 与上面几个 cron 的**根本区别**：这条只跑 scripts/snapshot_intraday.mjs，
+    # 不跑管道、不碰 archive.json、不重算分位与因子（理由见该脚本文件头）。
+    # 覆盖 01:00~07:30 UTC（= 北京 09:00~15:30），脚本内部再按相位闸门过滤出真正的盘中时段。
+    - cron: '0,30 1-7 * * 1-5'
+    # ② 盘前数据源冒烟（北京 08:30 = UTC 00:30）：六源真打一遍。
+    #   开市前摸门的意义：源悄悄改字段/加风控，盘前就能红出来，带 needs 依赖拦下
+    #   盘后主跑——坏数据不进生产档。这条 cron **只触发 smoke job**（build 的 if 已排除）。
+    - cron: '30 0 * * 1-5'
+    # ③ 盘前 AI 报告（S2 · 2026-10-06）：北京 09:05（UTC 01:05）——用户指定
+    #   9:00-9:10 窗口：早于 09:15 集合竞价留出阅读时间；晚于 08:30 冒烟（昨收
+    #   口径数据已定）；错开 09:00 盘中 tick 首拍（不同 cron 字符串 = 独立 run，
+    #   job 级 if 路由，互不掺和）。非交易日由脚本内闸门自动跳过（exit 0 不红）。
+    #   ⚠ GitHub 定时可能延迟数分钟（平台已知行为）：数据为昨收口径不随竞价变化，
+    #     延迟不损内容正确性；推送有指纹去重兜底不重复。
+    - cron: '5 1 * * 1-5'
+    # ④ 盘中定时推送（S3-6 · 2026-10-07）：三个关键决策窗口强制触发快照 + 推送判断，
+    #   北京 10:15（早盘定局）/ 13:45（午后开盘）/ 14:45（尾盘前瞻）。
+    #   分-时耦合不同（02:15 / 05:45 / 06:45 UTC）无法写成一条，最省两条：
+    #   '15 2 * * 1-5' = 10:15；'45 5,6 * * 1-5' = 13:45 + 14:45。
+    #   与 tick（:00/:30 网格）的关系：tick 每半小时已 build+push intraday 报告，
+    #   三个时点在网格缝里加拍——新快照刚抓，hot 榜若更新则指纹变即推送（变才推，
+    #   防风暴纪律不变）；榜没变不推。非 live 相位由 gateIntraday 自动跳过（exit 0）。
+    #   ⚠ smoke/build 是排除式 if——新 cron 字符串必须同步加排除（见各自 if），
+    #     否则 10:15 会误跑六源冒烟 + 全量管道重算。
+    - cron: '15 2 * * 1-5'
+    - cron: '45 5,6 * * 1-5'
+  workflow_dispatch:        # 手动触发
+
+# ── 模拟选股层总开关（S2 · 2026-10-07 用户拍板）────────────────────────────
+# 默认 'true'；GitHub 仓库 Settings → Secrets and variables → Actions → Variables
+# 里设 SIMULATION_MODE=false 即全局关闭（盘前/盘中/盘后/周报四挂点一起），
+# 不用动本文件——回测期间临时关闭、复测完改回，零 workflow 改动。
+# 单次强制开：手动 dispatch 命令里加 --sim（CLI flag 优先于 env）。
+env:
+  SIMULATION_MODE: ${{ vars.SIMULATION_MODE || 'true' }}
+
+# 调度重叠治理（2026-10-06 部署治理配套）：18:30 首抓若未跑完（六源慢/重试），21:00 补抓
+# 会在旁并行——两条管线同时写 data/ 再各自 git 提交是竞态。数据写入不可中断，故**排队不取消**
+# （cancel-in-progress: false）：后到者等先到者收尾再跑。盘中快照（30 分钟一拍）同受此治理。
+concurrency:
+  group: daily-sentiment
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  # issues: write（2026-10-08 守卫双通道 ③）：守卫 BLOCK/ERROR 时 guard_notify 建
+  # 兜底 issue（GITHUB_TOKEN 由 CI 自动注入，零新增 secret）。issue 是企微通道挂掉
+  # （secrets 失效/网络墙）时的最后触达面——本工作流三班 smoke，异常静默一天的
+  # 代价远大于一次 API 调用。
+  issues: write
+  # pages/id-token 权限已移除（2026-10-06 部署治理）：Pages 部署收口至 deploy-pages.yml
+  # 单通道——本工作流回归纯数据生产，部署由数据提交（bot push）经 paths(data/**) 触发。
+
+jobs:
+  # ── ② 真实 API 冒烟：六源逐个真打（getharden/东财LHB/同花顺行业/腾讯指数/东财池/同花顺日K）──
+  #   为什么排在 build 之前且 build needs 它：管道容灾会「保留上次快照并标失败」，
+  #   源结构悄悄变化时页面只表现为数据慢慢变旧——等发现已晚。冒烟每天主动摸一遍
+  #   每个源的门：硬失败 → 本 job 红 → build 被拦（不污染生产档）+ CI 邮件当天报警。
+  #   软失败（龙虎榜当日未公布）不算源故障（盘后早跑正常态）。
+  smoke:
+    # S3-6：盘中推送三时点（'15 2' / '45 5,6'）已加排除——冒烟是盘前 08:30 摸门语义，
+    # 盘中重跑纯浪费且占 daily-sentiment 并发槽（会延迟同拍 intraday job）。
+    if: github.event.schedule != '0,30 1-7 * * 1-5' && github.event.schedule != '5 1 * * 1-5' && github.event.schedule != '15 2 * * 1-5' && github.event.schedule != '45 5,6 * * 1-5'
+    runs-on: ubuntu-latest
+    # 5 → 8：重试兜底后最坏路径 = 首跑（≤2 分钟）+ 60s 退避 + 重跑，留足余量不误触超时。
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # ── 瞬时抖动重试（2026-10-07）────────────────────────────────────────────
+      #   实录：北京 10-07 04:41 那班冒烟因 UND_ERR_SOCKET 型网络抖动 53s 失败 →
+      #   半夜报警邮件；同 commit 一小时后复跑 6/6 全绿（自愈）。dns ipv4first 只能
+      #   降频不能绝根，故 step 层兜底：失败 → 退避 60s 重跑一次。
+      #     · 重试通过 = 抖动自愈 → job 绿，夜间误报清零；
+      #     · 重试仍败 = 真实源故障 → exit 1 照旧拦 build（真挂的源连挂两次照样红，
+      #       不会因重试被放过）。
+      #   覆盖所有班次而非仅凌晨：18:30/21:00 的冒烟失败同样会误拦主跑，重试让瞬时
+      #   抖动不再打断数据管线（代价仅 +2 分钟，远低于整班 build 被拦的损失）。
+      #   重跑会覆盖 data/smoke-latest.json 为最终态（首败证据在日志里可见）。
+      - name: 六源真实 API 冒烟（不 mock，断言 200+非空+字段契约；瞬时抖动重试一次）
+        id: smoke
+        run: |
+          if node scripts/smoke_sources.mjs; then exit 0; fi
+          echo "⚠ 第一次冒烟失败——疑似瞬时网络抖动，退避 60 秒后重试一次"
+          sleep 60
+          if ! node scripts/smoke_sources.mjs; then
+            echo "✗ 重试后仍失败——判定为真实源故障，硬失败照旧拦下主跑"
+            exit 1
+          fi
+          echo "✓ 重试通过——第一次失败为瞬时抖动自愈，非源故障"
+      - name: 冒烟报告落盘留档（data/smoke-latest.json，随仓库可见）
+        if: always()
+        run: |
+          if [ -f data/smoke-latest.json ]; then
+            echo "冒烟摘要："
+            node -e "const r=require('./data/smoke-latest.json'); console.log(r.allOk?'全部通过':'硬失败: '+r.hardFail.join(','), '@', r.tradeDateAnchored)"
+          fi
+      # ⑤ 两市成交额跨源对账（2026-10-08 对账任务）：smoke 之后 build 之前的独立
+      #   观测——东财 push2his 备源（上证+深证两 secid 相加）核验主源（s6 顺产落盘
+      #   的 amountAnchor）当日值，差值超 5% 或备源不可用 → 企微+issue 双通道告警。
+      #   纯观测不拦 build：恒 exit 0（+ continue-on-error 双保险），CI 红只属于守卫；
+      #   主源值缺失（s6 硬失败）自动跳过——守卫先说话，对账不重复告警。
+      - name: 跨源对账（两市成交额，差值超阈值建 issue，不拦 build）
+        if: always()
+        continue-on-error: true
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/cross_check.mjs \
+            --run-id "${{ github.run_id }}" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      # ②+③ 守卫结果双通道通知（2026-10-08 合并交付）：PASS/BLOCK/ERROR 三态全覆盖，
+      #   企微 + GitHub issue 双通道。替代 alert_smoke_fail.mjs 单通道时代（其企微正文
+      #   由 smokeFailEvent 继续 carry，语义零漂移；避免 BLOCK 时双企微打扰）。
+      #   · if: always()——冒烟 step 无论成败（含超时 kill）通知必发：通知器独立于
+      #     守卫进程，读 outcome + 落盘报告交叉判定，脚本崩掉也有 issue 兜底（这是
+      #     通知函数放守卫脚本内部做不到的）；
+      #   · continue-on-error: true——通知自身失败（webhook 未配/issue API 拒绝）绝不
+      #     把 CI 再拖红，红只留给「守卫本身没过」；
+      #   · PASS 只发企微心跳（首跑盯防刚需，嫌吵 GUARD_PASS_NOTIFY=false 关）；issue
+      #     只兜 BLOCK/ERROR——smoke 每天三班，PASS 流水 issue 会淹没真异常台账；
+      #   · issue 用 GITHUB_TOKEN（自动注入）+ 顶层 issues: write 权限，零新增 secret。
+      - name: 守卫结果双通道通知（PASS 心跳 / BLOCK+ERROR 企微+issue 兜底）
+        if: always()
+        continue-on-error: true
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/guard_notify.mjs \
+            --step-outcome "${{ steps.smoke.outcome }}" \
+            --run-id "${{ github.run_id }}" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+  build:
+    # 盘后完整管道（18:30 / 21:00 / 手动触发）—— 必须先过冒烟门禁（源挂了不写生产档）
+    needs: smoke
+    if: >
+      needs.smoke.result == 'success' &&
+      github.event.schedule != '0,30 1-7 * * 1-5' &&
+      github.event.schedule != '30 20 * * 1-5' &&
+      github.event.schedule != '30 0 * * 1-5' &&
+      github.event.schedule != '5 1 * * 1-5' &&
+      github.event.schedule != '15 2 * * 1-5' &&
+      github.event.schedule != '45 5,6 * * 1-5'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # 交易日历：从**上证指数日K**反推真实开市日（休市 = 工作日内无日K）。
+      # ⚠ 必须排在管道**之前**：管道用日历判"今天是不是交易日"，
+      #   日历若还是上次的（比如跨年、或长假前更新过而节后没续），
+      #   会在开市日误判为休市 → 整天不抓数据，且页面上只表现为"没更新"，极难归因。
+      #   （本项由 scripts/audit_lhb_caliber.mjs 的 B13 块按「run: 行先后」机器校验。）
+      - name: 同步交易日历（指数日K反推，含调休补班）
+        run: node scripts/fetch_calendar.mjs
+      - name: 运行管道（live 模式，非交易日自动跳过）
+        env:
+          MODE: live
+          # 运维告警推送通道（降维预埋）：拦截器事件 → 企微机器人。
+          # secret 未配置时为空串 → 脚本内部跳过推送（仅落盘），不会报错。
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+        run: node src/pipeline.js
+      - name: 数据新鲜度判定（按交易日历，输出可读结论）
+        run: node scripts/freshness.mjs
+      # 外围行情独立成步：A 股休市（长假）时上面那步会整段跳过，而假期恰恰是外围数据
+      # 最该攒的时候——节后预案靠的就是这几天美股交易日。所以它不受 A 股开市与否影响。
+      # 抓不到时脚本内部容灾（保留上次快照并标记失败），不会拖挂整条 job。
+      - name: 抓取外围市场行情（隔夜美股/中国资产/汇率/商品）
+        run: node scripts/fetch_global.mjs
+      - name: 生成 V5.2 回测档（成本/平滑/风控/网格帕累托/滚动/主线选股）
+        run: node scripts/backtest.mjs
+      # ⑥ 双轨账本重放（2026-10-08 第三批接入 CI）：三轨道每日纪面账（A 执行/B 参考/C 影子）。
+      #   之前只在本地手动跑——CI 断供时旧值顶替当日值（第二批 09-30 名/10-08 内容事故的
+      #   供应侧根源）。紧贴 backtest.mjs：账本三重门禁要读 data/backtest.json::v52。
+      #   continue-on-error：重放挂（如数据延伸导致锚点漂移）只影响披露不影响核心数据面，
+      #   不阻断 CI；真滞后由末尾 freshness --require-fresh 三模块门禁标红（通知语义，
+      #   数据在前一步已提交不丢），消费端守卫（②）同步把旧值拦在叙事之外。
+      - name: 双轨账本重放（A执行/B参考/C影子，滞后不阻断）
+        run: node tools/backtest/paper_dual_track.mjs
+        continue-on-error: true
+      # ③ 策略收益回测：冰点反转/题材动量/梯队风险偏好 × 沪深300基准（严格 point-in-time）。
+      #   个股日K走 data/.bt_kline/ 缓存（不入库，CI 每次真抓——86 只 top1 题材成员约 2 分钟）。
+      #   产物 data/backtest-strategies.json 入库；样本不足时脚本自行跳过不阻断。
+      - name: 生成策略收益回测（三策略 × 基准，point-in-time）
+        run: node scripts/backtest_strategies.mjs
+        continue-on-error: true
+      # 公式版本回归验证集：v4.5 / v5.0 / v5.2 在同一段历史上并行重算，
+      # 对次日上证涨跌幅算相关性 + 方向准确率。改公式后跑一次即可看出影响面，
+      # 不必再用肉眼看"某天数字好像不对"。
+      # 样本不足时脚本自行跳过（不阻断），产物自带"样本量小、不排优劣"的披露。
+      - name: 公式版本回归验证（v4.5/v5.0/v5.2 并行重算对比）
+        run: node scripts/version_regression.mjs
+      # 模拟交易的标的池：从存档里归纳出「有哪些票、属于哪个板段、最近一次真实收盘价」。
+      # 必须在 archive.json 更新之后跑——池子就是存档的派生物，早跑会拿到昨天的价。
+      # 脚本内部对板段非法/非股票品种做校验，不合法直接退出，避免把错池子推上线。
+      - name: 构建模拟交易标的池（板段/ST/最近真实收盘价）
+        run: node scripts/fetch_universe.mjs
+      # 亏钱效应行情快照（#2）：昨涨停今日表现**必须**用全市场真实行情算，
+      # 不能用 hot 列表反查（hot 只含上涨股，会静默丢弃下跌的一半，得出恒 +10% 的假繁荣）。
+      # 故单独一步在收盘后抓昨日涨停名单的今日行情，产出 data/pain-latest.json。
+      # 非交易日/行情日期不匹配时脚本自行拒绝写盘（退出码 2），不阻断整条 job。
+      - name: 抓取亏钱效应行情（昨涨停今日表现，收盘后口径）
+        run: node scripts/fetch_pain.mjs
+        continue-on-error: true
+
+      # 多维市场宽度（#3）：站上20日线占比 / 创新高&新低家数 / 破净率 / 涨跌家数。
+      # **必须分片抓**（全市场约 5400 只，一把梭会被限流且无法断点续跑）：
+      #   分片缓存落 data/.breadth_kline/，失败重跑只补缺的片。
+      # 产出 data/breadth-latest.json（轻量计数）+ data/breadth-daily.json（逐日序列）。
+      - name: 抓取多维市场宽度（分片扫描全市场日K）
+        run: node scripts/fetch_breadth.mjs --shards 8
+        continue-on-error: true
+      # 口径守卫：两套龙虎榜净额（当日榜 / 含区间累计榜的全量）不得混用。
+      # 放在提交之前——口径一旦漂移，宁可本次运行失败，也不要把错数据推上线。
+      - name: 龙虎榜口径守卫（双口径不混用 + 存档可重现）
+        run: node scripts/audit_lhb_caliber.mjs
+      # 行业离群告警跨源自动核验：扫全档 OUTLIER_INDUSTRY（warn），逐条去同花顺行业指数
+      # 拉该日历史日K 独立复算 → 一致即自动销案（写入 data/industry_outlier_review.json，
+      # 此后不再重复报）；不一致标 data-error（**不销案**）并 exit 1。
+      # 只影响是否重复告警，不动任何数值。失败不阻断数据管线（continue-on-error），
+      # 但日志 ✗ 与台账 diff 都会留痕——异常排查见 data-error 条目。
+      - name: 行业离群告警跨源自动核验（真实销案 / 异常报警）
+        run: node scripts/verify_industry_outliers.mjs
+        continue-on-error: true
+      - name: 单元测试（含 Python↔JS 一致性夹具比对 + 合并版 UI schema 守卫）
+        run: node --test
+      # 前后端接口契约门禁（V5.3 同步机制）：全部数据档落盘后校验 vs schemas/ 契约。
+      #   放在提交与 UI 构建之前——字段漏产/改名/类型漂移宁可整次运行失败，
+      #   也不让「前端静默渲染空白」的档推上线（missingNote→missingReason 事故的常驻拦截器）。
+      #   契约本体与变更流程见 schemas/*.schema.json 头注与 README「接口契约」章节。
+      - name: 前后端接口契约守卫（数据档 vs schemas/ 契约）
+        run: node scripts/check_contract.mjs
+      # ── 合并版（merge/pro-into-ui · 2026-10-02）：K线增量 + UI 构建 + Pages 部署 ──
+      # K线增量必须在 UI 构建**之前**：个股 closes/yzt_chg（昨涨停今均涨幅）由 K 线分片派生，
+      # 分片没当日 bar → 这些卡片按缺失降级（如实「—」，不编数）。非交易日脚本自报无增量。
+      - name: K线分片增量（全市场当日 bar，非交易日无增量）
+        run: node ui/fetch_kline_all.mjs
+      - name: 合并构建 UI（PRO 管线数据层 + 原系统 UI 展示层 → dist/）
+        run: node scripts/build_ui.mjs
+      # ── AI 报告（S2 · 归档轨挂 build 末尾，设计文档 §3.3）───────────────────
+      # 盘后 + 周报：18:30 首抓与 21:00 补抓都生成（补抓数据更全时覆盖同日文件）。
+      # 周报自带闸门：tradeDate 非本周最后交易日（周五或节前最后一天）自动跳过。
+      # 模拟选股段由顶层 env SIMULATION_MODE 控制（默认开，仓库 Variables 可关）。
+      - name: 生成盘后 AI 报告（含模拟选股段）
+        run: node scripts/build_ai_report.mjs --type post_market
+      - name: 生成周报 AI 报告（非本周最后交易日自动跳过）
+        run: node scripts/build_ai_report.mjs --type weekly
+      - name: 报告转 Markdown（GitHub 直接可读）
+        run: node scripts/export_reports_md.mjs
+      # 推送只在 21:00 补抓与手动触发：18:30 首抓常缺龙虎榜/深证日K，推半成品
+      # 不如等 2.5 小时推全量（"收盘 5 分钟"语义由页面即时轨 15:05 版补位，
+      # 双轨时点约束见设计文档 §3.3）。指纹去重保证 21:00 与 18:30 内容未变时不重推。
+      - name: 推送盘后/周报 AI 报告（企微 + 指纹防风暴）
+        if: github.event.schedule == '0 13 * * 1-5' || github.event_name == 'workflow_dispatch'
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+        run: node scripts/push_ai_report.mjs --latest post_market --latest weekly
+      # Pages 部署产物上传已移除（2026-10-06 部署治理）：dist 部署通道收口至
+      # deploy-pages.yml（双通道互相覆盖的实录与决策见该文件头注）。build_ui 保留——
+      # dist/ 产物与 board_rank 写回仍是数据面的一部分；下面的数据提交（bot push）
+      # 会经 deploy-pages.yml 的 paths(data/**) 自动触发页面刷新，闭环不变。
+      # data/reports/ 一并提交（AI 报告档 + 推送指纹状态）：落 data/** 白名单内，
+      # 页面首屏示例与最新报告随数据提交自动上线。
+      - name: 提交最新数据
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/archive.json data/archive-index.json data/archive-recent.json data/archive-20*.json data/signals-latest.json data/backtest.json data/backtest-strategies.json data/global.json data/paper_universe.json data/paper_universe-lite.json data/calendar.json data/version-regression.json data/pain-latest.json data/breadth-latest.json data/breadth-daily.json data/smoke-latest.json data/ops-alerts-latest.json data/industry_outlier_review.json data/board_rank.json data/paper data/reports ui/kline
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 更新情绪数据 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+      # 放在提交之后：数据已安全落库，再判定滞后。真滞后 → 本次运行标红（GitHub 会发失败通知），
+      # 避免「回退/跳过被容错吞掉、job 仍是绿」这种静默故障再次发生。
+      # 18:30 首抓常因龙虎榜未公布而跳过，此时判定为 pending（非滞后）不会误伤；21:00 补抓仍不成才会标红。
+      - name: 数据新鲜度门禁（真滞后则本次运行失败）
+        run: node scripts/freshness.mjs --require-fresh
+
+  # deploy-pages job 已移除（2026-10-06 部署治理）：
+  #   旧双通道 = 本 job（dist 合并版 UI 单文件）+ Settings 原生分支构建（main/root 仓库根），
+  #   两者**互相覆盖**：2026-10-05 13:12 run 实录——本 job success 部署 dist → 同轮数据提交
+  #   触发的原生分支构建完成于其后 → 云端被盖回分支内容；最终态取决于谁后完成（非确定）。
+  #   现行单通道 = deploy-pages.yml（部署仓库根 web 面 = 当前云端页面形态，paths 白名单
+  #   过滤文档类变更 + concurrency group "pages" 防覆盖，实录与设计见其文件头注）。
+  #   本工作流回归纯数据生产：数据提交（bot push）→ deploy-pages.yml 自动触发部署。
+  #   若未来启用合并版 UI（dist 单文件形态），在 deploy-pages.yml 换产物源即可——一处切换。
+
+  intraday:
+    # 盘中轻量快照：只抓 hot/pools/breadth 三个实时源，写 data/intraday.json。
+    # 绝不触碰 archive.json —— 盘中涨跌家数未定盘，写进情绪因子会让分数反复跳变、分位失去意义。
+    # S3-6（2026-10-07）：除 tick 网格（:00/:30）外，三个决策时点（10:15 / 13:45 / 14:45
+    # 北京 = '15 2' / '45 5,6' UTC）也走本 job 全流程（快照 → 报告 → 推送 → 提交）——
+    # 推送仍受指纹去重约束（榜变才推），闸门 gateIntraday 过滤非 live 相位。
+    if: github.event.schedule == '0,30 1-7 * * 1-5' || github.event.schedule == '15 2 * * 1-5' || github.event.schedule == '45 5,6 * * 1-5' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # 脚本自带三重保险：① 相位非 live 直接跳过；② 强势股返回交易日 ≠ 北京当日则跳过
+      # （该接口在非交易日会静默返回上一交易日数据）；③ 三源全失败则不覆盖上次成功快照。
+      - name: 抓盘中快照（非盘中自动跳过）
+        run: node scripts/snapshot_intraday.mjs
+      # ── 盘中 AI 报告（S2）：同一 tick 追加，复用刚抓的 intraday.json 做候选池
+      #   盘中涨幅联查（hot 强势榜 change_pct → intraday_chg；不在榜 = null ≠ 0）。
+      #   报告闸门与快照同源（相位 live 才生成）；urgent 四类事件（熔断/regime 切换/
+      #   回撤接近/剧本命中）依赖实时价与账本，归档轨 CI 无源 → 由页面即时轨（S3）
+      #   负责，CI 只出 30 分钟例行版（trigger=schedule）。
+      #   指纹去重的实际效果：归档轨盘中内容随 hot 榜变化，榜变才推、榜不变不推。
+      - name: 生成并推送盘中 AI 报告（相位非 live 自动跳过）
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+        run: |
+          node scripts/build_ai_report.mjs --type intraday
+          node scripts/export_reports_md.mjs
+          node scripts/push_ai_report.mjs --latest intraday
+      - name: 提交盘中快照
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/intraday.json data/reports
+          if git diff --cached --quiet; then
+            echo "无变化（非盘中或快照相同），跳过提交"
+          else
+            git commit -m "chore: 盘中快照+AI报告 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+
+  premarket:
+    # ── 盘前 AI 报告（S2 · 2026-10-06）：北京 09:05 生成并推送 ──────────────
+    #   cron '5 1 * * 1-5'（UTC 01:05）。为什么单独一个 job 而不是塞进 intraday：
+    #   ① 触发时刻在 09:00/09:30 两拍之间，与盘中 tick 错峰；② 盘前读的是**昨收
+    #   口径**全档（dual_track/signals/global），不依赖刚抓的 intraday.json；
+    #   ③ 相位 09:05 是 pre（非 live），塞 intraday 会被它的相位闸门拦掉。
+    #   闸门：非交易日脚本自跳（exit 0）；推送与生成同 step（原子性：生成失败不推）。
+    if: github.event.schedule == '5 1 * * 1-5' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 生成并推送盘前 AI 报告（非交易日自动跳过）
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+        run: |
+          node scripts/build_ai_report.mjs --type pre_market
+          node scripts/export_reports_md.mjs
+          node scripts/push_ai_report.mjs --latest pre_market
+      - name: 提交盘前报告
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/reports
+          if git diff --cached --quiet; then
+            echo "无变化（非交易日），跳过提交"
+          else
+            git commit -m "chore: 盘前AI报告 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
+
+  us-close:
+    # ★ 美股收盘档（2026-10-01 事故修复）：只抓外围，不跑管道。
+    #   为什么单独成一个 job 而不是并进 build：
+    #     · 触发时刻是北京次日 04:30，与 build 的 18:30/21:00 完全不同；
+    #     · 它**只需** scripts/fetch_global.mjs 一步（不碰 archive、不重算因子），
+    #       单独跑 15 秒即可完成，并进 build 会把整条 15 分钟的管道一起拖起来。
+    #   抓取内容：美股的"最近已收盘会话"= 前一交易日收盘价。这正是用户要的完整收盘态。
+    #   时刻换算：UTC 20:30 = 北京 04:30（次日）= 美东 16:30（EDT，收盘+30 分钟）。
+    if: github.event.schedule == '30 20 * * 1-5' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      # 脚本自带时机自检：若此刻美股档仍未就绪（早于 16:30 ET），
+      # 会打印警告并把美股那一档按"无数据"处理（chgPct=null，绝不写 0）。
+      - name: 抓取外围行情（美股收盘档）
+        run: node scripts/fetch_global.mjs
+      # ③ 东财 push2his 连通性探测（2026-10-08 第三件）：观察者不是门禁——结果只
+      #   通知不拦截，恒 exit 0（+ continue-on-error 双保险），绝不拖红美股收盘档。
+      #   为什么挂这班：04:30 是源可用性观测的自然班次（与守卫通知同窗，一眼对账）；
+      #   s6 量能备源（东财/同花顺互切）依赖 push2his，而 10-08 实测部分网络下 TLS
+      #   被断/返回空——每日探测为备源决策攒可用性事实。通知复用 guard_notify 双通道：
+      #   OK→企微心跳；FAIL→企微+issue 兜底（labels guard+eastmoney）。
+      - name: 东财 push2his 连通性探测（独立观察者，结果双通道通知）
+        if: always()
+        continue-on-error: true
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/check_eastmoney.mjs \
+            --run-id "${{ github.run_id }}" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+      - name: 提交外围快照
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/global.json
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 外围(美股收盘档) $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi

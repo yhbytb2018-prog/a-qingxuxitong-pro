@@ -1,0 +1,6 @@
+# 每日收盘后自动采集（情绪历史 + 老龙头扫描）——crontab 示例
+#
+# 安装：crontab -e 后把下面这行粘贴进去，替换 /你的项目路径 为项目绝对路径
+# （node 路径用 `which node` 确认，默认 /usr/local/bin/node）
+# 15:30（收盘后）拉当日涨停池快照，日志追加到 logs/daily_fetch.log
+30 15 * * 1-5 cd /你的项目路径 && /usr/local/bin/node scripts/daily_fetch.mjs >> logs/daily_fetch.log 2>&1

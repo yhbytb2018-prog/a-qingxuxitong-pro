@@ -1,0 +1,321 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "ai-report",
+  "description": "AI 报告生成与推送模块契约（S1 · 2026-10-06 六决议）。信封四类报告共用；payload base 字段四类必产，分型字段各自 optional（小子集无 if/then，分型必产由生成器与单测锁定）。缺失语义：null = 未生成/无数据源，绝不补 0。",
+  "type": "object",
+  "required": [
+    "schema_version", "report_type", "trigger", "urgent", "date", "generated_at",
+    "generated_by", "status", "track", "data_health", "data_completeness",
+    "payload", "missing_notes", "concepts", "sources", "disclaimer"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "report_type": { "type": "string", "enum": ["pre_market", "intraday", "post_market", "weekly"] },
+    "trigger": {
+      "type": "string",
+      "enum": ["schedule", "event:circuit_breaker", "event:trend_switch", "event:drawdown_near", "event:script_hit"],
+      "description": "urgent 触发条件限定四类（决议 3）；schedule 之外均为 urgent"
+    },
+    "urgent": { "type": "boolean" },
+    "date": { "type": ["string", "null"] },
+    "generated_at": { "type": "string" },
+    "generated_by": { "type": "string", "enum": ["ci", "browser"] },
+    "status": { "type": "string", "enum": ["ok", "degraded", "missing"] },
+    "track": { "type": "string", "const": "A" },
+    "data_health": {
+      "type": "object",
+      "required": ["sources"],
+      "properties": {
+        "sources": {
+          "type": "object",
+          "description": "各数据源健康：fresh | stale | missing | live（paper_account 即时轨）"
+        }
+      }
+    },
+    "data_completeness": {
+      "type": "object",
+      "description": "字段级来源与可信度（决议 5）：{field: {source: live|archived|derived|assumed|missing, confidence: measured|assumed|missing}}",
+      "additionalProperties": { "$ref": "#/$defs/completeness" }
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "date", "status", "pnl_daily", "pnl_cumulative", "max_drawdown_daily",
+        "grid_triggers", "counter_trend_losses", "trend_switch_hits", "cost_ratio",
+        "slippage_avg", "slippage_source", "regime", "circuit_breaker", "overseas",
+        "simulation_stock"
+      ],
+      "properties": {
+        "date": { "type": ["string", "null"] },
+        "status": { "type": "string", "enum": ["ok", "degraded", "missing"] },
+        "pnl_daily": { "type": ["number", "null"] },
+        "pnl_cumulative": { "type": ["number", "null"] },
+        "max_drawdown_daily": { "type": ["number", "null"] },
+        "grid_triggers": { "type": "null", "description": "系统无网格交易引擎，结构性缺失（恒 null）" },
+        "counter_trend_losses": { "type": "null", "description": "无逆势记账，结构性缺失（恒 null）" },
+        "trend_switch_hits": { "type": ["number", "null"] },
+        "cost_ratio": { "type": ["number", "null"] },
+        "slippage_avg": { "type": ["number", "null"] },
+        "slippage_source": { "type": "string", "enum": ["assumed_constant", "measured"] },
+        "regime": {
+          "type": ["object", "null"],
+          "required": ["key", "label", "cap", "position_range"],
+          "properties": {
+            "key": { "type": ["string", "null"] },
+            "label": { "type": ["string", "null"] },
+            "cap": { "type": ["number", "null"] },
+            "position_range": { "type": ["string", "null"] }
+          }
+        },
+        "circuit_breaker": {
+          "type": ["object", "null"],
+          "required": ["dd_tier", "hard_stop_triggered", "risk_events", "note"],
+          "properties": {
+            "dd_tier": { "type": ["number", "null"] },
+            "hard_stop_triggered": { "type": ["boolean", "null"] },
+            "risk_events": { "type": ["number", "null"] },
+            "note": { "type": "string" }
+          }
+        },
+        "overseas": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "required": ["key", "name", "chgPct", "state"],
+            "properties": {
+              "key": { "type": "string" },
+              "name": { "type": ["string", "null"] },
+              "chgPct": { "type": ["number", "null"], "description": "未开盘/无成交一律 null，绝不写 0" },
+              "state": { "type": "string" }
+            }
+          }
+        },
+        "prev_nav": { "type": ["number", "null"] },
+        "positions": { "type": ["object", "null"] },
+        "overnight_exposure": {
+          "type": ["object", "null"],
+          "required": ["a50_chgPct", "posGap"],
+          "properties": {
+            "a50_chgPct": { "type": ["number", "null"] },
+            "posGap": { "type": ["number", "null"] },
+            "us_close": {
+              "type": ["object", "null"],
+              "properties": {
+                "dji": { "type": ["number", "null"] },
+                "spx": { "type": ["number", "null"] },
+                "ixic": { "type": ["number", "null"] }
+              }
+            },
+            "cn_overnight": {
+              "type": ["object", "null"],
+              "properties": {
+                "hxc": { "type": ["number", "null"] },
+                "fxi": { "type": ["number", "null"] }
+              }
+            },
+            "cnh_chgPct": { "type": ["number", "null"] }
+          }
+        },
+        "key_levels": { "type": "null" },
+        "events_today": { "type": "null" },
+        "atr": { "type": "null" },
+        "suggested_step": { "type": "null" },
+        "nav_realtime": { "type": ["number", "null"] },
+        "approx": { "type": "boolean" },
+        "drawdown_vs_threshold": {
+          "type": ["object", "null"],
+          "required": ["dd_now", "tier_edges", "distance_pp", "basis"],
+          "properties": {
+            "dd_now": { "type": ["number", "null"] },
+            "tier_edges": { "type": "array", "items": { "type": "number" } },
+            "distance_pp": { "type": ["number", "null"] },
+            "basis": { "type": "string" }
+          }
+        },
+        "fee_total": { "type": ["number", "null"] },
+        "slippage_total": { "type": ["number", "null"] },
+        "net_pnl": { "type": ["number", "null"] },
+        "grid_trigger_detail": { "type": "null" },
+        "counter_trend_loss_ratio": { "type": "null" },
+        "max_drawdown_intraday": { "type": ["number", "null"] },
+        "close_drawdown": { "type": ["number", "null"] },
+        "backtest_deviation": {
+          "type": ["object", "null"],
+          "required": ["live_cum", "backtest_v52", "delta", "note"],
+          "properties": {
+            "live_cum": { "type": ["number", "null"] },
+            "backtest_v52": { "type": ["number", "null"] },
+            "delta": { "type": ["number", "null"] },
+            "note": { "type": "string" }
+          }
+        },
+        "market_context": { "type": ["object", "null"] },
+        "week_return": { "type": ["number", "null"] },
+        "nav_series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["date", "day_return", "score", "regime"],
+            "properties": {
+              "date": { "type": "string" },
+              "day_return": { "type": ["number", "null"] },
+              "score": { "type": ["number", "null"] },
+              "regime": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "max_drawdown_week": { "type": ["number", "null"] },
+        "win_rate": { "type": ["number", "null"], "description": "剧本命中次数/总剧本执行次数（决议 4）；绑定缺席恒 null" },
+        "win_rate_note": { "type": "string" },
+        "profit_trade_ratio": { "type": ["number", "null"] },
+        "cost_ratio_week": { "type": ["number", "null"] },
+        "trend_switch_effect": {
+          "type": ["object", "null"],
+          "required": ["turns", "shadow_note"],
+          "properties": {
+            "turns": { "type": "array" },
+            "shadow_note": { "type": ["string", "null"] }
+          }
+        },
+        "param_suggestions": { "type": "array" },
+        "simulation_stock": {
+          "type": ["object", "null"],
+          "description": "模拟选股层（S1.5 · 决议 7/8）。null = 未生成；对象一旦在场其内字段必须齐（半缺是最危险形态）",
+          "required": [
+            "sentiment_cycle", "position_suggestion", "pool_basis",
+            "candidate_pool", "simulation_positions", "review"
+          ],
+          "properties": {
+            "sentiment_cycle": {
+              "type": "object",
+              "required": [
+                "phase", "phase_label", "regime_raw", "phase_source", "limit_up_count",
+                "highest_chain", "broken_limit_ratio", "yesterday_chain_performance",
+                "warning_signals"
+              ],
+              "properties": {
+                "phase": { "type": ["string"], "description": "五期英文枚举（startup/fermentation/climax/decline/freezing，契约稳定键，2026-10-06 拍板）；映射外状态原样透出七态 key（shift/unknown），不硬塞" },
+                "phase_label": { "type": ["string", "null"], "enum": ["启动期", "发酵期", "高潮期", "退潮期", "冰点期", null], "description": "五期中文标签（展示用）；映射外状态为 null（无五期标签可给）" },
+                "regime_raw": { "type": "string", "description": "七态原始值（决议 7：复盘追溯，翻译层不丢信息）" },
+                "phase_source": { "type": "string" },
+                "limit_up_count": { "type": ["number", "null"] },
+                "highest_chain": { "type": ["number", "null"] },
+                "broken_limit_ratio": { "type": ["number", "null"] },
+                "yesterday_chain_performance": { "type": ["number", "null"] },
+                "warning_signals": { "type": "array" }
+              }
+            },
+            "position_suggestion": {
+              "type": "string",
+              "enum": ["aggressive", "neutral", "defensive", "wait"],
+              "description": "regime cap 的翻译，非新增风控规则（§9.2）"
+            },
+            "pool_basis": { "type": "string" },
+            "candidate_pool": {
+              "type": "array",
+              "description": "5-10 只（不足时如实给出实际数量）",
+              "items": {
+                "type": "object",
+                "required": [
+                  "code", "name", "themes", "selection_reason", "intraday_chg", "fundamentals",
+                  "fund_flow_note", "scripts", "risks"
+                ],
+                "properties": {
+                  "code": { "type": "string" },
+                  "name": { "type": ["string", "null"] },
+                  "themes": { "type": ["array", "null"], "description": "题材标签无个股级数据源 → null 占位" },
+                  "selection_reason": { "type": "string", "minLength": 1, "description": "入选理由必填（决议 8）：盘后复盘据此归因选股逻辑" },
+                  "intraday_chg": { "type": ["number", "null"], "description": "盘中涨幅%（S2：intraday.json::hot.rows 强势榜联查；**不在榜 = null ≠ 0**，缺席与不涨严格区分；仅盘中报告注入，盘前/盘后恒 null" },
+                  "fundamentals": {
+                    "type": "object",
+                    "description": "八字段 null 占位（决议 8）：键常驻，接数据源后直接填充不改 schema",
+                    "required": ["roe", "revenue_growth", "net_profit_growth", "pe", "pb", "peg", "market_cap", "moat_note"],
+                    "properties": {
+                      "roe": { "type": ["number", "null"] },
+                      "revenue_growth": { "type": ["number", "null"] },
+                      "net_profit_growth": { "type": ["number", "null"] },
+                      "pe": { "type": ["number", "null"] },
+                      "pb": { "type": ["number", "null"] },
+                      "peg": { "type": ["number", "null"] },
+                      "market_cap": { "type": ["number", "null"] },
+                      "moat_note": { "type": ["string", "null"] }
+                    }
+                  },
+                  "fund_flow_note": { "type": ["string", "null"], "description": "席位级真实数据旁注；个股级主力净流入系统无数据" },
+                  "scripts": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["name", "trigger_condition", "position_ratio", "stop_loss", "take_profit", "invalid_condition", "script_source"],
+                      "properties": {
+                        "name": { "type": "string", "enum": ["A", "B", "C"] },
+                        "trigger_condition": { "type": "string" },
+                        "position_ratio": { "type": ["number", "null"] },
+                        "stop_loss": { "type": ["number", "null"], "description": "B 剧本为条件位（破 5 日线）→ null 不造数" },
+                        "take_profit": { "type": ["number", "null"], "description": "B/C 指令未给数值 → null" },
+                        "invalid_condition": { "type": "string" },
+                        "script_source": { "type": "string", "const": "template" }
+                      }
+                    }
+                  },
+                  "risks": { "type": "array" }
+                }
+              }
+            },
+            "simulation_positions": {
+              "type": ["array", "null"],
+              "description": "即时轨（localStorage 账本）才有；归档轨 null",
+              "items": {
+                "type": "object",
+                "required": ["code", "name", "cost_price", "current_price", "volume", "unrealized_pnl", "holding_days", "script_name", "stop_loss_triggered", "take_profit_triggered"],
+                "properties": {
+                  "code": { "type": "string" },
+                  "name": { "type": ["string", "null"] },
+                  "cost_price": { "type": ["number", "null"] },
+                  "current_price": { "type": ["number", "null"] },
+                  "volume": { "type": ["number", "null"] },
+                  "unrealized_pnl": { "type": ["number", "null"] },
+                  "holding_days": { "type": ["number", "null"] },
+                  "script_name": { "type": ["string", "null"], "description": "绑定记录（airpt_sim_bindings_v1）联查；未绑定 → null" },
+                  "stop_loss_triggered": { "type": ["boolean", "null"] },
+                  "take_profit_triggered": { "type": ["boolean", "null"] }
+                }
+              }
+            },
+            "review": {
+              "type": ["object", "null"],
+              "description": "复盘归因（S3 录入后才有数据）；win_rate 口径 = 剧本命中/总执行（决议 4），缺席恒 null"
+            }
+          }
+        }
+      }
+    },
+    "missing_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "reason", "ref"],
+        "properties": {
+          "field": { "type": "string" },
+          "reason": { "type": "string" },
+          "ref": { "type": "string" }
+        }
+      }
+    },
+    "concepts": { "type": "object" },
+    "sources": { "type": "object" },
+    "disclaimer": { "type": "string" },
+    "merged_from": { "type": "array", "description": "双轨合并（决议 1）后才有" },
+    "backfilled_fields": { "type": "array" }
+  },
+  "$defs": {
+    "completeness": {
+      "type": "object",
+      "required": ["source", "confidence"],
+      "properties": {
+        "source": { "type": "string", "enum": ["live", "archived", "derived", "assumed", "missing"] },
+        "confidence": { "type": "string", "enum": ["measured", "assumed", "missing"] }
+      }
+    }
+  }
+}

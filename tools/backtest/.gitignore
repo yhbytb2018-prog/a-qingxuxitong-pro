@@ -1,0 +1,5 @@
+reports/
+reports_demo/
+demo_preview/
+demo_factors.csv
+__pycache__/

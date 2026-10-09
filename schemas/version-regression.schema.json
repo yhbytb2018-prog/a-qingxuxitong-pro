@@ -1,0 +1,72 @@
+{
+  "$comment": [
+    "前后端接口契约 · version-regression.json（V5.3 同步机制 · 2026-10-05）",
+    "生产方：scripts/version_regression.mjs（writeJsonStable 剥时间戳防 chore diff）",
+    "消费方：app.js loadVersionRegression/renderVerCmp——satThreshold 是全站唯一出处，前端不得硬编码"
+  ],
+  "type": "object",
+  "required": ["kind", "sample", "versions", "satThreshold", "stats", "cautions"],
+  "properties": {
+    "kind": { "type": "string", "const": "version-regression" },
+    "version": { "type": ["string", "number"] },
+    "generatedAt": { "type": "string" },
+    "baseline": { "type": "string" },
+    "formulaVersion": { "type": "string" },
+    "sample": {
+      "type": "object",
+      "required": ["mainDays", "withNextRet", "archiveDays", "dateRange"],
+      "properties": {
+        "mainDays": { "type": "number" },
+        "withNextRet": { "type": "number" },
+        "archiveDays": { "type": "number" },
+        "dateRange": { "type": "array", "items": { "type": "string" }, "minItems": 2 },
+        "partialDays": { "type": "number" },
+        "noneDays": { "type": "number" }
+      }
+    },
+    "satThreshold": { "type": "number" },
+    "versions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "baseline", "candidate", "normalizer"],
+        "properties": {
+          "key": { "type": "string" },
+          "name": { "type": "string" },
+          "desc": { "type": "string" },
+          "baseline": { "type": "boolean" },
+          "candidate": { "type": "boolean" },
+          "normalizer": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "required": [],
+      "$comment": "键为版本 key（v4.5/v5.0/v5.2-pro/v5.3-pro），动态枚举故不锁键集；值结构锁死",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["version", "scoreMean", "scoreStdev", "pearson", "direction"],
+        "properties": {
+          "version": { "type": "string" },
+          "name": { "type": "string" },
+          "desc": { "type": "string" },
+          "scoreMean": { "type": ["number", "null"] },
+          "scoreStdev": { "type": ["number", "null"] },
+          "scoreMin": { "type": ["number", "null"] },
+          "scoreMax": { "type": ["number", "null"] },
+          "sNetSaturated": { "type": ["number", "null"] },
+          "sNetMissing": { "type": ["number", "null"] },
+          "pearson": { "type": ["number", "null"] },
+          "spearman": { "type": ["number", "null"] },
+          "direction": {
+            "type": ["object", "null"],
+            "required": ["acc"],
+            "properties": { "acc": { "type": ["number", "null"] } }
+          }
+        }
+      }
+    },
+    "cautions": { "type": "array", "items": { "type": "string" } }
+  }
+}

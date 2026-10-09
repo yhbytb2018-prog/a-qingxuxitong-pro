@@ -1,0 +1,1949 @@
+{
+  "meta": {
+    "generatedAt": "2026-09-30T13:13:24.127Z",
+    "tool": "scripts/compare_sigma.mjs",
+    "days": 120,
+    "sigmas": [
+      0.5
+    ],
+    "total_days": 120,
+    "range": [
+      "2026-04-09",
+      "2026-09-30"
+    ],
+    "caliber": "与 scripts/backtest.mjs 主线链路同口径：mlHistory 不含当日；market_state=量能×上证累计涨跌代理；sentiment=昨日主线龙头(无阈值口径)今日涨跌；gating 后 topN=min(2,maxOutput)",
+    "mainLine": {
+      "lookback_days": 60,
+      "min_sample_days": 20,
+      "fixedFallback": {
+        "up_count_threshold": 6,
+        "density_threshold": 0.1
+      }
+    }
+  },
+  "summary": [
+    {
+      "sigma": 0.5,
+      "triggered_days": 24,
+      "total_days": 120,
+      "identification_rate": 20,
+      "weak_days": 6,
+      "retreat_days": 0,
+      "fallback_days": 0,
+      "main_theme_count": 39
+    }
+  ],
+  "per_day": [
+    {
+      "date": "2026-04-09",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-10",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-13",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-14",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-15",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-16",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-17",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-20",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-21",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-22",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-23",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-24",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-27",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-28",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-29",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-04-30",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-06",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-07",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-08",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-11",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-12",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-13",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-14",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-15",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-18",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-19",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-20",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-21",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-22",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-25",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-26",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-27",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-28",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-05-29",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-01",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-02",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-03",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-04",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-05",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-08",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-09",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-10",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-11",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-12",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-15",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-16",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-17",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-18",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-22",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-23",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-29",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-06-30",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-01",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-02",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-06",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "market_state": "weak",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-08",
+      "market_state": "weak",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-10",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-13",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-14",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-15",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-16",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-17",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-20",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-21",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-22",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-23",
+      "market_state": "weak",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-24",
+      "market_state": "weak",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-27",
+      "market_state": "weak",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-28",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-29",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-30",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-07-31",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-03",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-04",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-05",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-06",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-07",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-10",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-11",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-12",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-13",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-08-14",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0,
+          "density_threshold": 0,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "AI算力",
+            "国企改革"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-17",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 0.89,
+          "density_threshold": 0.0076,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "国企改革",
+            "机器人"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 1.48,
+          "density_threshold": 0.0099,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "国企改革",
+            "粮食概念"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-19",
+      "market_state": "strong",
+      "sentiment_state": "rising",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2.26,
+          "density_threshold": 0.0148,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "国企改革",
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 2.4,
+          "density_threshold": 0.0177,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "医药",
+            "国企改革"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-21",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 3.44,
+          "density_threshold": 0.0241,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "机器人"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-24",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 3.74,
+          "density_threshold": 0.0267,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "新能源"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-25",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 3.88,
+          "density_threshold": 0.0286,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "AI算力"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-26",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 4.14,
+          "density_threshold": 0.0308,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "国企改革"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-27",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 4.61,
+          "density_threshold": 0.0367,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "PCB"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-28",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 5.32,
+          "density_threshold": 0.0428,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "AI算力"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-08-31",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 6.46,
+          "density_threshold": 0.0497,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "AI算力"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 7.1,
+          "density_threshold": 0.0536,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "AI算力"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 7.42,
+          "density_threshold": 0.0558,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-03",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 7.62,
+          "density_threshold": 0.0586,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 7.8,
+          "density_threshold": 0.0614,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-07",
+      "market_state": "strong",
+      "sentiment_state": "rising",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 7.88,
+          "density_threshold": 0.0627,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 8.18,
+          "density_threshold": 0.0644,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 8.43,
+          "density_threshold": 0.0668,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 8.64,
+          "density_threshold": 0.0712,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-11",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 8.75,
+          "density_threshold": 0.0733,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-14",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 8.84,
+          "density_threshold": 0.0748,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "AI算力"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 9.03,
+          "density_threshold": 0.0773,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "新能源"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 9.19,
+          "density_threshold": 0.0811,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "光通信"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 9.43,
+          "density_threshold": 0.0828,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-18",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 9.53,
+          "density_threshold": 0.0846,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-21",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 9.69,
+          "density_threshold": 0.086,
+          "triggered": true,
+          "main_count": 2,
+          "themes": [
+            "业绩线",
+            "医药"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 10.02,
+          "density_threshold": 0.0878,
+          "triggered": true,
+          "main_count": 1,
+          "themes": [
+            "业绩线"
+          ]
+        }
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "market_state": "strong",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 10.19,
+          "density_threshold": 0.0895,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 10.29,
+          "density_threshold": 0.0906,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-28",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 10.44,
+          "density_threshold": 0.0925,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-29",
+      "market_state": "weak",
+      "sentiment_state": "rising",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 12.49,
+          "density_threshold": 0.0937,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    },
+    {
+      "date": "2026-09-30",
+      "market_state": "normal",
+      "sentiment_state": "stable",
+      "by_sigma": {
+        "0.5": {
+          "mode": "dynamic",
+          "up_threshold": 10.6,
+          "density_threshold": 0.095,
+          "triggered": false,
+          "main_count": 0,
+          "themes": []
+        }
+      }
+    }
+  ],
+  "theme_stats": [
+    {
+      "theme": "业绩线",
+      "days": 18
+    },
+    {
+      "theme": "国企改革",
+      "days": 6
+    },
+    {
+      "theme": "AI算力",
+      "days": 6
+    },
+    {
+      "theme": "机器人",
+      "days": 2
+    },
+    {
+      "theme": "新能源",
+      "days": 2
+    },
+    {
+      "theme": "医药",
+      "days": 2
+    },
+    {
+      "theme": "光通信",
+      "days": 1
+    },
+    {
+      "theme": "粮食概念",
+      "days": 1
+    },
+    {
+      "theme": "PCB",
+      "days": 1
+    }
+  ],
+  "threshold_drift": {
+    "start": 0,
+    "end": 10.6,
+    "max": 12.49,
+    "max_date": "2026-09-29",
+    "days_above_10": 6,
+    "days_above_12": 1,
+    "trigger_rate_above_10": 16.7,
+    "trigger_rate_above_12": 0
+  }
+}

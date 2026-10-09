@@ -1,0 +1,190 @@
+name: merge-staging-to-main
+
+# ★ #141 staging → main 合并节奏（唯一合法入口）
+#
+# 为什么需要这条工作流，而不是"想起来就手动 merge 一下"：
+#   本项目的所有产出（情绪分、分位、归档、前端断言）都建立在**口径一致**上。
+#   main 是"对外可用"的分支，一旦有人绕过门禁直接合，main 上就可能出现
+#   "口径漂移但没人发现"的状态 —— 而这种故障的特征是**静默**：页面照常渲染，
+#   数字看起来也正常，只是和 staging 对不上。事后归因代价极高（见 2026-10-01 外围事故）。
+#   所以把"合什么、什么时候合、绿不绿才能合"写成机器可执行的规则，而不是靠人的自觉。
+#
+# 节奏（用户明确规格）：
+#   ① 定期：每周一 09:30（北京）自动尝试合并 —— 把上一周的 staging 成果整批带进 main。
+#   ② 门槛：**五道门禁全绿**才允许合。任何一道红 → 本次不合并，只留记录（不返工、不阻断后续）。
+#   ③ 例外（加塞）：重大 bug 修完可不等周一，用 workflow_dispatch 手动触发。
+#      ⚠ 加塞**只改时机，不改门槛** —— 门禁全绿这一条永远不放松。
+#   ④ 明令禁止：自由 merge。不经本工作流的 staging→main 合并一律视为违规操作。
+
+on:
+  schedule:
+    # 每周一 01:30 UTC = 北京 09:30。选周一开盘前：周末数据静止，
+    # 此刻 staging 处于"上周全部产物已落库、本周尚未开盘"的稳定态，合并风险最低。
+    - cron: '30 1 * * 1'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: '合并理由（加塞时必填：写明哪次重大 bug 修复，例："修 2026-10-01 外围未成交被当 0%"）'
+        required: false
+        default: ''
+      # ★ 刻意**不提供** "跳过门禁强制合并" 开关。
+      #   理由：用户规格里写明"自由 merge 不允许，避免滥用"。若留一个 force 开关，
+      #   它就是那条被滥用的路 —— 且"跳过门禁"的合理性完全依赖人的临场判断，
+      #   而本项目所有真实事故的共性恰恰是"当时觉得没问题"。
+      #   门禁本身坏掉时该怎么办：修门禁（那是 bug，走正常 staging 流程），
+      #   而不是绕过它。为此保留一条后路就足够：直接改工作流文件本身，
+      #   而那次改动同样要经过 code review 与 staging 流程。
+
+# 需要写权限：合并后要 push main，并把合并结论回写到 Actions summary。
+permissions:
+  contents: write
+
+concurrency:
+  # 合并不可并发：两个合并同时跑会互相覆盖 main 的 push。
+  # 加 `cancel-in-progress: false` 让后到的排队而不是取消先到的 —— 合并不像构建，
+  # 半途被取消会留下"已合一半"的中间态，比排队等到更糟。
+  group: merge-staging-to-main
+  cancel-in-progress: false
+
+jobs:
+  gates:
+    # 门禁 job：把五道门禁原样跑一遍。**不 checkout main，只 checkout staging** ——
+    # 要验的就是"staging 这个 SHA 是否够格进 main"，验别的东西没有意义。
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      # 供 merge job 判读：staging 当前 SHA（保证"验的"和"合的"是同一个 commit）。
+      staging_sha: ${{ steps.head.outputs.sha }}
+    steps:
+      - name: 检出 staging（不 fetch main：本 job 只验 staging）
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # 记录被验的确切 SHA。合并 job 会再核对一次：
+      # 若两次不一致（说明验完之后 staging 又动了），**拒绝合并** ——
+      # 不能拿"验过的绿"去背书"没验过的 commit"。
+      - name: 记录被验的 staging SHA
+        id: head
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      # ---- 门禁 ① 单元测试（含 Python↔JS 一致性夹具、口径锁、幂等锁、决策锁）----
+      - name: 门禁① 单元测试
+        run: node --test test/*.test.mjs
+
+      # ---- 门禁 ② 龙虎榜口径守卫（双口径不混用 + 存档可重现 + run 行先后）----
+      - name: 门禁② 龙虎榜口径守卫
+        run: node scripts/audit_lhb_caliber.mjs
+
+      # ---- 门禁 ③ 前端断言（需要在 jsdom 里真跑页面）----
+      # ★ jsdom 不是仓库依赖（node_modules/ 已被 .gitignore），CI 里必须显式装。
+      #   为什么不用 `npm i jsdom` 落进仓库：本仓库刻意保持"零运行时依赖"，
+      #   jsdom 只服务于这一条开发/CI 断言，装进 repo 会给每次 checkout 增负担。
+      #   所以装到 runner 的临时目录，再用 NODE_PATH 指过去。
+      - name: 安装 jsdom（门禁③ 的依赖，不入仓库）
+        run: npm i --no-save --prefix "$RUNNER_TEMP/fe-deps" jsdom
+
+      # --require-jsdom 是硬开关：缺依赖直接失败，不允许"跳过即通过"。
+      # 理由见 scripts/check_frontend.mjs 文件头 ★ —— 否则门禁会一路假绿。
+      - name: 门禁③ 前端断言
+        run: node scripts/check_frontend.mjs --require-jsdom
+        env:
+          NODE_PATH: ${{ runner.temp }}/fe-deps/node_modules
+
+      # ---- 门禁 ④ 公式版本回归（v4.5/v5.0/v5.2 并行重算对比）----
+      - name: 门禁④ 公式版本回归
+        run: node scripts/version_regression.mjs
+
+      # ---- 门禁 ⑤ 归档切片一致性（主档 < 7MB、signals-latest < 32KB 体积纪律）----
+      - name: 门禁⑤ 归档切片 --check
+        run: node scripts/split_archive.mjs --check
+
+  merge:
+    needs: gates
+    # 门禁全绿才进来。注意 `always() && needs.gates.result == 'success'` 的必要性：
+    # 默认 needs 失败会**整个 job 跳过**，那样连"因门禁红而未合并"的记录都没有，
+    # 事后看 Actions 只看到一团 skipped，归因困难。这里显式进来，把结论写清楚。
+    if: always() && needs.gates.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出 staging（带完整历史，便于 fast-forward 判定）
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+          # 用默认 GITHUB_TOKEN 推 main：token 随 job 结束即失效，不落任何长期凭据。
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 复核 staging SHA 未漂移
+        id: verify
+        run: |
+          CUR=$(git rev-parse HEAD)
+          WANT="${{ needs.gates.outputs.staging_sha }}"
+          echo "cur=$CUR want=$WANT"
+          if [ "$CUR" != "$WANT" ]; then
+            echo "::error::staging 在门禁跑完后发生了新的提交（$WANT → $CUR）。"
+            echo "::error::拒绝合并：门禁结论只对 $WANT 有效，不能给未验证的 commit 背书。"
+            echo "drift=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "drift=false" >> "$GITHUB_OUTPUT"
+
+      - name: 合并到 main（仅允许 fast-forward）
+        if: steps.verify.outputs.drift == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          # ★ 只允许 fast-forward（--ff-only）：main 上不该有 staging 没有的提交。
+          #   若 ff 失败（历史分叉），说明有人绕过本工作流直接往 main 推过东西 ——
+          #   这种情况**必须人工介入**裁决（要么把 main 的提交合回 staging，
+          #   要么明确废弃），绝不能自动化地产生一个 merge commit 把分叉糊过去。
+          if ! git merge --ff-only staging; then
+            echo "::error::main 与 staging 历史已分叉，无法 fast-forward。"
+            echo "::error::这通常意味着有人绕过本工作流直接 push 了 main。"
+            echo "::error::请人工裁决：把 main 的独有提交合回 staging，或明确废弃后再重跑。"
+            exit 1
+          fi
+          git push origin main
+
+      - name: 回写合并结论
+        if: always()
+        run: |
+          echo "## staging → main 合并结论" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 触发方式：\`${{ github.event_name }}\`" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${{ github.event.inputs.reason }}" ]; then
+            echo "- 合并理由：${{ github.event.inputs.reason }}" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "- 门禁结果：**${{ needs.gates.result }}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- staging SHA：\`${{ needs.gates.outputs.staging_sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "> 规则：五道门禁全绿才允许合并；加塞（手动触发）只改时机、不改门槛；自由 merge 不允许。" >> "$GITHUB_STEP_SUMMARY"
+
+  # 门禁红时单独一个 job 把"为什么没合"讲清楚，避免 Actions 里只剩 skipped 无从归因。
+  blocked:
+    needs: gates
+    if: always() && needs.gates.result != 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: 说明未合并原因
+        run: |
+          echo "::warning::门禁未全绿（结果：${{ needs.gates.result }}），本次**不合并** staging → main。"
+          echo "::warning::main 保持原状。请在 staging 上修复后，等下一个周一，或修复重大 bug 后手动加塞。"
+          {
+            echo "## staging → main：本次未合并"
+            echo ""
+            echo "- 门禁结果：**${{ needs.gates.result }}**（需为 success 才合并）"
+            echo "- main 未被改动。"
+            echo "- 下一步：在 staging 修复红项 → 等下一个周一自动重试，或修完重大 bug 后手动触发加塞。"
+            echo ""
+            echo "> 门禁全绿是硬门槛。加塞只改时机，不改门槛。"
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1

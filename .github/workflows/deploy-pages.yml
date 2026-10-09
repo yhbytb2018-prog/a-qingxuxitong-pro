@@ -1,0 +1,104 @@
+name: deploy-pages
+
+# ★ Pages 单通道部署（2026-10-06 部署治理）：仓库根 web 面 → GitHub Pages。
+#
+# 背景（收口前的实况——双通道互相覆盖，Actions job 级实录）：
+#   · 旧形态 = Settings Source: Deploy from a branch（main/root）：任何 push（含纯文档
+#     变更）都触发一次原生 Pages 构建；本仓库 kline 分片 5554 个，原生构建排队 5~10 分钟
+#     是常态（2026-10-05 实测 20:04 入队的构建滞留 10+ 分钟）。
+#   · daily.yml 另有一条 dist 部署 job（合并版 UI 单文件）——与原生分支构建**互相覆盖**：
+#     2026-10-05 13:12 run 实录：deploy-pages(dist) success → 同轮数据提交触发的原生分支
+#     构建完成于其后 → 云端被盖回分支内容。两个通道每天打一次，最终态取决于谁后完成
+#     （非确定行为 = 部署面不可审计）。
+#   · 本工作流 = 唯一部署通道：Settings 切到 GitHub Actions 后原生构建停摆，只剩这里。
+#
+# 设计要点：
+#   ① paths 正向白名单 = web 面清单（index.html 引用 ∪ sw.js SHELL_ASSETS ∪ data/**）。
+#      纯文档/管线/测试变更（**.md、docs/、scripts/、test/、tools/、src 管线码）不触发部署。
+#      ⚠ 三处同源须同步改：sw.js SHELL_ASSETS / 本文件 paths / 下方产物组装 cp 清单
+#      ——SW 外壳新增资产时三处一并对齐（缺一处 = 离线外壳缺资产或部署漏触发）。
+#   ② concurrency group "pages" + cancel-in-progress：连续 push 只保留最后一次部署，
+#      进行中的旧部署就地取消——接替旧形态「原生构建 superseded 自动取消」的职责，
+#      且真正管到 Actions 通道（旧机制只取消原生队列，管不到 daily 的 dist 部署，
+#      两通道照样互打——这正是本次收口要消灭的形态）。
+#   ③ daily.yml 的数据提交（bot push）命中 data/** → 自动触发本工作流，页面随数据刷新。
+#   ④ 手动通道 workflow_dispatch：改部署配置后想立即验证时用。
+#
+# ⚠ 启用前置（一次性，手工一击）：Settings → Pages → Build and deployment → Source
+#   切到 GitHub Actions。切换前原生分支构建仍照常触发（GitHub 侧行为，yml 管不到，
+#   纯文档 push 仍会有原生构建）；切换后原生停摆、本通道接管，两通道不再并存互打。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'style.css'
+      - 'sw.js'
+      - 'paper_ui.js'
+      - 'manifest.webmanifest'
+      - 'src/report.js'
+      - 'src/report_audit.js'
+      - 'src/seats.js'
+      - 'src/paper.js'
+      - 'src/quote.js'
+      - 'src/intraday_live.js'
+      - 'src/intraday_sampler.js'
+      - 'src/ai_report.js'
+      - 'src/lhbfilter.js'
+      - 'src/lhb.js'
+      - 'src/report_card_live.js'
+      - 'src/dataset.js'
+      - 'src/dual_track.js'
+      - 'src/error_boundary.js'
+      - 'data/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: 组装 web 面产物（根 web 面 → site/；清单与 paths 白名单同源）
+        run: |
+          set -eu
+          mkdir -p site/src site/data
+          # 页面外壳（index.html 引用 + SW SHELL_ASSETS 离线外壳）
+          cp index.html app.js style.css sw.js paper_ui.js manifest.webmanifest site/
+          cp src/report.js src/report_audit.js src/seats.js site/src/
+          cp src/paper.js src/quote.js src/intraday_live.js src/intraday_sampler.js site/src/
+          cp src/ai_report.js src/lhbfilter.js src/lhb.js src/report_card_live.js site/src/
+          cp src/dataset.js src/dual_track.js src/error_boundary.js site/src/
+          # 数据面（运行时 fetch('./data/*.json') 的全部消费档，含 paper/ 双轨账本）
+          cp -r data/. site/data/
+          # SW 版本指纹注入（2026-10-07）：SW 更新由「sw.js 字节变化」触发（规范 byte-diff，
+          # CACHE_VERSION 只命名缓存、不参与触发）。但若某次部署只改了 shell 资产而 sw.js
+          # 一字未动，install 不会重跑——新增的 SHELL_ASSETS 项不入缓存（SWR 后台刷新只
+          # 覆盖已存在的 key）。注入 commit hash 后，**每次部署 site/sw.js 字节必变**：
+          # install 必重跑、外壳全量重 add，activate 的 staleCaches 按前缀清掉旧版本名。
+          # 源文件（sw.js / src/offline.js）保持 'v2' 不动——一致性守卫在源上跑，不受影响。
+          sed -E -i "s/^const CACHE_VERSION = 'v[0-9a-z-]*';/const CACHE_VERSION = 'v2-${GITHUB_SHA::7}';/" site/sw.js
+          grep -q "CACHE_VERSION = 'v2-${GITHUB_SHA::7}'" site/sw.js  # 注入失败（源形态变了）→ fail-fast
+          # 产物体积留痕（Actions 日志可直接核对）
+          du -sh site
+      - name: 上传 Pages 部署产物（site/）
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

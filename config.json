@@ -1,0 +1,213 @@
+{
+  "_about": "a-sentiment-pro 全局配置（唯一事实源）。Node 侧经 src/config.js 薄壳加载（校验 + params.live 递归冻结 + 组装兼容层同引用）；前端经 index.html 内联 module 脚本 import config.json 挂 window.ASENT_CONFIG（app.js 读 params.live；旧浏览器兜底走 TH_DEFAULT——模拟交易台面 paper_ui.js 已于 2026-10-03 下线）。改配置只改本文件（参数走 scripts/promote_params.mjs），勿在别处手抄数值。",
+  "schemaVersion": 2,
+  "formulaVersion": "v5.2-pro",
+  "_paramsNote": "参数双套与双写镜像（JSON 无注释，集中在此）：① live=生产口径、train=实验区，两块五段（weights/thresholds/stops/lookback/costModel）键集合必须一致（守卫锁定），只许改值不许改结构；改动唯一通道 = scripts/promote_params.mjs --apply（样本外 20% 门禁 + params_changelog.json 留痕 who/when/why/验证结果），手改 live 不留痕 → test/params_governance.test.mjs 红。② 顶层 weights/lookback/backtest.thresholds/costs/rolling/maxPos/stopLoss/ddTrigger/maxPosChg/momentumRecent/momentumPrev 是 live 的**双写镜像**（前端桥与 check_frontend 平铺 JSON 直接读扁平层），必须与 params.live 逐位相等，漂移即「报告说 A、算的是 B」。③ 四档阈值（收盘打分、T+1 生效）：≥80 过热只减仓不新建 / ≥65 满仓 / 24~65 半仓 / ≤24 清仓；hi=44 是保留参数——src/backtest.js positions() 未用它判档（24~65 同属半仓），仅历史口径展示，若需独立减仓档须同时改 positions() 并更新回归夹具。④ costModel 实盘摩擦预埋：佣金万3双边 / 印花万5卖出 / 滑点万2；priceLimit 为涨跌停约束占位（enabled:false），启用须先回填限价口径，避免届时返工。⑤ lookback.rankWindow/rankMin 与 src/sources.js 的 RANK_WINDOW/RANK_MIN 同源（防前视分位窗口 #134）；rolling 与 walk-forward 同源。",
+  "params": {
+    "live": {
+      "weights": {
+        "s_net20": 0.2,
+        "s_pos10": 0.1,
+        "s_brd20": 0.2,
+        "s_hot10": 0.1,
+        "s_zdt15": 0.15,
+        "s_zbl10": 0.1,
+        "s_amt15": 0.15
+      },
+      "thresholds": {
+        "panic": 24,
+        "hi": 44,
+        "lo": 65,
+        "overheat": 80
+      },
+      "stops": {
+        "maxPos": 1,
+        "stopLoss": -0.08,
+        "ddTrigger": -0.15,
+        "maxPosChg": 0.2
+      },
+      "lookback": {
+        "rolling": {
+          "trainWindow": 20,
+          "testWindow": 6
+        },
+        "momentumRecent": 5,
+        "momentumPrev": 5,
+        "rankWindow": 60,
+        "rankMin": 20
+      },
+      "costModel": {
+        "comm": 0.0003,
+        "stamp": 0.0005,
+        "slip": 0.0002,
+        "priceLimit": {
+          "enabled": false
+        }
+      }
+    },
+    "train": {
+      "weights": {
+        "s_net20": 0.2,
+        "s_pos10": 0.1,
+        "s_brd20": 0.2,
+        "s_hot10": 0.1,
+        "s_zdt15": 0.15,
+        "s_zbl10": 0.1,
+        "s_amt15": 0.15
+      },
+      "thresholds": {
+        "panic": 24,
+        "hi": 44,
+        "lo": 65,
+        "overheat": 80
+      },
+      "stops": {
+        "maxPos": 1,
+        "stopLoss": -0.08,
+        "ddTrigger": -0.15,
+        "maxPosChg": 0.2
+      },
+      "lookback": {
+        "rolling": {
+          "trainWindow": 20,
+          "testWindow": 6
+        },
+        "momentumRecent": 5,
+        "momentumPrev": 5,
+        "rankWindow": 60,
+        "rankMin": 20
+      },
+      "costModel": {
+        "comm": 0.0003,
+        "stamp": 0.0005,
+        "slip": 0.0002,
+        "priceLimit": {
+          "enabled": false
+        }
+      }
+    },
+    "governance": "live 冻结（薄壳递归 Object.freeze）；改动唯一通道 = scripts/promote_params.mjs --apply（样本外20%门禁 + params_changelog.json 留痕 who/when/why/验证结果）。train 为实验区，寻优锚点已切至 train（scripts/backtest.mjs）。"
+  },
+  "lookback": {
+    "rolling": {
+      "trainWindow": 20,
+      "testWindow": 6
+    },
+    "momentumRecent": 5,
+    "momentumPrev": 5,
+    "rankWindow": 60,
+    "rankMin": 20
+  },
+  "weights": {
+    "s_net20": 0.2,
+    "s_pos10": 0.1,
+    "s_brd20": 0.2,
+    "s_hot10": 0.1,
+    "s_zdt15": 0.15,
+    "s_zbl10": 0.1,
+    "s_amt15": 0.15
+  },
+  "factorKeyMap": {
+    "s_net20": "s_net",
+    "s_pos10": "s_pos",
+    "s_brd20": "s_brd",
+    "s_hot10": "s_hot",
+    "s_zdt15": "s_zdt",
+    "s_zbl10": "s_zbl",
+    "s_amt15": "s_amt"
+  },
+  "backtest": {
+    "thresholds": {
+      "panic": 24,
+      "hi": 44,
+      "lo": 65,
+      "overheat": 80
+    },
+    "_thresholdsNote": "四档阈值（收盘打分、T+1 生效）：≥80 过热只减仓不新建 / ≥65 满仓 / 24~65 半仓 / ≤24 清仓。hi=44 是保留参数：src/backtest.js positions() 未用它判档（24~65 同属半仓），仅历史口径展示；若需独立减仓档须同时改 positions() 并更新回归夹具。",
+    "assets": [
+      "上证指数",
+      "深证成指",
+      "创业板指"
+    ],
+    "costs": {
+      "comm": 0.0003,
+      "stamp": 0.0005,
+      "slip": 0.0002,
+      "priceLimit": {
+        "enabled": false
+      }
+    },
+    "maxPos": 1,
+    "stopLoss": -0.08,
+    "ddTrigger": -0.15,
+    "maxPosChg": 0.2,
+    "gridSteps": [
+      0.6,
+      0.8,
+      1,
+      1.2,
+      1.4
+    ],
+    "rolling": {
+      "trainWindow": 20,
+      "testWindow": 6
+    }
+  },
+  "mainLine": {
+    "_note": "主线识别动态阈值（2026-10-07）：题材须达「近 lookback_days 个交易日最强题材分布的 均值 + sigma_multiplier×标准差」才算当日主线（废除无条件取 topN）。历史样本不足 min_sample_days 条时降级 fixedFallback（固定阈值，取页面既有规格口径：主线涨停 ≥6 只为强势）。历史窗口不含当日（用过去分布定今日门槛，防当日突增自我抬高门槛把当日主线滤掉）。第二步（同日）加「总阀门」：assessMarketState（量能×指数趋势）与 assessSentimentState（昨日老主线龙头今日表现）双状态调节阈值与输出上限——市场弱势时门槛上调且最多出 weak_mode_max_output 条主线；老龙头退潮时密集度门槛上调（接力题材须更强的抱团证据）。sentiment_rise_pct 超出规格清单但遵循「参数不硬编码」总纲（涨幅 >3% 判 rising 的 3 也入配置）。「指数在均线下方」因 archive 无指数点位序列，接入层以「近10日累计涨跌 < 0」为趋势代理（口径见 scripts/backtest.mjs），纯函数仍收数值保持可测。第三步（同日）加「仓位管理」：computeATR（Wilder 平滑）+ assignPositionWeights 按 ATR% 分档（low ≤ atr_low_threshold / > atr_high_threshold 为 high / 中间 mid / 数据不足 unknown 取 mid 默认权重）给建议仓位——archive 无个股日内高低价，接入层用热点榜收盘序列构造退化 K 线（TR=|Δclose|，量级略低估真 ATR），断档或在榜不足 atr_period+1 日 → unknown；补齐 K 线数据后仅需替换接入层构造，分档逻辑零改动。sigma_multiplier 2026-10-07 由 1.0 调至 0.5：scripts/compare_sigma.mjs 60 日对比回测显示 10 个不一致日全部为 σ0.5 触发 / σ1 漏报（σ1 于 9 月仅 1 天触发，且不一致集中于 normal/strong 日、非弱势门槛效应，纯阈值敏感度问题），σ1 门槛过苛。",
+    "lookback_days": 60,
+    "sigma_multiplier": 0.5,
+    "min_sample_days": 20,
+    "fixedFallback": {
+      "up_count_threshold": 6,
+      "density_threshold": 0.1
+    },
+    "market_weak_volume_ratio": 0.8,
+    "market_weak_index_below_ma": true,
+    "sentiment_old_dragon_drop": -5,
+    "sentiment_rise_pct": 3,
+    "weak_mode_threshold_boost": 2,
+    "weak_mode_max_output": 1,
+    "dragon_retreat_density_boost": 0.05,
+    "atr_period": 10,
+    "atr_low_threshold": 3,
+    "atr_high_threshold": 8,
+    "weight_low_vol": 15,
+    "weight_mid_vol": 10,
+    "weight_high_vol": 5
+  },
+  "missingPolicy": "proxy",
+  "minThemeStocksGlobal": 2,
+  "minThemeStocksWindow": 2,
+  "momentumRecent": 5,
+  "momentumPrev": 5,
+  "healthWarnImputedRatio": 0.34,
+  "retry": {
+    "times": 3,
+    "backoff": 1500
+  },
+  "sources": {
+    "eastmoney": {
+      "lhb": "https://datacenter.eastmoney.com/securities/api/data/v1/get",
+      "pool": "https://push2.eastmoney.com/api/qt/clist/get"
+    },
+    "tencent": {
+      "index": "https://qt.gtimg.cn/q="
+    },
+    "ths": {
+      "industry": "https://q.10jqka.com.cn/thshy/"
+    }
+  },
+  "manualHolidays": [
+    "2026-09-25",
+    "2026-09-26",
+    "2026-09-27",
+    "2026-10-01",
+    "2026-10-02",
+    "2026-10-03",
+    "2026-10-04",
+    "2026-10-05",
+    "2026-10-06",
+    "2026-10-07"
+  ]
+}

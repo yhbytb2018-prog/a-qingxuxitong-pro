@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股情绪看板 · 实战使用指南（动态版）</title>
+<style>
+  :root{
+    --bg:#0d121b; --panel:#111823; --card:#151d2b; --line:#24304a;
+    --txt:#d7e1f0; --dim:#8fa1bb; --faint:#5c6d86;
+    --blue:#4a9eff; --gold:#e8b04a; --green:#3fbf7f; --red:#e05c5c; --purple:#a78bfa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.8;padding:32px 16px 80px}
+  .wrap{max-width:900px;margin:0 auto}
+  h1{font-size:28px;letter-spacing:1px;margin-bottom:6px}
+  .sub{color:var(--dim);font-size:14px;margin-bottom:28px}
+  .sub b{color:var(--gold)}
+  h2{font-size:20px;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--blue)}
+  h2 .no{color:var(--faint);font-weight:400;margin-right:8px}
+  h3{font-size:15.5px;color:var(--blue);margin:20px 0 8px}
+  p{margin:8px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th{background:#182234;color:var(--dim);text-align:left;padding:9px 12px;border:1px solid var(--line);font-weight:600;white-space:nowrap}
+  td{padding:9px 12px;border:1px solid var(--line);vertical-align:top}
+  td:first-child{white-space:nowrap}
+  .tag{display:inline-block;padding:1px 9px;border-radius:20px;font-size:12px;margin-right:6px;white-space:nowrap}
+  .t-blue{background:rgba(74,158,255,.14);color:var(--blue)}
+  .t-gold{background:rgba(232,176,74,.14);color:var(--gold)}
+  .t-green{background:rgba(63,191,127,.14);color:var(--green)}
+  .t-red{background:rgba(224,92,92,.14);color:var(--red)}
+  .t-purple{background:rgba(167,139,250,.14);color:var(--purple)}
+  ul,ol{margin:8px 0 8px 22px}
+  li{margin:6px 0}
+  .dim{color:var(--dim)}
+  .small{font-size:13px}
+  .hl{color:var(--gold)}
+  .up{color:var(--red);font-weight:600}
+  .down{color:var(--green);font-weight:600}
+  .warn{background:rgba(232,176,74,.07);border:1px solid rgba(232,176,74,.3);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px}
+  .warn b{color:var(--gold)}
+  .danger{background:rgba(224,92,92,.07);border:1px solid rgba(224,92,92,.35);border-radius:10px;padding:12px 16px;margin:12px 0;font-size:13.5px}
+  .danger b{color:var(--red)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:12px 0}
+  .grid .g{background:#182234;border:1px solid var(--line);border-radius:10px;padding:10px 12px;text-align:center}
+  .grid .g .v{font-size:19px;font-weight:700;font-family:Consolas,monospace}
+  .grid .g .k{font-size:12px;color:var(--dim)}
+  .badge{display:inline-block;padding:4px 16px;border-radius:24px;font-size:16px;font-weight:700;margin:6px 0}
+  .b-hot{background:rgba(224,92,92,.16);color:var(--red)}
+  .b-ice{background:rgba(74,158,255,.16);color:var(--blue)}
+  .b-rec{background:rgba(63,191,127,.16);color:var(--green)}
+  .b-neu{background:rgba(143,161,187,.16);color:var(--dim)}
+  .b-ret{background:rgba(232,176,74,.16);color:var(--gold)}
+  .src{font-size:12px;color:var(--faint);margin-top:10px}
+  footer{margin-top:60px;color:var(--faint);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>A股情绪看板 · 实战使用指南</h1>
+<div class="sub">§4「今日作战卡」是<b>动态的</b>：每次打开自动读取云端最新数据、自动判定当天情绪状态并给出对应作战要点，跟着每天的结果走 · 其余章节为方法说明 · v4.9.12 · 从看板「🎯 今日状态」页签可随时打开本指南</div>
+
+<!-- ============ 1 ============ -->
+<h2 id="what"><span class="no">1</span>这个系统是干嘛的</h2>
+<div class="card">
+<p>一句话：<b>它是全市场的「情绪温度计 + 资金流向表」</b>，帮你回答三个实战问题——</p>
+<ol>
+  <li><span class="tag t-gold">时机</span>今天市场冷还是热？适合<b>重仓出手、轻仓试错，还是收缩观望</b>？</li>
+  <li><span class="tag t-gold">方向</span>资金今天往哪些题材流？主线在强化还是在退潮？</li>
+  <li><span class="tag t-gold">个股</span>我关注的那只票，技术形态怎么样、和大盘比强不强？</li>
+</ol>
+<div class="danger"><b>它做不到的事（先说清楚，免得用错方向）</b>
+<ul style="margin-top:6px">
+  <li><b>不荐股</b>：呈现的是全市场统计，不会告诉你「买哪只、几点几分买」；</li>
+  <li><b>不预测点位</b>：情绪指数图上的金色虚线是统计外推（趋势参考），<b>永远不要拿它当买卖依据</b>；</li>
+  <li><b>不构成投资建议</b>：最终决策、盈亏由你自己承担。</li>
+</ul>
+</div>
+<p class="dim small">正确定位：盘后复盘和次日计划的「仪表盘」——把散落在龙虎榜、涨停板、题材榜里的信号汇总成几个数字，把「感觉今天市场不错」变成可对照、可回看的事实。</p>
+</div>
+
+<!-- ============ 2 ============ -->
+<h2 id="daily"><span class="no">2</span>每天怎么用：收盘后 10 分钟流程</h2>
+<div class="card">
+<p>建议固定在<b>收盘后 19:35 以后</b>做（当日数据已全部就绪），顺序如下（本指南 §4 的作战卡就是这套流程的自动执行版）：</p>
+<table>
+<tr><th>步骤</th><th>去哪看</th><th>看什么、想什么</th></tr>
+<tr><td>① 先看温度</td><td>小程序概览 / 网页情绪指数</td><td>情绪分在哪个区间？比昨天升了还是降了？<b>单日值不重要，连续 3 天的方向才重要</b></td></tr>
+<tr><td>② 再看资金</td><td>网页信号中心</td><td>龙虎榜净买正负？净买分位高低？<b>情绪高 + 资金净流入 = 健康；情绪高 + 资金净流出 = 警惕诱多</b></td></tr>
+<tr><td>③ 看接力意愿</td><td>网页当日盘面</td><td>涨停数、炸板率、连板高度。<b>炸板率骤升（&gt;30%）是退潮最灵敏的信号</b>，常比指数提前 1~3 天</td></tr>
+<tr><td>④ 找主线题材</td><td>题材榜 / S4 演化树</td><td>TOP3 题材连续 3 天霸榜的才是主线，一日游题材不追</td></tr>
+<tr><td>⑤ 落到个股</td><td>小程序个股档案/对比</td><td>只有第①步允许出手时，这一步才有意义</td></tr>
+<tr><td>⑥ 留痕</td><td>实验室 S7 笔记 / S3 简报</td><td>写一句话存档，下周回看对错</td></tr>
+</table>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2 id="states"><span class="no">3</span>五种情绪状态对照手册</h2>
+<div class="card">
+<p>§4 作战卡按这套规则自动判定今天的状态；这里是人读版：</p>
+<table>
+<tr><th>状态</th><th>判定（自动版规则）</th><th>统计特征与常见思路（经验参考，非指令）</th></tr>
+<tr><td><span class="tag t-blue">冰点区</span></td><td>情绪分 &lt; 30</td><td>涨停一二十家、连板断层、亏钱效应充分释放。历史上是中线「分批区域」：分批、慢买、买超跌不买强势，<b>忌追当日热点</b></td></tr>
+<tr><td><span class="tag t-green">回升期</span></td><td>30~65 且近 3 日累升 ≥ 4 分</td><td>涨停递增、炸板率下降、题材出现 2~3 天连续主线。顺势跟随主流题材，仓位随情绪抬升逐步放大；做<b>强于大盘</b>的票胜率相对高</td></tr>
+<tr><td><span class="tag t-blue">中性区</span></td><td>45~55 附近来回摆，方向不明</td><td>题材一天一换。<b>降低频率</b>——震荡市频繁交易是散户最大亏损来源，适合做功课更新自选，等方向选出</td></tr>
+<tr><td><span class="tag t-red">偏热区</span></td><td>情绪分 &gt; 65</td><td>涨停五六十家+、连板打开、题材全面开花。高分后 5~10 日波动显著放大：可能是主升也可能见顶，取决于资金。持仓黄金期但<b>不宜新开重仓</b>；盯两个见顶前兆：<b>炸板率跳升</b>与<b>净买转负</b></td></tr>
+<tr><td><span class="tag t-gold">退潮期</span></td><td>近 5 日内曾有 &gt;65 高点，且近 3 日累跌 ≥ 4 分</td><td>高位连板批量炸板、题材轮动不过 2 天。短线客亏损最集中阶段：<b>收缩仓位、停做接力</b>；翻历史回看页找上次退潮见底特征，提前写好冰点应对计划</td></tr>
+</table>
+<p class="small">叠加预警（任何状态都会自动检查）：炸板率 &gt; 30% → 接力恶化；偏热 + 净买 &lt; 0 → 诱多风险。<b>记忆口诀：位置（冷热）+ 趋势（连 3 天方向）+ 拐点（炸板/净买）= 仓位依据。</b></p>
+</div>
+
+<!-- ============ 4 动态 ============ -->
+<h2 id="live"><span class="no">4</span>今日作战卡（每天自动更新）</h2>
+<div class="card" id="liveCard">
+<p id="loadmsg" class="dim">正在读取云端最新数据……</p>
+<div id="liveBody" style="display:none"></div>
+</div>
+
+<!-- ============ 5 ============ -->
+<h2 id="verify"><span class="no">5</span>进阶：验证你自己的打法</h2>
+<div class="card">
+<ul>
+  <li><span class="tag t-purple">S11 区间回测</span>：把你的规则写成条件（如「&lt;30 买入、&gt;65 卖出」）在存档期跑模拟。<b>存档目前 32 天还在累积，样本不足不下结论</b>，但每月都在变厚。</li>
+  <li><span class="tag t-purple">S2 预测追踪器</span>：系统的外推每天被记录并与实际对比。听任何「预测」前先看它的历史准确率。</li>
+  <li><span class="tag t-purple">S3/S7 复盘</span>：把判断写下来锚定数据，三个月后看清自己哪类判断靠谱。</li>
+</ul>
+</div>
+
+<!-- ============ 6 ============ -->
+<h2 id="ref"><span class="no">6</span>速查卡：指标 & 更新时间</h2>
+<div class="card">
+<table>
+<tr><th>指标</th><th>实战含义</th><th>在哪看</th></tr>
+<tr><td>情绪分</td><td>&lt;30 冰点 · 30-65 正常 · &gt;65 偏热；连 3 天方向比单日值重要</td><td>小程序概览/趋势 · 网页情绪指数</td></tr>
+<tr><td>情绪/净买分位</td><td>在全部存档日中的百分位；&gt;80% 极热、&lt;20% 极冷</td><td>网页信号中心</td></tr>
+<tr><td>炸板率</td><td>打板胜率反向指标；<b>骤升 = 退潮最灵敏前兆</b></td><td>当日盘面 · 信号中心</td></tr>
+<tr><td>龙虎榜净买</td><td>资金净流入方向；与情绪背离时优先信资金</td><td>信号中心 · 当日盘面</td></tr>
+<tr><td>题材榜 TOP</td><td>连 3 天霸榜 = 主线；一日游不追</td><td>题材榜 · S4 演化树</td></tr>
+</table>
+<table>
+<tr><th>时间（交易日）</th><th>什么数据就绪</th></tr>
+<tr><td>15:35 后</td><td>个股/指数日 K 推进到当天</td></tr>
+<tr><td>19:35 后</td><td>当日情绪分、题材榜、龙虎榜、分位全部就绪（<b>建议此时复盘</b>）</td></tr>
+<tr><td>随时</td><td>小程序下拉刷新 /「↻ 刷新」强制取云端最新；网页 F5</td></tr>
+</table>
+</div>
+
+<!-- ============ 7 ============ -->
+<h2 id="rules"><span class="no">7</span>使用纪律（比任何指标都值钱）</h2>
+<div class="card">
+<ol>
+  <li><b>先定状态，再谈个股</b>：§4 的状态判定没看之前，不看任何个股结论。</li>
+  <li><b>单日信号不当真</b>：连续 3 天同向变化才开始有意义。</li>
+  <li><b>情绪与资金打架时，信资金</b>。</li>
+  <li><b>出手前先看 S11 是否验证过同类条件</b>，没验证过的规则等于掷硬币。</li>
+  <li><b>每天判断写进 S7</b>：不复盘的交易系统只是好看的仪表盘。</li>
+  <li><b>系统度量的是「市场情绪」，不是「你的标的」</b>：情绪好 ≠ 你的票会涨。</li>
+</ol>
+</div>
+
+<footer>A股情绪看板 · 实战使用指南（动态版）· §4 自动读取云端 sentiment_daily 并按 §3 规则判定状态 · 不构成投资建议</footer>
+</div>
+
+<script>
+(function(){
+  var EP='https://mp-api.app.workbuddy.host';
+  var KEY='wbpk_FPBUJ4woyj5q8iEsX7Jsl6_AtCfloPqagFbt4juYG7qzzisb1LlY890';
+  /* 断网兜底快照（2026-09-30 内置，倒序） */
+  var FALLBACK=[
+   {date:'2026-09-29',v:67.2,pct:61.3,netPct:45.2,net:15.53,zt:57,dt:10,zbl:12.3,amt:6617,maxLb:6,top:'华为概念(17) · 数据中心(AIDC)(12) · 锂电池概念(11)'},
+   {date:'2026-09-28',v:35.1,pct:3.2,netPct:9.7,net:-0.61,zt:33,dt:56,zbl:25,amt:17028,maxLb:5,top:'一带一路(10) · 绿色电力(6) · 数字经济(6)'},
+   {date:'2026-09-24',v:54.2,pct:29,netPct:48.4,net:15.74,zt:52,dt:13,zbl:16.1,amt:16533.6,maxLb:5,top:'海峡两岸(13) · 人工智能(12) · 比亚迪概念(9)'},
+   {date:'2026-09-23',v:58.3,pct:32.3,netPct:80.6,net:27.29,zt:51,dt:13,zbl:33.8,amt:17649.8,maxLb:4,top:'芯片概念(13) · 华为概念(13) · 5G(11)'},
+   {date:'2026-09-22',v:65.4,pct:48.4,netPct:51.6,net:15.87,zt:63,dt:3,zbl:22.2,amt:21355.5,maxLb:6,top:'人工智能(20) · 华为概念(19) · DeepSeek概念(16)'},
+   {date:'2026-09-21',v:77.9,pct:83.9,netPct:22.6,net:7.98,zt:103,dt:2,zbl:19.5,amt:20315.1,maxLb:5,top:'华为概念(23) · 西部大开发(15) · 粤港澳大湾区(15)'},
+   {date:'2026-09-18',v:81.9,pct:96.8,netPct:83.9,net:32.71,zt:78,dt:0,zbl:24.3,amt:20771,maxLb:4,top:'芯片概念(18) · 华为概念(16) · 人工智能(15)'},
+   {date:'2026-09-17',v:58.3,pct:32.3,netPct:12.9,net:4.85,zt:47,dt:1,zbl:29.9,amt:18231.3,maxLb:5,top:'新能源汽车(13) · 一带一路(12) · 储能(10)'}
+  ];
+
+  function load(){
+    return fetch(EP+'/.cloud/database/rest/sentiment_daily?select=trade_date,detail&order=trade_date.desc&limit=10',{
+      headers:{'x-wb-webapp-access-key':KEY}})
+      .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.json(); })
+      .then(function(rows){
+        var days=rows.map(function(r){ var d=r.detail||{},e=d.emo||{},s=d.sum||{};
+          return {date:r.trade_date,v:e.v,pct:e.pct,netPct:e.netPct,net:s.netTotalYi,zt:s.zt,dt:s.dt,zbl:s.zbl,amt:s.amountYi,maxLb:s.maxLb,
+                  top:(d.concepts||[]).slice(0,3).map(function(c){return c.tag+'('+c.count+')';}).join(' · ')};});
+        if(days.length&&days[0].v!=null) return {days:days,live:true};
+        throw new Error('empty');
+      })
+      .catch(function(){ return {days:FALLBACK,live:false}; });
+  }
+
+  function judge(days){
+    var asc=days.slice().sort(function(a,b){return a.date<b.date?-1:1;});
+    var L=asc[asc.length-1];
+    var ref=asc.length>3?asc[asc.length-4]:asc[0];
+    var d3=L.v-(ref?ref.v:L.v);
+    var recentHot=asc.slice(-6,-1).some(function(x){return x.v>65;});
+    var st;
+    if(L.v<30) st='ice';
+    else if(L.v>65) st='hot';
+    else if(d3>=4) st='rec';
+    else if(d3<=-4&&recentHot) st='ret';
+    else st='neu';
+    var warns=[];
+    if(st==='hot'&&L.net<0) warns.push('情绪偏热但龙虎榜资金净流出（'+L.net.toFixed(2)+' 亿）——警惕诱多，收缩新仓。');
+    if(L.zbl>30) warns.push('炸板率 '+L.zbl+'% 已超 30% 警戒线——打板资金胜率恶化，是退潮期最灵敏的前兆。');
+    if(st==='ice'&&L.net>0) warns.push('情绪冰点但资金已净流入 '+L.net.toFixed(2)+' 亿——留意转折信号，可开始列观察清单。');
+    return {st:st,d3:d3,L:L,warns:warns};
+  }
+
+  var META={
+    ice :{cls:'b-ice', name:'❄ 冰点区',  play:['统计上是中线「分批区域」：分批、慢买、买超跌不买强势','<b>忌追当日热点</b>——冰点期热点次日死亡率极高','把候选池功课做在低位，等回升期确认再动手']},
+    rec :{cls:'b-rec', name:'📈 回升期',  play:['最舒服的做多窗口：顺势跟随主流题材','仓位随情绪抬升逐步放大，不一次打满','在个股对比页筛<b>强于大盘</b>的票，弱于大盘的放弃']},
+    neu :{cls:'b-neu', name:'➖ 中性区',  play:['降低频率——震荡市频繁交易是散户最大亏损来源','题材一天一换不追高，做功课更新自选池','等方向选出来（连 3 天同向）再行动']},
+    hot :{cls:'b-hot', name:'🔥 偏热区',  play:['持仓者的黄金期，但<b>不适合新开重仓</b>','盯两个见顶前兆：炸板率跳升、龙虎榜净买转负','二者同时出现，减仓动作要快于犹豫']},
+    ret :{cls:'b-ret', name:'🌧 退潮期',  play:['短线客亏损最集中阶段：<b>收缩仓位、停做接力</b>','空仓也是策略，别急于抄底半山腰','去历史回看页找上次退潮的见底特征，写好冰点应对计划']}
+  };
+
+  function fmt(n,d){ return n==null?'—':Number(n).toFixed(d==null?1:d); }
+
+  function render(res){
+    var j=judge(res.days), L=j.L, m=META[j.st];
+    var dirTxt=j.d3>0.5?('较 3 日前 <span class="up">↑ '+fmt(j.d3,1)+' 分</span>'): (j.d3<-0.5?('较 3 日前 <span class="down">↓ '+fmt(-j.d3,1)+' 分</span>'):'近 3 日走平');
+    var html='';
+    html+='<span class="badge '+m.cls+'">'+m.name+'</span>';
+    html+='<p><b>'+L.date+'</b> · 情绪分 <b class="num">'+L.v+'</b> · '+dirTxt+'（分位 '+fmt(L.pct,1)+'%）</p>';
+    html+='<div class="grid">'
+      +'<div class="g"><div class="v" style="color:'+(L.net>=0?'var(--red)':'var(--green)')+'">'+(L.net>=0?'+':'')+fmt(L.net,2)+'亿</div><div class="k">龙虎榜净买（分位 '+fmt(L.netPct,1)+'%）</div></div>'
+      +'<div class="g"><div class="v">'+L.zt+' / '+L.dt+'</div><div class="k">涨停 / 跌停</div></div>'
+      +'<div class="g"><div class="v">'+fmt(L.zbl,1)+'%</div><div class="k">炸板率'+(L.zbl>30?' ⚠':'（&lt;30% 正常）')+'</div></div>'
+      +'<div class="g"><div class="v">'+(L.maxLb||'—')+' 板</div><div class="k">连板高度</div></div>'
+      +'<div class="g"><div class="v">'+(L.amt?(L.amt/10000).toFixed(2)+'万亿':(L.amt?(''+L.amt+'亿'):'—'))+'</div><div class="k">两市成交</div></div>'
+      +'</div>';
+    if(L.top) html+='<p><b>今日题材 TOP</b>：'+L.top+'</p>';
+    if(j.warns.length) html+='<div class="warn"><b>⚠ 自动预警</b><ul style="margin-top:4px">'+j.warns.map(function(w){return '<li>'+w+'</li>';}).join('')+'</ul></div>';
+    html+='<div class="card" style="background:#10192a"><b style="color:var(--gold)">对应作战要点（'+m.name+'）</b><ul>'+m.play.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
+    html+='<p class="dim small">判定规则见 §3；数据'+(res.live?'实时读取自云端（打开本页时最新）':'为 2026-09-30 内置离线快照（当前无法联网，联网刷新即更新）')+'。以上为统计口径的方法演示，不构成投资建议。</p>';
+    var body=document.getElementById('liveBody');
+    body.innerHTML=html; body.style.display='block';
+    document.getElementById('loadmsg').style.display='none';
+  }
+
+  load().then(render);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+# ══ Cloudflare Worker：a-sentiment 推送代理（P0 · 决议 2）══════════════════
+#
+# 本期范围：页面即时轨报告的云端推送代理（POST /push · GET /healthz）。
+#   完整迁移评估与分阶段计划见 docs/cloudflare_migration_checklist.md。
+#
+# 本地验证（零部署）：
+#   npx wrangler dev                 # → http://127.0.0.1:8787/healthz
+#   curl -X POST http://127.0.0.1:8787/push -H 'content-type: application/json' -d @report.json
+#
+# 部署（一次性）：
+#   npx wrangler login
+#   npx wrangler kv namespace create PUSH_STATE        # 把返回的 id 填到下面
+#   npx wrangler secret put OPS_WEBHOOK               # 企微机器人 URL（与 CI 同值）
+#   npx wrangler deploy
+#   # 加固（页面部署域确定后）：取消下面 ALLOWED_ORIGIN 注释并改域名
+name = "a-sentiment-push"
+main = "worker/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+[[kv_namespaces]]
+binding = "PUSH_STATE"
+id = "328b5211480d4d0b839e660c4e4afb44"  # 2026-10-07 创建（title: PUSH_STATE，生产命名空间）
+
+[vars]
+# ALLOWED_ORIGIN = "https://sjc19950404.github.io"

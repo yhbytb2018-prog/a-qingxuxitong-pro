@@ -1,0 +1,129 @@
+{
+  "kind": "industry-outlier-review",
+  "version": 1,
+  "note": "行业离群 warn（src/dirty.js 的 OUTLIER_INDUSTRY）的复核台账。每条 = 一次跨源核验。verdict: confirmed-real = 真实行情（销案，dirty.js 不再重复报 warn，档案原值不动）；data-error = 采集异常（须修正数据源）。核验方式：同花顺行业指数（881xxx）历史日K 独立复算该行业当日涨跌幅，与档案值逐位比对（容差 0.05pp）；有条件时附第二源交叉。销案只影响「是否重复报警」，不影响任何数值。",
+  "tolerance": 0.05,
+  "primarySource": {
+    "name": "同花顺行业指数（881xxx）",
+    "endpoint": "https://d.10jqka.com.cn/v6/line/bk_{code}/01/{year}.js",
+    "why": "与生产抓取（src/sources.js 同花顺行业）同口径的独立历史源；按年返回全量日K，可复算任意历史日涨跌幅。"
+  },
+  "entries": [
+    {
+      "date": "2026-01-21",
+      "industry": "贵金属",
+      "changePct": 9.24,
+      "nearestGap": 5.23,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881169 贵金属（d.10jqka.com.cn 日K）",
+        "recomputed": 9.24,
+        "delta": 0,
+        "detail": "2026-01-20 收盘 5610.150 → 2026-01-21 收盘 6128.472，复算 +9.24%，与档案值逐位一致。"
+      },
+      "reviewedAt": "2026-10-03",
+      "note": "黄金/贵金属行情驱动（国际金价上行周期），非采集异常。当期该板块独立行情，邻居行业未同步——属板块轮动而非数据抽风。"
+    },
+    {
+      "date": "2026-01-23",
+      "industry": "光伏设备",
+      "changePct": 10.07,
+      "nearestGap": 5.46,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881279 光伏设备（d.10jqka.com.cn 日K）",
+        "recomputed": 10.07,
+        "delta": 0,
+        "detail": "2026-01-22 收盘 8864.034 → 2026-01-23 收盘 9756.927，复算 +10.07%，与档案值逐位一致。",
+        "corroboration": "东财口径交叉验证：申万三级「光伏主材」(BK1318) 同日 +8.81%——两个独立源同向同量级（口径差异解释 1.26pp 落差：同花顺「光伏设备」含设备商，弹性更大）。"
+      },
+      "reviewedAt": "2026-10-03",
+      "note": "光伏供给侧行情驱动，非采集异常。"
+    },
+    {
+      "date": "2026-01-26",
+      "industry": "贵金属",
+      "changePct": 10.89,
+      "nearestGap": 6.18,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881169 贵金属（d.10jqka.com.cn 日K）",
+        "recomputed": 10.89,
+        "delta": 0,
+        "detail": "2026-01-23 收盘 6299.616 → 2026-01-26 收盘 6985.895，复算 +10.89%，与档案值逐位一致。"
+      },
+      "reviewedAt": "2026-10-03",
+      "note": "同 2026-01-21：贵金属行情延续段（三个交易日内两次 +9%+），真实主题集中。"
+    },
+    {
+      "date": "2026-02-10",
+      "industry": "影视院线",
+      "changePct": 11.31,
+      "nearestGap": 6.9,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881274 影视院线（d.10jqka.com.cn 日K）",
+        "recomputed": 11.31,
+        "delta": 0,
+        "detail": "2026-02-09 收盘 1941.115 → 2026-02-10 收盘 2160.595，复算 +11.31%，与档案值逐位一致。"
+      },
+      "reviewedAt": "2026-10-03",
+      "note": "春节档预期驱动（2026 年春节假期前后档期），真实主题集中。"
+    },
+    {
+      "date": "2026-03-03",
+      "industry": "油气开采及服务",
+      "changePct": 12.22,
+      "nearestGap": null,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881107 油气开采及服务（d.10jqka.com.cn 日K）",
+        "code": "881107",
+        "recomputed": 12.219,
+        "delta": 0.001,
+        "detail": "本日收盘/前收复算涨跌幅 12.219%，与档案 12.22% 相差 0.001pp（容差 0.05pp）。"
+      },
+      "reviewedAt": "2026-10-05",
+      "note": "自动跨源核验：真实行情（脚本 verify_industry_outliers.mjs）。"
+    },
+    {
+      "date": "2026-03-03",
+      "industry": "燃气",
+      "changePct": 9.47,
+      "nearestGap": null,
+      "verdict": "confirmed-real",
+      "method": "cross-source",
+      "evidence": {
+        "source": "同花顺行业指数 881146 燃气（d.10jqka.com.cn 日K）",
+        "code": "881146",
+        "recomputed": 9.4711,
+        "delta": 0.0011,
+        "detail": "本日收盘/前收复算涨跌幅 9.4711%，与档案 9.47% 相差 0.0011pp（容差 0.05pp）。"
+      },
+      "reviewedAt": "2026-10-05",
+      "note": "自动跨源核验：真实行情（脚本 verify_industry_outliers.mjs）。"
+    },
+    {
+      "date": "2026-08-18",
+      "industry": "种植业与林业",
+      "changePct": 9.36,
+      "nearestGap": 5.85,
+      "verdict": "confirmed-real",
+      "method": "cross-source + intra-archive",
+      "evidence": {
+        "source": "同花顺行业指数 881101 种植业与林业（d.10jqka.com.cn 日K）",
+        "recomputed": 9.36,
+        "delta": 0,
+        "detail": "2026-08-17 收盘 4089.520 → 2026-08-18 收盘 4472.231，复算 +9.36%，与档案值逐位一致。",
+        "corroboration": "本档当日产业链簇状印证：农产品加工 +3.51% / 养殖业 +2.95% / 农化制品 +2.30% / 油气开采及服务 +2.07%（农林牧渔整条链齐涨），另有十余只涨停。"
+      },
+      "reviewedAt": "2026-10-03",
+      "note": "粮食/猪肉概念驱动，板块轮动（当日 2121 涨 / 3292 跌、指数近乎持平）——正是本项目要研究的现象，非噪声。"
+    }
+  ]
+}

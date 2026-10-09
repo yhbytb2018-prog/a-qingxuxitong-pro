@@ -1,0 +1,16 @@
+{
+ "days": [
+  {
+   "date": "2026-09-30",
+   "stats": {
+    "circMvMedianYi": 59.24,
+    "circMvP25Yi": 35.53,
+    "circMvP75Yi": 96.33,
+    "smallCapPct": 44.2,
+    "bigCapPct": 0
+   },
+   "n": 52,
+   "misses": 0
+  }
+ ]
+}

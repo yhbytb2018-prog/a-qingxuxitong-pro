@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A股情绪系统 · PRO</title>
+  <meta name="theme-color" content="#0d1117" />
+  <!-- 离线看盘：Service Worker（sw.js）预缓存外壳 + 数据网络优先回退缓存。
+       策略判定在 src/offline.js（纯函数，可单测）；sw.js 只执行。
+       注册失败（file:// 打开 / 不支持 SW 的浏览器）不影响任何在线功能——
+       由 app.js 里的 canRegister 守卫，只在 https 或 localhost 下尝试。 -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">A股情绪系统 <span class="ver">PRO</span></div>
+    <div class="meta">
+      <span id="tradeDate">--</span>
+      <span id="sourceTag" class="tag">--</span>
+      <span id="genTime" class="muted"></span>
+      <span id="loadScope" class="scope" hidden></span>
+      <!-- 数据导出（CSV / Excel）：导出件与屏幕同源——取数一律走 src/dataset.js，
+           前端只负责"把哪一份交给下载器"，绝不在前端另写一套取数逻辑
+           （那会让导出件与页面上的数字慢慢分叉，而下载到的表格最不会被怀疑）。 -->
+      <div class="exp-wrap">
+        <button id="expBtn" aria-haspopup="true" aria-expanded="false" title="把页面上的数据导出成 CSV / Excel">⇩ 导出数据 ▾</button>
+        <div id="expMenu" class="exp-menu" role="menu" hidden></div>
+      </div>
+      <button id="refreshBtn" title="重新拉取最新数据">↻ 刷新</button>
+      <span id="refreshState" class="muted"></span>
+      <span id="netState" class="net-state" hidden></span>
+    </div>
+  </header>
+
+  <!-- 分区导航（sticky）：分区跳转，避免长页面里找不到内容 -->
+  <nav class="zonenav" id="zoneNav" aria-label="页面分区导航">
+    <a class="zn on" href="#zone-overview" data-zone="zone-overview">概览</a>
+    <a class="zn" href="#zone-detail" data-zone="zone-detail">个股与题材</a>
+    <a class="zn" href="#zone-backtest" data-zone="zone-backtest">策略回测 V5.2</a>
+    <a class="zn" href="#zone-brief" data-zone="zone-brief">研判报告</a>
+    <a class="zn" href="#zone-global" data-zone="zone-global">外围预案</a>
+    <span class="zn-note" id="navNote">表格行 / 题材标签 / 图上数据点 / 权重行 均可点击查看详情 · 快捷键 1-5 跳分区、/ 聚焦搜索</span>
+  </nav>
+
+  <div id="alerts"></div>
+
+  <!-- 轨道回滚横幅（P1/P2-β）：执行面已切 A_fallback（V5.2 冻结快照）时的常驻警示。
+       A 态（常态）不渲染任何内容——零 diff 纪律在渲染端的体现：缺席 ≠ 默认值。
+       数据源：signals-latest.json 的 active_track / activeTrackNote（展示镜像，事实源
+       = data/paper/track_state.json）。与 offlineBar 分开：那条说"数据可信度"，本条说
+       "执行面变了"——语义完全不同，混排会让回滚状态被当成数据告警读过去。 -->
+  <div id="trackBanner" class="track-banner" hidden></div>
+
+  <!-- 拐点标签（#4）：用户第一眼要看的"今天这盘是什么状态"——冰点/回暖/高潮/退潮。
+       判据 = 水位（历史分位为主）× 方向（较 3 个交易日前变化），两者任一不可判则
+       显示「数据不足」（绝不猜一个"中性"顶上）。标签只描述状态，不含买卖建议。
+       数据源：signals-latest.json 的 regime 段（由 src/regime.js 唯一实现）。 -->
+  <div id="regimePanel" class="regime-panel" hidden></div>
+
+  <!-- 宽度背离告警（#3 决策：宽度**不纳入**情绪分，独立成一条告警）。
+       为什么要独立：情绪分回答"钱有多凶"，宽度回答"多少票在涨"——同向时无信息量，
+       只有**背离**（钱凶但票不涨 / 票涨但钱冷）才是信号。故不并入情绪分，
+       而是在这里单独盯"这两个读数打架了没有"。
+       三态必须分清：有背离 / 同向（已比对）/ **未评估**（宽度判定缺失）——
+       最后一种绝不能显示成"一致"，那是把"没检查"读成"没问题"。 -->
+  <div id="divergePanel" class="diverge-panel" hidden></div>
+
+  <!-- 每日盘后日报（#4）：把当天的证据串成一份可读的七节简报（状态/情绪/涨跌/
+       亏钱/资金/题材/质量）。它是"翻译层"——只把屏幕上已有的数字翻成人话，
+       不重算任何指标；缺失项明写「未采集/未计算」，绝不补 0。
+       可整份复制/导出，便于留档与分享。 -->
+  <div id="reportPanel" class="report-panel" hidden></div>
+
+  <!-- 离线/陈旧 状态横幅（错误边界 + SW 离线回退的统一出口）。
+       与 #alerts 分开是有意的：#alerts 说"今天盘面如何"，本条说"你看到的数据可信到什么程度"。
+       两者语义完全不同，混在一个 div 里会让"数据陈旧"被当成行情信息读过去。
+       模型由 src/error_boundary.js 的 staleBannerModel() 生成（纯函数，可单测）；
+       全 ok / fresh 时不占屏幕——常驻横幅会训练人忽略它，真出事时反而看不见。 -->
+  <div id="offlineBar" class="offline-bar" hidden></div>
+
+  <!-- 数据健康面板（#115）：先看"数据能不能用"，再看行情。
+       异常时自动展开；正常时折叠成一行，不抢主视觉。 -->
+  <div id="healthPanel" class="health-panel" hidden></div>
+
+  <!-- 资金属性（#1）：谁在买——机构/北向/游资三类逐日净买。答"资金性质"而非"资金多少"。
+       席位明细接口只保留最近数日，故此处序列从有数据之日起逐日累积。 -->
+  <div id="seatsPanel" class="seats-panel" hidden></div>
+
+  <!-- 亏钱效应（#2）：追高的人今天亏没亏——昨涨停今日翻绿比例 + 连板晋级失败率。
+       与 s_zbl（炸板率，当日视角）正交，这一块才是真情绪。 -->
+  <div id="painPanel" class="pain-panel" hidden></div>
+
+  <!-- 市场宽度（#3）：市场结构长什么样——站上20日线占比 / 创新高新低 / 破净率 / 涨跌家数。
+       由全市场真实前复权日K计算（非 hot 榜单样本）；样本不足或 PB 源不可用时显示「未计算」。 -->
+  <div id="breadthPanel" class="breadth-panel" hidden></div>
+
+  <div id="dirtyPanel" class="dirty-panel" hidden></div>
+
+  <!-- 跨源一致性互证（#2）：同一交易日用**第二个独立行业源**（申万二级/腾讯）交叉验证
+       主源（同花顺行业）。单源的问题不是"偶尔错"，而是"错了没人知道"；本面板把
+       "真轮动 vs 源抽风"变成可判定。未互证时显示「未互证」——绝不放行成「一致」。 -->
+  <div id="xcheckPanel" class="xcheck-panel" hidden></div>
+
+  <!-- 双轨披露面板（P2-β 渲染接线 · 框架 docs/dual_track_framework.md §三）：
+       轨道 A = V5.2 唯一执行轨道；轨道 B = V5.3 风险参考线（"若整份买保险，今天会在哪"，
+       永不执行）；轨道 C = shift 次日帽影子（记账不执行）。分歧 = 保险当日保费敞口；
+       账本 = P2 起累计的保险账（保费/保额/影子增益）。
+       数据源：signals-latest.json 的 dualTrack 段（src/dual_track.js 唯一搬运出处，
+       数字唯一出处 = tools/backtest/paper_dual_track.mjs）。
+       ⚠ null = "账本未生成"（≠ 轨道一致）；asOf 可能滞后于 meta.tradeDate（旁路工具
+       每日一跑）——面板如实披露账本末日，不伪装成"今日"。轨道 B/C 是风控参考，
+       不是买卖信号（DISCLAIMER 口径）。 -->
+  <div id="dualTrackPanel" class="dualtrack-panel" hidden></div>
+
+  <!-- 致命错误替代区：首屏必需档（archive-index）拿不到时填入。
+       刻意放在 <main> **之外** —— fatal 时会给 main 加 aria-hidden（视觉上收起），
+       本区必须仍在无障碍树里，且仍可被读屏读到。
+       存在的唯一目的就是**不要白屏**：白屏是"看起来像没数据"的最坏形式，
+       连"这儿本该有东西、只是加载失败"这层信息都没有。 -->
+  <div id="fatalHolder" class="fatal-holder" hidden></div>
+
+  <main>
+    <!-- ── 区一：概览 ── -->
+    <section class="zone" id="zone-overview">
+      <div class="zone-head">
+        <h3>概览 · 今日盘面</h3>
+        <span class="zone-sub">情绪分 / 题材动量 / 情绪趋势 / 题材分布</span>
+      </div>
+      <div class="grid">
+        <section class="card emotion">
+          <h2>综合情绪 <span class="bf-auto">悬停因子条看口径</span></h2>
+          <div class="score-row">
+            <div class="score" id="emScore">--</div>
+            <div class="pct">
+              <div>历史分位 <b id="emPct">--</b>%</div>
+              <div class="muted" id="emNet"></div>
+              <div class="muted" id="emTier"></div>
+            </div>
+          </div>
+          <div id="factors" class="factors"></div>
+          <div id="relBlock" class="rel-block"></div>
+        </section>
+
+        <section class="card momentum">
+          <h2>题材动量 <span class="bf-auto">点标签看题材成分</span></h2>
+          <div class="mom-group">
+            <div class="mom-title fresh">新晋 <span id="freshN">0</span></div>
+            <div id="freshList" class="chips"></div>
+          </div>
+          <div class="mom-group">
+            <div class="mom-title fade">退潮 <span id="fadeN">0</span></div>
+            <div id="fadeList" class="chips"></div>
+          </div>
+          <div class="mom-group">
+            <div class="mom-title cont">延续 <span id="contN">0</span></div>
+            <div id="contList" class="chips muted"></div>
+          </div>
+        </section>
+
+        <section class="card trend">
+          <h2>情绪趋势（近15日）<span class="bf-auto">点数据点看当日盘面</span></h2>
+          <svg id="trendSvg" viewBox="0 0 300 90" preserveAspectRatio="none" role="img" aria-label="近15日情绪分趋势"></svg>
+          <div id="trendTip" class="trend-tip muted">共 -- 个交易日样本</div>
+        </section>
+
+        <section class="card themes">
+          <h2>最新日题材（已去噪）<span class="bf-auto">点条目看成分股</span></h2>
+          <div id="themeBars"></div>
+        </section>
+
+        <!-- 盘中快照卡：只在 meta.phase === 'live' 且有 data/intraday.json 时显示。
+             口径纪律：这里的一切数值都是**盘中实时值**，未定盘，且**不参与情绪因子与分位**。
+             与上方各卡（收盘口径）并存时必须显著区分，否则读者会拿实时涨停数去对收盘分位。 -->
+        <section class="card intraday" id="intradayCard" hidden>
+          <h2>盘中快照 <span class="bf-auto">实时值 · 不参与打分</span></h2>
+          <div id="intradayBody"></div>
+          <!-- S3-1 即时轨（轨道 A 估值）：src/intraday_sampler.js 每 60 秒采样发布
+               window.__intradayLive，app.js::renderIntradayLive 渲染本行。独立于
+               #intradayBody（loadIntraday 整体重写不冲掉）；随本卡 phase!=='live' 隐藏。 -->
+          <div id="intradayLiveRow" hidden></div>
+        </section>
+        <!-- S3-4 AI 盘中报告卡（生成器复用）：归档基座 = data/reports/ 最新 intraday
+             报告（与推送收到的同一份 JSON）；live 相位且桥就绪 → app.js 调
+             window.ReportCardLive.buildLiveReport（6 源 + __intradayLive →
+             buildInput + generateIntraday，信封唯一出处）实时替换。与快照卡不同：
+             盘后/非交易不隐藏（看报告是正当需求），显示归档口径并标注。 -->
+        <section class="card ai-report" id="aiReportCard" hidden>
+          <h2>AI 盘中报告 <span class="bf-auto">四类报告 · 盘中实时 / 盘后归档</span></h2>
+          <div id="aiReportCardBody"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ── 区二：个股与题材明细 ── -->
+    <section class="zone" id="zone-detail">
+      <div class="zone-head">
+        <h3>个股与题材 · 明细</h3>
+        <span class="zone-sub" id="hotHint">支持搜索与排序；点任意一行（窄屏为卡片）查看席位与资金详情</span>
+      </div>
+      <div class="grid">
+        <section class="card hot">
+          <h2>个股明细 <span class="bf-auto">双视图 · 点击行查看详情</span></h2>
+          <div class="tbar">
+            <div class="seg" id="hotTabs" role="tablist" aria-label="个股明细视图">
+              <button class="on" data-view="hot" role="tab" aria-selected="true">强势股归因</button>
+              <button data-view="lhb" role="tab" aria-selected="false">龙虎榜资金</button>
+            </div>
+            <input id="hotSearch" class="search" type="search" placeholder="搜索代码 / 名称 / 诱因…" aria-label="搜索个股" />
+            <!-- 窄屏（卡片模式）表头不可见 → 排序改由下拉 + 方向钮承担，宽屏自动隐藏 -->
+            <select id="hotSortSel" class="sortsel only-narrow" aria-label="排序字段"></select>
+            <button id="hotSortDir" class="mini only-narrow" type="button" aria-label="切换排序方向" title="切换升/降序">▼</button>
+            <span id="hotCount" class="muted"></span>
+          </div>
+          <div id="hotLazyNote" class="hot-lazy" hidden></div>
+          <div class="table-wrap tall">
+            <table id="hotTable">
+              <thead><tr id="hotHead"></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <!-- 窄屏（≤720px）替代表格的卡片列表：同一份 rows 渲染，排序/搜索/视图切换全部同步 -->
+          <div class="cardlist" id="hotCards" aria-label="个股明细卡片列表"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ── 区三：策略回测 V5.2 ── -->
+    <section class="zone" id="zone-backtest">
+      <div class="zone-head">
+        <h3>策略回测 V5.2</h3>
+        <span class="zone-sub">交易成本 · 仓位平滑 · 多标的轮动 · 风控 · 权重寻优 · 滚动样本外</span>
+      </div>
+      <div class="grid">
+        <section class="card bt">
+          <h2>策略回测（V5.2）<span class="bf-auto">悬停净值曲线看日期</span></h2>
+          <div id="btMetrics"></div>
+          <svg id="btNavSvg" viewBox="0 0 300 100" preserveAspectRatio="none" role="img" aria-label="净值曲线对比"></svg>
+          <div class="bt-legend" id="btLegend"></div>
+          <div id="btParams" class="bt-params muted"></div>
+          <button id="btMore" class="mini" type="button" data-act="btmore" style="margin-top:8px">查看完整参数与口径</button>
+          <div id="btNote" class="bf-foot"></div>
+        </section>
+
+        <section class="card vercmp">
+          <h2>公式版本对比 <span class="bf-auto">同一段历史、多版并行重算；只看异常，不排优劣</span></h2>
+          <div id="verSummary" class="sum-line"></div>
+          <div class="table-wrap">
+            <table id="verTable">
+              <thead><tr><th>版本</th><th>s_net 归一</th><th>均分</th><th>σ</th><th>s_net 饱和</th><th>Pearson</th><th>方向</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div id="verCaution" class="bf-foot"></div>
+        </section>
+
+        <section class="card pareto">
+          <h2>网格寻优 · 帕累托双目标 <span class="bf-auto">点权重行看组合明细</span></h2>
+          <div id="paretoSummary" class="sum-line"></div>
+          <div class="table-wrap">
+            <table id="paretoTable">
+              <thead><tr><th>夏普</th><th>最大回撤</th><th>Calmar</th><th>年化</th><th>非支配</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="cardlist" id="paretoCards" aria-label="权重寻优结果卡片列表"></div>
+        </section>
+
+        <section class="card roll">
+          <h2>滚动样本外（walk-forward）<span class="bf-auto">点分段行看权重</span></h2>
+          <div id="rollSummary" class="sum-line"></div>
+          <div class="table-wrap">
+            <table id="rollTable">
+              <thead><tr><th>口径</th><th>测试区间</th><th>总收益</th><th>夏普</th><th>回撤</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="cardlist" id="rollCards" aria-label="滚动样本外分段卡片列表"></div>
+        </section>
+
+        <section class="card mainline">
+          <h2>主线自动选股 <span class="bf-auto">逐日识别主线题材 → 当日标的清单（点标的看详情）</span></h2>
+          <div id="mainLineBody"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ── 区四：研判报告 ── -->
+    <section class="zone" id="zone-brief">
+      <div class="zone-head">
+        <h3>研判报告</h3>
+        <span class="zone-sub">规则引擎 · 每日随档生成 · 口径同回测引擎</span>
+      </div>
+      <div class="grid">
+        <section class="card brief">
+          <h2>研判报告 <span class="bf-auto">极简摘要 + 7 大章节 · 口径默认收起（点「🔍 点击展开查看口径」）· 含独立口径附录</span></h2>
+          <div class="bf-tools">
+            <button id="briefRefresh" class="mini primary" type="button" title="只重新拉取并重建研判报告（保留当前阅读位置与折叠状态，不重算其它区块）">↻ 刷新报告</button>
+            <span id="briefRefreshState" class="bf-rf-state muted" role="status" aria-live="polite"></span>
+            <span id="briefAudit" class="bf-audit" role="status" aria-live="polite" hidden></span>
+            <button id="briefAuditRetry" class="mini" type="button" hidden title="重新构建并重新执行出厂质检">重试质检</button>
+            <div id="briefNav" class="bf-nav" role="tablist" aria-label="报告段落导航"></div>
+            <button id="briefToggle" class="mini" type="button">全部折叠</button>
+            <div class="bf-acts">
+              <button id="briefCopy" class="mini" type="button" title="复制报告全文（纯文本，可直接粘贴到微信/邮件）">复制全文</button>
+              <div class="bf-exp">
+                <button id="briefExport" class="mini" type="button" aria-haspopup="true" aria-expanded="false" title="导出为可打印的正式文档">导出文档 ▾</button>
+                <div id="briefExportMenu" class="bf-menu" role="menu" hidden>
+                  <button type="button" role="menuitem" data-fmt="html">正式文档（HTML · 可直接打印）</button>
+                  <button type="button" role="menuitem" data-fmt="md">Markdown（粘进知识库/文档）</button>
+                  <button type="button" role="menuitem" data-fmt="txt">纯文本（记事本/邮件）</button>
+                </div>
+              </div>
+              <button id="briefPrint" class="mini" type="button" title="按 A4 版式打印（只打印报告正文）">打印</button>
+            </div>
+          </div>
+          <div id="briefBody" class="brief-body"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ── 区五：外围市场 · 隔夜与节后预案 ── -->
+    <section class="zone" id="zone-global">
+      <div class="zone-head">
+        <h3>外围市场 · 节后预案</h3>
+        <span class="zone-sub" id="globSub">隔夜美股 / 中国资产 / 汇率 / 商品 —— A股休市期间照常更新</span>
+      </div>
+      <div class="grid">
+        <section class="card glob">
+          <h2>外围行情 · 隔夜 <span class="bf-auto">点品种看与A股的映射口径</span></h2>
+          <div id="globVerdict" class="glob-verdict"></div>
+          <div id="globSignals" class="glob-signals"></div>
+          <div class="table-wrap">
+            <table id="globTable">
+              <thead><tr><th>品种</th><th class="num">最新</th><th class="num">涨跌幅</th><th>会话 / 时间</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="cardlist" id="globCards" aria-label="外围行情卡片列表"></div>
+          <div id="globNote" class="bf-foot"></div>
+        </section>
+
+        <section class="card globmap">
+          <h2>与 A 股的映射 <span class="bf-auto">点条目看口径说明</span></h2>
+          <div id="globMap"></div>
+          <div id="globTrack" class="glob-track"></div>
+        </section>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot muted">
+    七因子情绪模型 v5.2-pro · 题材去噪 + 缺失代理 + 多源容灾 · 研判报告与回测引擎同源（阈值/仓位档位）· 策略回测 V5.2（成本/平滑/风控/帕累托）· 外围市场观测（A股休市期间照常更新）· 数据仅供参考，非投资建议
+  </footer>
+
+  <button id="toTop" class="totop" type="button" title="回到顶部" aria-label="回到顶部">↑</button>
+
+  <!-- 详情抽屉：表格行 / 题材 / 权重 / 分段 / 交易日 共用 -->
+  <div id="drawerMask" class="drawer-mask"></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="dwTitle" aria-hidden="true">
+    <header class="dw-head">
+      <div class="dw-titles">
+        <div id="dwTitle" class="dw-title"></div>
+        <div id="dwSub" class="dw-sub"></div>
+      </div>
+      <button id="dwClose" class="dw-close" type="button" title="关闭（Esc）" aria-label="关闭详情">✕</button>
+    </header>
+    <div id="dwBody" class="dw-body"></div>
+  </aside>
+
+  <script src="./app.js"></script>
+  <!-- 报告导出引擎是 ESM（与 src/paper.js 同样的「纯函数、浏览器与 Node 共用」设计）。
+       app.js 是经典脚本、不能用 import，故用一小段模块脚本把它挂到 window 上；
+       挂载完成前导出按钮不可用（下面用事件兜底，不会点到未就绪的引擎）。 -->
+  <script type="module">
+    import * as Report from './src/report.js';
+    window.ReportExport = Report;
+    window.dispatchEvent(new Event('report-export-ready'));
+  </script>
+  <!-- 报告「出厂质检」引擎：同样是 ESM 纯函数，挂到 window 供 app.js 在渲染前调用。
+       闸门语义——审计不通过就不把报告写入 #briefBody（宁可不出报告，也不显示坏报告）。
+       必须在 report.js 之后挂载（它审计的三形态产物由 ReportExport 生成）。 -->
+  <script type="module">
+    import * as ReportAudit from './src/report_audit.js';
+    window.ReportAudit = ReportAudit;
+    window.dispatchEvent(new Event('report-audit-ready'));
+  </script>
+  <!-- 席位口径唯一来源（券商主体/席位类型/买卖双侧读取）同样是 ESM 纯函数，app.js 不能 import，
+       故与 report.js 一样挂到 window。个股抽屉里的「席位身份」下钻与表格渲染都走它，
+       保证屏幕上的解析结果与 Node 侧测试/报告完全同源。 -->
+  <script type="module">
+    import * as Seats from './src/seats.js';
+    window.Seats = Seats;
+    window.dispatchEvent(new Event('seats-ready'));
+  </script>
+  <!-- config.json 桥（唯一事实源的前端入口）。
+       原先由 paper_ui.js 兼任；模拟交易台面下线后 paper_ui.js 不再被页面加载，
+       改由这段独立模块脚本承担：动态 import + 静默降级——拿到就挂 window.ASENT_CONFIG，
+       拿不到就走各处兜底默认值（app.js 的 TH_DEFAULT 等）。app.js 是经典脚本无法 import，
+       运行时从 window 取——module 总在经典脚本之后、DOMContentLoaded 前执行完毕，
+       而 app.js 的阈值消费点（getThresholds 等）都在用户交互/数据加载时才调用，时序安全。 -->
+  <script type="module">
+    import('./config.json', { with: { type: 'json' } })
+      .then((m) => { window.ASENT_CONFIG = m.default; })
+      .catch(() => { /* 旧浏览器/异常路径：静默降级，走兜底默认值 */ });
+  </script>
+  <!-- S3-1 即时轨采样器（src/intraday_sampler.js）：拉估值锚 + 腾讯指数实时涨幅，
+       60 秒采样当日权益序列（localStorage 当日键），发布 window.__intradayLive
+      （accountStats 形态的 live 账本，S3-4 报告卡片 input.live 的数据源）。
+       静态 import 依赖 quote.js / intraday_live.js / paper.js（ESM 纯函数链，
+       浏览器与 Node 同源）。加载失败静默——桥缺席 = 即时轨待命，归档面不受影响。 -->
+  <script type="module">
+    import('./src/intraday_sampler.js').catch(() => { /* 静默：即时轨待命 */ });
+  </script>
+  <!-- S3-4 报告卡实时装配引擎（src/report_card_live.js）：ESM 纯装配层，
+       import 链 = ai_report → paper → lhbfilter → lhb/seats（全纯函数，浏览器与
+       Node 同源）。app.js 是经典脚本不能 import，故与 report.js 等同款挂 window。
+       挂载失败静默——卡片自动停留在归档基座（loadAiReportCard 的降级分支）。 -->
+  <script type="module">
+    import * as ReportCardLive from './src/report_card_live.js';
+    window.ReportCardLive = ReportCardLive;
+    window.dispatchEvent(new Event('report-card-live-ready'));
+  </script>
+  <!-- 数据导出引擎（src/dataset.js）：同样是 ESM 纯函数、浏览器与 Node 共用。
+       app.js 是经典脚本不能 import，故挂到 window。
+       ⚠ 导出件与屏幕同源这件事，就靠"两边都调同一个 buildDataset"来保证——
+         前端**一行取数逻辑都不写**（连"这个字段就在 ARC 里，直接 map 一下"也不行）。 -->
+  <script type="module">
+    import * as DatasetExport from './src/dataset.js';
+    window.DatasetExport = DatasetExport;
+    window.dispatchEvent(new Event('dataset-export-ready'));
+  </script>
+  <!-- 错误边界 / 离线横幅模型（src/error_boundary.js）：同上，挂 window 供 app.js 调用。 -->
+  <script type="module">
+    import * as ErrorBoundary from './src/error_boundary.js';
+    window.ErrorBoundary = ErrorBoundary;
+    window.dispatchEvent(new Event('error-boundary-ready'));
+  </script>
+  <!-- 离线看盘：注册 Service Worker。刻意放在最后——注册本身要下载 sw.js 并触发
+       预缓存（外壳 9 个文件 + 3 个轻量数据档），不该和首屏渲染抢带宽。
+       ⚠ 只在 https / localhost 下尝试：file:// 打开时 navigator.serviceWorker
+       存在但 register 必失败，会污染控制台并让"运行期无异常"的守卫变红。 -->
+  <script>
+    (function () {
+      if (!('serviceWorker' in navigator)) return;
+      var secure = location.protocol === 'https:' || location.hostname === 'localhost'
+        || location.hostname === '127.0.0.1';
+      if (!secure) return;
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sw.js', { scope: './' }).then(function (reg) {
+          window.__swReg = reg;
+          window.dispatchEvent(new CustomEvent('sw-ready', { detail: { scope: reg.scope } }));
+          // 有新 SW 在等待 → 立刻接管（否则用户要刷两次才拿到新外壳）
+          reg.addEventListener('updatefound', function () {
+            var sw = reg.installing;
+            if (!sw) return;
+            sw.addEventListener('statechange', function () {
+              if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({ type: 'skip-waiting' });
+              }
+            });
+          });
+        }).catch(function (e) {
+          window.dispatchEvent(new CustomEvent('sw-failed', { detail: { message: String(e && e.message || e) } }));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

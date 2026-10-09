@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "emergency_contacts",
+  "$comment": "P3 应急联系人档（实盘模拟前置件）。消费端 scripts/alert_channel.mjs：error 级推送 @ primary.phone（企微 mentioned_mobile_list），内容附 secondary 升级链。缺席/损坏时通道降级为不 @ 但照常推送（通道自身故障不能阻塞告警源）。check_contract 将本档列为 required——P3 宣告确认后缺席即红。",
+  "type": "object",
+  "required": ["primary", "secondary"],
+  "additionalProperties": false,
+  "properties": {
+    "primary": { "$ref": "#/$defs/contact" },
+    "secondary": { "$ref": "#/$defs/contact" }
+  },
+  "$defs": {
+    "contact": {
+      "type": "object",
+      "required": ["name", "phone", "wechat", "role", "duty"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "phone": {
+          "type": "string",
+          "pattern": "^1[3-9]\\d{9}$",
+          "$comment": "中国大陆手机号 11 位（企微 mentioned_mobile_list 按手机号 @，格式错 = @ 链静默断裂）"
+        },
+        "wechat": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "duty": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

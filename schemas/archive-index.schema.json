@@ -1,0 +1,45 @@
+{
+  "$comment": [
+    "前后端接口契约 · archive-index.json（V5.3 同步机制 · 2026-10-05）",
+    "生产方：src/archive_split.js buildIndex（首屏必需档，REQUIRED_ON_BOOT 唯一成员）",
+    "消费方：app.js pullArchive/mergeArc/loadFull/lazyNoticeHTML + error_boundary（缺它整页进降级态）"
+  ],
+  "type": "object",
+  "required": ["kind", "version", "meta", "signals", "totalDays", "years", "latestDate", "latest", "lazy"],
+  "properties": {
+    "kind": { "type": "string", "const": "archive-index" },
+    "version": { "type": "number" },
+    "meta": {
+      "type": "object",
+      "required": ["tradeDate", "generatedAt"],
+      "properties": {
+        "tradeDate": { "type": "string" },
+        "generatedAt": { "type": "string" },
+        "stale": { "type": "boolean" },
+        "formulaVersion": { "type": "string" }
+      }
+    },
+    "signals": { "type": "object" },
+    "totalDays": { "type": "number", "minimum": 1 },
+    "years": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "yearMeta": { "type": "object" },
+    "latestDate": { "type": "string" },
+    "latest": {
+      "type": "object",
+      "required": ["trade_date", "value"],
+      "properties": {
+        "trade_date": { "type": "string" },
+        "value": { "type": ["number", "null"] },
+        "pct_rank": { "type": ["number", "null"] },
+        "zt_count": { "type": ["number", "null"] },
+        "dt_count": { "type": ["number", "null"] },
+        "zb_count": { "type": ["number", "null"] },
+        "up_count": { "type": ["number", "null"] },
+        "down_count": { "type": ["number", "null"] },
+        "seal_pct": { "type": ["number", "null"] },
+        "factors": { "type": ["object", "null"] }
+      }
+    },
+    "lazy": { "type": "object" }
+  }
+}

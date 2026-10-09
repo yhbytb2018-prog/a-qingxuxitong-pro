@@ -1,0 +1,751 @@
+{
+ "schema_version": "1.0",
+ "report_type": "pre_market",
+ "trigger": "schedule",
+ "urgent": false,
+ "date": "2026-10-08",
+ "generated_at": "2026-10-09T01:24:27.611Z",
+ "generated_by": "ci",
+ "status": "degraded",
+ "track": "A",
+ "data_health": {
+  "sources": {
+   "dual_track": "fresh",
+   "signals": "fresh",
+   "global": "fresh",
+   "backtest": "fresh",
+   "ops_alerts": "fresh",
+   "intraday": "fresh",
+   "paper_account": "missing"
+  }
+ },
+ "data_completeness": {
+  "date": {
+   "source": "derived",
+   "confidence": "measured"
+  },
+  "grid_triggers": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "counter_trend_losses": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "pnl_daily": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "pnl_cumulative": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "max_drawdown_daily": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "trend_switch_hits": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "cost_ratio": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "slippage_avg": {
+   "source": "assumed",
+   "confidence": "assumed"
+  },
+  "slippage_source": {
+   "source": "derived",
+   "confidence": "measured"
+  },
+  "regime": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "circuit_breaker": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "overseas": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "prev_nav": {
+   "source": "derived",
+   "confidence": "measured"
+  },
+  "positions": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "overnight_exposure": {
+   "source": "archived",
+   "confidence": "measured"
+  },
+  "key_levels": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "events_today": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "atr": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "suggested_step": {
+   "source": "missing",
+   "confidence": "missing"
+  },
+  "simulation_stock": {
+   "source": "derived",
+   "confidence": "measured"
+  },
+  "ma20_degraded": {
+   "source": "derived",
+   "confidence": "measured"
+  }
+ },
+ "payload": {
+  "date": "2026-10-08",
+  "grid_triggers": null,
+  "counter_trend_losses": null,
+  "pnl_daily": -0.004997,
+  "pnl_cumulative": -0.019927,
+  "max_drawdown_daily": null,
+  "trend_switch_hits": 0,
+  "cost_ratio": null,
+  "slippage_avg": 0.0002,
+  "slippage_source": "assumed_constant",
+  "regime": {
+   "key": "recover",
+   "label": "回暖",
+   "cap": 0.5,
+   "position_range": "30%~50%"
+  },
+  "circuit_breaker": {
+   "dd_tier": null,
+   "hard_stop_triggered": null,
+   "risk_events": 0,
+   "note": "归档轨无账户日内回撤与止损记录，档位未知；ops-alerts 事件计数如上"
+  },
+  "overseas": [
+   {
+    "key": "a50",
+    "name": "富时中国A50期货",
+    "chgPct": -0.002817,
+    "state": "ok"
+   },
+   {
+    "key": "sox",
+    "name": "费城半导体指数",
+    "chgPct": -0.033861,
+    "state": "ok"
+   }
+  ],
+  "prev_nav": 0.9849950201155172,
+  "positions": {
+   "targetPos": {
+    "上证指数": 0.5,
+    "深证成指": 0.2,
+    "创业板指": 0.2
+   },
+   "poolPos": 0.3,
+   "executed": true
+  },
+  "overnight_exposure": {
+   "a50_chgPct": -0.002817,
+   "posGap": 0.05,
+   "us_close": {
+    "dji": 0.0010119999999999999,
+    "spx": -0.004667,
+    "ixic": -0.012541
+   },
+   "cn_overnight": {
+    "hxc": -0.006217,
+    "fxi": 0.000898
+   },
+   "cnh_chgPct": 0.000015
+  },
+  "key_levels": null,
+  "events_today": null,
+  "atr": null,
+  "suggested_step": null,
+  "simulation_stock": {
+   "sentiment_cycle": {
+    "phase": "fermentation",
+    "phase_label": "发酵期",
+    "regime_raw": "recover",
+    "phase_source": "regime=recover · 分位 32.2 · 方向 up（recover 细分阈值 <30 为启动期）",
+    "limit_up_count": 43,
+    "highest_chain": 6,
+    "broken_limit_ratio": 0.4266666666666667,
+    "yesterday_chain_performance": 1.3,
+    "warning_signals": [
+     "昨涨停今日翻绿 49%、高位板晋级失败 40%，追高盈亏各半",
+     "大面 4 只：澳弘电子 -10%、协和电子 -10%、雪龙集团 -9.98%、中新赛克 -8.65%",
+     "宽度收窄（站上20日线仅 31.5%）"
+    ]
+   },
+   "position_suggestion": "neutral",
+   "pool_basis": "pain.advance.detail 连板活跃明细按连板数降序（情绪面规则现算，决议 8：人工输入模式的辅助建议，可一键采纳不自动生效）",
+   "candidate_pool": [
+    {
+     "code": "600825",
+     "name": "新华传媒",
+     "themes": null,
+     "selection_reason": "6 连板（当日 9.99%，晋级成功，近期上榜 8 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（600825，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "6 板高位，连板晋级失败率 40%"
+     ]
+    },
+    {
+     "code": "603949",
+     "name": "雪龙集团",
+     "themes": null,
+     "selection_reason": "4 连板（当日 -9.98%，晋级失败，近期上榜 7 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（603949，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "昨日 4 板已晋级失败（chg -9.98%），反核属逆势剧本"
+     ]
+    },
+    {
+     "code": "000678",
+     "name": "襄阳轴承",
+     "themes": null,
+     "selection_reason": "3 连板（当日 9.98%，晋级成功，近期上榜 5 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（000678，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "3 板高位，连板晋级失败率 40%"
+     ]
+    },
+    {
+     "code": "002912",
+     "name": "中新赛克",
+     "themes": null,
+     "selection_reason": "2 连板（当日 -8.65%，晋级失败，近期上榜 9 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（002912，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "昨日 2 板已晋级失败（chg -8.65%），反核属逆势剧本"
+     ]
+    },
+    {
+     "code": "600032",
+     "name": "浙江新能",
+     "themes": null,
+     "selection_reason": "2 连板（当日 -5.75%，晋级失败，近期上榜 11 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（600032，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "昨日 2 板已晋级失败（chg -5.75%），反核属逆势剧本"
+     ]
+    },
+    {
+     "code": "600488",
+     "name": "津药药业",
+     "themes": null,
+     "selection_reason": "2 连板（当日 -3.04%，晋级失败，近期上榜 23 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（600488，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "昨日 2 板已晋级失败（chg -3.04%），反核属逆势剧本"
+     ]
+    },
+    {
+     "code": "600241",
+     "name": "时代万恒",
+     "themes": null,
+     "selection_reason": "2 连板（当日 9.95%，晋级成功，近期上榜 3 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（600241，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "2 板高位，连板晋级失败率 40%"
+     ]
+    },
+    {
+     "code": "000011",
+     "name": "深物业A",
+     "themes": null,
+     "selection_reason": "2 连板（当日 9.97%，晋级成功，近期上榜 9 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（000011，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "2 板高位，连板晋级失败率 40%"
+     ]
+    },
+    {
+     "code": "002242",
+     "name": "九阳股份",
+     "themes": null,
+     "selection_reason": "2 连板（当日 10.04%，晋级成功，近期上榜 5 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（002242，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "2 板高位，连板晋级失败率 40%"
+     ]
+    },
+    {
+     "code": "301190",
+     "name": "善水科技",
+     "themes": null,
+     "selection_reason": "2 连板（当日 20.01%，晋级成功，近期上榜 6 次）",
+     "intraday_chg": null,
+     "fundamentals": {
+      "roe": null,
+      "revenue_growth": null,
+      "net_profit_growth": null,
+      "pe": null,
+      "pb": null,
+      "peg": null,
+      "market_cap": null,
+      "moat_note": null
+     },
+     "fund_flow_note": "游资/其他（营业部·分公司·自营）主导（席位级：instNet/northNet/hotNet 真值；个股级主力净流入系统无数据）",
+     "scripts": [
+      {
+       "name": "A",
+       "trigger_condition": "高开 >2% 或放量突破昨收上沿（301190，即时轨实时价判定）",
+       "position_ratio": 0.5,
+       "stop_loss": -0.08,
+       "take_profit": 0.16,
+       "invalid_condition": "低开 >3% 或午前跌破昨收 -2%",
+       "script_source": "template"
+      },
+      {
+       "name": "B",
+       "trigger_condition": "平开震荡：回踩 5 日线缩量企稳（即时轨实时价判定）",
+       "position_ratio": 0.25,
+       "stop_loss": null,
+       "take_profit": null,
+       "invalid_condition": "放量跌破 5 日线（止损为条件位，非固定百分比，故 stop_loss=null 不造数）",
+       "script_source": "template"
+      },
+      {
+       "name": "C",
+       "trigger_condition": "低开/竞价弱：观望或轻仓反核（情绪冰点逆势位）",
+       "position_ratio": 0.1,
+       "stop_loss": -0.05,
+       "take_profit": null,
+       "invalid_condition": "断板次日翻绿或 seats 转机构撤离",
+       "script_source": "template"
+      }
+     ],
+     "risks": [
+      "2 板高位，连板晋级失败率 40%"
+     ]
+    }
+   ],
+   "simulation_positions": null,
+   "review": null
+  },
+  "ma20_degraded": false,
+  "status": "degraded"
+ },
+ "missing_notes": [
+  {
+   "field": "grid_triggers / grid_trigger_detail",
+   "reason": "系统无网格交易引擎（grid_parallel 是参数寻优并行器，非交易网格）",
+   "ref": "src/grid_parallel.js"
+  },
+  {
+   "field": "counter_trend_losses / counter_trend_loss_ratio",
+   "reason": "无逆势加仓/亏损记账；参考 divergence.posGap（保费敞口）",
+   "ref": "data/paper/dual_track_latest.json"
+  },
+  {
+   "field": "key_levels / events_today / atr / suggested_step",
+   "reason": "指标服务未提供 ATR 与关键价位；事件日历无数据源",
+   "ref": "docs/ai_report_module_design.md#2.3"
+  },
+  {
+   "field": "max_drawdown_daily / fee_total / net_pnl / cost_ratio / slippage 实测",
+   "reason": "个人账本成交与日内 equity 仅存在于浏览器 localStorage（即时轨一等公民，决议 1）",
+   "ref": "paper_ui.js __paperSnapshot"
+  },
+  {
+   "field": "simulation_stock.candidate_pool[].themes/fundamentals(八字段)/个股级主力资金",
+   "reason": "系统无基本面选股模块与个股级题材/主力资金数据源；基本面键 null 占位（决议 8），接数据源后直接填充不改 schema",
+   "ref": "docs/ai_report_module_design.md#9.3"
+  }
+ ],
+ "concepts": {
+  "trend_switch": "regime 状态机（src/regime.js）",
+  "circuit_breaker": "DD_TIERS + HARD_STOP_LOSS + ops-alerts（src/paper.js / src/opsalerts.js）"
+ },
+ "sources": {
+  "date": "data/paper/dual_track_latest.json::day.date",
+  "pnl_daily": "data/paper/dual_track_latest.json::day.dayReturns.A（即时轨覆盖为账本 nav 当日变化）",
+  "pnl_cumulative": "data/paper/dual_track_latest.json::summary.trackA.total（即时轨覆盖为 accountStats.ret）",
+  "close_drawdown": "data/paper/dual_track_latest.json::summary.trackA.maxDd",
+  "max_drawdown_daily": "即时轨当日 equity 序列峰谷（S3-1 注入：opts.drawdownDaily ← window.__intradayLive.drawdownDaily ← src/intraday_live.js::dailyDrawdown）",
+  "trend_switch_hits": "data/signals-latest.json::regime.turns",
+  "overseas": "data/global.json::quotes（A50 + 费半；美股仅美东 16:30 后可信）",
+  "backtest_deviation": "data/backtest.json::v52 vs dual_track summary.trackA",
+  "market_context": "data/signals-latest.json::latest / breadth / pain / seats",
+  "circuit_breaker": "data/ops-alerts-latest.json::events + src/paper.js::DD_TIERS",
+  "regime": "data/paper/dual_track_latest.json::day.regime + signals.dailyReport（仓位区间）",
+  "slippage_avg": "src/paper.js::DEFAULT_SLIP（归档轨假设常量）/ orders×trades 逐笔实测（即时轨）",
+  "cost_ratio": "即时轨当日 trades 费用合计 / 成交额合计；归档轨无成交明细 → null",
+  "win_rate": "口径 = 剧本命中次数 / 总剧本执行次数（决议 4，2026-10-06 拍板）；剧本绑定记录（airpt_sim_bindings_v1）缺席 → null，不降级为日收益口径"
+ },
+ "disclaimer": "本报告只描述系统状态与风险特征，不构成投资建议；缺失项标注未知而非补 0。"
+}

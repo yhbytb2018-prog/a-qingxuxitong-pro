@@ -1,0 +1,229 @@
+{
+  "$comment": [
+    "前后端接口契约 · backtest.json（V5.3 同步机制 · 2026-10-05）",
+    "生产方：scripts/backtest.mjs（payload 字面量即后端接口定义处）",
+    "消费方：app.js loadBacktest/renderBacktest（V5.3 对照段/净值曲线/止盈摘要）+ getThresholds（params.thresholds 为全站阈值兜底链最高优先级）",
+    "★ 变更流程与 signals-latest.schema.json 头注同款：先改契约→同步两端→check_contract 门禁对齐。",
+    "指标段（base/v52/v53/v53tp*）required = 前端对照表实际渲染的指标列。"
+  ],
+  "type": "object",
+  "required": ["meta", "params", "series", "base", "v52", "v53", "v53tpPartial", "v53tpTrail", "pareto", "rolling", "mainLine"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["days", "tradeDate", "formulaVersion"],
+      "properties": {
+        "days": { "type": "number", "minimum": 1 },
+        "tradeDate": { "type": "string" },
+        "formulaVersion": { "type": "string" },
+        "generatedAt": { "type": "string" },
+        "assets": { "type": "array" },
+        "caveat": { "type": "string" },
+        "indexCoverage": {
+          "$comment": "收益覆盖守卫（2026-10-05）：缺失 indexes 的交易日按 0 收益回退参与回测，会系统性扭曲胜率/夏普/归因。coveredDays/totalDays 显式披露，低于 BACKTEST_MIN_COVERAGE（默认 0.8）时后端直接拒产。回填历史见 scripts/backfill_indexes.mjs。",
+          "type": "object",
+          "required": ["coveredDays", "totalDays", "ratio"],
+          "properties": {
+            "coveredDays": { "type": "number", "minimum": 0 },
+            "totalDays": { "type": "number", "minimum": 1 },
+            "ratio": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    },
+    "params": {
+      "type": "object",
+      "required": ["thresholds", "v52"],
+      "properties": {
+        "thresholds": {
+          "type": "object",
+          "required": ["panic", "hi", "lo", "overheat"],
+          "properties": {
+            "panic": { "type": "number" },
+            "hi": { "type": "number" },
+            "lo": { "type": "number" },
+            "overheat": { "type": "number" }
+          }
+        },
+        "v52": {
+          "type": "object",
+          "required": ["maxPos", "stopLoss", "ddTrigger", "maxPosChg"],
+          "properties": {
+            "maxPos": { "type": "number" },
+            "stopLoss": { "type": "number" },
+            "ddTrigger": { "type": "number" },
+            "maxPosChg": { "type": "number" }
+          }
+        },
+        "weights": { "type": "object" }
+      }
+    },
+    "series": {
+      "type": "object",
+      "required": ["dates", "navBase", "navV52", "navV53", "navHold"],
+      "properties": {
+        "dates": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "navBase": { "type": "array", "items": { "type": "number" } },
+        "navV52": { "type": "array", "items": { "type": "number" } },
+        "navV53": { "type": "array", "items": { "type": "number" } },
+        "navHold": { "type": "array", "items": { "type": "number" } },
+        "posV52": { "type": "array" },
+        "posV53": { "type": "array" }
+      }
+    },
+    "base": { "$ref": "#/$defs/perfBlock" },
+    "v52": { "$ref": "#/$defs/perfBlock" },
+    "v53": {
+      "type": "object",
+      "required": ["annual", "maxDd", "sharpe", "calmar", "winRate", "emptyRatio", "regimeCounts", "unknownDays"],
+      "properties": {
+        "annual": { "type": "number" },
+        "maxDd": { "type": "number" },
+        "sharpe": { "type": "number" },
+        "calmar": { "type": "number" },
+        "winRate": { "type": "number" },
+        "emptyRatio": { "type": "number" },
+        "regimeCounts": { "type": "object" },
+        "unknownDays": { "type": "number" },
+        "note": { "type": "string" },
+        "params": { "type": "object" }
+      }
+    },
+    "v53tpPartial": {
+      "type": "object",
+      "required": ["annual", "maxDd", "sharpe", "triggeredDays"],
+      "properties": {
+        "annual": { "type": "number" },
+        "maxDd": { "type": "number" },
+        "sharpe": { "type": "number" },
+        "triggeredDays": { "type": "number" },
+        "note": { "type": "string" },
+        "params": { "type": "object" }
+      }
+    },
+    "v53tpTrail": {
+      "type": "object",
+      "required": ["annual", "maxDd", "sharpe", "triggeredDays"],
+      "properties": {
+        "annual": { "type": "number" },
+        "maxDd": { "type": "number" },
+        "sharpe": { "type": "number" },
+        "triggeredDays": { "type": "number" },
+        "note": { "type": "string" },
+        "params": { "type": "object" }
+      }
+    },
+    "pareto": {
+      "type": "object",
+      "required": ["count", "rows"],
+      "properties": {
+        "count": { "type": "number" },
+        "uniqueCount": { "type": "number" },
+        "scanned": { "type": "number" },
+        "note": { "type": "string" },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["sharpe", "maxDd", "calmar", "annual", "np"],
+            "properties": {
+              "sharpe": { "type": "number" },
+              "maxDd": { "type": "number" },
+              "calmar": { "type": "number" },
+              "annual": { "type": "number" },
+              "total": { "type": "number" },
+              "winRate": { "type": "number" },
+              "np": { "type": "boolean" },
+              "w": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "rolling": {
+      "type": "object",
+      "required": ["refitChangedSegments", "base", "refit"],
+      "properties": {
+        "refitChangedSegments": { "type": ["number", "null"] },
+        "base": { "$ref": "#/$defs/rollingBlock" },
+        "refit": { "$ref": "#/$defs/rollingBlock" }
+      }
+    },
+    "mainLine": {
+      "type": ["object", "null"],
+      "required": ["tradeDate", "mains", "topIndustries"],
+      "properties": {
+        "tradeDate": { "type": "string" },
+        "mains": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["theme", "density", "mainScore"],
+            "properties": {
+              "theme": { "type": "string" },
+              "themeCount": { "type": ["number", "null"] },
+              "density": { "type": ["number", "null"] },
+              "mainScore": { "type": ["number", "null"] },
+              "stockCount": { "type": "number" },
+              "stocks": { "type": "array" }
+            }
+          }
+        },
+        "topIndustries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "change_pct"],
+            "properties": {
+              "name": { "type": "string" },
+              "change_pct": { "type": ["number", "null"] }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "perfBlock": {
+      "type": "object",
+      "required": ["annual", "maxDd", "sharpe", "calmar", "winRate", "emptyRatio"],
+      "properties": {
+        "annual": { "type": "number" },
+        "maxDd": { "type": "number" },
+        "sharpe": { "type": "number" },
+        "calmar": { "type": "number" },
+        "total": { "type": "number" },
+        "winRate": { "type": "number" },
+        "profitRatio": { "type": ["number", "null"] },
+        "sortino": { "type": ["number", "null"] },
+        "emptyRatio": { "type": "number" }
+      }
+    },
+    "rollingBlock": {
+      "type": "object",
+      "required": ["sharpeMean", "ddWorst", "winSegPct", "segments"],
+      "properties": {
+        "sharpeMean": { "type": ["number", "null"] },
+        "ddWorst": { "type": ["number", "null"] },
+        "winSegPct": { "type": ["number", "null"] },
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["testStart", "testEnd", "total", "sharpe", "maxDd"],
+            "properties": {
+              "testStart": { "type": "string" },
+              "testEnd": { "type": "string" },
+              "trainDays": { "type": ["number", "null"] },
+              "testDays": { "type": ["number", "null"] },
+              "total": { "type": ["number", "null"] },
+              "sharpe": { "type": ["number", "null"] },
+              "maxDd": { "type": ["number", "null"] },
+              "w": { "type": "object" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

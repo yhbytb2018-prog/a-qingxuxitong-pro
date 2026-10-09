@@ -1,0 +1,178 @@
+{
+  "generatedAt": "2026-10-08T15:38:41.983Z",
+  "tradeDateAnchored": "2026-10-08",
+  "allOk": true,
+  "hardFail": [],
+  "lhbNotPublished": false,
+  "amountAnchor": {
+    "date": "20261008",
+    "amountYi": 16821.3
+  },
+  "note": "冒烟与生产同源实现（src/sources.js）。任一硬失败 → CI needs 关系拦下主跑，不污染生产档。软失败（当日未公布）不算源故障。",
+  "sources": [
+    {
+      "id": "s1",
+      "label": "同花顺强势股 getharden",
+      "ok": true,
+      "latencyMs": 160,
+      "checks": [
+        {
+          "name": "HTTP 200 且 errocode=0（fetchHot 内建校验）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "data 非空数组",
+          "ok": true,
+          "detail": "45 条"
+        },
+        {
+          "name": "交易日探测成功",
+          "ok": true,
+          "detail": "2026-10-08"
+        },
+        {
+          "name": "样本字段齐全（code/name/reason/date）",
+          "ok": true,
+          "detail": "抽查前 45 条"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "s2",
+      "label": "东财龙虎榜 RPT_DAILYBILLBOARD",
+      "ok": true,
+      "latencyMs": 166,
+      "checks": [
+        {
+          "name": "HTTP 200（fetchLhb 内建）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "result.data 非空",
+          "ok": true,
+          "detail": "82 条（≤5 页分页）"
+        },
+        {
+          "name": "字段齐全（SECURITY_CODE/SECURITY_NAME_ABBR/TRADE_DATE）",
+          "ok": true,
+          "detail": "抽查前 30 条"
+        },
+        {
+          "name": "净额字段存在（BILLBOARD_NET_AMT/NET_BS_AMT）",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "s3",
+      "label": "同花顺行业 881xxx 日K",
+      "ok": true,
+      "latencyMs": 9487,
+      "checks": [
+        {
+          "name": "HTTP 200（fetchBoards 内建）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "板块数 ≥ 50",
+          "ok": true,
+          "detail": "89 个"
+        },
+        {
+          "name": "字段齐全（name/change_pct 数值）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "涨跌幅范围合法（|chg| ≤ 15%）",
+          "ok": true,
+          "detail": "极值 -4.98 ~ 3.60"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "s4",
+      "label": "腾讯三大指数 qt.gtimg.cn",
+      "ok": true,
+      "latencyMs": 62,
+      "checks": [
+        {
+          "name": "HTTP 200（fetchIndexes 内建）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "三大指数齐全",
+          "ok": true,
+          "detail": "上证指数/深证成指/创业板指"
+        },
+        {
+          "name": "涨跌幅为数值",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "s5",
+      "label": "东财涨跌停/炸板池 push2ex",
+      "ok": true,
+      "latencyMs": 203,
+      "checks": [
+        {
+          "name": "HTTP 200（fetchPools 内建重试）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "三池键存在（zt/dt/zb）",
+          "ok": true,
+          "detail": "zt=43 dt=13 zb=32"
+        },
+        {
+          "name": "涨停池样本非空",
+          "ok": true,
+          "detail": "43 家"
+        },
+        {
+          "name": "计数为非负整数",
+          "ok": true,
+          "detail": null
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "s6",
+      "label": "同花顺大盘日K（两市成交额）",
+      "ok": true,
+      "latencyMs": 1492,
+      "checks": [
+        {
+          "name": "HTTP 200（fetchAmountMap 内建）",
+          "ok": true,
+          "detail": null
+        },
+        {
+          "name": "覆盖到冒烟锚点交易日",
+          "ok": true,
+          "detail": "最新 20261008 vs 锚点 20261008"
+        },
+        {
+          "name": "成交额数值合理（1000~80000 亿）",
+          "ok": true,
+          "detail": "区间 14092 ~ 39415 亿"
+        }
+      ],
+      "error": null
+    }
+  ]
+}

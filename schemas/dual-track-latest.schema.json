@@ -1,0 +1,161 @@
+{
+  "$comment": [
+    "双轨账本档契约 · data/paper/dual_track_latest.json（P2-β 渲染接线 · 2026-10-06）",
+    "生产方：tools/backtest/paper_dual_track.mjs（每日三轨重放 + 记账，唯一数字出处）",
+    "消费方：src/dual_track.js::dualTrackBlock（搬运成 signals-latest.dualTrack 披露块）+ 人工审计",
+    "",
+    "★ 变更流程（不可反序，与 signals-latest.schema.json 同一纪律）：",
+    "  1) 先改本契约；2) 同步改 paper_dual_track.mjs（生产）与 src/dual_track.js（搬运白名单）；",
+    "  3) 跑 node scripts/check_contract.mjs（门禁红到两端对齐为止）。",
+    "",
+    "required 语义 = 消费面实际读取的字段：day/trackState/generatedAt 供披露块搬运；",
+    "gates/summary/notes 为审计面（optional——旁路工具门禁失败时仍会写出账本供尸检）。",
+    "半缺是最危险形态：day 段一旦存在，段内 required 必须齐（搬运端遇半缺整块降级 null）。"
+  ],
+  "type": "object",
+  "required": ["tool", "generatedAt", "trackState", "sample", "day"],
+  "properties": {
+    "tool": { "type": "string", "const": "paper_dual_track" },
+    "generatedAt": { "type": "string" },
+    "trackState": {
+      "type": "object",
+      "required": ["activeTrack", "paramsSource"],
+      "properties": {
+        "activeTrack": { "type": "string", "enum": ["A", "A_fallback"] },
+        "paramsSource": { "type": "string" },
+        "fallback": { "type": ["object", "null"] },
+        "note": { "type": "string" }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "required": ["from", "to", "days"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "days": { "type": "number" }
+      }
+    },
+    "gates": {
+      "$comment": "门禁锚点对账（轨道A↔v52 / 轨道B↔v53 / 影子C / 披露口径差）。门禁失败时工具拒写盘，故在场即应自洽",
+      "type": ["object", "null"]
+    },
+    "day": {
+      "type": "object",
+      "required": ["date", "regime", "trackA", "trackB", "divergence", "trackC", "ledger"],
+      "properties": {
+        "date": { "type": "string" },
+        "score": { "type": ["number", "null"] },
+        "regime": {
+          "type": ["object", "null"],
+          "required": ["key", "label", "cap"],
+          "properties": {
+            "key": { "type": "string", "enum": ["ice", "recover", "climax", "ebb", "neutral", "shift", "unknown"] },
+            "label": { "type": "string" },
+            "cap": { "type": ["number", "null"] },
+            "reasons": { "type": "array", "items": { "type": "string" } },
+            "note": { "type": ["string", "null"] }
+          }
+        },
+        "trackA": {
+          "type": "object",
+          "required": ["targetPos", "poolPos", "executed"],
+          "properties": {
+            "targetPos": { "type": "object" },
+            "poolPos": { "type": "number" },
+            "executed": { "type": "boolean" }
+          }
+        },
+        "trackB": {
+          "type": "object",
+          "required": ["refPos", "poolPos", "executed"],
+          "properties": {
+            "refPos": { "type": "object" },
+            "poolPos": { "type": "number" },
+            "executed": { "type": "boolean", "const": false }
+          }
+        },
+        "divergence": {
+          "type": "object",
+          "required": ["posGap", "note"],
+          "properties": {
+            "posGap": { "type": "number" },
+            "note": { "type": "string" }
+          }
+        },
+        "trackC": {
+          "type": "object",
+          "required": ["active", "shadowPos", "biting"],
+          "properties": {
+            "active": { "type": "boolean" },
+            "shadowPos": { "type": "object" },
+            "biting": { "type": "object" }
+          }
+        },
+        "dayReturns": {
+          "$comment": "三轨当日收益：A / B / C0.3 / C0.4 / C0.5（披露口径，消费面非必需）",
+          "type": ["object", "null"]
+        },
+        "ledger": {
+          "type": "object",
+          "required": ["since", "premiumCum", "coverageCum", "shadowCum", "episodes", "activeDays"],
+          "properties": {
+            "since": { "type": "string" },
+            "premiumCum": { "type": "number" },
+            "coverageCum": { "type": "number" },
+            "shadowCum": { "type": "object" },
+            "episodes": { "type": "object" },
+            "activeDays": { "type": "number" }
+          }
+        }
+      }
+    },
+    "intraday_valuation": {
+      "$comment": [
+        "S3-1 即时轨估值锚（2026-10-07，optional——老档无此段 → 页面采样器待命不冒充）。",
+        "轨道 A 是账户级仓位模拟（指数池 × targetPos，无个股持仓），页面日内权益 =",
+        "equity_prev × (1 + Σ pos_today[name] × 指数实时涨幅% ÷ 池资产数)——公式消费端",
+        "src/intraday_live.js，单测两端锁死。nav_series = 全史日权益（元口径，",
+        "Π(1+dayReturns.A) × init_cash），供 accountStats 历史峰值口径（数字唯一出处=生产方）。",
+        "pool[].code 为腾讯行情代码（null = 未知资产，页面跳过该资产并如实降级）。"
+      ],
+      "type": ["object", "null"],
+      "required": ["equity_prev", "init_cash", "pos_today", "pool", "nav_series"],
+      "properties": {
+        "equity_prev": { "type": "number" },
+        "init_cash": { "type": "number" },
+        "pos_today": { "type": "object" },
+        "pool": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "code"],
+            "properties": {
+              "name": { "type": "string" },
+              "code": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "nav_series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["date", "equity"],
+            "properties": {
+              "date": { "type": "string" },
+              "equity": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "$comment": "全样本三轨汇总（total/maxDd/sharpe）——total 面被披露块 cum 搬运（src/dual_track.js::cumFromSummary），maxDd/sharpe 留审计面。optional：门禁失败时账本仍写出（此时披露块 cum 各位 null）",
+      "type": ["object", "null"]
+    },
+    "notes": {
+      "$comment": "口径注解字典（键=字段名，值=口径说明）——审计面，披露块不搬运",
+      "type": ["object", "null"]
+    }
+  }
+}

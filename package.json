@@ -1,0 +1,25 @@
+{
+  "name": "a-sentiment-pro",
+  "version": "5.0.0",
+  "description": "A股 市场情绪系统（云端版）：多源数据 + 七因子情绪 + 题材去噪 + 缺失代理 + 多源容灾",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "pipeline": "node src/pipeline.js",
+    "global": "node scripts/fetch_global.mjs",
+    "universe": "node scripts/fetch_universe.mjs",
+    "backtest": "node scripts/backtest.mjs",
+    "freshness": "node scripts/freshness.mjs",
+    "audit:lhb": "node scripts/audit_lhb_caliber.mjs",
+    "recalc:lhb": "node scripts/recalc_lhb_daily.mjs",
+    "check:frontend": "node scripts/check_frontend.mjs",
+    "build:ui": "node scripts/build_ui.mjs",
+    "kline:daily": "node ui/fetch_kline_all.mjs",
+    "kline:init": "node ui/fetch_kline_all.mjs --init",
+    "promote": "node scripts/promote_params.mjs",
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

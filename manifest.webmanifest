@@ -1,0 +1,11 @@
+{
+  "name": "A股情绪系统 · PRO",
+  "short_name": "情绪系统",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "description": "A股市场情绪系统：多源数据 + 七因子情绪 + 题材去噪 + 缺失代理 + 多源容灾。数据仅供参考，不构成投资建议。",
+  "icons": []
+}

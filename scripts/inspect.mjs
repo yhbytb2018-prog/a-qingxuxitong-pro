@@ -1,0 +1,10 @@
+import { readFileSync } from 'fs';
+import { extractArchive } from '../src/pipeline.js';
+const html = readFileSync('snapshot.html', 'utf8');
+const arc = extractArchive(html);
+const day = arc.all_days[arc.all_days.length - 1];
+console.log('ALL_DAYS keys:', Object.keys(day));
+console.log('emotion:', JSON.stringify(day.emotion).slice(0, 260));
+console.log('hot[0]:', JSON.stringify(day.hot && day.hot[0]).slice(0, 320));
+console.log('topics[0]:', JSON.stringify(day.topics && day.topics[0]));
+console.log('summary:', JSON.stringify(day.summary).slice(0, 200));

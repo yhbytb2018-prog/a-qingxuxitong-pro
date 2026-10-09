@@ -1,0 +1,62 @@
+node_modules/
+*.log
+.DS_Store
+snapshot.html
+
+# 合并版 UI 构建产物（dist/ 部署走 Pages artifact，不入库；源在 ui/ + scripts/build_ui.mjs）
+dist/
+
+# backtest 产物
+tools/backtest/demo_preview/
+tools/backtest/_smoke_gui.py
+tools/backtest/_smoke_out.txt
+tools/backtest/reports*/
+tools/backtest/auto_pool_test*
+tools/backtest/_shot_gui.py
+tools/backtest/_shot_log.txt
+tools/backtest/_gui_shot.png
+tools/backtest/reports_dbg/
+tools/backtest/_check*/
+tools/backtest/archive_*.csv
+
+# 真浏览器截图（开发用临时产物）
+shots/
+scripts/_shot_*.mjs
+scripts/_diag_*.mjs
+
+# 日K抓取磁盘缓存（可重建，只用于连板回溯时少打接口）
+data/.kline_cache.json
+
+# 全市场宽度扫描的分片 K 线缓存（可重建；断点续跑用，不入库）
+# 为什么不入库：单分片约 1~3MB，8 片就是十几 MB，且完全可由 fetch_breadth.mjs 重抓。
+# 真正要入库的是**汇总结果** data/breadth-latest.json 与 data/breadth-daily.json。
+data/.breadth_kline/
+
+# 策略回测（③）的个股/指数日K缓存（可重建，首次运行真抓腾讯 ifzq）
+# 要入库的是**回测结论** data/backtest-strategies.json。
+data/.bt_kline/
+
+# 工作区记忆（本地，不入库）
+.workbuddy/
+
+# 六因子历史回填的全市场不复权K线缓存（5901 分片 ~150MB，可由 scripts/fetch_raw_kline.mjs 重抓）
+# 要入库的是**回填结论**：data/archive.json 主档 + data/bt_industry.json（90 板块年线，~500KB，验证门禁的原料）
+data/bt_kline/
+data/bt_kline_fetch.log
+data/bt_kline_fetch.err.log
+
+# 本地前端验证临时产物（点火验证用的静态服务脚本与日志，用完即删）
+.dev-server.tmp.mjs
+.dev-server.log.tmp
+
+.dev.vars
+.wrangler/
+
+# H-4 原子写（2026-10-07）：极端场景（进程在写 tmp 后、清理前被 SIGKILL）的残留临时档
+*.tmp
+
+# 涨停池三模块的历史产物档（emotion/old_dragon/main_theme）——可由 ztpool_history.json + archive.json 完全重建，
+# 且每次 daily_fetch 重跑都只改 generatedAt（churn 无内容），不入库避免 stash 折腾。原始积累 ztpool_history.json 照常入库。
+data/emotion_history.json
+data/old_dragon_history.json
+data/main_theme_history.json

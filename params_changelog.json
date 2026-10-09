@@ -1,0 +1,27 @@
+{
+  "note": "参数治理台账（过拟合防线 · 2026-10-02 拍板）。规则：改 config.json 的 params.train（实验区）→ node scripts/promote_params.mjs（跑样本外 20% 门禁，出报告）→ --apply 才更新 params.live 并在此追加记录（who/when/why/验证结果/liveAfter 快照）。直接改 params.live 不留痕 = 违规，test/params_governance.test.mjs 会红。",
+  "schema": {
+    "at": "ISO 时间",
+    "who": "操作人（git user 或 --who）",
+    "what": "改了什么（块级摘要）",
+    "why": "为什么改（--why 必填）",
+    "validation": { "type": "baseline|oos-20pct", "pass": "bool", "oosDays": "样本外天数", "note": "说明" },
+    "liveAfter": "晋升后的 live 五块快照（weights/thresholds/stops/lookback/costModel），与 config.json 的 params.live 逐位相等"
+  },
+  "entries": [
+    {
+      "at": "2026-10-02T12:00:00+08:00",
+      "who": "baseline",
+      "what": "v5.2-pro 基线冻结（TRAIN_PARAMS 与 LIVE_PARAMS 初始对齐）",
+      "why": "过拟合防线落地（#134/#141 配套）：以现状为冻结起点，此后任何 live 变动必须过样本外 20% 门禁并留痕；寻优锚点（scripts/backtest.mjs）同步切至 train。",
+      "validation": { "type": "baseline", "pass": true, "oosDays": null, "note": "基线快照无需样本外验证；下一次改动起强制走 promote 门禁。" },
+      "liveAfter": {
+        "weights": { "s_net20": 0.2, "s_pos10": 0.1, "s_brd20": 0.2, "s_hot10": 0.1, "s_zdt15": 0.15, "s_zbl10": 0.1, "s_amt15": 0.15 },
+        "thresholds": { "panic": 24, "hi": 44, "lo": 65, "overheat": 80 },
+        "stops": { "maxPos": 1, "stopLoss": -0.08, "ddTrigger": -0.15, "maxPosChg": 0.2 },
+        "lookback": { "rolling": { "trainWindow": 20, "testWindow": 6 }, "momentumRecent": 5, "momentumPrev": 5, "rankWindow": 60, "rankMin": 20 },
+        "costModel": { "comm": 0.0003, "stamp": 0.0005, "slip": 0.0002, "priceLimit": { "enabled": false } }
+      }
+    }
+  ]
+}

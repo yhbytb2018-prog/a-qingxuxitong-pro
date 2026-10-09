@@ -1,0 +1,754 @@
+{
+  "$comment": [
+    "前后端接口契约 · signals-latest.json（V5.3 同步机制 · 2026-10-05）",
+    "生产方：src/archive_split.js buildSignals（经 src/engine/write.js 或 scripts/split_archive.mjs 落盘）",
+    "消费方：app.js loadHealth/renderHealth/renderSeats/renderPain/renderBreadth/renderDirty/renderXcheck/",
+    "renderRegime/renderDailyReport/renderDiverge/renderAlerts + src/dataset.js 导出层",
+    "",
+    "★ 变更流程（不可反序）：",
+    "  1) 先改本契约（字段/类型/枚举），提交信息注明「契约变更」；",
+    "  2) 同步改另一端：生产方=src/archive_split.js 等，消费方=app.js；",
+    "  3) 跑 node scripts/check_contract.mjs（门禁会红到两端对齐为止）；",
+    "  4) 若字段语义变化（不只增删），须在 check_frontend.mjs 补对应渲染断言。",
+    "顺序反了（先改代码后补契约）会被门禁拦下——这正是「通知相关方」的强制形态。",
+    "",
+    "required 语义：= 前端渲染实际消费的字段（消费面，非生产面自画像）。",
+    "整段 anyOf null（如 health 可为 null）：未生成≠没有，前端有专门缺失分支；",
+    "段一旦存在，段内 required 字段必须齐——半缺是最危险形态（渲染静默空白）。",
+    "",
+    "★ P2-β（2026-10-06）：active_track / activeTrackNote 正式字段化。",
+    "  · 事实源 = data/paper/track_state.json（契约 schemas/track-state.schema.json，同一变更流程管理）；",
+    "  · 本字段是展示镜像：抓取管道每轮重写会冲掉 → paper_dual_track.mjs fallback 态每日自愈回写；",
+    "  · 生产方：scripts/rollback_track.mjs（回滚写/恢复清）+ tools/backtest/paper_dual_track.mjs（自愈）；",
+    "  · 消费方：前端回滚横幅（随双轨披露渲染接线，本轮先锁契约）；",
+    "  · 跨档一致性（check_contract.mjs 守卫）：A_fallback 态镜像必须在场；A 态不得带本字段（零 diff 纪律）。",
+    "",
+    "★ P2-β 渲染接线（2026-10-06）：dualTrack / dualTrackNote 正式字段化。",
+    "  · 事实源 = data/paper/dual_track_latest.json（契约 schemas/dual-track-latest.schema.json）；",
+    "  · 生产方：src/dual_track.js::dualTrackDisclosureFn（唯一实现，纯搬运不重算），经 buildSignals 的",
+    "    dualTrackFn 注入——src/engine/write.js 与 scripts/split_archive.mjs 用同一工厂产物（两路径零分裂）；",
+    "  · 消费方：app.js renderDualTrack（三轨披露面板）；",
+    "  · asOf = 双轨账本末日，与 meta.tradeDate 不同步时以 asOf 为披露口径（旁路工具每日一跑，",
+    "    盘中抓取时账本停在上一收盘日——如实披露不隐藏）；",
+    "  · 跨档一致性（check_contract.mjs 守卫 crossCheckDualTrack）：段内 day/ledger/trackState 必须与",
+    "    dual_track_latest.json 逐字段一致（防「报告说 A、算的是 B」的 R4 口径分裂）。"
+  ],
+  "type": "object",
+  "required": [
+    "kind", "version", "meta", "signals", "latest", "relative",
+    "health", "healthNote", "seats", "seatsNote", "pain", "painNote",
+    "breadth", "breadthNote", "dirty", "dirtyNote",
+    "crosscheck", "crosscheckNote", "regime", "regimeNote",
+    "divergence", "divergenceNote", "dailyReport", "dailyReportNote",
+    "llm", "llmNote", "dualTrack", "dualTrackNote"
+  ],
+  "properties": {
+    "kind": { "type": "string", "const": "signals-latest" },
+    "version": { "type": "number" },
+
+    "meta": {
+      "type": "object",
+      "required": ["generatedAt", "formulaVersion", "source", "tradeDate", "stale", "phase"],
+      "properties": {
+        "generatedAt": { "type": "string" },
+        "formulaVersion": { "type": "string" },
+        "source": { "type": "string" },
+        "tradeDate": { "type": "string" },
+        "stale": { "type": "boolean" },
+        "staleReason": { "type": ["object", "null"] },
+        "phase": { "type": "string" },
+        "phaseNote": { "type": "string" },
+        "lastAttempt": {
+          "type": ["object", "null"],
+          "properties": {
+            "at": { "type": "string" },
+            "outcome": { "type": "string" },
+            "reason": { "type": ["string", "null"] }
+          }
+        },
+        "freshness": {
+          "type": ["object", "null"],
+          "properties": {
+            "state": { "type": "string" },
+            "stale": { "type": "boolean" },
+            "tradeDate": { "type": ["string", "null"] },
+            "behindSessions": { "type": "number" }
+          }
+        }
+      }
+    },
+
+    "signals": {
+      "type": "object",
+      "required": ["tradeDate", "momentum"],
+      "properties": {
+        "tradeDate": { "type": "string" },
+        "momentum": {
+          "type": "object",
+          "$comment": "momentum 三态统一 {theme, stocks} 对象数组（enrich.js：退潮题材今日已消失 → stocks=0 如实披露；消费端 app.js chips() 双形态兼容）。fresh/fading 契约自 33482e5，continuing/fading 自 4c57901 引擎拆分起实际为对象数组，2026-10-08 契约对齐实现（节后首日 fading 首次非空暴露缺口）。rising 在当前档不存在（形态见 archive_split.js）",
+          "properties": {
+            "fresh": { "type": "array", "items": { "type": "object", "required": ["theme", "stocks"] } },
+            "continuing": { "type": "array", "items": { "type": "object", "required": ["theme", "stocks"] } },
+            "fading": { "type": "array", "items": { "type": "object", "required": ["theme", "stocks"] } }
+          }
+        }
+      }
+    },
+
+    "latest": {
+      "type": "object",
+      "required": ["trade_date", "value", "factors"],
+      "properties": {
+        "trade_date": { "type": "string" },
+        "value": { "type": "number", "minimum": 0, "maximum": 100 },
+        "pct_rank": { "type": ["number", "null"] },
+        "factors": {
+          "type": "object",
+          "required": ["s_net", "s_pos", "s_brd", "s_hot", "s_zdt", "s_zbl", "s_amt"],
+          "properties": {
+            "s_net": { "type": ["number", "null"] },
+            "s_pos": { "type": ["number", "null"] },
+            "s_brd": { "type": ["number", "null"] },
+            "s_hot": { "type": ["number", "null"] },
+            "s_zdt": { "type": ["number", "null"] },
+            "s_zbl": { "type": ["number", "null"] },
+            "s_amt": { "type": ["number", "null"] }
+          }
+        },
+        "zt_count": { "type": ["number", "null"] },
+        "dt_count": { "type": ["number", "null"] },
+        "zb_count": { "type": ["number", "null"] },
+        "up_count": { "type": ["number", "null"] },
+        "down_count": { "type": ["number", "null"] },
+        "seal_pct": { "type": ["number", "null"] },
+        "indexes": { "type": ["object", "null"] }
+      }
+    },
+
+    "relative": {
+      "type": ["object", "null"],
+      "required": ["primary", "degraded", "vsIndex", "vsMedian"],
+      "properties": {
+        "primary": { "type": "string" },
+        "degraded": { "type": "boolean" },
+        "degradedReason": { "type": ["string", "null"] },
+        "vsIndex": {
+          "type": ["object", "null"],
+          "$comment": "超额榜（attack/defense 各 top5 行）；改行结构须同步 app.js 相对强弱表",
+          "required": ["base", "baseLabel", "basePct", "attack", "defense"],
+          "properties": {
+            "base": { "type": "string" },
+            "baseLabel": { "type": "string" },
+            "basePct": { "type": ["number", "null"] },
+            "attack": { "type": "array", "items": { "type": "object", "required": ["name", "change_pct", "excess"] } },
+            "defense": { "type": "array", "items": { "type": "object", "required": ["name", "change_pct", "excess"] } }
+          }
+        },
+        "vsMedian": { "type": ["object", "null"] },
+        "medianPct": { "type": ["number", "null"] },
+        "upCount": { "type": ["number", "null"] },
+        "total": { "type": ["number", "null"] },
+        "topN": { "type": ["number", "null"] }
+      }
+    },
+
+    "health": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["level", "label", "items", "summary"],
+          "properties": {
+            "level": { "type": "string", "enum": ["ok", "warn", "fail", "unknown"] },
+            "label": { "type": "string" },
+            "summary": { "type": "string" },
+            "note": { "type": "string" },
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["item", "label", "level", "detail"],
+                "properties": {
+                  "item": { "type": "string" },
+                  "label": { "type": "string" },
+                  "level": { "type": "string" },
+                  "detail": { "type": "string" },
+                  "state": { "type": ["string", "null"] },
+                  "stale": { "type": "boolean" },
+                  "rows": { "type": "array" }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "healthNote": { "type": "string" },
+
+    "seats": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["verdict", "series", "summary"],
+          "properties": {
+            "verdict": {
+              "type": "object",
+              "required": ["level", "label", "reason"],
+              "properties": {
+                "level": { "type": "string", "enum": ["inst", "north", "hot", "unknown"] },
+                "label": { "type": "string" },
+                "reason": { "type": "string" },
+                "date": { "type": ["string", "null"] }
+              }
+            },
+            "series": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["date", "ok", "instNet", "northNet", "hotNet", "dominant"],
+                "properties": {
+                  "date": { "type": "string" },
+                  "ok": { "type": "boolean" },
+                  "instNet": { "type": ["number", "null"] },
+                  "northNet": { "type": ["number", "null"] },
+                  "hotNet": { "type": ["number", "null"] },
+                  "dominant": { "type": ["string", "null"] }
+                }
+              }
+            },
+            "summary": {
+              "type": "object",
+              "required": ["okRows", "totalDays", "coverage"],
+              "properties": {
+                "okRows": { "type": "number" },
+                "totalDays": { "type": "number" },
+                "coverage": { "type": ["number", "null"] },
+                "instNet": { "type": ["object", "null"] },
+                "northNet": { "type": ["object", "null"] },
+                "hotNet": { "type": ["object", "null"] }
+              }
+            },
+            "seatsNote": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "seatsNote": { "type": "string" },
+
+    "pain": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["verdict", "perf", "advance", "bigLoss"],
+          "properties": {
+            "verdict": {
+              "type": "object",
+              "required": ["level", "label", "reason"],
+              "properties": {
+                "level": { "type": "string", "enum": ["severe", "weak", "normal", "strong", "unknown"] },
+                "label": { "type": "string" },
+                "reason": { "type": "string" }
+              }
+            },
+            "perf": {
+              "type": "object",
+              "required": ["n", "universe", "reliable", "avg", "median", "lossRatio", "limitUpAgain", "limitDown", "bigLoss"],
+              "properties": {
+                "n": { "type": "number" },
+                "universe": { "type": "number" },
+                "missing": { "type": "number" },
+                "reliable": { "type": "boolean" },
+                "avg": { "type": ["number", "null"] },
+                "median": { "type": ["number", "null"] },
+                "lossRatio": { "type": ["number", "null"] },
+                "worst": { "type": ["number", "null"] },
+                "best": { "type": ["number", "null"] },
+                "limitUpAgain": { "type": ["number", "null"] },
+                "limitDown": { "type": ["number", "null"] },
+                "bigLoss": { "type": ["number", "null"] }
+              }
+            },
+            "advance": {
+              "type": "object",
+              "required": ["failRate", "maxLb"],
+              "properties": {
+                "n": { "type": "number" },
+                "kept": { "type": "number" },
+                "failed": { "type": "number" },
+                "failRate": { "type": ["number", "null"] },
+                "maxLb": { "type": ["number", "null"] },
+                "reliable": { "type": "boolean" },
+                "byTier": { "type": ["object", "null"] }
+              }
+            },
+            "bigLoss": {
+              "type": "object",
+              "required": ["n", "list"],
+              "properties": {
+                "n": { "type": "number" },
+                "list": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": ["name", "chg"],
+                    "properties": {
+                      "name": { "type": "string" },
+                      "code": { "type": ["string", "null"] },
+                      "chg": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "painNote": { "type": "string" },
+
+    "breadth": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["snapshot", "series", "summary", "verdict"],
+          "properties": {
+            "snapshot": {
+              "type": "object",
+              "required": ["scanned", "requested", "reliable", "aboveMa", "newHigh", "newLow", "updown"],
+              "properties": {
+                "scanned": { "type": ["number", "null"] },
+                "requested": { "type": ["number", "null"] },
+                "reliable": { "type": "boolean" },
+                "aboveMa": { "type": ["object", "null"] },
+                "newHigh": { "type": ["object", "null"] },
+                "newLow": { "type": ["object", "null"] },
+                "brokenPb": { "type": ["object", "null"] },
+                "updown": { "type": ["object", "null"] },
+                "divergence": { "type": ["number", "null"] },
+                "thresholds": { "type": ["object", "null"] },
+                "verdict": {
+                  "type": "object",
+                  "required": ["level", "label", "detail"],
+                  "properties": {
+                    "level": { "type": "string" },
+                    "label": { "type": "string" },
+                    "detail": { "type": ["string", "null"] }
+                  }
+                }
+              }
+            },
+            "series": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["date", "maRatio", "up", "down"],
+                "properties": {
+                  "date": { "type": "string" },
+                  "maRatio": { "type": ["number", "null"] },
+                  "newHighRatio": { "type": ["number", "null"] },
+                  "newLowRatio": { "type": ["number", "null"] },
+                  "brokenRatio": { "type": ["number", "null"] },
+                  "up": { "type": ["number", "null"] },
+                  "down": { "type": ["number", "null"] }
+                }
+              }
+            },
+            "summary": { "type": ["object", "null"] },
+            "verdict": {
+              "type": "object",
+              "required": ["level", "label"],
+              "properties": {
+                "level": { "type": "string" },
+                "label": { "type": "string" },
+                "detail": { "type": ["string", "null"] }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "breadthNote": { "type": "string" },
+
+    "dirty": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["latest", "totalDays", "taggedDays", "dirtyDays", "warnDays", "byField", "recent"],
+          "properties": {
+            "latest": { "type": ["object", "null"] },
+            "totalDays": { "type": "number" },
+            "taggedDays": { "type": "number" },
+            "dirtyDays": { "type": "number" },
+            "warnDays": { "type": "number" },
+            "byField": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["field", "days"],
+                "properties": {
+                  "field": { "type": "string" },
+                  "days": { "type": "number" }
+                }
+              }
+            },
+            "recent": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["date", "status"],
+                "properties": {
+                  "date": { "type": "string" },
+                  "status": { "type": "string" },
+                  "issues": { "type": "array" },
+                  "reviewVerdict": { "type": ["string", "null"] }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dirtyNote": { "type": "string" },
+
+    "crosscheck": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["status", "comparable", "coverage", "flagged", "conflictCount"],
+          "properties": {
+            "status": { "type": "string", "enum": ["ok", "diverge", "conflict", "skip", "unknown"] },
+            "comparable": { "type": ["number", "null"] },
+            "coverage": { "type": ["number", "null"] },
+            "offset": { "type": ["number", "null"] },
+            "flagged": { "type": "array" },
+            "conflictCount": { "type": ["number", "null"] },
+            "rows": { "type": "array" },
+            "primaryName": { "type": ["string", "null"] },
+            "secondaryName": { "type": ["string", "null"] },
+            "asOfDate": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "crosscheckNote": { "type": "string" },
+
+    "regime": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["latest", "turns", "counts", "totalDays", "labels"],
+          "properties": {
+            "latest": {
+              "type": "object",
+              "required": ["trade_date", "value", "pct_rank", "key", "label", "dir", "confidence"],
+              "properties": {
+                "trade_date": { "type": "string" },
+                "value": { "type": ["number", "null"] },
+                "pct_rank": { "type": ["number", "null"] },
+                "key": { "type": "string", "enum": ["ice", "recover", "climax", "ebb", "neutral", "shift", "unknown"] },
+                "label": { "type": "string" },
+                "level": { "type": "string" },
+                "dir": { "type": "string", "enum": ["up", "flat", "down"] },
+                "confidence": { "type": "string", "enum": ["low", "mid", "high"] },
+                "caution": { "type": ["string", "null"] },
+                "detail": { "type": ["object", "null"] }
+              }
+            },
+            "turns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["date", "from", "to"],
+                "properties": {
+                  "date": { "type": "string" },
+                  "from": { "type": "string" },
+                  "to": { "type": "string" },
+                  "value": { "type": ["number", "null"] }
+                }
+              }
+            },
+            "counts": { "type": "object" },
+            "totalDays": { "type": "number" },
+            "labels": { "type": "object" },
+            "rules": { "type": ["object", "null"] },
+            "seriesCompact": { "type": "array" },
+            "seriesFields": { "type": "array" }
+          }
+        }
+      ]
+    },
+    "regimeNote": { "type": "string" },
+
+    "divergence": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["diverged", "level", "label", "reason", "history"],
+          "properties": {
+            "diverged": { "type": "boolean" },
+            "level": { "type": "string", "enum": ["ok", "warn", "unknown"] },
+            "kind": { "type": ["string", "null"] },
+            "label": { "type": "string" },
+            "reason": { "type": ["string", "null"] },
+            "history": {
+              "type": ["object", "null"],
+              "required": ["checkedDays", "divergedDays", "ratePct"],
+              "properties": {
+                "checkedDays": { "type": "number" },
+                "divergedDays": { "type": "number" },
+                "ratePct": { "type": ["number", "null"] },
+                "recent": { "type": "array" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "divergenceNote": { "type": "string" },
+
+    "dailyReport": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["date", "headline", "tag", "sections"],
+          "properties": {
+            "date": { "type": "string" },
+            "headline": { "type": "string" },
+            "tag": {
+              "type": "object",
+              "required": ["key", "label"],
+              "properties": {
+                "key": { "type": "string" },
+                "label": { "type": "string" },
+                "level": { "type": "string" },
+                "dir": { "type": "string" },
+                "confidence": { "type": "string" }
+              }
+            },
+            "caveats": { "type": "array" },
+            "disclaimer": { "type": "string" },
+            "sections": {
+              "type": "array",
+              "items": {
+                "$comment": "双形态互斥（anyOf）：missing=false 的节必须带 points（渲染列表本体，漏了=整节空白）；missing=true 的节必须带 missingReason（指引文案，漏了=前端显示「原因未知」——missingNote→missingReason 事故的精确锁点）。const 绑定 missing 值与形态，两边都对不上就两分支全不命中。",
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "required": ["id", "title", "level", "missing", "points"],
+                    "properties": {
+                      "id": { "type": "string" },
+                      "title": { "type": "string" },
+                      "level": { "type": "string", "enum": ["info", "warn", "ok", "unknown"] },
+                      "missing": { "type": "boolean", "const": false },
+                      "points": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "required": ["text", "kind"],
+                          "properties": {
+                            "text": { "type": "string" },
+                            "kind": { "type": "string", "enum": ["main", "evidence", "caution", "unknown", "info"] }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "required": ["id", "title", "level", "missing", "missingReason"],
+                    "properties": {
+                      "id": { "type": "string" },
+                      "title": { "type": "string" },
+                      "level": { "type": "string", "enum": ["info", "warn", "ok", "unknown"] },
+                      "missing": { "type": "boolean", "const": true },
+                      "missingReason": { "type": "string" }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "dailyReportNote": { "type": "string" },
+
+    "llm": {
+      "$comment": "未生成为 null（常态，需收盘后跑 scripts/fetch_llm_sentiment.mjs）；结构由 src/llm_sentiment.js llmSentimentBlock 产出，节 8 由 dailyReport.sections 透出",
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["effective", "direction", "adj", "original", "modified", "effectNote", "asOfDate"],
+          "properties": {
+            "effective": { "type": "boolean" },
+            "direction": { "type": ["string", "null"] },
+            "adj": { "type": ["number", "null"] },
+            "original": { "type": ["number", "null"] },
+            "modified": { "type": ["number", "null"] },
+            "effectNote": { "type": ["string", "null"] },
+            "sentimentRaw": { "type": ["number", "null"] },
+            "confidence": { "type": ["number", "string", "null"] },
+            "reason": { "type": ["string", "null"] },
+            "events": { "type": "array" },
+            "asOfDate": { "type": "string" },
+            "model": { "type": ["string", "null"] }
+          }
+        }
+      ]
+    },
+    "llmNote": { "type": "string" },
+
+    "marketAlerts": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "object",
+        "required": ["layer", "level", "type", "action", "text"],
+        "properties": {
+          "layer": { "type": "string" },
+          "level": { "type": "string" },
+          "type": { "type": "string" },
+          "action": { "type": "string" },
+          "text": { "type": "string" },
+          "why": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "marketAlertsNote": { "type": "string" },
+
+    "active_track": {
+      "type": "string",
+      "enum": ["A_fallback"],
+      "$comment": "P2-β 正式字段化（2026-10-06，原为 rollback_track 临时约定）。三态：字段缺席=轨道 A（常态，A 态零 diff 纪律=缺席而非写 'A'）；'A_fallback'=执行面已回滚 V5.2 冻结快照。降级策略：旧版客户端读缺字段 → 默认轨道 A + warn 日志（唯一出处 schemas/track-state.schema.json 头注）。"
+    },
+    "activeTrackNote": {
+      "type": "string",
+      "$comment": "A_fallback 态的提示文案（回滚横幅数据源：快照提交/回滚时刻 since/生效日/触发编号/原因 why 原文/事实源指向——缺项按 [未记录] 显式标注，不静默吞）。缺席=轨道 A 常态。"
+    },
+
+    "dualTrack": {
+      "$comment": "双轨披露块（P2-β 渲染接线，框架 docs/dual_track_framework.md §三）。null = 账本未生成（≠轨道一致，前端按「未生成」渲染）。段一旦存在，day 内 required 必须齐（半缺=渲染静默空白）。数字唯一出处 tools/backtest/paper_dual_track.mjs，本段只搬运不重算。",
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["asOf", "generatedAt", "day", "cum", "trackState", "note"],
+          "properties": {
+            "asOf": {
+              "type": "string",
+              "$comment": "双轨账本末日（YYYY-MM-DD）。与 meta.tradeDate 不同步时以本字段为披露口径。"
+            },
+            "generatedAt": { "type": ["string", "null"] },
+            "day": {
+              "type": "object",
+              "required": ["date", "regime", "trackA", "trackB", "divergence", "trackC"],
+              "properties": {
+                "date": { "type": "string" },
+                "score": { "type": ["number", "null"] },
+                "regime": {
+                  "type": ["object", "null"],
+                  "required": ["key", "label", "cap"],
+                  "properties": {
+                    "key": { "type": "string", "enum": ["ice", "recover", "climax", "ebb", "neutral", "shift", "unknown"] },
+                    "label": { "type": "string" },
+                    "cap": { "type": ["number", "null"] },
+                    "reasons": { "type": "array", "items": { "type": "string" } },
+                    "note": { "type": ["string", "null"] }
+                  }
+                },
+                "trackA": {
+                  "type": "object",
+                  "required": ["targetPos", "poolPos", "executed"],
+                  "properties": {
+                    "targetPos": { "type": "object" },
+                    "poolPos": { "type": "number" },
+                    "executed": { "type": "boolean" }
+                  }
+                },
+                "trackB": {
+                  "type": "object",
+                  "required": ["refPos", "poolPos", "executed"],
+                  "properties": {
+                    "refPos": { "type": "object" },
+                    "poolPos": { "type": "number" },
+                    "executed": { "type": "boolean", "const": false }
+                  }
+                },
+                "divergence": {
+                  "type": "object",
+                  "required": ["posGap", "note"],
+                  "properties": {
+                    "posGap": { "type": "number" },
+                    "note": { "type": "string" }
+                  }
+                },
+                "trackC": {
+                  "type": "object",
+                  "required": ["active", "shadowPos", "biting"],
+                  "properties": {
+                    "active": { "type": "boolean" },
+                    "shadowPos": { "type": "object" },
+                    "biting": { "type": "object" }
+                  }
+                },
+                "dayReturns": {
+                  "$comment": "三轨当日收益（小数：A / B / C0.3 / C0.4 / C0.5）——用户规格「当日净值」的搬运面。曾因 32KB 预算剔除，预算重估 36KB 后恢复全量镜像。",
+                  "type": ["object", "null"]
+                },
+                "ledger": {
+                  "type": "object",
+                  "required": ["since", "premiumCum", "coverageCum", "shadowCum", "episodes", "activeDays"],
+                  "properties": {
+                    "since": { "type": "string" },
+                    "premiumCum": { "type": "number" },
+                    "coverageCum": { "type": "number" },
+                    "shadowCum": { "type": "object" },
+                    "episodes": { "type": "object" },
+                    "activeDays": { "type": "number" }
+                  }
+                }
+              }
+            },
+            "cum": {
+              "$comment": "累计收益（全样本 summary.total 面搬运：trackA/trackB 各一数 + trackC 三线各一数）。null 位 = 账本 summary 缺席（审计面 optional，门禁失败时账本仍写出）≠ 累计为零。提取逻辑唯一出处 src/dual_track.js::cumFromSummary（守卫 crossCheckDualTrack 复用同一函数）。",
+              "type": "object",
+              "required": ["trackA", "trackB", "trackC"],
+              "properties": {
+                "trackA": { "type": ["number", "null"] },
+                "trackB": { "type": ["number", "null"] },
+                "trackC": {
+                  "type": ["object", "null"],
+                  "required": ["0.3", "0.4", "0.5"],
+                  "properties": {
+                    "0.3": { "type": ["number", "null"] },
+                    "0.4": { "type": ["number", "null"] },
+                    "0.5": { "type": ["number", "null"] }
+                  }
+                }
+              }
+            },
+            "trackState": {
+              "type": "object",
+              "required": ["activeTrack", "paramsSource"],
+              "properties": {
+                "activeTrack": { "type": "string", "enum": ["A", "A_fallback"] },
+                "paramsSource": { "type": ["string", "null"] }
+              },
+              "$comment": "轨道状态简版（账本 trackState 的搬运）。完整态事实源 = data/paper/track_state.json。"
+            },
+            "note": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "dualTrackNote": { "type": "string" }
+  }
+}

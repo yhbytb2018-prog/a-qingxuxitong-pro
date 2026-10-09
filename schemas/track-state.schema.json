@@ -1,0 +1,73 @@
+{
+  "$comment": [
+    "轨道回滚状态契约 · data/paper/track_state.json（P2-β · 2026-10-06）",
+    "生产方：scripts/rollback_track.mjs（唯一合法写入通道——回滚/恢复都留痕 history）",
+    "消费方：tools/backtest/paper_dual_track.mjs（参数面切换）+ scripts/check_contract.mjs（跨档一致性）",
+    "",
+    "★ 与 signals-latest.schema.json 的 active_track 同一变更流程管理（版本同步改）：",
+    "  1) 先改本契约，提交信息注明「契约变更」；",
+    "  2) 同步改另一端（rollback_track.mjs / paper_dual_track.mjs / check_contract.mjs）；",
+    "  3) 跑 node scripts/check_contract.mjs（门禁红到两端对齐为止）；",
+    "  4) 一致性语义变化须同步 test/contract.test.mjs 负向演练。",
+    "",
+    "★ 条件语义（小子集 schema 不含 if/then，由 check_contract.mjs 一致性守卫锁死）：",
+    "  · activeTrack='A'         → fallback 必须为 null（残留 = 状态脏，红）；",
+    "  · activeTrack='A_fallback'→ fallback 段必须在场且字段齐；且 signals-latest.json",
+    "    必须带 active_track='A_fallback' 镜像 + activeTrackNote（镜像在场性）；",
+    "  · 文件缺席 = 轨道 A 常态（合法态，非缺口——check_contract 跳过而非红）。",
+    "",
+    "★ 降级策略（唯一出处）：读取端遇「文件在但 activeTrack 缺失/非法」→ 默认轨道 A + warn 日志，",
+    "  不许把缺字段当错误渲染（与 signals-latest.active_track 缺席=轨道 A 同一降级语义）。",
+    "",
+    "字段语义：",
+    "  · activeTrack：执行面轨道（enum：A=常态 / A_fallback=已回滚 V5.2 冻结快照）；",
+    "  · fallback：回滚元数据（三态：null=常态 / 对象=A_fallback 态必须齐——半缺最危险）；",
+    "    - effectiveDate：次一交易日（YYYY-MM-DD；null=[待确认] calendar 未覆盖）；",
+    "    - trigger：触发条件编号（T1 单日>5% / T2 3日累计>8% / T3 回撤触15% / T4 人工一键）；",
+    "    - snapshotCommit：A_fallback 冻结快照的 git 提交（配套档 track_fallback_params.json）；",
+    "  · history：回滚/恢复事件台账（append-only，audit 用；条目最小 required = at/event/why）。"
+  ],
+  "type": "object",
+  "required": ["activeTrack", "fallback", "history"],
+  "properties": {
+    "activeTrack": { "type": "string", "enum": ["A", "A_fallback"] },
+    "fallback": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["since", "effectiveDate", "trigger", "why", "who", "snapshotCommit", "log"],
+          "properties": {
+            "since": { "type": "string" },
+            "effectiveDate": { "type": ["string", "null"] },
+            "effectiveNote": { "type": "string" },
+            "trigger": { "type": "string", "enum": ["T1", "T2", "T3", "T4"] },
+            "triggerDetail": { "type": "string" },
+            "why": { "type": "string" },
+            "who": { "type": "string" },
+            "snapshotCommit": { "type": "string" },
+            "log": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["at", "event", "why"],
+        "properties": {
+          "at": { "type": "string" },
+          "event": { "type": "string", "enum": ["rollback", "restore"] },
+          "trigger": { "type": "string" },
+          "why": { "type": "string" },
+          "who": { "type": "string" },
+          "effectiveDate": { "type": ["string", "null"] },
+          "log": { "type": "string" },
+          "forced": { "type": "boolean" }
+        }
+      }
+    },
+    "updatedAt": { "type": "string" }
+  }
+}

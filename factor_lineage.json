@@ -1,0 +1,167 @@
+{
+  "$schema": "./types/factor_lineage.d.ts",
+  "meta": {
+    "formulaVersion": "v5.2-pro",
+    "generatedNote": "数据血统表：七因子情绪模型的因子级口径台账。唯一事实来源为代码（src/sentiment.js / src/pipeline.js / src/sources.js / src/lhb.js / src/config.js），本表是它们的**镜像描述**，由 test/factor_lineage.test.mjs 守卫与 config.weights 的一致性；改口径必须同步改代码与本表，守卫测试会拦截漏改。",
+    "weightsSource": "src/config.js#weights",
+    "missingPolicyGlobal": "proxy —— 因子算不出时先试代理指标，代理也无则中性50计入并显式标记（emotion.missing / imputedRatio），绝不静默",
+    "dirtyPolicy": "src/dirty.js validateDay 标脏：脏字段原始值保留在档（可追溯），但不喂 computeSentiment，走 missing/代理通道"
+  },
+  "factors": [
+    {
+      "id": "s_net20",
+      "displayKey": "s_net",
+      "label": "龙虎榜净额",
+      "weight": 0.2,
+      "formula": "normalizer(netBuy − newStockNet)；v5.2-pro 默认 tanh(x/5)×50+50；v5.3-pro 可插拔分位映射（窗口60交易日、minHist 20、历史不含当日）",
+      "numerator": {
+        "chain": "东财龙虎榜 RPT_DAILYBILLBOARD_DETAILSNEW 原始明细 → src/lhb.js caliberFromDay 当日榜口径（同股多榜取|净额|最大一笔去重）→ splitNewStockNet 剔除上市首5日无涨跌幅限制新股净买 → summary.lhb_daily_ex_new_net（亿元）",
+        "sourceEndpoint": "https://datacenter.eastmoney.com/securities/api/data/v1/get"
+      },
+      "denominator": {
+        "chain": "无固定分母：v5.2 为 tanh 固定尺度 k=5；v5.3-pro 为该日**之前**的净买历史窗口（60个交易日，不含当日）",
+        "sourceEndpoint": "同分子（历史档 data/archive.json 的 lhb_daily_net 序列）"
+      },
+      "timeAlignment": "T日龙虎榜（收盘后披露，当日18:30管道入档）→ T日情绪分；分位/MA类分母一律仅用 < T 的历史（防前视，test/idempotence.test.mjs 锁定）",
+      "missingPolicy": "归一器返回 null（净买缺失或 v5.3 历史不足20天）→ 中性50计入，emotion.missing 标记",
+      "circuitBreaker": "新股扰动熔断：新股净买占当日榜净买 > 25%（NEW_STOCK_DISTURB_RATIO）→ 引擎自动剔除并显式标注「因子已自动剔除」",
+      "evidenceFields": ["emotion.newStock.netRaw", "emotion.newStock.netExNew", "emotion.newStock.newStockNet", "emotion.newStock.newStockRatio", "emotion.newStock.factorRaw", "emotion.newStock.factorUsed", "emotion.lhb_daily_net", "emotion.netCaliber"]
+    },
+    {
+      "id": "s_pos10",
+      "displayKey": "s_pos",
+      "label": "涨跌家数",
+      "weight": 0.1,
+      "formula": "upRatio×100，upRatio = upCount/(upCount+downCount)",
+      "numerator": {
+        "chain": "全市场上涨家数 upCount（东财行情统计；存档字段 summary.up_count）",
+        "sourceEndpoint": "东财行情统计（fetch_daily 管道）"
+      },
+      "denominator": {
+        "chain": "上涨家数+下跌家数（up_count + down_count）",
+        "sourceEndpoint": "同分子"
+      },
+      "timeAlignment": "仅T日当日收盘统计，无跨日依赖（无前视风险）",
+      "missingPolicy": "upCount/downCount 缺 → 代理：龙虎榜净买正负条数比 posRatio=net_pos/(net_pos+net_neg)；代理也无 → 中性50标记",
+      "circuitBreaker": "无（单股无法显著影响全市场家数比）",
+      "evidenceFields": ["summary.up_count", "summary.down_count", "summary.net_pos", "summary.net_neg"]
+    },
+    {
+      "id": "s_brd20",
+      "displayKey": "s_brd",
+      "label": "行业涨比（广度）",
+      "weight": 0.2,
+      "formula": "indRatio×100，indRatio = industryUp/industryTotal",
+      "numerator": {
+        "chain": "同花顺 881xxx 行业板块日K重建的当日上涨板块数 ind_up",
+        "sourceEndpoint": "https://q.10jqka.com.cn/thshy/ + 板块日K接口"
+      },
+      "denominator": {
+        "chain": "参与统计的行业板块总数 ind_count（约90个，通达信口径）",
+        "sourceEndpoint": "同分子"
+      },
+      "timeAlignment": "T日板块日K（收盘后重建）→ T日情绪分，仅T日数据无跨日依赖（无前视风险）；⚠ 数据源失效时 meta.dataQuality.industrySourceOk=false",
+      "missingPolicy": "行业明细缺 → 代理：全市场涨跌比 upRatio；代理也无 → 中性50标记（源失效时显式提示「源失效 · 中性默认」）",
+      "circuitBreaker": "无单股熔断；多源容灾：行业源失效走代理并留 dataQuality 记录",
+      "evidenceFields": ["summary.ind_up", "summary.ind_count", "meta.dataQuality.industrySourceOk"]
+    },
+    {
+      "id": "s_hot10",
+      "displayKey": "s_hot",
+      "label": "涨停强度",
+      "weight": 0.1,
+      "formula": "limitUp/(limitUp+limitDown)×100",
+      "numerator": {
+        "chain": "涨停家数 zt_count（东财涨停池 push2ex，必须带 date=YYYYMMDD；与同花顺池双源互证，容差±2家，见 data/crosscheck-latest.json）",
+        "sourceEndpoint": "https://push2ex.eastmoney.com 涨停池"
+      },
+      "denominator": {
+        "chain": "涨停家数+跌停家数（zt_count + dt_count）",
+        "sourceEndpoint": "同分子"
+      },
+      "timeAlignment": "仅T日当日收盘池统计，无跨日依赖（无前视风险）",
+      "missingPolicy": "池数据缺（ldDen=0）→ 代理：upRatio；代理也无 → 中性50标记",
+      "circuitBreaker": "无（结构性行情指标）",
+      "evidenceFields": ["summary.zt_count", "summary.dt_count", "data/crosscheck-latest.json"]
+    },
+    {
+      "id": "s_zdt15",
+      "displayKey": "s_zdt",
+      "label": "涨跌停对比",
+      "weight": 0.15,
+      "formula": "(limitUp−limitDown)/(limitUp+limitDown)×50+50",
+      "numerator": {
+        "chain": "涨停家数−跌停家数（zt_count − dt_count）",
+        "sourceEndpoint": "东财涨停池（同 s_hot，双源互证）"
+      },
+      "denominator": {
+        "chain": "涨停家数+跌停家数（zt_count + dt_count）",
+        "sourceEndpoint": "同分子"
+      },
+      "timeAlignment": "仅T日当日收盘池统计，无跨日依赖（无前视风险）",
+      "missingPolicy": "池数据缺（ldDen=0）→ 无代理，中性50标记",
+      "circuitBreaker": "无（结构性行情指标）",
+      "evidenceFields": ["summary.zt_count", "summary.dt_count"]
+    },
+    {
+      "id": "s_zbl10",
+      "displayKey": "s_zbl",
+      "label": "封板质量",
+      "weight": 0.1,
+      "formula": "limitUp/(limitUp+brokenCount)×100（炸板率 zb/(zt+zb) 的镜像）",
+      "numerator": {
+        "chain": "涨停家数 zt_count（东财涨停池）",
+        "sourceEndpoint": "https://push2ex.eastmoney.com 涨停池"
+      },
+      "denominator": {
+        "chain": "涨停家数+炸板家数（zt_count + zb_count）",
+        "sourceEndpoint": "同分子（炸板数同池产出）"
+      },
+      "timeAlignment": "仅T日当日收盘池统计，无跨日依赖（无前视风险）",
+      "missingPolicy": "limitUp 或 brokenCount 缺 → 代理：limitUp/(limitUp+limitDown)；代理也无 → 中性50标记",
+      "circuitBreaker": "无（结构性行情指标）",
+      "evidenceFields": ["summary.zt_count", "summary.zb_count", "summary.seal_pct"]
+    },
+    {
+      "id": "s_amt15",
+      "displayKey": "s_amt",
+      "label": "量能",
+      "weight": 0.15,
+      "formula": "tanh((amount/amountMA20−1)×1.8)×50+50（平量50，1.2倍≈67，1.5倍≈86，2倍≈97）",
+      "numerator": {
+        "chain": "沪深两市成交额（亿元）：腾讯指数日K f37 上证+深成求和；东财 amountMap 缺段时 FATAL 拒绝入库（v4.9 教训），另有腾讯指数 amount 代理链",
+        "sourceEndpoint": "https://qt.gtimg.cn / web.ifzq.gtimg.cn 指数日K"
+      },
+      "denominator": {
+        "chain": "amountMA20：当日**之前**最近20个有值交易日成交额均值（仅 j<i 向后看；不足10个样本返回 null）",
+        "sourceEndpoint": "同分子（历史档 amount_yi 序列）"
+      },
+      "timeAlignment": "T日成交额 vs T−1及以前的20日均量 —— 严格防前视（分子分母不重叠当日）",
+      "missingPolicy": "amount 或 amountMA20 缺 → 无代理，中性50标记",
+      "circuitBreaker": "无（全市场总量指标，单股无法扰动）",
+      "evidenceFields": ["summary.amount_yi"]
+    }
+  ],
+  "derivedIndicators": [
+    {
+      "id": "pct_rank",
+      "label": "情绪分历史分位",
+      "formula": "windowedPctRank：当日值在「以该日结尾的最近 RANK_WINDOW=60 个有效样本」中的位置×100（平值取首次出现位置）",
+      "source": "src/sources.js（全项目唯一分位口径出处）",
+      "timeAlignment": "窗口**含当日**但绝不含未来；有效样本 < RANK_MIN=20 → null（显示「未计算」，绝不填50冒充中位）",
+      "noLookaheadProof": "test/idempotence.test.mjs「追加新天不改历史分位」+ 真档案截断实证"
+    },
+    {
+      "id": "net_daily_pct_rank",
+      "label": "净买分位",
+      "formula": "同 pct_rank，序列换为 emotion.lhb_daily_net（当日榜口径净额）",
+      "source": "src/sources.js recalcRanks",
+      "timeAlignment": "窗口含当日但绝不含未来；有效样本 < RANK_MIN=20 → null（与 pct_rank 同口径同参数，同函数实现）"
+    }
+  ],
+  "composition": {
+    "formula": "score = Σ weights[f] × factor[f]（七因子加权，权重和=1，见 config.weights）",
+    "rounding": "score 取整到 0.1；factors 各取整到 0.1（避免报告出现假精度差）",
+    "missingDisclosure": "emotion.missing[]（缺失因子清单）+ emotion.imputedRatio（补位率）+ S6 数据健康面板告警线 healthWarnImputedRatio=0.34"
+  }
+}

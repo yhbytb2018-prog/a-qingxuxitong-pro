@@ -1,0 +1,35 @@
+{
+  "$comment": [
+    "A_fallback 冻结快照契约 · data/paper/track_fallback_params.json（P2-β · 2026-10-06）",
+    "生产方：scripts/rollback_track.mjs ensureSnapshot（从 git 提取 bd77fed:config.json 的",
+    "  params.train 五块——bd77fed 期 train≡live 双对齐基线；每次运行与 git 对账，",
+    "  被手改 → git 版本覆写并警告。快照完整性另有双门禁：paper_dual_track 门禁①",
+    "  （轨道A ↔ v52 锚点）+ 本契约结构锁）",
+    "消费方：tools/backtest/paper_dual_track.mjs（fallback 态轨道 A 参数面）",
+    "",
+    "★ 变更流程与 schemas/track-state.schema.json 同一管理（同步改）；",
+    "  文件缺席 = 首次回滚前未提取（合法态，check_contract 跳过而非红）。",
+    "",
+    "字段语义（锁结构不锁值——值由 git 提交冻结，改值 = 改 FREEZE_COMMIT 走契约变更）：",
+    "  · commit：冻结基准的 git 提交号（rollback_track.mjs 的 FREEZE_COMMIT 常量）；",
+    "  · params：五块参数（与 config.json params.train 同构；块内键值不在此锁——",
+    "    值的唯一事实源是 git 对象，契约锁「五块都必须在」防残缺快照进执行面）。"
+  ],
+  "type": "object",
+  "required": ["commit", "extractedAt", "params"],
+  "properties": {
+    "commit": { "type": "string" },
+    "extractedAt": { "type": "string" },
+    "params": {
+      "type": "object",
+      "required": ["weights", "thresholds", "stops", "lookback", "costModel"],
+      "properties": {
+        "weights": { "type": "object" },
+        "thresholds": { "type": "object" },
+        "stops": { "type": "object" },
+        "lookback": { "type": "object" },
+        "costModel": { "type": "object" }
+      }
+    }
+  }
+}
