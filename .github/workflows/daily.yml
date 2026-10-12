@@ -408,6 +408,20 @@ jobs:
           else
             echo "非 09:30 拍点（UTC $HHMM），跳过"
           fi
+      # 盘中预判（对齐模板策略链路：创科 10日涨幅榜硬过滤 → 组合AB）：
+      #   UTC 02:30 = 北京 10:30 首判（模板口径 10:35-10:50 盘中数据）；
+      #   UTC 07:00 = 北京 15:00 终判（收盘前最终版，覆盖首判）。
+      #   push2 clist 本地可能拉不通，CI runner 可达；拉不通页面按缺失降级。
+      - name: 生成盘中预判（北京 10:30 首判 / 15:00 终判）
+        if: runner.os != 'Windows'
+        run: |
+          HHMM=$(date -u +%H%M)
+          if [ "$HHMM" = "0230" ] || [ "$HHMM" = "0700" ]; then
+            node scripts/fetch_prejudge_data.mjs || true
+            node scripts/build_reports_html.mjs --only prejudge
+          else
+            echo "非盘中预判拍点（UTC $HHMM），跳过"
+          fi
       - name: 提交盘中快照
         run: |
           git config user.name "github-actions[bot]"

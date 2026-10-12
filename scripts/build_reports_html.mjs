@@ -49,6 +49,7 @@ const breadthLatest = readJson('data/breadth-latest.json');
 const stockDetail = readJson('data/stock_detail.json');   // 个股级涨跌停明细（fetch_stock_detail.mjs）
 const arbSources = readJson('data/arb_sources.json');      // 转债/正股联动（fetch_arb_sources.mjs）
 const hotNews = readJson('data/hot_news.json');            // 热点题材快讯（fetch_hot_news.mjs）
+const prejudgeDetail = readJson('data/prejudge_detail.json'); // 盘中预判明细（fetch_prejudge_data.mjs）
 
 // 交易日：--date > signals 口径 > intraday 口径；推不出则退出（不猜日期）
 const tradeDate = dateArg
@@ -420,31 +421,115 @@ ${regimeCard()}
   return pageHtml({ title: `次日预测 · ${tradeDate}`, colKey: 'predict', body });
 }
 
-// ── prejudge 栏目（盘中预判：盘中快照池 → 强弱分层）────────────────────────
+// ── prejudge 栏目（盘中预判：大盘铁律 → 情绪过滤 → 10日涨幅硬过滤 → 组合AB）──
+// 结构对齐外部模板 prejudge/20261009.html 九节；数据源 data/prejudge_detail.json
+// （fetch_prejudge_data.mjs，创科 10日涨幅榜 + 硬过滤 + 主力资金交叉验证）。
 function renderPrejudge() {
-  const hot = intraday?.hot?.rows ?? [];
+  const pj = prejudgeDetail;
+  const c = pj?.counts ?? {};
+  const idxRows = Object.entries(idx ?? {});
+  const cjk = idx?.['创业板指'] ?? null; // 铁律1：创业板指跌 >1% → 终止
+  const rule1 = cjk != null && cjk < -1;
+  const ztN = (sd?.zt?.length ?? pools?.zt ?? sig?.zt_count ?? null);
+  const zbN = (sd?.zb?.length ?? pools?.zb ?? sig?.zb_count ?? null);
+  const dtN = (sd?.dt?.length ?? pools?.dt ?? sig?.dt_count ?? null);
+  const zbRate = (ztN != null && zbN != null && ztN + zbN > 0) ? Number(((zbN / (ztN + zbN)) * 100).toFixed(1)) : null;
+  const cm20 = (sd?.zt ?? []).filter((s) => s.code?.startsWith('30') || s.code?.startsWith('68'));
+  const maxLbStock = ztByLb[0] ?? null;
+  const emotionPass = !(cm20.length >= 5 && zbRate != null && zbRate >= 40);
+  const cutRow = (s, extra = '') => `<tr>
+    <td><span style="font-variant-numeric:tabular-nums">${esc(s.code)}</span> ${esc(s.name ?? '')}</td>
+    <td>${pct(s.pct)}</td><td>${num(s.price, 2)}</td><td>${num(s.turnover, 2, '%')}</td>
+    <td>${s.pct10d != null ? pct(s.pct10d) : dash}</td><td>${esc(s.industry ?? '—')}</td>${extra}</tr>`;
+  const emptyGate = (title, reasons) => `<div class="section"><h2>${title}</h2><div class="metric-grid">
+    <div class="metric"><div class="metric-label">入选</div><div class="metric-value">0 只</div></div></div>
+    <p style="font-size:13px;margin-top:8px">判定依据：</p><ul style="font-size:13px;padding-left:20px">${reasons.map((r) => `<li>${r}</li>`).join('')}</ul></div>`;
+
   const body = `
-<h1>⏱️ 盘中预判 ${esc(tradeDate)}</h1>
-<div class="sub">数据源：data/intraday.json 盘中快照（capturedAt ${esc(intraday?.capturedAtBJ ?? '—')}）· 相位 ${esc(intraday?.phase ?? '—')}</div>
-${regimeCard()}
+<h1>⏱️ 盘中预判 · ${esc(tradeDate)}</h1>
+<div class="sub">数据基准：盘中实时快照（生成于 ${esc(pj?.generatedAt?.replace('T', ' ').slice(0, 16) ?? '—')}）· 临近 14:50 请二次确认 · 不构成投资建议</div>
+${pj ? '' : `<div class="warn-box">盘中预判明细缺失（data/prejudge_detail.json 不存在——需东财 push2 clist，先跑 scripts/fetch_prejudge_data.mjs；本地网络拉不通时仅 CI 可生成）。以下仅展示可用的市场级数据。</div>`}
 <div class="section">
   <h2>一、大盘形势</h2>
-  <table><thead><tr><th>指数</th><th>涨跌幅</th></tr></thead><tbody>
-    ${Object.entries(idx ?? {}).map(([k, v]) => `<tr><td>${esc(k)}</td><td>${pct(v)}</td></tr>`).join('') || '<tr><td><span class="na">—</span></td></tr>'}
+  <table><thead><tr><th>指数</th><th>涨跌幅</th><th>判定</th></tr></thead><tbody>
+    ${idxRows.map(([k, v]) => `<tr><td>${esc(k)}</td><td>${pct(v)}</td><td>${v < -1 ? '❌ 弱势' : v < 0 ? '⚠️' : '✅'}</td></tr>`).join('') || '<tr><td colspan="3"><span class="na">—</span></td></tr>'}
   </tbody></table>
+  <p style="font-size:13px;margin-top:8px">两市成交额 ${num(sig?.amount_yi, 1, ' 亿')} · 铁律1（创业板指跌&gt;1%）→ ${rule1 ? '<b class="down">❌ 触发，套利流程终止</b>' : '✅ 未触发'} · 指数级主力净额：本管道未接入（如实标注，不臆造）</p>
 </div>
 <div class="section">
   <h2>二、情绪过滤结果</h2>
+  <table><thead><tr><th>指标</th><th>数值</th><th>判定</th></tr></thead><tbody>
+    <tr><td>涨停家数</td><td>${num(ztN)} 家</td><td>—</td></tr>
+    <tr><td>炸板家数 / 炸板率</td><td>${num(zbN)} 家 / ${zbRate != null ? pct(zbRate, 1) : dash}</td><td>${zbRate != null && zbRate >= 40 ? '❌ ≥40% 触发' : '✅ <40% 未触发'}</td></tr>
+    <tr><td>20cm 涨停家数</td><td>${num(cm20.length)} 家</td><td>${cm20.length >= 5 ? '⚠️ 高位区' : '⚠️ 连续低位区'}</td></tr>
+    <tr><td>最高连板</td><td>${maxLbStock ? `${maxLbStock.lb} 板（${esc(maxLbStock.name)}·${esc(maxLbStock.industry ?? '—')}）` : num(pools?.max_lb, 0, ' 板')}</td><td>${(pools?.max_lb ?? 0) > 2 ? '✅ >2板 不做减半' : '⚠️ ≤2板 做减半处理'}</td></tr>
+    <tr><td>跌停家数</td><td>${num(dtN)} 家</td><td>${(dtN ?? 0) < 50 ? '✅ <50' : '❌'}</td></tr>
+  </tbody></table>
+  <p style="font-size:13px;margin-top:8px">闸门判定：${emotionPass ? '✅ 通过（AND 条件不成立）' : '❌ 未通过'}${cm20.length ? ` · 20cm 样本：${cm20.slice(0, 5).map((s) => `${esc(s.name)}(${esc(s.industry ?? '—')})`).join('、')}` : ''}</p>
+</div>
+${pj ? `
+<div class="section">
+  <h2>三、候选池硬过滤（创科 10日涨幅前${pj.rankN} → 通过${c.passed}只）</h2>
   <div class="metric-grid">
-    <div class="metric"><div class="metric-label">涨停 / 炸板 / 跌停（快照）</div><div class="metric-value" style="font-size:16px">${num(pools?.zt)} / ${num(pools?.zb)} / ${num(pools?.dt)}</div></div>
-    <div class="metric"><div class="metric-label">最高连板</div><div class="metric-value">${pools?.max_lb != null ? `${pools.max_lb} 板` : dash}</div></div>
-    <div class="metric"><div class="metric-label">上涨占比</div><div class="metric-value">${(br?.up != null && br?.down != null) ? pct((br.up / Math.max(br.up + br.down, 1)) * 100, 1) : dash}</div></div>
+    <div class="metric"><div class="metric-label">上榜</div><div class="metric-value">${c.rank}</div></div>
+    <div class="metric"><div class="metric-label">通过</div><div class="metric-value up">${c.passed}</div></div>
+    <div class="metric"><div class="metric-label">淘汰</div><div class="metric-value down">${c.eliminated}</div></div>
+    <div class="metric"><div class="metric-label">淘汰率</div><div class="metric-value">${c.rank ? pct((c.eliminated / c.rank) * 100, 1) : dash}</div></div>
   </div>
+  <h3>淘汰原因计数</h3>
+  <table><thead><tr><th>原因</th><th>计数</th></tr></thead><tbody>
+    ${Object.entries(pj.reasonCount ?? {}).map(([k, v]) => `<tr><td>${esc(k)}</td><td class="down">${v}</td></tr>`).join('') || '<tr><td colspan="2">—</td></tr>'}
+  </tbody></table>
+  <h3>通过池（${c.passed} 只）</h3>
+  <table><thead><tr><th>个股</th><th>涨跌幅</th><th>现价</th><th>换手</th><th>10日涨幅</th><th>行业</th></tr></thead><tbody>
+    ${(pj.passed ?? []).slice(0, 40).map((s) => cutRow(s)).join('') || '<tr><td colspan="6">全部被否</td></tr>'}
+  </tbody></table>
+  <h3>淘汰明细（前 30）</h3>
+  <table><thead><tr><th>个股</th><th>涨跌幅</th><th>现价</th><th>换手</th><th>10日涨幅</th><th>行业</th><th>淘汰原因</th></tr></thead><tbody>
+    ${(pj.eliminated ?? []).slice(0, 30).map((s) => cutRow(s, `<td class="down">${esc((s.reasons ?? []).join('；'))}</td>`)).join('') || '<tr><td colspan="7">—</td></tr>'}
+  </tbody></table>
 </div>
 <div class="section">
-  <h2>三、热点池（盘中快照，${hot.length} 只）</h2>
-  ${hot.length ? `<table><thead><tr><th>代码</th><th>名称</th></tr></thead><tbody>${hot.slice(0, 40).map((h) => `<tr><td><span style="font-variant-numeric:tabular-nums">${esc(h.code ?? h.c ?? '—')}</span></td><td>${esc(h.name ?? h.n ?? '—')}</td></tr>`).join('')}</tbody></table>`
-    : '<div class="warn-box">盘中热点池未产出（intraday.hot.rows 缺失——盘中快照 cron 线上自动跑，本地需 scripts/snapshot_intraday.mjs）。</div>'}
+  <h2>四、板块分析</h2>
+  <h3>行业板块涨幅排行（相对大盘超额前 15）</h3>
+  ${(relVs?.attack ?? []).length ? `<table><thead><tr><th>板块</th><th>涨跌幅</th><th>超额</th><th>判定</th></tr></thead><tbody>
+    ${(relVs?.attack ?? []).slice(0, 15).map((a) => `<tr><td>${esc(a.name)}</td><td>${pct(a.change_pct)}</td><td>${pct(a.excess)}</td><td>${a.change_pct >= 2.5 ? '✅ 合力' : '弱'}</td></tr>`).join('')}</tbody></table>
+    <p style="font-size:12px;color:#8b949e">板块净流入/涨跌家数：本管道未接入该粒度，标注缺失。</p>`
+    : '<div class="warn-box">板块强弱数据缺失。</div>'}
+  <h3>候选票板块合力评级（通过池聚合）</h3>
+  <table><thead><tr><th>板块</th><th>池内票数</th><th>强势票（涨幅&gt;3%）</th><th>成员</th></tr></thead><tbody>
+    ${(pj.synergy ?? []).slice(0, 12).map((g) => `<tr><td>${esc(g.industry)}</td><td>${g.count}</td><td>${g.strong > 0 ? `<span class="up">${g.strong}</span>` : '0'}</td><td style="font-size:12px">${esc(g.members ?? '')}</td></tr>`).join('') || '<tr><td colspan="4">—</td></tr>'}
+  </tbody></table>
+  <p style="font-size:13px;margin-top:8px">情绪周期（regime 口径）：「${reg ? esc(reg.label) : '未知'}」，建议仓位上限 ${reg?.cap != null ? pct(reg.cap * 100, 0) : dash}。合力达标线 ⭐⭐⭐⭐（强势票≥2 且板块入 Top15）：${((pj.synergy ?? []).some((g) => g.strong >= 2 && (relVs?.attack ?? []).some((a) => a.name === g.industry && a.change_pct >= 2.5))) ? '✅ 有板块达标' : '❌ 无板块达标，铁律4 独立否决'}</p>
+</div>
+${c.combA || c.combB ? `
+<div class="section">
+  <h2>五、组合A（主线推荐：主力净额 ≥ 1 亿）</h2>
+  ${c.combA ? `<table><thead><tr><th>个股</th><th>涨跌幅</th><th>现价</th><th>主力净额</th><th>行业</th></tr></thead><tbody>
+    ${(pj.combA ?? []).map((s) => `<tr><td><span style="font-variant-numeric:tabular-nums">${esc(s.code)}</span> ${esc(s.name ?? '')}</td><td>${pct(s.pct)}</td><td>${num(s.price, 2)}</td><td class="up">${yi(s.mainNet)}</td><td>${esc(s.industry ?? '—')}</td></tr>`).join('')}</tbody></table>`
+    : emptyGate('组合A：0 只', ['资金门槛否决：通过池内无主力净额 ≥1亿 标的'])}
+</div>
+<div class="section">
+  <h2>六、组合B（弹性博弈：主力净额 ≥ 5000 万）</h2>
+  ${c.combB ? `<table><thead><tr><th>个股</th><th>涨跌幅</th><th>现价</th><th>主力净额</th><th>行业</th></tr></thead><tbody>
+    ${(pj.combB ?? []).map((s) => `<tr><td><span style="font-variant-numeric:tabular-nums">${esc(s.code)}</span> ${esc(s.name ?? '')}</td><td>${pct(s.pct)}</td><td>${num(s.price, 2)}</td><td class="up">${yi(s.mainNet)}</td><td>${esc(s.industry ?? '—')}</td></tr>`).join('')}</tbody></table>`
+    : emptyGate('组合B：0 只', ['资金门槛否决：通过池内无主力净额 ≥5000万 标的（不降标）'])}
+</div>` : emptyGate('五/六、组合A / 组合B', c.fundsAvailable ? ['铁律/资金门槛双重否决，无入选标的'] : ['主力净额口径缺失（f62 全为空）→ 资金门槛判定跳过，如实标注'])}
+<div class="section">
+  <h2>七、★ 交叉验证：候选池 ∩ 主力净额门槛名单（全创科 ≥5000万 前 30）</h2>
+  <table><thead><tr><th>个股</th><th>主力净额</th><th>涨跌幅</th><th>换手</th><th>行业</th><th>是否在池内</th></tr></thead><tbody>
+    ${(pj.mainFunds ?? []).map((r) => {
+      const inPool = (pj.passed ?? []).some((s) => s.code === r.code);
+      const elim = (pj.eliminated ?? []).find((s) => s.code === r.code);
+      const why = inPool ? '✅ 池内' : elim ? `⚠️ ${esc(elim.reasons.join('；'))}` : '❌ 未入榜';
+      return `<tr><td><span style="font-variant-numeric:tabular-nums">${esc(r.code)}</span> ${esc(r.name ?? '')}</td><td class="up">${yi(r.mainNet)}</td><td>${pct(r.pct)}</td><td>${num(r.turnover, 2, '%')}</td><td>${esc(r.industry ?? '—')}</td><td>${why}</td></tr>`;
+    }).join('') || '<tr><td colspan="6">—</td></tr>'}
+  </tbody></table>
+  <p style="font-size:13px;margin-top:8px">核心结论：硬过滤通过 ${c.passed} 只 ∩ 主力≥5000万 名单 ${c.mainFunds} 只 = <b>${(pj.passed ?? []).filter((s) => (pj.mainFunds ?? []).some((r) => r.code === s.code)).length} 只</b>重叠。</p>
+</div>` : ''}
+<div class="section">
+  <h2>八、缩量预检 / 九、形态评分</h2>
+  <div class="warn-box">逐票昨日全天量与 K 线形态评分依赖个股历史日K逐只复算，当前管道未接入该粒度——标注缺失而非补 0；接入后由本页直接扩展本节。</div>
 </div>`;
   return pageHtml({ title: `盘中预判 ${tradeDate}`, colKey: 'prejudge', body });
 }

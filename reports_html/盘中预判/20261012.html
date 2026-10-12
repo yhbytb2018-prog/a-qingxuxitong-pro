@@ -35,35 +35,31 @@ footer { margin-top:32px; color:#5b6570; font-size:12px; text-align:center; }
 <body>
 <nav class="rpt-nav"><a href="./../index.html">🏠 首页</a><a href="./../%E6%97%A9%E7%9B%98%E5%BF%AB%E6%8A%A5/index.html">早盘快报</a><a href="./../%E6%83%85%E7%BB%AA%E6%89%AB%E6%8F%8F/index.html">情绪扫描</a><a href="./../%E7%9F%AD%E7%BA%BF%E9%80%89%E8%82%A1/index.html">短线选股</a><a href="./../%E7%9B%98%E5%89%8D%E5%A4%87%E5%BF%98/index.html">盘前备忘</a><a href="./../%E7%9B%98%E4%B8%AD%E9%A2%84%E5%88%A4/index.html" class="cur">盘中预判</a><a href="./../%E7%AB%9E%E4%BB%B7%E5%A4%8D%E7%9B%98/index.html">竞价复盘</a><a href="./../%E5%A5%97%E5%88%A9%E6%97%A5%E6%8A%A5/index.html">套利日报</a><a href="./../%E6%B6%A8%E5%81%9C%E5%8F%8C%E8%A7%86%E8%A7%92/index.html">涨停双视角</a><a href="./../%E4%B8%BB%E6%9D%BF%E6%8E%A5%E5%8A%9B/index.html">主板接力</a><a href="./../%E4%BA%8C%E6%B3%A2%E6%89%AB%E6%8F%8F/index.html">二波扫描</a><a href="./../%E9%A2%98%E6%9D%90%E5%AF%BC%E5%9B%BE/index.html">题材导图</a><a href="./../%E6%AC%A1%E6%97%A5%E9%A2%84%E6%B5%8B/index.html">次日预测</a><a href="./../%E5%91%A8%E5%BA%A6%E5%A4%8D%E7%9B%98/index.html">周度复盘</a><a href="./../%E7%83%AD%E7%82%B9%E6%96%B0%E9%97%BB/index.html">热点新闻</a><a href="./index.html">🗂️ 归档</a></nav>
 
-<h1>⏱️ 盘中预判 2026-10-12</h1>
-<div class="sub">数据源：data/intraday.json 盘中快照（capturedAt 2026-10-09 14:53）· 相位 live</div>
-
-<div class="section">
-  <h2>情绪周期定位</h2>
-  <div class="metric-grid">
-    <div class="metric"><div class="metric-label">市场状态</div><div class="metric-value">冰点</div></div>
-    <div class="metric"><div class="metric-label">情绪得分</div><div class="metric-value">48.6</div></div>
-    <div class="metric"><div class="metric-label">建议仓位上限</div><div class="metric-value"><span class="up">+20%</span></div></div>
-    <div class="metric"><div class="metric-label">主力题材</div><div class="metric-value" style="font-size:16px">文化传媒</div></div>
-  </div>
-</div>
+<h1>⏱️ 盘中预判 · 2026-10-12</h1>
+<div class="sub">数据基准：盘中实时快照（生成于 —）· 临近 14:50 请二次确认 · 不构成投资建议</div>
+<div class="warn-box">盘中预判明细缺失（data/prejudge_detail.json 不存在——需东财 push2 clist，先跑 scripts/fetch_prejudge_data.mjs；本地网络拉不通时仅 CI 可生成）。以下仅展示可用的市场级数据。</div>
 <div class="section">
   <h2>一、大盘形势</h2>
-  <table><thead><tr><th>指数</th><th>涨跌幅</th></tr></thead><tbody>
-    <tr><td>上证指数</td><td><span class="down">-0.43%</span></td></tr><tr><td>深证成指</td><td><span class="down">-2.03%</span></td></tr><tr><td>创业板指</td><td><span class="down">-2.61%</span></td></tr>
+  <table><thead><tr><th>指数</th><th>涨跌幅</th><th>判定</th></tr></thead><tbody>
+    <tr><td>上证指数</td><td><span class="down">-0.43%</span></td><td>⚠️</td></tr><tr><td>深证成指</td><td><span class="down">-2.03%</span></td><td>❌ 弱势</td></tr><tr><td>创业板指</td><td><span class="down">-2.61%</span></td><td>❌ 弱势</td></tr>
   </tbody></table>
+  <p style="font-size:13px;margin-top:8px">两市成交额 15378.3 亿 · 铁律1（创业板指跌&gt;1%）→ <b class="down">❌ 触发，套利流程终止</b> · 指数级主力净额：本管道未接入（如实标注，不臆造）</p>
 </div>
 <div class="section">
   <h2>二、情绪过滤结果</h2>
-  <div class="metric-grid">
-    <div class="metric"><div class="metric-label">涨停 / 炸板 / 跌停（快照）</div><div class="metric-value" style="font-size:16px">69 / 14 / 8</div></div>
-    <div class="metric"><div class="metric-label">最高连板</div><div class="metric-value">9 板</div></div>
-    <div class="metric"><div class="metric-label">上涨占比</div><div class="metric-value"><span class="up">+58.7%</span></div></div>
-  </div>
+  <table><thead><tr><th>指标</th><th>数值</th><th>判定</th></tr></thead><tbody>
+    <tr><td>涨停家数</td><td>46 家</td><td>—</td></tr>
+    <tr><td>炸板家数 / 炸板率</td><td>25 家 / <span class="up">+35.2%</span></td><td>✅ <40% 未触发</td></tr>
+    <tr><td>20cm 涨停家数</td><td>7 家</td><td>⚠️ 高位区</td></tr>
+    <tr><td>最高连板</td><td>10 板（新华传媒·出版）</td><td>✅ >2板 不做减半</td></tr>
+    <tr><td>跌停家数</td><td>0 家</td><td>✅ <50</td></tr>
+  </tbody></table>
+  <p style="font-size:13px;margin-top:8px">闸门判定：✅ 通过（AND 条件不成立） · 20cm 样本：莱美药业(化学制药)、金冠电气(电网设备)、金丹科技(化学制品)、阿莱德(通信设备)、果麦文化(出版)</p>
 </div>
+
 <div class="section">
-  <h2>三、热点池（盘中快照，71 只）</h2>
-  <table><thead><tr><th>代码</th><th>名称</th></tr></thead><tbody><tr><td><span style="font-variant-numeric:tabular-nums">600400</span></td><td>红豆股份</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605058</span></td><td>澳弘电子</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603398</span></td><td>*ST沐邦</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">000736</span></td><td>中交发展</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">600715</span></td><td>文投控股</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603216</span></td><td>梦天家居</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002979</span></td><td>雷赛智能</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605168</span></td><td>三人行</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">300413</span></td><td>芒果超媒</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002696</span></td><td>百洋股份</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002343</span></td><td>慈文传媒</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">001330</span></td><td>博纳影业</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">688152</span></td><td>麒麟信安</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002181</span></td><td>粤传媒</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603533</span></td><td>掌阅科技</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">300364</span></td><td>中文在线</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002317</span></td><td>众生药业</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601811</span></td><td>新华文轩</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603232</span></td><td>格尔软件</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">000892</span></td><td>欢瑞世纪</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">000710</span></td><td>贝瑞基因</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603096</span></td><td>新经典</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002082</span></td><td>ST万邦</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603838</span></td><td>*ST四通</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601929</span></td><td>吉视传媒</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601595</span></td><td>上海电影</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605577</span></td><td>龙版传媒</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002811</span></td><td>郑中设计</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605287</span></td><td>德才股份</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601566</span></td><td>九牧王</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605177</span></td><td>东亚药业</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002912</span></td><td>中新赛克</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601519</span></td><td>大智慧</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">600621</span></td><td>华鑫股份</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">600354</span></td><td>敦煌种业</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">000420</span></td><td>吉林化纤</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">601069</span></td><td>西部黄金</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">603067</span></td><td>振华股份</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">605188</span></td><td>国光连锁</td></tr><tr><td><span style="font-variant-numeric:tabular-nums">002212</span></td><td>天融信</td></tr></tbody></table>
+  <h2>八、缩量预检 / 九、形态评分</h2>
+  <div class="warn-box">逐票昨日全天量与 K 线形态评分依赖个股历史日K逐只复算，当前管道未接入该粒度——标注缺失而非补 0；接入后由本页直接扩展本节。</div>
 </div>
 <footer>数据来源：data/ 管道产物 · 缺失项标注「—」而非补 0 · 本页不构成投资建议</footer>
 </body>
