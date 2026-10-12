@@ -1,0 +1,1366 @@
+{
+ "kind": "stock-detail",
+ "version": 1,
+ "generatedAt": "2026-10-12T11:32:30.382Z",
+ "tradeDate": "20261012",
+ "source": "eastmoney-topic-pool",
+ "counts": {
+  "zt": 46,
+  "dt": 0,
+  "zb": 25
+ },
+ "zt": [
+  {
+   "code": "002242",
+   "name": "九阳股份",
+   "market": 0,
+   "pct": 9.980172157287598,
+   "price": 16.64,
+   "amount": 1996903760,
+   "floatMcap": 12675780000,
+   "lb": 6,
+   "firstSeal": 92500,
+   "lastSeal": 104512,
+   "sealFund": 59186816,
+   "brokenTimes": 5,
+   "industry": "小家电",
+   "streak": {
+    "days": 6,
+    "count": 6
+   }
+  },
+  {
+   "code": "600812",
+   "name": "华北制药",
+   "market": 1,
+   "pct": 9.950248718261719,
+   "price": 6.63,
+   "amount": 1002097840,
+   "floatMcap": 11375292353.1,
+   "lb": 3,
+   "firstSeal": 92501,
+   "lastSeal": 93758,
+   "sealFund": 143673870,
+   "brokenTimes": 2,
+   "industry": "化学制药",
+   "streak": {
+    "days": 3,
+    "count": 3
+   }
+  },
+  {
+   "code": "600831",
+   "name": "广电网络",
+   "market": 1,
+   "pct": 10.14084529876709,
+   "price": 3.91,
+   "amount": 154024936,
+   "floatMcap": 2779802738.7200003,
+   "lb": 1,
+   "firstSeal": 92501,
+   "lastSeal": 100125,
+   "sealFund": 68117736,
+   "brokenTimes": 1,
+   "industry": "电视广播",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603096",
+   "name": "新经典",
+   "market": 1,
+   "pct": 9.982688903808594,
+   "price": 19.06,
+   "amount": 70752073,
+   "floatMcap": 2939711933.4399996,
+   "lb": 2,
+   "firstSeal": 92501,
+   "lastSeal": 92501,
+   "sealFund": 131756614,
+   "brokenTimes": 0,
+   "industry": "出版",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "605136",
+   "name": "丽人丽妆",
+   "market": 1,
+   "pct": 9.957627296447754,
+   "price": 10.38,
+   "amount": 42697922,
+   "floatMcap": 4156759230.0000005,
+   "lb": 2,
+   "firstSeal": 92501,
+   "lastSeal": 92501,
+   "sealFund": 183524835,
+   "brokenTimes": 0,
+   "industry": "互联网电",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "605287",
+   "name": "德才股份",
+   "market": 1,
+   "pct": 10.00497817993164,
+   "price": 44.2,
+   "amount": 103640160,
+   "floatMcap": 6188000000,
+   "lb": 2,
+   "firstSeal": 92501,
+   "lastSeal": 92501,
+   "sealFund": 239409300,
+   "brokenTimes": 0,
+   "industry": "装修装饰",
+   "streak": {
+    "days": 4,
+    "count": 3
+   }
+  },
+  {
+   "code": "600693",
+   "name": "东百集团",
+   "market": 1,
+   "pct": 10.039369583129883,
+   "price": 11.18,
+   "amount": 302864560,
+   "floatMcap": 9714892102.76,
+   "lb": 1,
+   "firstSeal": 92502,
+   "lastSeal": 92502,
+   "sealFund": 320562015,
+   "brokenTimes": 0,
+   "industry": "一般零售",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "600825",
+   "name": "新华传媒",
+   "market": 1,
+   "pct": 9.976058006286621,
+   "price": 13.78,
+   "amount": 487084176,
+   "floatMcap": 14398554573,
+   "lb": 10,
+   "firstSeal": 92502,
+   "lastSeal": 92502,
+   "sealFund": 1016510886,
+   "brokenTimes": 0,
+   "industry": "出版",
+   "streak": {
+    "days": 10,
+    "count": 10
+   }
+  },
+  {
+   "code": "002343",
+   "name": "慈文传媒",
+   "market": 0,
+   "pct": 10.032894134521484,
+   "price": 6.69,
+   "amount": 189454780,
+   "floatMcap": 3168921113.34,
+   "lb": 2,
+   "firstSeal": 93000,
+   "lastSeal": 93000,
+   "sealFund": 141656200,
+   "brokenTimes": 0,
+   "industry": "影视院线",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "300006",
+   "name": "莱美药业",
+   "market": 0,
+   "pct": 19.9268741607666,
+   "price": 6.56,
+   "amount": 1333525056,
+   "floatMcap": 6926185090.879999,
+   "lb": 1,
+   "firstSeal": 93000,
+   "lastSeal": 140854,
+   "sealFund": 67066973,
+   "brokenTimes": 8,
+   "industry": "化学制药",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "605577",
+   "name": "龙版传媒",
+   "market": 1,
+   "pct": 10,
+   "price": 17.82,
+   "amount": 252983433,
+   "floatMcap": 7920000009.900001,
+   "lb": 2,
+   "firstSeal": 93002,
+   "lastSeal": 93002,
+   "sealFund": 138536154,
+   "brokenTimes": 0,
+   "industry": "出版",
+   "streak": {
+    "days": 4,
+    "count": 3
+   }
+  },
+  {
+   "code": "001330",
+   "name": "博纳影业",
+   "market": 0,
+   "pct": 10.043041229248047,
+   "price": 7.67,
+   "amount": 1572119120,
+   "floatMcap": 8919038959.74,
+   "lb": 2,
+   "firstSeal": 93009,
+   "lastSeal": 94609,
+   "sealFund": 85265089,
+   "brokenTimes": 2,
+   "industry": "影视院线",
+   "streak": {
+    "days": 6,
+    "count": 3
+   }
+  },
+  {
+   "code": "002696",
+   "name": "百洋股份",
+   "market": 0,
+   "pct": 9.972677230834961,
+   "price": 8.05,
+   "amount": 103751651,
+   "floatMcap": 2690784289.9,
+   "lb": 2,
+   "firstSeal": 93012,
+   "lastSeal": 93012,
+   "sealFund": 42501874,
+   "brokenTimes": 0,
+   "industry": "饲料",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "600241",
+   "name": "时代万恒",
+   "market": 1,
+   "pct": 10.034013748168945,
+   "price": 12.94,
+   "amount": 1199299600,
+   "floatMcap": 3808269368.1,
+   "lb": 6,
+   "firstSeal": 93022,
+   "lastSeal": 141201,
+   "sealFund": 31216947,
+   "brokenTimes": 3,
+   "industry": "电池",
+   "streak": {
+    "days": 6,
+    "count": 6
+   }
+  },
+  {
+   "code": "600851",
+   "name": "海欣股份",
+   "market": 1,
+   "pct": 9.974424362182617,
+   "price": 8.6,
+   "amount": 260385601,
+   "floatMcap": 6348572546,
+   "lb": 1,
+   "firstSeal": 93112,
+   "lastSeal": 130330,
+   "sealFund": 37410851,
+   "brokenTimes": 1,
+   "industry": "化学制药",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "000892",
+   "name": "欢瑞世纪",
+   "market": 0,
+   "pct": 10.103093147277832,
+   "price": 5.34,
+   "amount": 1258263824,
+   "floatMcap": 3795665613.36,
+   "lb": 2,
+   "firstSeal": 93154,
+   "lastSeal": 131027,
+   "sealFund": 51218610,
+   "brokenTimes": 3,
+   "industry": "影视院线",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "603528",
+   "name": "多伦科技",
+   "market": 1,
+   "pct": 9.984399795532227,
+   "price": 7.05,
+   "amount": 106282238,
+   "floatMcap": 4976807423.55,
+   "lb": 1,
+   "firstSeal": 93336,
+   "lastSeal": 93336,
+   "sealFund": 46128565,
+   "brokenTimes": 0,
+   "industry": "软件开发",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "688517",
+   "name": "金冠电气",
+   "market": 1,
+   "pct": 20,
+   "price": 21.18,
+   "amount": 470683168,
+   "floatMcap": 2893467237.12,
+   "lb": 1,
+   "firstSeal": 93347,
+   "lastSeal": 131044,
+   "sealFund": 30846234,
+   "brokenTimes": 2,
+   "industry": "电网设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "601929",
+   "name": "吉视传媒",
+   "market": 1,
+   "pct": 10,
+   "price": 2.75,
+   "amount": 1396036320,
+   "floatMcap": 9596917462,
+   "lb": 2,
+   "firstSeal": 93412,
+   "lastSeal": 101548,
+   "sealFund": 98932350,
+   "brokenTimes": 2,
+   "industry": "电视广播",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "600192",
+   "name": "长城电工",
+   "market": 1,
+   "pct": 9.986129760742188,
+   "price": 7.93,
+   "amount": 150851604,
+   "floatMcap": 3503061640,
+   "lb": 1,
+   "firstSeal": 93704,
+   "lastSeal": 93728,
+   "sealFund": 66454193,
+   "brokenTimes": 1,
+   "industry": "电网设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603032",
+   "name": "德新科技",
+   "market": 1,
+   "pct": 10.021552085876465,
+   "price": 20.42,
+   "amount": 653535808,
+   "floatMcap": 4755442272,
+   "lb": 1,
+   "firstSeal": 93747,
+   "lastSeal": 142326,
+   "sealFund": 6818625,
+   "brokenTimes": 4,
+   "industry": "电池",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002441",
+   "name": "众业达",
+   "market": 0,
+   "pct": 10.035842895507812,
+   "price": 9.21,
+   "amount": 254621752,
+   "floatMcap": 3674461009.59,
+   "lb": 1,
+   "firstSeal": 93748,
+   "lastSeal": 110500,
+   "sealFund": 15190053,
+   "brokenTimes": 2,
+   "industry": "电网设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002576",
+   "name": "通达动力",
+   "market": 0,
+   "pct": 9.993155479431152,
+   "price": 16.07,
+   "amount": 141156693,
+   "floatMcap": 2603783065.9700003,
+   "lb": 1,
+   "firstSeal": 93818,
+   "lastSeal": 93915,
+   "sealFund": 30412475,
+   "brokenTimes": 1,
+   "industry": "电机Ⅱ",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002531",
+   "name": "天顺风能",
+   "market": 0,
+   "pct": 9.973404884338379,
+   "price": 8.27,
+   "amount": 839926256,
+   "floatMcap": 14777403313.73,
+   "lb": 1,
+   "firstSeal": 93845,
+   "lastSeal": 93845,
+   "sealFund": 215145712,
+   "brokenTimes": 0,
+   "industry": "风电设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002692",
+   "name": "远程股份",
+   "market": 0,
+   "pct": 10.084033966064453,
+   "price": 5.24,
+   "amount": 266233014,
+   "floatMcap": 3761595177,
+   "lb": 2,
+   "firstSeal": 94039,
+   "lastSeal": 94039,
+   "sealFund": 76709408,
+   "brokenTimes": 0,
+   "industry": "电网设备",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "300829",
+   "name": "金丹科技",
+   "market": 0,
+   "pct": 20,
+   "price": 28.02,
+   "amount": 613444352,
+   "floatMcap": 4711053904.62,
+   "lb": 1,
+   "firstSeal": 94736,
+   "lastSeal": 94736,
+   "sealFund": 130509594,
+   "brokenTimes": 0,
+   "industry": "化学制品",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002990",
+   "name": "盛视科技",
+   "market": 0,
+   "pct": 10.007864952087402,
+   "price": 55.95,
+   "amount": 681227392,
+   "floatMcap": 7722138599.85,
+   "lb": 1,
+   "firstSeal": 95406,
+   "lastSeal": 101912,
+   "sealFund": 103781655,
+   "brokenTimes": 1,
+   "industry": "计算机设",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "600560",
+   "name": "金自天正",
+   "market": 1,
+   "pct": 10.008779525756836,
+   "price": 12.53,
+   "amount": 80256859,
+   "floatMcap": 2802278115,
+   "lb": 1,
+   "firstSeal": 95436,
+   "lastSeal": 95436,
+   "sealFund": 15535947,
+   "brokenTimes": 0,
+   "industry": "专用设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "601811",
+   "name": "新华文轩",
+   "market": 1,
+   "pct": 9.995217323303223,
+   "price": 23,
+   "amount": 1264841568,
+   "floatMcap": 18213789700,
+   "lb": 2,
+   "firstSeal": 95453,
+   "lastSeal": 102802,
+   "sealFund": 46726823,
+   "brokenTimes": 3,
+   "industry": "出版",
+   "streak": {
+    "days": 11,
+    "count": 8
+   }
+  },
+  {
+   "code": "301419",
+   "name": "阿莱德",
+   "market": 0,
+   "pct": 20,
+   "price": 47.7,
+   "amount": 422151504,
+   "floatMcap": 5347325025,
+   "lb": 1,
+   "firstSeal": 95545,
+   "lastSeal": 95912,
+   "sealFund": 35691095,
+   "brokenTimes": 1,
+   "industry": "通信设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "301052",
+   "name": "果麦文化",
+   "market": 0,
+   "pct": 20.007877349853516,
+   "price": 30.47,
+   "amount": 583938704,
+   "floatMcap": 2444906523.18,
+   "lb": 1,
+   "firstSeal": 100706,
+   "lastSeal": 100812,
+   "sealFund": 52502857,
+   "brokenTimes": 1,
+   "industry": "出版",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603500",
+   "name": "祥和实业",
+   "market": 1,
+   "pct": 9.960159301757812,
+   "price": 11.04,
+   "amount": 468892736,
+   "floatMcap": 3673965775.2,
+   "lb": 1,
+   "firstSeal": 100727,
+   "lastSeal": 135057,
+   "sealFund": 17260554,
+   "brokenTimes": 3,
+   "industry": "轨交设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603533",
+   "name": "掌阅科技",
+   "market": 1,
+   "pct": 9.98427677154541,
+   "price": 27.98,
+   "amount": 2096530448,
+   "floatMcap": 12280333443.3,
+   "lb": 2,
+   "firstSeal": 101058,
+   "lastSeal": 105513,
+   "sealFund": 88316072,
+   "brokenTimes": 1,
+   "industry": "数字媒体",
+   "streak": {
+    "days": 5,
+    "count": 3
+   }
+  },
+  {
+   "code": "002264",
+   "name": "新 华 都",
+   "market": 0,
+   "pct": 10,
+   "price": 8.14,
+   "amount": 1122462176,
+   "floatMcap": 5298390078.08,
+   "lb": 1,
+   "firstSeal": 101212,
+   "lastSeal": 142339,
+   "sealFund": 25297085,
+   "brokenTimes": 7,
+   "industry": "广告营销",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "601595",
+   "name": "上海电影",
+   "market": 1,
+   "pct": 9.983831405639648,
+   "price": 27.21,
+   "amount": 753730736,
+   "floatMcap": 12195522000,
+   "lb": 2,
+   "firstSeal": 102154,
+   "lastSeal": 102154,
+   "sealFund": 30581319,
+   "brokenTimes": 0,
+   "industry": "影视院线",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "603992",
+   "name": "松霖科技",
+   "market": 1,
+   "pct": 9.978991508483887,
+   "price": 20.94,
+   "amount": 157046556,
+   "floatMcap": 9277295710.800001,
+   "lb": 1,
+   "firstSeal": 102240,
+   "lastSeal": 103425,
+   "sealFund": 33747992,
+   "brokenTimes": 2,
+   "industry": "家居用品",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "688004",
+   "name": "博汇科技",
+   "market": 1,
+   "pct": 20.00644302368164,
+   "price": 37.25,
+   "amount": 410465088,
+   "floatMcap": 2983278000,
+   "lb": 1,
+   "firstSeal": 103153,
+   "lastSeal": 103153,
+   "sealFund": 27648812,
+   "brokenTimes": 0,
+   "industry": "IT服务Ⅱ",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603232",
+   "name": "格尔软件",
+   "market": 1,
+   "pct": 10.011778831481934,
+   "price": 18.68,
+   "amount": 744347904,
+   "floatMcap": 4320683906.6,
+   "lb": 2,
+   "firstSeal": 111027,
+   "lastSeal": 134100,
+   "sealFund": 57931163,
+   "brokenTimes": 1,
+   "industry": "软件开发",
+   "streak": {
+    "days": 2,
+    "count": 2
+   }
+  },
+  {
+   "code": "002908",
+   "name": "德生科技",
+   "market": 0,
+   "pct": 10.013717651367188,
+   "price": 8.02,
+   "amount": 232753947,
+   "floatMcap": 2608489890.3199997,
+   "lb": 1,
+   "firstSeal": 130830,
+   "lastSeal": 130830,
+   "sealFund": 21862279,
+   "brokenTimes": 0,
+   "industry": "IT服务Ⅱ",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "301658",
+   "name": "首航新能",
+   "market": 0,
+   "pct": 20,
+   "price": 27.12,
+   "amount": 512184288,
+   "floatMcap": 2641940388.7200003,
+   "lb": 1,
+   "firstSeal": 131509,
+   "lastSeal": 131509,
+   "sealFund": 14498352,
+   "brokenTimes": 0,
+   "industry": "光伏设备",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "001231",
+   "name": "农心科技",
+   "market": 0,
+   "pct": 10.008591651916504,
+   "price": 25.61,
+   "amount": 192490606,
+   "floatMcap": 1305160765.35,
+   "lb": 1,
+   "firstSeal": 132333,
+   "lastSeal": 133454,
+   "sealFund": 202406074,
+   "brokenTimes": 1,
+   "industry": "农化制品",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603336",
+   "name": "宏辉果蔬",
+   "market": 1,
+   "pct": 10,
+   "price": 10.45,
+   "amount": 326095520,
+   "floatMcap": 6361112975.25,
+   "lb": 1,
+   "firstSeal": 133930,
+   "lastSeal": 133930,
+   "sealFund": 27538487,
+   "brokenTimes": 0,
+   "industry": "种植业",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "603230",
+   "name": "内蒙新华",
+   "market": 1,
+   "pct": 10,
+   "price": 14.63,
+   "amount": 825104576,
+   "floatMcap": 5172041490,
+   "lb": 1,
+   "firstSeal": 135520,
+   "lastSeal": 135520,
+   "sealFund": 75604899,
+   "brokenTimes": 0,
+   "industry": "出版",
+   "streak": {
+    "days": 13,
+    "count": 7
+   }
+  },
+  {
+   "code": "603968",
+   "name": "醋化股份",
+   "market": 1,
+   "pct": 10.033726692199707,
+   "price": 13.05,
+   "amount": 321073552,
+   "floatMcap": 2668464000,
+   "lb": 1,
+   "firstSeal": 140328,
+   "lastSeal": 140707,
+   "sealFund": 18147330,
+   "brokenTimes": 1,
+   "industry": "化学制品",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "002591",
+   "name": "恒大高新",
+   "market": 0,
+   "pct": 9.984639167785645,
+   "price": 7.16,
+   "amount": 259630736,
+   "floatMcap": 1600349227.92,
+   "lb": 1,
+   "firstSeal": 142524,
+   "lastSeal": 142642,
+   "sealFund": 32438380,
+   "brokenTimes": 1,
+   "industry": "化学制品",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  },
+  {
+   "code": "601127",
+   "name": "赛力斯",
+   "market": 1,
+   "pct": 10.004293441772461,
+   "price": 51.24,
+   "amount": 2642317664,
+   "floatMcap": 79791101806.08,
+   "lb": 1,
+   "firstSeal": 143129,
+   "lastSeal": 143129,
+   "sealFund": 309832498,
+   "brokenTimes": 0,
+   "industry": "乘用车",
+   "streak": {
+    "days": 1,
+    "count": 1
+   }
+  }
+ ],
+ "dt": [],
+ "zb": [
+  {
+   "code": "001300",
+   "name": "三柏硕",
+   "market": 0,
+   "pct": -9.892328262329102,
+   "price": 13.39,
+   "amount": 483870752,
+   "floatMcap": 3264159488.46,
+   "lb": null,
+   "firstSeal": 93000,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "文娱用品",
+   "streak": {
+    "days": 3,
+    "count": 2
+   }
+  },
+  {
+   "code": "000420",
+   "name": "吉林化纤",
+   "market": 0,
+   "pct": 0,
+   "price": 3.81,
+   "amount": 1229045872,
+   "floatMcap": 9367934056.83,
+   "lb": null,
+   "firstSeal": 93003,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "化学纤维",
+   "streak": {
+    "days": 2,
+    "count": 1
+   }
+  },
+  {
+   "code": "603101",
+   "name": "汇嘉时代",
+   "market": 1,
+   "pct": -3.2540674209594727,
+   "price": 7.73,
+   "amount": 444551168,
+   "floatMcap": 3636192000,
+   "lb": null,
+   "firstSeal": 93021,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "一般零售",
+   "streak": {
+    "days": 2,
+    "count": 1
+   }
+  },
+  {
+   "code": "300389",
+   "name": "艾比森",
+   "market": 0,
+   "pct": 7.844690799713135,
+   "price": 13.61,
+   "amount": 374010576,
+   "floatMcap": 3736190946.31,
+   "lb": null,
+   "firstSeal": 93036,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "光学光电",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "600127",
+   "name": "金健米业",
+   "market": 1,
+   "pct": -8.432147979736328,
+   "price": 13.9,
+   "amount": 5880540928,
+   "floatMcap": 8920786730.2,
+   "lb": null,
+   "firstSeal": 93040,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 7,
+   "industry": "农产品加",
+   "streak": {
+    "days": 2,
+    "count": 1
+   }
+  },
+  {
+   "code": "001356",
+   "name": "富岭股份",
+   "market": 0,
+   "pct": 6.889127731323242,
+   "price": 9.93,
+   "amount": 218553306,
+   "floatMcap": 2102146245,
+   "lb": null,
+   "firstSeal": 93115,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 2,
+   "industry": "家居用品",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "600251",
+   "name": "冠农股份",
+   "market": 1,
+   "pct": 0.5774783492088318,
+   "price": 10.45,
+   "amount": 458374640,
+   "floatMcap": 8119582942.349999,
+   "lb": null,
+   "firstSeal": 93351,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "农产品加",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "002655",
+   "name": "共达电声",
+   "market": 0,
+   "pct": 4.180381774902344,
+   "price": 31.65,
+   "amount": 1164278736,
+   "floatMcap": 11564397649.8,
+   "lb": null,
+   "firstSeal": 93818,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 2,
+   "industry": "消费电子",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603810",
+   "name": "丰山集团",
+   "market": 1,
+   "pct": 7.181467056274414,
+   "price": 13.88,
+   "amount": 190215976,
+   "floatMcap": 2294955579.48,
+   "lb": null,
+   "firstSeal": 94040,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "农化制品",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "002487",
+   "name": "大金重工",
+   "market": 0,
+   "pct": 7.657142639160156,
+   "price": 47.1,
+   "amount": 4566761728,
+   "floatMcap": 29716344528.600002,
+   "lb": null,
+   "firstSeal": 94251,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "风电设备",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "300690",
+   "name": "双一科技",
+   "market": 0,
+   "pct": 9.792767524719238,
+   "price": 27.02,
+   "amount": 681920656,
+   "floatMcap": 3014898571.16,
+   "lb": null,
+   "firstSeal": 94321,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "风电设备",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "000601",
+   "name": "韶能股份",
+   "market": 0,
+   "pct": 4.934210777282715,
+   "price": 6.38,
+   "amount": 1069306288,
+   "floatMcap": 6724269527.58,
+   "lb": null,
+   "firstSeal": 94906,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "电力",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "600550",
+   "name": "保变电气",
+   "market": 1,
+   "pct": 5.905130386352539,
+   "price": 10.94,
+   "amount": 1078150080,
+   "floatMcap": 20146321571.2,
+   "lb": null,
+   "firstSeal": 94948,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 2,
+   "industry": "电网设备",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "001255",
+   "name": "博菲电气",
+   "market": 0,
+   "pct": -1.7235057353973389,
+   "price": 26.8,
+   "amount": 151701030,
+   "floatMcap": 2069329411.2,
+   "lb": null,
+   "firstSeal": 100903,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "塑料",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "002549",
+   "name": "凯美特气",
+   "market": 0,
+   "pct": 5.113636493682861,
+   "price": 12.95,
+   "amount": 823050112,
+   "floatMcap": 8966055861.699999,
+   "lb": null,
+   "firstSeal": 102115,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 2,
+   "industry": "化学制品",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "002938",
+   "name": "鹏鼎控股",
+   "market": 0,
+   "pct": 2.4514400959014893,
+   "price": 76.48,
+   "amount": 4740588544,
+   "floatMcap": 176731992747.2,
+   "lb": null,
+   "firstSeal": 102227,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 3,
+   "industry": "元件",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603956",
+   "name": "威派格",
+   "market": 1,
+   "pct": 6.312768936157227,
+   "price": 7.41,
+   "amount": 518817104,
+   "floatMcap": 4223005579.26,
+   "lb": null,
+   "firstSeal": 102428,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 3,
+   "industry": "专用设备",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603730",
+   "name": "岱美股份",
+   "market": 1,
+   "pct": 7.867495059967041,
+   "price": 10.42,
+   "amount": 530117328,
+   "floatMcap": 22388346156.02,
+   "lb": null,
+   "firstSeal": 102531,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 4,
+   "industry": "汽车零部",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603155",
+   "name": "新亚强",
+   "market": 1,
+   "pct": 6.221646308898926,
+   "price": 16.39,
+   "amount": 952248784,
+   "floatMcap": 7504831195.400001,
+   "lb": null,
+   "firstSeal": 102604,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 3,
+   "industry": "化学制品",
+   "streak": {
+    "days": 2,
+    "count": 1
+   }
+  },
+  {
+   "code": "603690",
+   "name": "至纯科技",
+   "market": 1,
+   "pct": 5.692233562469482,
+   "price": 21.91,
+   "amount": 770220320,
+   "floatMcap": 8390746717.5,
+   "lb": null,
+   "firstSeal": 102630,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "半导体",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603065",
+   "name": "宿迁联盛",
+   "market": 1,
+   "pct": 5.921052932739258,
+   "price": 14.49,
+   "amount": 504598064,
+   "floatMcap": 6070840118.28,
+   "lb": null,
+   "firstSeal": 112500,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "化学制品",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "603217",
+   "name": "元利科技",
+   "market": 1,
+   "pct": 1.089494228363037,
+   "price": 25.98,
+   "amount": 207851062,
+   "floatMcap": 5406115848,
+   "lb": null,
+   "firstSeal": 112809,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "化学制品",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  },
+  {
+   "code": "600207",
+   "name": "安彩高科",
+   "market": 1,
+   "pct": 5.535714149475098,
+   "price": 5.91,
+   "amount": 739719648,
+   "floatMcap": 6437837194.14,
+   "lb": null,
+   "firstSeal": 131729,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 3,
+   "industry": "光伏设备",
+   "streak": {
+    "days": 2,
+    "count": 1
+   }
+  },
+  {
+   "code": "601118",
+   "name": "海南橡胶",
+   "market": 1,
+   "pct": 4.189944267272949,
+   "price": 7.46,
+   "amount": 2567989344,
+   "floatMcap": 31924531365.62,
+   "lb": null,
+   "firstSeal": 133113,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 2,
+   "industry": "种植业",
+   "streak": {
+    "days": 4,
+    "count": 2
+   }
+  },
+  {
+   "code": "002919",
+   "name": "名臣健康",
+   "market": 0,
+   "pct": 6.86274528503418,
+   "price": 17.44,
+   "amount": 247178672,
+   "floatMcap": 4607790833.6,
+   "lb": null,
+   "firstSeal": 143530,
+   "lastSeal": null,
+   "sealFund": null,
+   "brokenTimes": 1,
+   "industry": "游戏Ⅱ",
+   "streak": {
+    "days": 0,
+    "count": 0
+   }
+  }
+ ]
+}

@@ -38,8 +38,9 @@ const cpFiles = new Set();
 for (const line of yml.matchAll(/^\s+cp\s+.*$/gm)) {
   const toks = line[0].trim().split(/\s+/).slice(1).filter((t) => t !== '-r');
   for (const t of toks) {
-    if (t === 'site/' || t === 'site/src/' || t === 'site/data/') continue;
+    if (t === 'site/' || t === 'site/src/' || t === 'site/data/' || t === 'site/reports_html/') continue;
     if (t === 'data/.') { cpFiles.add('data/**'); continue; } // cp -r data/. site/data/ ⇔ paths 的 'data/**'
+    if (t === 'reports_html/.') { cpFiles.add('reports_html/**'); continue; } // cp -r reports_html/. site/reports_html/ ⇔ paths 的 'reports_html/**'
     cpFiles.add(t);
   }
 }

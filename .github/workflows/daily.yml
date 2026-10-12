@@ -140,6 +140,30 @@ jobs:
       #   · PASS 只发企微心跳（首跑盯防刚需，嫌吵 GUARD_PASS_NOTIFY=false 关）；issue
       #     只兜 BLOCK/ERROR——smoke 每天三班，PASS 流水 issue 会淹没真异常台账；
       #   · issue 用 GITHUB_TOKEN（自动注入）+ 顶层 issues: write 权限，零新增 secret。
+      # ── 热点题材新闻（reports_html/热点新闻 + 企微晨报）────────────────────
+      # 复用本 job 的 08:30 cron（'30 0'），按 UTC 时刻分拍，不加新 cron（成对约束不涉及）。
+      # UTC 00:30 = 北京 08:30：抓东财 7x24 快讯 + 聚合涨停题材 → 生成热点新闻栏目页
+      #   → 推企微晨报（指纹防重推）。新闻 7x24 无交易日语义，工作日每天都抓。
+      - name: 热点题材新闻抓取+推送（北京 08:30 拍点）
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+        run: |
+          HHMM=$(date -u +%H%M)
+          if [ "$HHMM" = "0030" ]; then
+            node scripts/fetch_hot_news.mjs
+            node scripts/build_reports_html.mjs --only news
+            node scripts/push_hot_news.mjs
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/hot_news.json data/hot_news_push_state.json reports_html
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: 热点题材晨报 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+              git push
+            fi
+          else
+            echo "非 08:30 拍点（UTC $HHMM），跳过"
+          fi
+
       - name: 守卫结果双通道通知（PASS 心跳 / BLOCK+ERROR 企微+issue 兜底）
         if: always()
         continue-on-error: true
@@ -271,6 +295,21 @@ jobs:
         run: node scripts/build_ai_report.mjs --type weekly
       - name: 报告转 Markdown（GitHub 直接可读）
         run: node scripts/export_reports_md.mjs
+      # ── 多栏目静态 HTML 日报（reports_html/）────────────────────────────────
+      # 个股级明细（东财涨停/跌停/炸板池）与转债联动源是 10 个个股级栏目的共同
+      # 数据底座——必须先于 build_reports_html 落盘。失败 continue-on-error：
+      # 缺档时报告页按缺失标注降级，不阻断数据提交。
+      - name: 采集个股级涨跌停明细
+        run: node scripts/fetch_stock_detail.mjs
+        continue-on-error: true
+      - name: 采集转债/正股联动源
+        run: node scripts/fetch_arb_sources.mjs
+        continue-on-error: true
+      # 读 data/ 管道产物渲染 13 栏目日报 + 各栏目归档首页 + 根导航。
+      # 无独立 cron（挂在既有盘后 job 内，cron 成对约束不涉及）；产物自包含 HTML，
+      # 部署由 deploy-pages.yml paths 白名单新增的 reports_html/** 承接。
+      - name: 生成多栏目静态 HTML 日报
+        run: node scripts/build_reports_html.mjs
       # 推送只在 21:00 补抓与手动触发：18:30 首抓常缺龙虎榜/深证日K，推半成品
       # 不如等 2.5 小时推全量（"收盘 5 分钟"语义由页面即时轨 15:05 版补位，
       # 双轨时点约束见设计文档 §3.3）。指纹去重保证 21:00 与 18:30 内容未变时不重推。
@@ -289,7 +328,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/archive.json data/archive-index.json data/archive-recent.json data/archive-20*.json data/signals-latest.json data/backtest.json data/backtest-strategies.json data/global.json data/paper_universe.json data/paper_universe-lite.json data/calendar.json data/version-regression.json data/pain-latest.json data/breadth-latest.json data/breadth-daily.json data/smoke-latest.json data/ops-alerts-latest.json data/industry_outlier_review.json data/board_rank.json data/paper data/reports ui/kline
+          git add data/archive.json data/archive-index.json data/archive-recent.json data/archive-20*.json data/signals-latest.json data/backtest.json data/backtest-strategies.json data/global.json data/paper_universe.json data/paper_universe-lite.json data/calendar.json data/version-regression.json data/pain-latest.json data/breadth-latest.json data/breadth-daily.json data/smoke-latest.json data/ops-alerts-latest.json data/industry_outlier_review.json data/board_rank.json data/stock_detail.json data/arb_sources.json data/paper data/reports reports_html ui/kline
           if git diff --cached --quiet; then
             echo "无变化，跳过提交"
           else
@@ -342,11 +381,38 @@ jobs:
           node scripts/build_ai_report.mjs --type intraday
           node scripts/export_reports_md.mjs
           node scripts/push_ai_report.mjs --latest intraday
+      # ── 盘中定时栏目（reports_html）───────────────────────────────────────
+      # 复用本 job 的既有 cron（0,30 1-7），按 UTC 时刻分拍，不加新 cron（成对约束不涉及）：
+      #   UTC 01:00 = 北京 09:00 → 早盘快报（盘前锚：隔夜外围 + 昨收情绪环境）
+      #   UTC 01:30 = 北京 09:30 → 竞价复盘（东财涨停池此时已含竞价/秒板首封样本；
+      #     18:30/21:00 盘后 job 会用全天数据覆盖同日文件）
+      # 非交易日快照脚本自跳过，但本步仍会生成（数据日 = 上一交易日收盘口径，
+      # 页面自身标注数据日，语义正确）；节假日多余一版可接受。
+      - name: 生成早盘快报（北京 09:00 拍点）
+        if: runner.os != 'Windows'
+        run: |
+          HHMM=$(date -u +%H%M)
+          if [ "$HHMM" = "0100" ]; then
+            node scripts/fetch_global.mjs || true
+            node scripts/build_reports_html.mjs --only morning
+          else
+            echo "非 09:00 拍点（UTC $HHMM），跳过"
+          fi
+      - name: 生成竞价复盘（北京 09:30 拍点）
+        if: runner.os != 'Windows'
+        run: |
+          HHMM=$(date -u +%H%M)
+          if [ "$HHMM" = "0130" ]; then
+            node scripts/fetch_stock_detail.mjs || true
+            node scripts/build_reports_html.mjs --only auction
+          else
+            echo "非 09:30 拍点（UTC $HHMM），跳过"
+          fi
       - name: 提交盘中快照
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/intraday.json data/reports
+          git add data/intraday.json data/reports reports_html
           if git diff --cached --quiet; then
             echo "无变化（非盘中或快照相同），跳过提交"
           else

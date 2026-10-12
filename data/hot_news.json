@@ -1,0 +1,303 @@
+{
+ "kind": "hot-news",
+ "version": 1,
+ "generatedAt": "2026-10-12T12:00:01.730Z",
+ "source": "eastmoney-kuaixun-102 + stock_detail.zt",
+ "tradeDate": "20261012",
+ "counts": {
+  "news": 40,
+  "themes": 12
+ },
+ "items": [
+  {
+   "title": "德国总理：将在德国预算允许的范围内降低电力税",
+   "url": "http://stock.eastmoney.com/a/202610123892855722.html",
+   "time": "20:47",
+   "sort": "1791805582055722"
+  },
+  {
+   "title": "比亚迪加码欧洲招聘 拟将当地员工人数增至4万",
+   "url": "http://finance.eastmoney.com/a/202610123892855666.html",
+   "time": "19:24",
+   "sort": "1791805577055666"
+  },
+  {
+   "title": "源杰科技：预计第三季度净利润同比增长579%-660%",
+   "url": "http://finance.eastmoney.com/a/202610123892853621.html",
+   "time": "02:27",
+   "sort": "1791805516053621"
+  },
+  {
+   "title": "联讯仪器：预计前三季度净利润同比增长1866%-2073%",
+   "url": "http://finance.eastmoney.com/a/202610123892838443.html",
+   "time": "13:37",
+   "sort": "1791805297038443"
+  },
+  {
+   "title": "王兴兴：机器人本体算力部署有限 能放云端尽量放云端",
+   "url": "http://finance.eastmoney.com/a/202610123892848431.html",
+   "time": "19:14",
+   "sort": "1791805058048431"
+  },
+  {
+   "title": "刚果（金）埃博拉疫情已致4336人死亡",
+   "url": "http://finance.eastmoney.com/a/202610123892822715.html",
+   "time": "15:40",
+   "sort": "1791804786022715"
+  },
+  {
+   "title": "重庆燃气：持股5%以上股东农行重庆分行拟减持不超1.06%公司股份",
+   "url": "http://finance.eastmoney.com/a/202610123892823249.html",
+   "time": "14:33",
+   "sort": "1791804782023249"
+  },
+  {
+   "title": "霸王茶姬庆祝活动爆单 内部感谢信显示将发放总计1350万元奖励门店员工",
+   "url": "http://finance.eastmoney.com/a/202610123892822669.html",
+   "time": "21:50",
+   "sort": "1791804549022669"
+  },
+  {
+   "title": "中国证监会主席吴清会见阿联酋穆巴达拉投资公司首席执行官兼董事总经理哈勒敦",
+   "url": "http://finance.eastmoney.com/a/202610123892822515.html",
+   "time": "01:00",
+   "sort": "1791804474022515"
+  },
+  {
+   "title": "李强同新西兰总理拉克森通电话",
+   "url": "http://finance.eastmoney.com/a/202610123892820437.html",
+   "time": "14:07",
+   "sort": "1791804262020437"
+  },
+  {
+   "title": "新华传媒：累计10个交易日涨停 10月13日起停牌核查",
+   "url": "http://finance.eastmoney.com/a/202610123892816113.html",
+   "time": "15:36",
+   "sort": "1791803749016113"
+  },
+  {
+   "title": "行云科技：与萧山经开国控集团签署升级版战略合作框架协议 新增AI服务器整机智造基地项目等",
+   "url": "http://finance.eastmoney.com/a/202610123892816988.html",
+   "time": "12:00",
+   "sort": "1791803736016988"
+  },
+  {
+   "title": "AI短剧正在围猎中年男性",
+   "url": "http://finance.eastmoney.com/a/202610123892815759.html",
+   "time": "03:46",
+   "sort": "1791803620015759"
+  },
+  {
+   "title": "中基协召开创业投资、私募股权及并购投资基金专业委员会会议",
+   "url": "http://fund.eastmoney.com/a/202610123892815825.html",
+   "time": "16:23",
+   "sort": "1791803579015825"
+  },
+  {
+   "title": "行云科技：上调算力服务合同总金额至33.57亿元 较原合同提升约9.96%",
+   "url": "http://finance.eastmoney.com/a/202610123892816072.html",
+   "time": "06:56",
+   "sort": "1791803545016072"
+  },
+  {
+   "title": "奥来德：预计前三季度净利润同比增长442%~538%",
+   "url": "http://finance.eastmoney.com/a/202610123892815933.html",
+   "time": "23:26",
+   "sort": "1791803518015933"
+  },
+  {
+   "title": "俄称若乌大选可在选举日停火",
+   "url": "http://finance.eastmoney.com/a/202610123892813924.html",
+   "time": "19:50",
+   "sort": "1791803505013924"
+  },
+  {
+   "title": "2连板欢瑞世纪：公司AI短剧业务在上线数量、营收规模及成本效益转化方面尚未形成规模化效应",
+   "url": "http://finance.eastmoney.com/a/202610123892817020.html",
+   "time": "13:00",
+   "sort": "1791803394017020"
+  },
+  {
+   "title": "SK海力士美股盘前跌超2%",
+   "url": "http://finance.eastmoney.com/a/202610123892806653.html",
+   "time": "05:36",
+   "sort": "1791803281006653"
+  },
+  {
+   "title": "ST豆神：全资孙公司签订约7.55亿元算力服务合同",
+   "url": "http://finance.eastmoney.com/a/202610123892807293.html",
+   "time": "01:33",
+   "sort": "1791803180007293"
+  },
+  {
+   "title": "翰宇药业：预计前三季度净利润同比增长503%-531% 原料药业务持续放量",
+   "url": "http://finance.eastmoney.com/a/202610123892802468.html",
+   "time": "16:03",
+   "sort": "1791802973002468"
+  },
+  {
+   "title": "智光电气：参股公司粤芯半导体将于10月13日上市",
+   "url": "http://finance.eastmoney.com/a/202610123892812413.html",
+   "time": "12:10",
+   "sort": "1791802959012413"
+  },
+  {
+   "title": "龙湖集团9月合约销售额23亿元",
+   "url": "http://finance.eastmoney.com/a/202610123892808123.html",
+   "time": "10:30",
+   "sort": "1791802953008123"
+  },
+  {
+   "title": "TD Cowen上调雪佛龙公司目标价",
+   "url": "http://finance.eastmoney.com/a/202610123892803725.html",
+   "time": "08:16",
+   "sort": "1791802945003725"
+  },
+  {
+   "title": "品高股份：计划以集中竞价交易方式出售已回购股份",
+   "url": "http://finance.eastmoney.com/a/202610123892803460.html",
+   "time": "00:30",
+   "sort": "1791802917003460"
+  },
+  {
+   "title": "歌尔股份：终止分拆歌尔微至香港联交所主板上市",
+   "url": "http://finance.eastmoney.com/a/202610123892803245.html",
+   "time": "23:06",
+   "sort": "1791802912003245"
+  },
+  {
+   "title": "鸿路钢构：前三季度新签合同额244.32亿元 同比增长9.72%",
+   "url": "http://finance.eastmoney.com/a/202610123892803661.html",
+   "time": "10:03",
+   "sort": "1791802865003661"
+  },
+  {
+   "title": "赛力斯：已累计回购1753.57万股 累计回购金额9.83亿元",
+   "url": "http://finance.eastmoney.com/a/202610123892803877.html",
+   "time": "01:50",
+   "sort": "1791802749003877"
+  },
+  {
+   "title": "驻沙特使领馆再次提醒在沙中资机构和中国公民务必加强安全防范",
+   "url": "http://finance.eastmoney.com/a/202610123892803596.html",
+   "time": "00:43",
+   "sort": "1791802745003596"
+  },
+  {
+   "title": "何立峰会见苹果公司执行董事长蒂姆·库克",
+   "url": "http://finance.eastmoney.com/a/202610123892801571.html",
+   "time": "15:50",
+   "sort": "1791802713001571"
+  },
+  {
+   "title": "金龙机电：收到刑事判决书预计影响2026年度损益约2636万元",
+   "url": "http://finance.eastmoney.com/a/202610123892803191.html",
+   "time": "13:53",
+   "sort": "1791802706003191"
+  },
+  {
+   "title": "税务部门再次集中曝光多起涉税中介违法违规案件",
+   "url": "http://finance.eastmoney.com/a/202610123892801139.html",
+   "time": "18:43",
+   "sort": "1791802637001139"
+  },
+  {
+   "title": "马斯克称只有三家公司拥有足够的编程训练数据",
+   "url": "http://finance.eastmoney.com/a/202610123892801378.html",
+   "time": "17:43",
+   "sort": "1791802547001378"
+  },
+  {
+   "title": "4天3板德才股份：漫剧孙公司奇想无限仍处于亏损状态",
+   "url": "http://finance.eastmoney.com/a/202610123892801461.html",
+   "time": "04:23",
+   "sort": "1791802499001461"
+  },
+  {
+   "title": "网友呼吁宣介“父母资助子女买房不是义务”理念 官方回应",
+   "url": "http://finance.eastmoney.com/a/202610123892798719.html",
+   "time": "19:14",
+   "sort": "1791802466098719"
+  },
+  {
+   "title": "云南省交通执法局提级约谈多家网约车及聚合平台",
+   "url": "http://finance.eastmoney.com/a/202610123892798279.html",
+   "time": "08:08",
+   "sort": "1791802426098279"
+  },
+  {
+   "title": "富国银行下调亚马逊、eBay目标价",
+   "url": "http://finance.eastmoney.com/a/202610123892799985.html",
+   "time": "06:44",
+   "sort": "1791802421099985"
+  },
+  {
+   "title": "房租可免三年、重大文体活动设专区：多地扶持“主理人经济”",
+   "url": "http://finance.eastmoney.com/a/202610123892797330.html",
+   "time": "18:48",
+   "sort": "1791802378097330"
+  },
+  {
+   "title": "王坚：工业界应开放数据给机器人企业 当前离AI仍太远",
+   "url": "http://finance.eastmoney.com/a/202610123892801279.html",
+   "time": "17:23",
+   "sort": "1791802373001279"
+  },
+  {
+   "title": "Stellantis与塔塔汽车签署车辆技术协议",
+   "url": "http://finance.eastmoney.com/a/202610123892799784.html",
+   "time": "11:24",
+   "sort": "1791802265099784"
+  }
+ ],
+ "hotThemes": [
+  {
+   "name": "出版",
+   "count": 6
+  },
+  {
+   "name": "影视院线",
+   "count": 4
+  },
+  {
+   "name": "电网设备",
+   "count": 4
+  },
+  {
+   "name": "化学制药",
+   "count": 3
+  },
+  {
+   "name": "化学制品",
+   "count": 3
+  },
+  {
+   "name": "电视广播",
+   "count": 2
+  },
+  {
+   "name": "电池",
+   "count": 2
+  },
+  {
+   "name": "软件开发",
+   "count": 2
+  },
+  {
+   "name": "IT服务Ⅱ",
+   "count": 2
+  },
+  {
+   "name": "小家电",
+   "count": 1
+  },
+  {
+   "name": "互联网电",
+   "count": 1
+  },
+  {
+   "name": "装修装饰",
+   "count": 1
+  }
+ ]
+}

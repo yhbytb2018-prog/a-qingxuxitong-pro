@@ -52,6 +52,7 @@ on:
       - 'src/dataset.js'
       - 'src/dual_track.js'
       - 'src/error_boundary.js'
+      - 'reports_html/**'
       - 'data/**'
   workflow_dispatch:
 
@@ -85,6 +86,8 @@ jobs:
           cp src/dataset.js src/dual_track.js src/error_boundary.js site/src/
           # 数据面（运行时 fetch('./data/*.json') 的全部消费档，含 paper/ 双轨账本）
           cp -r data/. site/data/
+          # 多栏目静态日报（scripts/build_reports_html.mjs 产物，自包含 HTML 相对链接）
+          cp -r reports_html/. site/reports_html/
           # SW 版本指纹注入（2026-10-07）：SW 更新由「sw.js 字节变化」触发（规范 byte-diff，
           # CACHE_VERSION 只命名缓存、不参与触发）。但若某次部署只改了 shell 资产而 sw.js
           # 一字未动，install 不会重跑——新增的 SHELL_ASSETS 项不入缓存（SWR 后台刷新只
