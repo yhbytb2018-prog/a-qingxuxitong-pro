@@ -144,12 +144,19 @@ jobs:
       # 复用本 job 的 08:30 cron（'30 0'），按 UTC 时刻分拍，不加新 cron（成对约束不涉及）。
       # UTC 00:30 = 北京 08:30：抓东财 7x24 快讯 + 聚合涨停题材 → 生成热点新闻栏目页
       #   → 推企微晨报（指纹防重推）。新闻 7x24 无交易日语义，工作日每天都抓。
-      - name: 热点题材新闻抓取+推送（北京 08:30 拍点）
+      # 2026-10-13 窗口化（防 GitHub cron 延迟丢拍）：N∈[0030,1000) 且当日文件缺失才生成——
+      #   本 job 只在 00:30/10:30/13:00/20:30 四个拍点运行（smoke 的 if 已排除其余 cron），
+      #   10:30 起的拍点 N≥1030 不在窗内，窗内运行唯一对应「08:30 拍点（含延迟）」或手动
+      #   dispatch；已出则跳过（幂等，push 侧另有指纹去重）。
+      - name: 热点题材新闻抓取+推送（北京 08:30 拍点 · 窗口缺失补生成）
         env:
           OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
         run: |
           HHMM=$(date -u +%H%M)
-          if [ "$HHMM" = "0030" ]; then
+          N=$((10#$HHMM))
+          YMD=$(node -e 'const r=p=>{try{return require(p)}catch{return null}};const s=r("data/signals-latest.json");const i=r("data/intraday.json");const d=(s&&s.meta&&s.meta.tradeDate)||(i&&i.tradeDate)||"";console.log(String(d).replaceAll("-",""))')
+          FILE="reports_html/热点新闻/${YMD}.html"
+          if [ "$N" -ge 30 ] && [ "$N" -lt 1000 ] && [ ! -f "$FILE" ]; then
             node scripts/fetch_hot_news.mjs
             node scripts/build_reports_html.mjs --only news
             node scripts/push_hot_news.mjs
@@ -161,7 +168,7 @@ jobs:
               git push
             fi
           else
-            echo "非 08:30 拍点（UTC $HHMM），跳过"
+            echo "非 08:30 窗口或当日热点新闻已出（UTC $HHMM），跳过"
           fi
 
       - name: 守卫结果双通道通知（PASS 心跳 / BLOCK+ERROR 企微+issue 兜底）
@@ -388,39 +395,63 @@ jobs:
       #     18:30/21:00 盘后 job 会用全天数据覆盖同日文件）
       # 非交易日快照脚本自跳过，但本步仍会生成（数据日 = 上一交易日收盘口径，
       # 页面自身标注数据日，语义正确）；节假日多余一版可接受。
-      - name: 生成早盘快报（北京 09:00 拍点）
+      # 2026-10-13 窗口化（防 GitHub cron 延迟丢拍）：各拍点改为「时间窗 + 当日文件
+      #   缺失补生成」——延迟的 run 落在窗内且文件未出即补，已出则跳过（幂等）。
+      #   文件名日期与 build_reports_html.mjs 同源（signals/intraday 口径推定）；
+      #   休市日文件恒已存在 → 自然跳过（原「节假日多余一版」随之消除）。
+      - name: 生成早盘快报（北京 09:00 拍点 · 窗口缺失补生成）
         if: runner.os != 'Windows'
         run: |
           HHMM=$(date -u +%H%M)
-          if [ "$HHMM" = "0100" ]; then
+          N=$((10#$HHMM))
+          YMD=$(node -e 'const r=p=>{try{return require(p)}catch{return null}};const s=r("data/signals-latest.json");const i=r("data/intraday.json");const d=(s&&s.meta&&s.meta.tradeDate)||(i&&i.tradeDate)||"";console.log(String(d).replaceAll("-",""))')
+          FILE="reports_html/早盘快报/${YMD}.html"
+          if [ "$N" -ge 100 ] && [ "$N" -lt 800 ] && [ ! -f "$FILE" ]; then
             node scripts/fetch_global.mjs || true
             node scripts/build_reports_html.mjs --only morning
           else
-            echo "非 09:00 拍点（UTC $HHMM），跳过"
+            echo "非 09:00 窗口或当日早盘快报已出（UTC $HHMM），跳过"
           fi
-      - name: 生成竞价复盘（北京 09:30 拍点）
+      - name: 生成竞价复盘（北京 09:30 拍点 · 窗口缺失补生成）
         if: runner.os != 'Windows'
         run: |
           HHMM=$(date -u +%H%M)
-          if [ "$HHMM" = "0130" ]; then
+          N=$((10#$HHMM))
+          YMD=$(node -e 'const r=p=>{try{return require(p)}catch{return null}};const s=r("data/signals-latest.json");const i=r("data/intraday.json");const d=(s&&s.meta&&s.meta.tradeDate)||(i&&i.tradeDate)||"";console.log(String(d).replaceAll("-",""))')
+          FILE="reports_html/竞价复盘/${YMD}.html"
+          if [ "$N" -ge 130 ] && [ "$N" -lt 800 ] && [ ! -f "$FILE" ]; then
             node scripts/fetch_stock_detail.mjs || true
             node scripts/build_reports_html.mjs --only auction
           else
-            echo "非 09:30 拍点（UTC $HHMM），跳过"
+            echo "非 09:30 窗口或当日竞价复盘已出（UTC $HHMM），跳过"
           fi
       # 盘中预判（对齐模板策略链路：创科 10日涨幅榜硬过滤 → 组合AB）：
       #   UTC 02:30 = 北京 10:30 首判（模板口径 10:35-10:50 盘中数据）；
       #   UTC 07:00 = 北京 15:00 终判（收盘前最终版，覆盖首判）。
       #   push2 clist 本地可能拉不通，CI runner 可达；拉不通页面按缺失降级。
-      - name: 生成盘中预判（北京 10:30 首判 / 15:00 终判）
+      #   2026-10-13 窗口化：首判窗 N∈[0230,0700) 缺失补生成；终判窗 N∈[0700,0830)
+      #   覆盖首判，但抓取失败时保留既有版本（不用降级页覆盖好数据），仅无文件时才出降级版。
+      - name: 生成盘中预判（北京 10:30 首判 / 15:00 终判 · 窗口缺失补生成）
         if: runner.os != 'Windows'
         run: |
           HHMM=$(date -u +%H%M)
-          if [ "$HHMM" = "0230" ] || [ "$HHMM" = "0700" ]; then
+          N=$((10#$HHMM))
+          YMD=$(node -e 'const r=p=>{try{return require(p)}catch{return null}};const s=r("data/signals-latest.json");const i=r("data/intraday.json");const d=(s&&s.meta&&s.meta.tradeDate)||(i&&i.tradeDate)||"";console.log(String(d).replaceAll("-",""))')
+          FILE="reports_html/盘中预判/${YMD}.html"
+          if [ "$N" -ge 700 ] && [ "$N" -lt 830 ]; then
+            if node scripts/fetch_prejudge_data.mjs; then
+              node scripts/build_reports_html.mjs --only prejudge
+            elif [ ! -f "$FILE" ]; then
+              echo "预判抓取失败且无首判版 → 生成降级版"
+              node scripts/build_reports_html.mjs --only prejudge
+            else
+              echo "预判抓取失败 → 保留既有版本，不用降级覆盖（UTC $HHMM）"
+            fi
+          elif [ "$N" -ge 230 ] && [ "$N" -lt 700 ] && [ ! -f "$FILE" ]; then
             node scripts/fetch_prejudge_data.mjs || true
             node scripts/build_reports_html.mjs --only prejudge
           else
-            echo "非盘中预判拍点（UTC $HHMM），跳过"
+            echo "非盘中预判窗口或当日首判已出（UTC $HHMM），跳过"
           fi
       - name: 提交盘中快照
         run: |
