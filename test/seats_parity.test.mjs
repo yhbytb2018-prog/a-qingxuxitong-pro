@@ -5,13 +5,16 @@
 // 的成因，与 test/offline.test.mjs ⑤（sw.js ↔ src/offline.js）同款问题、同款守卫：
 // 提取 app.js 的**真实函数文本**（非复制品）在 vm 里执行，与 src/seats.js 喂同一份数据，
 // 读取口径必须逐字一致。
+// 2026-10-13：汇总行词表改同源——副本不再内联名单，读 index.html 模块脚本挂载的
+// window.ASENT_AGG_ROW_NAMES（src/seats.js 词表）；vm 上下文同款挂载。
+// 唯一出处约束见 audit_lhb_caliber.mjs B3-②（别处不得重复实现判据）。
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
-import { seatsOf, sideStats, seatTypeOf } from '../src/seats.js';
+import { seatsOf, sideStats, seatTypeOf, AGGREGATE_ROW_NAMES } from '../src/seats.js';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const appRaw = readFileSync(path.join(ROOT, 'app.js'), 'utf8');
@@ -27,8 +30,10 @@ const fnEnd = appRaw.indexOf('\n}', fnStart) + 2;
 assert.ok(fnStart > 0 && fnEnd > fnStart, 'app.js 必须有 seatsMod 桥接函数');
 const fnText = appRaw.slice(fnStart, fnEnd);
 
-// vm 执行：window.Seats 缺位 → 走降级副本分支（正是要测的那条路径）
-const ctx = { window: {} };
+// vm 执行：window.Seats 缺位 → 走降级副本分支（正是要测的那条路径）。
+// ASENT_AGG_ROW_NAMES 按生产同款挂载（index.html 模块脚本挂主模块词表）——
+// 副本的汇总行判据是同源读取，不是内联复制（审计 B3-②）。
+const ctx = { window: { ASENT_AGG_ROW_NAMES: AGGREGATE_ROW_NAMES } };
 vm.createContext(ctx);
 vm.runInContext(fnText + '\nwindow.__seatsFallback = seatsMod();', ctx);
 const FB = ctx.window.__seatsFallback;

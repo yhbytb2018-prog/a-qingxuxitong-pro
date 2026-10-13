@@ -391,6 +391,9 @@
        保证屏幕上的解析结果与 Node 侧测试/报告完全同源。 -->
   <script type="module">
     import * as Seats from './src/seats.js';
+    // 类别汇总行词表：先于 window.Seats 挂载，供 app.js 经典脚本降级副本读取
+    // （审计 B3-② 约束：判据唯一出处 src/seats.js，副本不得内联复制词表）。
+    window.ASENT_AGG_ROW_NAMES = Seats.AGGREGATE_ROW_NAMES;
     window.Seats = Seats;
     window.dispatchEvent(new Event('seats-ready'));
   </script>

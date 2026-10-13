@@ -34,7 +34,9 @@ export const SIDE = { BUY: 'b', SELL: 's' };
  * 判据：名称**完全等于**这些投资者类别词（不做包含匹配）——真实席位名再短也带券商主体或
  * 「营业部/分公司/专用/总部」，不会恰好只有这几个词，所以全等匹配足够且不会误杀。
  */
-const AGGREGATE_ROW_NAMES = new Set([
+// 词表导出：index.html 模块脚本将其挂到 window.ASENT_AGG_ROW_NAMES 供 app.js 经典脚本
+// 降级副本读取——经典侧不得内联复制此名单（audit_lhb_caliber B3-②：判据唯一出处）。
+export const AGGREGATE_ROW_NAMES = new Set([
   '自然人', '机构', '中小投资者', '其他自然人', '其他机构', '专业机构', '个人投资者', '非金融类上市公司',
 ]);
 export function isAggregateSeatRow(name) {

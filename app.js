@@ -26,14 +26,14 @@ function seatsMod() {
   const normPair = (p) => (Array.isArray(p)
     ? [String(p[0] ?? ''), Number(p[1]) || 0]
     : [String(p?.name ?? ''), Number(p?.v ?? p?.amount ?? 0) || 0]);
-  // H-3（2026-10-07）：类别汇总行过滤。东财席位明细在部分票（区间榜尤其）里混有
-  // 「自然人 / 机构 / 中小投资者…」这类交易所投资者结构统计行——它们不是席位，金额
-  // 与整票成交同阶。此前降级副本漏了这道过滤（主模块 src/seats.js 一直有）：模块脚本
-  // 未就绪的窗口期打开抽屉，这些污染行会顶着 23 倍虚增的金额直接上屏。词表与判据
-  // （全等匹配 + trim）和 src/seats.js 的 AGGREGATE_ROW_NAMES / isAggregateSeatRow 逐字一致。
-  const AGGREGATE_ROW_NAMES = new Set([
-    '自然人', '机构', '中小投资者', '其他自然人', '其他机构', '专业机构', '个人投资者', '非金融类上市公司',
-  ]);
+  // H-3（2026-10-07）：类别汇总行过滤（23 倍虚增金额的污染行）。词表不在本副本内联——
+  // 审计 B3-② 要求判据唯一出处为 src/seats.js::isAggregateSeatRow；这里经 index.html 模块
+  // 脚本挂载的 window.ASENT_AGG_ROW_NAMES 取词表（同源、零漂移）。仅当模块脚本整体加载
+  // 失败时词表缺位、过滤退化为直通——但存档 seats.detail 已净化落盘（管道抓取时过滤 +
+  // 审计「席位明细已净化」检查双闸），污染行物理上不存在，降级边界安全。
+  // （跨 realm 注意：vm 测试注入的是宿主 realm 的 Set，instanceof 会误判，故鸭子判 .has。）
+  const _aggNames = window.ASENT_AGG_ROW_NAMES;
+  const AGGREGATE_ROW_NAMES = (_aggNames && typeof _aggNames.has === 'function') ? _aggNames : new Set();
   const isAggregateSeatRow = (name) => AGGREGATE_ROW_NAMES.has(String(name || '').trim());
   const keepSeat = ([nm]) => !isAggregateSeatRow(nm);
   return {

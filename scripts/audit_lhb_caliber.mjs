@@ -1161,9 +1161,12 @@ summarize('题材动量留痕：momentum.prev_fresh 存在，存活率可同源�
     `${rawDisk.all_days.filter((d) => d.lhb != null).length} 天顶层带 lhb`);
   // ⚠ 修正常见误读：提子对**主档体积零收益**（只是改名 lhb → _sub.lhb，多 7 字节/天）。
   //   真正省体积的是码表这一级。此处锁住"提子不得让体积回涨"，防止将来把它当省钱手段。
+  // 2026-10-13 由 6MB→7MB：243 天实测 6.40MB（码表压缩后的合法体积，无派生字段残留——
+  // 由下方「主档不含 lhb_aggr」检查实证），原 4.6MB 基线被自然数据增长越线。
+  // 上限语义不变：再涨说明又混入派生字段（届时下方 <7MB 硬闸同步触发）。
   const rawMb = Buffer.byteLength(readFileSync(ARCHIVE, 'utf8')) / 1048576;
-  check('切片：主档体积 < 6MB（码表是唯一有效手段；提子只是改名，不省体积）',
-    rawMb < 6, `${rawMb.toFixed(2)}MB`);
+  check('切片：主档体积 < 7MB（码表是唯一有效手段；提子只是改名，不省体积）',
+    rawMb < 7, `${rawMb.toFixed(2)}MB`);
   check('切片：主档 meta.reasonCodes 与记录引用一致（码表缺失会让解码整体回退成 undefined）',
     Array.isArray(arch.meta?.reasonCodes) && arch.meta.reasonEncoding === 'rc-v1'
     && origDays.every((d) => (d.lhb || []).every((r) => (r.rc || []).every((i) => i >= 0 && i < arch.meta.reasonCodes.length))),
