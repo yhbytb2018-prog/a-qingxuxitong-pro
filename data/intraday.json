@@ -1,163 +1,43 @@
 {
   "version": 1,
   "kind": "intraday",
-  "tradeDate": "2026-10-12",
-  "capturedAt": "2026-10-12T06:48:38.577Z",
-  "capturedAtBJ": "2026-10-12 14:48",
+  "tradeDate": "2026-10-14",
+  "capturedAt": "2026-10-14T05:38:47.478Z",
+  "capturedAtBJ": "2026-10-14 13:38",
   "phase": "live",
   "caliberNote": "盘中快照：数值为抓取时刻的实时值，未定盘；禁止用于情绪因子/分位/回测（那些一律用收盘口径的 archive.json）。",
   "hot": {
-    "count": 50,
-    "srcDate": "2026-10-12",
+    "count": 41,
+    "srcDate": "2026-10-14",
     "rows": [
       {
-        "code": "601127",
-        "name": "赛力斯",
-        "reason": "海外出海+宁德合作+华为合作",
+        "code": "601116",
+        "name": "三江购物",
+        "reason": "社区生鲜+冷链物流+即时零售",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002919",
-        "name": "名臣健康",
-        "reason": "网络游戏+微信小游戏+日化双主业",
+        "code": "002029",
+        "name": "七匹狼",
+        "reason": "夹克男装+投资科技+基金备案+海峡两岸",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002591",
-        "name": "恒大高新",
-        "reason": "钠电材料+硅碳负极+AI算力服务器",
+        "code": "603058",
+        "name": "永吉股份",
+        "reason": "AIGC短剧+管制药品+半年报增长",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "603968",
-        "name": "醋化股份",
-        "reason": "染料+安赛蜜+精细化工+食品饲料添加剂",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603230",
-        "name": "内蒙新华",
-        "reason": "出版发行+教材教辅+文化消费",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603336",
-        "name": "宏辉果蔬",
-        "reason": "创新药+果蔬供应链+速冻食品+苏州国资",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "001231",
-        "name": "农心科技",
-        "reason": "农药制剂+原药投产+海外登记",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "301658",
-        "name": "首航新能",
-        "reason": "储能系统+光伏逆变器+海外布局",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "002908",
-        "name": "德生科技",
-        "reason": "民生AI+社保服务+就医支付",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "600851",
-        "name": "海欣股份",
-        "reason": "股东变更+APDC+医药健康",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603232",
-        "name": "格尔软件",
-        "reason": "AI安全+抗量子密码+PKI安全",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603533",
-        "name": "掌阅科技",
-        "reason": "AI短剧+短剧出海+数字阅读",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "688004",
-        "name": "博汇科技",
-        "reason": "AI内容安全+视听大数据+传媒安全+协议转让",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "002264",
-        "name": "新华都",
-        "reason": "AI营销+电商酒类+直播电商",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603992",
-        "name": "松霖科技",
-        "reason": "机器人+智能硬件+智能厨卫+半年报增长",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "601595",
-        "name": "上海电影",
-        "reason": "AIGC+知识产权运营+院线经营",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "601929",
-        "name": "吉视传媒",
-        "reason": "智慧广电+AI微短剧+AI应用+算力租赁",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "601811",
-        "name": "新华文轩",
-        "reason": "出版传媒+数字教育+收购整合",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "603500",
-        "name": "祥和实业",
-        "reason": "轨道扣件+电容配件+智能检测",
+        "code": "000609",
+        "name": "*ST中迪",
+        "reason": "半导体封测+存储封测+房地产开发",
         "close": null,
         "change_pct": null,
         "huanshou": null
@@ -171,153 +51,129 @@
         "huanshou": null
       },
       {
-        "code": "301419",
-        "name": "阿莱德",
-        "reason": "光通信散热+重大资产重组+热管理材料",
+        "code": "601811",
+        "name": "新华文轩",
+        "reason": "出版传媒+数字教育+民族出版收购",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600560",
-        "name": "金自天正",
-        "reason": "冶金自动化+钢铁智能化+国有股东",
+        "code": "601858",
+        "name": "中国科传",
+        "reason": "AI应用+数字教育+出版+央企",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002990",
-        "name": "盛视科技",
-        "reason": "智算业务+机器人+智慧口岸",
+        "code": "000573",
+        "name": "粤宏远A",
+        "reason": "东莞地产+再生铅+产业转型",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "300829",
-        "name": "金丹科技",
-        "reason": "聚乳酸+乳酸提价+可降解材料",
+        "code": "603598",
+        "name": "引力传媒",
+        "reason": "AI短剧+全域营销+AI用研",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002692",
-        "name": "远程股份",
-        "reason": "电线电缆+数据中心电缆+电网应用+参股半导体",
+        "code": "300299",
+        "name": "富春股份",
+        "reason": "游戏出海+精品IP+扭亏为盈",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002576",
-        "name": "通达动力",
-        "reason": "电机铁芯+风电+机器人概念+新能源汽车",
+        "code": "603656",
+        "name": "泰禾智能",
+        "reason": "增持+储能+智能分选",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002531",
-        "name": "天顺风能",
-        "reason": "海上风电+海工装备+油气船舶",
+        "code": "605318",
+        "name": "法狮龙",
+        "reason": "AI算力+词元服务+集成吊顶",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "603032",
-        "name": "德新科技",
-        "reason": "锂电模具+固态电池+机器人减速器",
+        "code": "600391",
+        "name": "航发科技",
+        "reason": "航空发动机+长江1000A+外贸转包",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600192",
-        "name": "长城电工",
-        "reason": "输配电设备+核电项目+资产剥离",
+        "code": "603533",
+        "name": "掌阅科技",
+        "reason": "AI短剧+短剧出海+数字阅读",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002441",
-        "name": "众业达",
-        "reason": "工业电气分销+电网设备+业绩增长",
+        "code": "001299",
+        "name": "美能能源",
+        "reason": "城镇燃气+智慧燃气+工商业储能",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "301030",
-        "name": "*ST仕净",
-        "reason": "预重整+氨回收+环保设备",
+        "code": "301132",
+        "name": "满坤科技",
+        "reason": "AI服务器电源PCB+光模块PCB+回购上限上调",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "688517",
-        "name": "金冠电气",
-        "reason": "签订光储充协议+陶瓷基板+特高压+充电桩",
+        "code": "002813",
+        "name": "路畅科技",
+        "reason": "控制权变更+复牌+智能座舱+抬头显示",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "603528",
-        "name": "多伦科技",
-        "reason": "AI应用+人形机器人+智慧驾培",
+        "code": "300338",
+        "name": "*ST开元",
+        "reason": "预重整+职业教育+人工智能教育",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "001356",
-        "name": "富岭股份",
-        "reason": "塑料餐饮具+可降解材料+印尼产能",
+        "code": "600121",
+        "name": "郑州煤电",
+        "reason": "煤炭涨价+煤炭主业+国企控股",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "000892",
-        "name": "欢瑞世纪",
-        "reason": "AI漫剧+互动影游+影视制作",
+        "code": "000601",
+        "name": "韶能股份",
+        "reason": "清洁能源+算电协同+三季报预增",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600241",
-        "name": "时代万恒",
-        "reason": "新能源电池+圆柱锂电+辽宁国资",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "002696",
-        "name": "百洋股份",
-        "reason": "水产饲料+鱼粉涨价+青岛国资",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "001330",
-        "name": "博纳影业",
-        "reason": "AI电影+AI短剧+影视院线",
-        "close": null,
-        "change_pct": null,
-        "huanshou": null
-      },
-      {
-        "code": "605577",
-        "name": "龙版传媒",
-        "reason": "AI漫剧+数字出版+出版发行",
+        "code": "600252",
+        "name": "中恒集团",
+        "reason": "中药创新药+医药制造+回购注销",
         "close": null,
         "change_pct": null,
         "huanshou": null
@@ -331,6 +187,70 @@
         "huanshou": null
       },
       {
+        "code": "603258",
+        "name": "电魂网络",
+        "reason": "AI游戏+修仙时代+梦三国IP",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "000010",
+        "name": "*ST美丽",
+        "reason": "工程施工+智算服务+业绩减亏",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "600847",
+        "name": "万里股份",
+        "reason": "新能源锂电池+储能+铅酸蓄电池",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "002469",
+        "name": "三维化学",
+        "reason": "异辛酸项目+储能工程+硫磺回收",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "603096",
+        "name": "新经典",
+        "reason": "AI应用+自有IP+图书出版",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "603968",
+        "name": "醋化股份",
+        "reason": "乙腈涨价+安赛蜜+染料+食品饲料添加剂",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "600097",
+        "name": "开创国际",
+        "reason": "远洋捕捞+金枪鱼+南极磷虾",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "002917",
+        "name": "金奥博",
+        "reason": "并购+军工装备+民爆装备",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
         "code": "002343",
         "name": "慈文传媒",
         "reason": "微短剧+影视IP+江西国资",
@@ -339,73 +259,81 @@
         "huanshou": null
       },
       {
-        "code": "605287",
-        "name": "德才股份",
-        "reason": "AI漫剧+火山引擎合作+建筑装饰",
+        "code": "601188",
+        "name": "龙江交通",
+        "reason": "冰雪旅游保障+高速公路运营",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "605136",
-        "name": "丽人丽妆",
-        "reason": "化妆品电商+海外总代+业绩扭亏",
+        "code": "605189",
+        "name": "富春染织",
+        "reason": "业绩预增+筒子纱+染料+PEEK材料",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "603096",
-        "name": "新经典",
-        "reason": "图书出版+AI应用+内容IP",
+        "code": "600202",
+        "name": "哈空调",
+        "reason": "空冷器+飞翼式空冷+海外供应商",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600831",
-        "name": "广电网络",
-        "reason": "预重整+重整投资人+算力云网",
+        "code": "002860",
+        "name": "星帅尔",
+        "reason": "资产收购+精密刀具+家电零部件",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600825",
-        "name": "新华传媒",
-        "reason": "财联社重组+财经新媒体+图书发行",
+        "code": "002696",
+        "name": "百洋股份",
+        "reason": "水产饲料+鱼粉涨价+青岛国资+“羊”字辈",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600693",
-        "name": "东百集团",
-        "reason": "光芯片收购+光探测芯片+商业零售",
+        "code": "002552",
+        "name": "宝鼎科技",
+        "reason": "业绩预增+覆铜板+黄金采选",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002667",
-        "name": "*ST威领",
-        "reason": "复牌+要约收购+锂电材料+有色金属矿",
+        "code": "001318",
+        "name": "阳光乳业",
+        "reason": "低温乳品+冷链配送+新品研发",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "002242",
-        "name": "九阳股份",
-        "reason": "机器人投资+厨房小家电+产品创新",
+        "code": "000823",
+        "name": "超声电子",
+        "reason": "三季报预增+覆铜板+印制板+高阶HDI",
         "close": null,
         "change_pct": null,
         "huanshou": null
       },
       {
-        "code": "600812",
-        "name": "华北制药",
-        "reason": "鼠疫+抗感染药物+创新药研发",
+        "code": "000530",
+        "name": "冰山冷热",
+        "reason": "冰雪工程+数据中心液冷+储能温控+冷热设备",
+        "close": null,
+        "change_pct": null,
+        "huanshou": null
+      },
+      {
+        "code": "000668",
+        "name": "荣丰控股",
+        "reason": "控制权变更+复牌+要约收购+跨境物流",
         "close": null,
         "change_pct": null,
         "huanshou": null
@@ -413,73 +341,63 @@
     ]
   },
   "pools": {
-    "zt": 48,
-    "zb": 23,
-    "dt": 17,
-    "max_lb": 10,
-    "lb2": 18,
+    "zt": 38,
+    "zb": 19,
+    "dt": 5,
+    "max_lb": 4,
+    "lb2": 15,
     "zt_codes": [
-      "002242",
-      "600812",
-      "600831",
-      "603096",
-      "605136",
-      "605287",
-      "600693",
-      "600825",
-      "002343",
-      "300006",
-      "605577",
-      "001330",
+      "000530",
+      "000668",
+      "000823",
+      "001318",
+      "002552",
       "002696",
-      "600241",
-      "600851",
-      "001356",
-      "000892",
-      "603528",
-      "688517",
-      "601929",
-      "600192",
-      "603032",
-      "002441",
-      "002576",
-      "002531",
-      "002692",
-      "300829",
-      "002990",
-      "600560",
-      "601811",
-      "301419",
-      "301052",
-      "603500",
-      "603533",
-      "002264",
-      "601595",
-      "603992",
-      "688004",
-      "603232",
-      "002908",
-      "301658",
-      "001231",
-      "603336",
-      "603230",
+      "002860",
+      "600202",
+      "605189",
+      "002343",
+      "601188",
       "603968",
-      "002591",
-      "601127",
-      "002919"
+      "002917",
+      "603096",
+      "600097",
+      "002469",
+      "600847",
+      "603258",
+      "600252",
+      "300006",
+      "000601",
+      "600121",
+      "002813",
+      "301132",
+      "001299",
+      "603533",
+      "600391",
+      "605318",
+      "603656",
+      "300299",
+      "603598",
+      "000573",
+      "601858",
+      "601811",
+      "301052",
+      "603058",
+      "002029",
+      "601116"
     ],
-    "seal_pct": 67.6
+    "seal_pct": 66.7
   },
   "breadth": {
-    "up": 1169,
-    "down": 4034,
-    "flat": 86
+    "up": 1110,
+    "down": 4066,
+    "flat": 115
   },
   "sourcesFailed": [],
-  "prevCapturedAtBJ": "2026-10-09 14:53",
+  "prevCapturedAtBJ": "2026-10-12 14:48",
   "prevPools": {
-    "zt": 69,
-    "zb": 14,
-    "seal_pct": 83.1
+    "zt": 48,
+    "zb": 23,
+    "seal_pct": 67.6
   }
 }
