@@ -4,7 +4,7 @@
  "trigger": "schedule",
  "urgent": false,
  "date": "2026-10-12",
- "generated_at": "2026-10-13T07:30:48.488Z",
+ "generated_at": "2026-10-14T05:56:08.110Z",
  "generated_by": "ci",
  "status": "degraded",
  "track": "A",
@@ -15,7 +15,7 @@
    "global": "fresh",
    "backtest": "fresh",
    "ops_alerts": "fresh",
-   "intraday": "fresh",
+   "intraday": "stale",
    "paper_account": "missing"
   }
  },
@@ -136,13 +136,13 @@
    {
     "key": "a50",
     "name": "富时中国A50期货",
-    "chgPct": -0.010449,
+    "chgPct": -0.000519,
     "state": "ok"
    },
    {
     "key": "sox",
     "name": "费城半导体指数",
-    "chgPct": -0.026696,
+    "chgPct": -0.002288,
     "state": "ok"
    }
   ],
@@ -157,18 +157,18 @@
    "executed": true
   },
   "overnight_exposure": {
-   "a50_chgPct": -0.010449,
+   "a50_chgPct": -0.000519,
    "posGap": 0.05,
    "us_close": {
-    "dji": 0.003787,
-    "spx": -0.00055,
-    "ixic": -0.004395
+    "dji": -0.0034799999999999996,
+    "spx": -0.000229,
+    "ixic": -0.0015240000000000002
    },
    "cn_overnight": {
-    "hxc": -0.0038150000000000002,
-    "fxi": -0.0029210000000000004
+    "hxc": 0.001392,
+    "fxi": 0.000879
    },
-   "cnh_chgPct": 0.000075
+   "cnh_chgPct": 0.000044999999999999996
   },
   "key_levels": null,
   "events_today": null,
@@ -186,8 +186,7 @@
     "yesterday_chain_performance": 1.3,
     "warning_signals": [
      "昨涨停今日翻绿 49%、高位板晋级失败 40%，追高盈亏各半",
-     "大面 4 只：澳弘电子 -10%、协和电子 -10%、雪龙集团 -9.98%、中新赛克 -8.65%",
-     "宽度收窄（站上20日线仅 31.5%）"
+     "大面 4 只：澳弘电子 -10%、协和电子 -10%、雪龙集团 -9.98%、中新赛克 -8.65%"
     ]
    },
    "position_suggestion": "wait",
