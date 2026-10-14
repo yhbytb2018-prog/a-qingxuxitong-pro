@@ -133,6 +133,7 @@
    "distance_pp": 1.21,
    "basis": "归档轨 trackA.maxDd（运行回撤，非当日）"
   },
+  "simulation_stock": null,
   "status": "degraded"
  },
  "missing_notes": [

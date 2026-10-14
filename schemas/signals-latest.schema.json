@@ -31,7 +31,12 @@
     "  · asOf = 双轨账本末日，与 meta.tradeDate 不同步时以 asOf 为披露口径（旁路工具每日一跑，",
     "    盘中抓取时账本停在上一收盘日——如实披露不隐藏）；",
     "  · 跨档一致性（check_contract.mjs 守卫 crossCheckDualTrack）：段内 day/ledger/trackState 必须与",
-    "    dual_track_latest.json 逐字段一致（防「报告说 A、算的是 B」的 R4 口径分裂）。"
+    "    dual_track_latest.json 逐字段一致（防「报告说 A、算的是 B」的 R4 口径分裂）。",
+    "",
+    "★ 2026-10-14 契约修订（契约变更）：meta.staleReason 由 object|null 改为 string|null。",
+    "  生产端 src/freshness.js::staleReasonText 一直写人读文案（string|null），全部消费端",
+    "  （daily_report / error_boundary / opsalerts / pipeline 日志）按字符串消费——契约陈旧。",
+    "  漂移此前被主档提子断言（refreshMetaOnly 漏传 deflate）拦在审计步、从未跑到本门禁。"
   ],
   "type": "object",
   "required": [
@@ -55,7 +60,7 @@
         "source": { "type": "string" },
         "tradeDate": { "type": "string" },
         "stale": { "type": "boolean" },
-        "staleReason": { "type": ["object", "null"] },
+        "staleReason": { "type": ["string", "null"] },
         "phase": { "type": "string" },
         "phaseNote": { "type": "string" },
         "lastAttempt": {

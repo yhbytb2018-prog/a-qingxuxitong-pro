@@ -65,8 +65,13 @@ permissions:
   # （secrets 失效/网络墙）时的最后触达面——本工作流三班 smoke，异常静默一天的
   # 代价远大于一次 API 调用。
   issues: write
+  # actions: write（2026-10-14 部署链修复）：各提交步骤在 bot push 成功后经 Actions
+  # API 显式 dispatch deploy-pages——GITHUB_TOKEN 的 push 不产生 push 触发事件（2026-10-14
+  # 全量 run 实录：6/6 bot push 零触发、3/3 人工 push 全部触发），不能依赖 push 自动触发。
+  actions: write
   # pages/id-token 权限已移除（2026-10-06 部署治理）：Pages 部署收口至 deploy-pages.yml
-  # 单通道——本工作流回归纯数据生产，部署由数据提交（bot push）经 paths(data/**) 触发。
+  # 单通道——本工作流回归纯数据生产，各提交步骤 bot push 成功后经 Actions API 显式
+  # dispatch 部署（GITHUB_TOKEN 的 push 不产生触发事件，见上方 actions: write 注）。
 
 jobs:
   # ── ② 真实 API 冒烟：六源逐个真打（getharden/东财LHB/同花顺行业/腾讯指数/东财池/同花顺日K）──
@@ -166,6 +171,8 @@ jobs:
             if ! git diff --cached --quiet; then
               git commit -m "chore: 热点题材晨报 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
               git push
+              # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
+              curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
             fi
           else
             echo "非 08:30 窗口或当日热点新闻已出（UTC $HHMM），跳过"
@@ -341,6 +348,8 @@ jobs:
           else
             git commit -m "chore: 更新情绪数据 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
+            # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
+            curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
           fi
       # 放在提交之后：数据已安全落库，再判定滞后。真滞后 → 本次运行标红（GitHub 会发失败通知），
       # 避免「回退/跳过被容错吞掉、job 仍是绿」这种静默故障再次发生。
@@ -463,6 +472,8 @@ jobs:
           else
             git commit -m "chore: 盘中快照+AI报告 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
+            # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
+            curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
           fi
 
   premarket:
@@ -497,6 +508,8 @@ jobs:
           else
             git commit -m "chore: 盘前AI报告 $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
+            # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
+            curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
           fi
 
   us-close:
@@ -545,4 +558,6 @@ jobs:
           else
             git commit -m "chore: 外围(美股收盘档) $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git push
+            # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
+            curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
           fi

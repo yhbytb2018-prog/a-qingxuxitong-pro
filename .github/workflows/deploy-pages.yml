@@ -21,7 +21,10 @@ name: deploy-pages
 #      进行中的旧部署就地取消——接替旧形态「原生构建 superseded 自动取消」的职责，
 #      且真正管到 Actions 通道（旧机制只取消原生队列，管不到 daily 的 dist 部署，
 #      两通道照样互打——这正是本次收口要消灭的形态）。
-#   ③ daily.yml 的数据提交（bot push）命中 data/** → 自动触发本工作流，页面随数据刷新。
+#   ③ 部署触发双通道：人工 push 命中 paths 白名单即触发；daily.yml 各提交步骤
+#      （热点晨报/盘后/盘中/盘前/外围）在 bot push 成功后经 Actions API 显式
+#      dispatch 本工作流——GITHUB_TOKEN 的 push 不产生 push 触发事件（2026-10-14
+#      全量 run 实录：6/6 bot push 零触发、3/3 人工 push 全部触发）。
 #   ④ 手动通道 workflow_dispatch：改部署配置后想立即验证时用。
 #
 # ⚠ 启用前置（一次性，手工一击）：Settings → Pages → Build and deployment → Source

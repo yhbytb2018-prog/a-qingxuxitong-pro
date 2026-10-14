@@ -325,17 +325,21 @@ function refreshMetaOnly(dataPath, now, attempt) {
     console.log('[freshness] meta 未变化 |', f.state);
     return a;
   }
-  // 刷新 meta 也必须走压缩写盘，否则会把刚压好的主档「解压」回中文原文（体积翻数倍）。
-  // 这里重新编码是幂等的：entries 已带 rc 时 encodeDay 原样返回。
-  // H-4（2026-10-07）：原子替换——裸写 meta 刷新（全档重编码）中途被杀会留半截主档，
-  // 读取端 catch 会静默回退旧快照，损坏被降级成"旧但合法"。
-  atomicWriteJSON(dataPath, JSON.stringify(encodeArchive(a, buildReasonCodes(a.all_days))));
-  // 切片必须跟着刷新：首屏读的是 archive-index.json 的 meta（相位/新鲜度），
+  // 刷新 meta 必须与正常路径走**同一条**写盘函数（writeArchive：校验 + 码表 + 提子 +
+  // 切片 + 原子替换 H-4），两条写盘路径产出同一种形态。历史坑（2026-10-14 实录）：
+  // 这里曾用 encodeArchive 漏传 { deflate: true }，把提子态主档写回「lhb 顶层内联」——
+  // 口径守卫「主档写盘态 lhb 已提子」断言在 pipeline 自己写完后变红，盘后 build 在审计
+  // 步被拦，13 个盘后栏目（含次日预测）自 10-13 起停更。走到这里说明 meta 已变化
+  // （未变化上面已提前 return），重编码幂等：entries 已带 rc 时 encodeDay 原样返回。
+  try {
+    writeArchive(a, dataPath);
+  } catch (e) {
+    console.error('[freshness] meta 刷新写盘失败（保留既有主档，下次运行再刷）:', e.message);
+    return a;
+  }
+  // 切片随 writeArchive 同源重建：首屏读的是 archive-index.json 的 meta（相位/新鲜度），
   // 只更新主档会让页面顶部的相位标签与 STALE 标记停在旧值上——而这两者恰恰是
   // 「数据是否可信」的唯一提示，过期比没有更危险。
-  if (path.basename(dataPath) === 'archive.json') {
-    try { writeShards(a); } catch (e) { console.error('[split] 切片刷新失败:', e.message); }
-  }
   console.log('[freshness] meta 已刷新 |', f.state, '| stale =', a.meta.stale,
     a.meta.staleReason ? '| ' + a.meta.staleReason : '');
   return a;

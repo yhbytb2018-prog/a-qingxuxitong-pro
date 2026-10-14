@@ -1,11 +1,11 @@
 {
  "kind": "trading-calendar",
  "version": "1.0",
- "generatedAt": "2026-10-07T13:13:44.647Z",
+ "generatedAt": "2026-10-14T02:21:45.531Z",
  "source": "tencent-kline-derived",
  "upstream": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000001,day,2025-01-01,2027-12-31,640,qfq",
  "coveredFrom": "2025-01-02",
- "coveredTo": "2026-09-30",
+ "coveredTo": "2026-10-13",
  "years": [
   2025,
   2026
@@ -18,7 +18,7 @@
  "counts": {
   "trading": 0,
   "closed": 37,
-  "sessions": 424
+  "sessions": 428
  },
  "note": "休市日 = 上证指数在覆盖区间内的工作日中无日K的日期（由 scripts/fetch_calendar.mjs 反推）；trading = 有日K的周末日（调休补班）。周末默认休市，故不出现在 closed 中。超出 coveredTo 的日期由 src/calendar.js 回退到「非周末即交易日」。",
  "days": {
