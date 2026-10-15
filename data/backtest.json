@@ -1,9 +1,9 @@
 {
  "meta": {
-  "generatedAt": "2026-10-12T11:23:39.285Z",
+  "generatedAt": "2026-10-15T01:19:59.447Z",
   "formulaVersion": "v5.2-pro",
-  "tradeDate": "2026-10-12",
-  "days": 243,
+  "tradeDate": "2026-10-14",
+  "days": 244,
   "assets": [
    "上证指数",
    "深证成指",
@@ -11,17 +11,17 @@
   ],
   "signal": "七因子加权情绪分（权重取 src/config.js weights，与页面 emotion.value 同口径）",
   "costNote": "佣金 0.0003（双边）· 印花税 0.0005（卖出）· 滑点 0.0002；按仓位变动幅度计提",
-  "caveat": "样本仅 243 个交易日，年化/夏普等指标的统计意义有限，仅用于管线自检与参数对比，不构成投资建议。",
+  "caveat": "样本仅 244 个交易日，年化/夏普等指标的统计意义有限，仅用于管线自检与参数对比，不构成投资建议。",
   "sampleNote": {
-   "archiveDays": 243,
-   "backtestDays": 243,
+   "archiveDays": 244,
+   "backtestDays": 244,
    "excludedBackfillDays": 0,
    "klineRebuildDays": 223
   },
   "weightDrift": 0.075,
   "indexCoverage": {
-   "coveredDays": 243,
-   "totalDays": 243,
+   "coveredDays": 244,
+   "totalDays": 244,
    "ratio": 1
   }
  },
@@ -327,7 +327,8 @@
    "2026-09-29",
    "2026-09-30",
    "2026-10-08",
-   "2026-10-12"
+   "2026-10-12",
+   "2026-10-14"
   ],
   "emotion": [
    75.5,
@@ -572,7 +573,8 @@
    75.9,
    64.4,
    58.3,
-   48.6
+   48.6,
+   39.2
   ],
   "navBase": [
    1,
@@ -817,7 +819,8 @@
    0.9234,
    0.9233,
    0.9141,
-   0.9064
+   0.9064,
+   0.8974
   ],
   "navV52": [
    1,
@@ -1062,7 +1065,8 @@
    0.9848,
    0.985,
    0.9801,
-   0.9763
+   0.9763,
+   0.9716
   ],
   "navV53": [
    1,
@@ -1307,7 +1311,8 @@
    0.963,
    0.9629,
    0.958,
-   0.954
+   0.954,
+   0.9519
   ],
   "navHold": [
    1.0117,
@@ -1552,7 +1557,8 @@
    0.9748,
    0.9747,
    0.9552,
-   0.9391
+   0.9391,
+   0.9204
   ],
   "posV52": [
    0,
@@ -1796,6 +1802,7 @@
    0.38,
    0.3,
    0.5,
+   0.3,
    0.3,
    0.3
   ],
@@ -2042,7 +2049,8 @@
    0.1,
    0.3,
    0.25,
-   0.25
+   0.25,
+   0.1
   ]
  },
  "base": {
@@ -2055,15 +2063,15 @@
    "s_zbl": 0.1,
    "s_amt": 0.15
   },
-  "sharpe": -0.452,
-  "maxDd": 0.2046,
-  "calmar": -0.474,
-  "annual": -0.0969,
-  "total": -0.0936,
-  "winRate": 0.4895,
-  "profitRatio": 0.924,
-  "sortino": -0.614,
-  "emptyRatio": 0.0247
+  "sharpe": -0.505,
+  "maxDd": 0.2125,
+  "calmar": -0.498,
+  "annual": -0.1058,
+  "total": -0.1026,
+  "winRate": 0.4874,
+  "profitRatio": 0.916,
+  "sortino": -0.689,
+  "emptyRatio": 0.0246
  },
  "v52": {
   "w": {
@@ -2075,14 +2083,14 @@
    "s_zbl": 0.1,
    "s_amt": 0.15
   },
-  "sharpe": -0.089,
-  "maxDd": 0.1449,
-  "calmar": -0.169,
-  "annual": -0.0245,
-  "total": -0.0237,
-  "winRate": 0.5041,
-  "profitRatio": 0.986,
-  "sortino": -0.132,
+  "sharpe": -0.121,
+  "maxDd": 0.149,
+  "calmar": -0.197,
+  "annual": -0.0293,
+  "total": -0.0284,
+  "winRate": 0.5021,
+  "profitRatio": 0.98,
+  "sortino": -0.182,
   "emptyRatio": 0.0041
  },
  "v53": {
@@ -2095,14 +2103,14 @@
    "s_zbl": 0.1,
    "s_amt": 0.15
   },
-  "sharpe": -0.602,
-  "maxDd": 0.0962,
-  "calmar": -0.496,
-  "annual": -0.0477,
-  "total": -0.046,
-  "winRate": 0.4708,
-  "profitRatio": 0.897,
-  "sortino": -0.784,
+  "sharpe": -0.63,
+  "maxDd": 0.0982,
+  "calmar": -0.506,
+  "annual": -0.0496,
+  "total": -0.0481,
+  "winRate": 0.4689,
+  "profitRatio": 0.892,
+  "sortino": -0.821,
   "emptyRatio": 0.0123,
   "params": {
    "confirmDays": 1,
@@ -2112,7 +2120,7 @@
    "unknown": 2,
    "ebb": 42,
    "climax": 57,
-   "ice": 62,
+   "ice": 63,
    "recover": 40,
    "shift": 18,
    "neutral": 22
@@ -2130,14 +2138,14 @@
    "s_zbl": 0.1,
    "s_amt": 0.15
   },
-  "sharpe": -0.637,
-  "maxDd": 0.0968,
-  "calmar": -0.511,
-  "annual": -0.0495,
-  "total": -0.0477,
-  "winRate": 0.475,
-  "profitRatio": 0.89,
-  "sortino": -0.817,
+  "sharpe": -0.665,
+  "maxDd": 0.0987,
+  "calmar": -0.52,
+  "annual": -0.0514,
+  "total": -0.0498,
+  "winRate": 0.473,
+  "profitRatio": 0.886,
+  "sortino": -0.854,
   "emptyRatio": 0.0123,
   "params": {
    "mode": "partial",
@@ -2166,14 +2174,14 @@
    "s_zbl": 0.1,
    "s_amt": 0.15
   },
-  "sharpe": -0.575,
-  "maxDd": 0.0943,
-  "calmar": -0.484,
-  "annual": -0.0456,
-  "total": -0.044,
-  "winRate": 0.4708,
-  "profitRatio": 0.901,
-  "sortino": -0.747,
+  "sharpe": -0.588,
+  "maxDd": 0.0953,
+  "calmar": -0.488,
+  "annual": -0.0465,
+  "total": -0.045,
+  "winRate": 0.4689,
+  "profitRatio": 0.899,
+  "sortino": -0.764,
   "emptyRatio": 0.0123,
   "params": {
    "mode": "trailing",
@@ -2181,7 +2189,7 @@
    "activate": 1.05,
    "semantics": "浮盈 ≥5% 激活后，自持仓峰值回撤 ≥30% 次日离场（浮亏阶段不越权、归止损管）；离场不受仓位平滑约束"
   },
-  "triggeredDays": 1,
+  "triggeredDays": 2,
   "note": "同 v53tpPartial.note：零触发=指数腿无足够浮盈可保护，机制中性（无害）且已由夹具锁定语义。"
  },
  "best": {
@@ -2194,21 +2202,21 @@
    "s_zbl": 0.0625,
    "s_amt": 0.2188
   },
-  "sharpe": 0.094,
-  "maxDd": 0.1359,
-  "calmar": 0.022,
-  "annual": 0.003,
-  "total": 0.0029,
-  "winRate": 0.5041,
-  "profitRatio": 1.016,
-  "sortino": 0.146,
+  "sharpe": 0.054,
+  "maxDd": 0.1409,
+  "calmar": -0.022,
+  "annual": -0.0031,
+  "total": -0.003,
+  "winRate": 0.5021,
+  "profitRatio": 1.009,
+  "sortino": 0.083,
   "emptyRatio": 0.0041
  },
  "pareto": {
-  "count": 23,
-  "uniqueCount": 8878,
+  "count": 24,
+  "uniqueCount": 8879,
   "scanned": 78125,
-  "note": "扫描 78125 组、去重后 8878 个不同结果，非支配解 23 个",
+  "note": "扫描 78125 组、去重后 8879 个不同结果，非支配解 24 个",
   "rows": [
    {
     "w": {
@@ -2220,14 +2228,14 @@
      "s_zbl": 0.1304,
      "s_amt": 0.163
     },
-    "sharpe": 0.236,
-    "maxDd": 0.1469,
-    "calmar": 0.17,
-    "annual": 0.0249,
-    "total": 0.024,
-    "winRate": 0.5041,
-    "profitRatio": 1.04,
-    "sortino": 0.36,
+    "sharpe": 0.203,
+    "maxDd": 0.1511,
+    "calmar": 0.13,
+    "annual": 0.0197,
+    "total": 0.0191,
+    "winRate": 0.5021,
+    "profitRatio": 1.034,
+    "sortino": 0.311,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2241,14 +2249,14 @@
      "s_zbl": 0.12,
      "s_amt": 0.18
     },
-    "sharpe": 0.211,
-    "maxDd": 0.1469,
-    "calmar": 0.143,
-    "annual": 0.021,
-    "total": 0.0202,
-    "winRate": 0.5041,
-    "profitRatio": 1.035,
-    "sortino": 0.322,
+    "sharpe": 0.178,
+    "maxDd": 0.1511,
+    "calmar": 0.104,
+    "annual": 0.0158,
+    "total": 0.0153,
+    "winRate": 0.5021,
+    "profitRatio": 1.03,
+    "sortino": 0.272,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2262,14 +2270,14 @@
      "s_zbl": 0.1458,
      "s_amt": 0.1875
     },
-    "sharpe": 0.211,
-    "maxDd": 0.1464,
-    "calmar": 0.143,
-    "annual": 0.0209,
-    "total": 0.0202,
-    "winRate": 0.5041,
-    "profitRatio": 1.035,
-    "sortino": 0.321,
+    "sharpe": 0.178,
+    "maxDd": 0.1505,
+    "calmar": 0.105,
+    "annual": 0.0158,
+    "total": 0.0152,
+    "winRate": 0.5021,
+    "profitRatio": 1.03,
+    "sortino": 0.272,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2283,14 +2291,14 @@
      "s_zbl": 0.0606,
      "s_amt": 0.2121
     },
-    "sharpe": 0.197,
-    "maxDd": 0.1451,
-    "calmar": 0.129,
-    "annual": 0.0187,
-    "total": 0.0181,
-    "winRate": 0.5041,
-    "profitRatio": 1.033,
-    "sortino": 0.3,
+    "sharpe": 0.164,
+    "maxDd": 0.1492,
+    "calmar": 0.091,
+    "annual": 0.0136,
+    "total": 0.0131,
+    "winRate": 0.5021,
+    "profitRatio": 1.027,
+    "sortino": 0.251,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2304,14 +2312,14 @@
      "s_zbl": 0.0784,
      "s_amt": 0.1765
     },
-    "sharpe": 0.196,
-    "maxDd": 0.1451,
-    "calmar": 0.128,
-    "annual": 0.0186,
-    "total": 0.0179,
-    "winRate": 0.5041,
-    "profitRatio": 1.033,
-    "sortino": 0.3,
+    "sharpe": 0.163,
+    "maxDd": 0.1492,
+    "calmar": 0.09,
+    "annual": 0.0134,
+    "total": 0.013,
+    "winRate": 0.5021,
+    "profitRatio": 1.027,
+    "sortino": 0.251,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2325,14 +2333,14 @@
      "s_zbl": 0.087,
      "s_amt": 0.163
     },
-    "sharpe": 0.195,
-    "maxDd": 0.1451,
-    "calmar": 0.128,
-    "annual": 0.0185,
-    "total": 0.0179,
-    "winRate": 0.5041,
-    "profitRatio": 1.033,
-    "sortino": 0.299,
+    "sharpe": 0.163,
+    "maxDd": 0.1492,
+    "calmar": 0.089,
+    "annual": 0.0133,
+    "total": 0.0129,
+    "winRate": 0.5021,
+    "profitRatio": 1.027,
+    "sortino": 0.25,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2346,14 +2354,14 @@
      "s_zbl": 0.125,
      "s_amt": 0.2188
     },
-    "sharpe": 0.18,
-    "maxDd": 0.1445,
-    "calmar": 0.112,
-    "annual": 0.0162,
-    "total": 0.0156,
-    "winRate": 0.5041,
-    "profitRatio": 1.03,
-    "sortino": 0.275,
+    "sharpe": 0.149,
+    "maxDd": 0.1486,
+    "calmar": 0.074,
+    "annual": 0.011,
+    "total": 0.0107,
+    "winRate": 0.5021,
+    "profitRatio": 1.025,
+    "sortino": 0.227,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2367,14 +2375,14 @@
      "s_zbl": 0.1224,
      "s_amt": 0.2143
     },
-    "sharpe": 0.179,
-    "maxDd": 0.1436,
-    "calmar": 0.108,
-    "annual": 0.0156,
-    "total": 0.015,
-    "winRate": 0.5041,
-    "profitRatio": 1.03,
-    "sortino": 0.276,
+    "sharpe": 0.144,
+    "maxDd": 0.1477,
+    "calmar": 0.071,
+    "annual": 0.0104,
+    "total": 0.0101,
+    "winRate": 0.5021,
+    "profitRatio": 1.024,
+    "sortino": 0.222,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2388,56 +2396,56 @@
      "s_zbl": 0.0741,
      "s_amt": 0.2222
     },
-    "sharpe": 0.171,
-    "maxDd": 0.141,
-    "calmar": 0.102,
-    "annual": 0.0144,
-    "total": 0.0139,
-    "winRate": 0.5041,
-    "profitRatio": 1.029,
-    "sortino": 0.261,
+    "sharpe": 0.136,
+    "maxDd": 0.1452,
+    "calmar": 0.064,
+    "annual": 0.0093,
+    "total": 0.009,
+    "winRate": 0.5021,
+    "profitRatio": 1.023,
+    "sortino": 0.208,
     "emptyRatio": 0.0041,
     "np": true
    },
    {
     "w": {
-     "s_net": 0.1277,
-     "s_pos": 0.1277,
-     "s_brd": 0.2128,
-     "s_hot": 0.0638,
-     "s_zdt": 0.0957,
-     "s_zbl": 0.1489,
-     "s_amt": 0.2234
+     "s_net": 0.1395,
+     "s_pos": 0.093,
+     "s_brd": 0.186,
+     "s_hot": 0.0698,
+     "s_zdt": 0.1047,
+     "s_zbl": 0.1628,
+     "s_amt": 0.2442
     },
-    "sharpe": 0.17,
-    "maxDd": 0.137,
-    "calmar": 0.104,
-    "annual": 0.0143,
-    "total": 0.0137,
-    "winRate": 0.5041,
-    "profitRatio": 1.028,
-    "sortino": 0.258,
+    "sharpe": 0.135,
+    "maxDd": 0.1416,
+    "calmar": 0.064,
+    "annual": 0.009,
+    "total": 0.0088,
+    "winRate": 0.5021,
+    "profitRatio": 1.022,
+    "sortino": 0.207,
     "emptyRatio": 0.0041,
     "np": true
    },
    {
     "w": {
-     "s_net": 0.1622,
-     "s_pos": 0.1081,
-     "s_brd": 0.1622,
-     "s_hot": 0.0811,
-     "s_zdt": 0.1216,
-     "s_zbl": 0.0811,
-     "s_amt": 0.2838
+     "s_net": 0.1319,
+     "s_pos": 0.1538,
+     "s_brd": 0.1319,
+     "s_hot": 0.0659,
+     "s_zdt": 0.1319,
+     "s_zbl": 0.1538,
+     "s_amt": 0.2308
     },
-    "sharpe": 0.153,
-    "maxDd": 0.1367,
-    "calmar": 0.085,
-    "annual": 0.0117,
-    "total": 0.0112,
-    "winRate": 0.5041,
-    "profitRatio": 1.025,
-    "sortino": 0.233,
+    "sharpe": 0.128,
+    "maxDd": 0.1416,
+    "calmar": 0.056,
+    "annual": 0.008,
+    "total": 0.0077,
+    "winRate": 0.5021,
+    "profitRatio": 1.021,
+    "sortino": 0.196,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2451,14 +2459,14 @@
      "s_zbl": 0.0714,
      "s_amt": 0.1786
     },
-    "sharpe": 0.108,
-    "maxDd": 0.1362,
-    "calmar": 0.037,
-    "annual": 0.0051,
-    "total": 0.0049,
-    "winRate": 0.5041,
-    "profitRatio": 1.018,
-    "sortino": 0.164,
+    "sharpe": 0.066,
+    "maxDd": 0.1413,
+    "calmar": -0.007,
+    "annual": -0.001,
+    "total": -0.001,
+    "winRate": 0.5021,
+    "profitRatio": 1.011,
+    "sortino": 0.101,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2472,14 +2480,14 @@
      "s_zbl": 0.1111,
      "s_amt": 0.1667
     },
-    "sharpe": 0.096,
-    "maxDd": 0.136,
-    "calmar": 0.023,
-    "annual": 0.0032,
-    "total": 0.003,
-    "winRate": 0.5041,
-    "profitRatio": 1.016,
-    "sortino": 0.148,
+    "sharpe": 0.055,
+    "maxDd": 0.141,
+    "calmar": -0.021,
+    "annual": -0.0029,
+    "total": -0.0028,
+    "winRate": 0.5021,
+    "profitRatio": 1.009,
+    "sortino": 0.085,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2493,14 +2501,14 @@
      "s_zbl": 0.0625,
      "s_amt": 0.2188
     },
-    "sharpe": 0.094,
-    "maxDd": 0.1359,
-    "calmar": 0.022,
-    "annual": 0.003,
-    "total": 0.0029,
-    "winRate": 0.5041,
-    "profitRatio": 1.016,
-    "sortino": 0.146,
+    "sharpe": 0.054,
+    "maxDd": 0.1409,
+    "calmar": -0.022,
+    "annual": -0.0031,
+    "total": -0.003,
+    "winRate": 0.5021,
+    "profitRatio": 1.009,
+    "sortino": 0.083,
     "emptyRatio": 0.0041,
     "np": true
    },
@@ -2514,14 +2522,14 @@
      "s_zbl": 0.1188,
      "s_amt": 0.1782
     },
-    "sharpe": 0.223,
-    "maxDd": 0.1469,
-    "calmar": 0.155,
-    "annual": 0.0228,
-    "total": 0.022,
-    "winRate": 0.5041,
-    "profitRatio": 1.037,
-    "sortino": 0.339,
+    "sharpe": 0.19,
+    "maxDd": 0.1511,
+    "calmar": 0.117,
+    "annual": 0.0176,
+    "total": 0.017,
+    "winRate": 0.5021,
+    "profitRatio": 1.032,
+    "sortino": 0.29,
     "emptyRatio": 0.0041,
     "np": false
    }
@@ -3877,48 +3885,48 @@
   }
  },
  "mainLine": {
-  "tradeDate": "2026-10-12",
+  "tradeDate": "2026-10-14",
   "mains": [],
   "topIndustries": [
    {
-    "name": "影视院线",
-    "change_pct": 3.67
-   },
-   {
-    "name": "文化传媒",
-    "change_pct": 2.37
-   },
-   {
-    "name": "风电设备",
-    "change_pct": 2.34
-   },
-   {
-    "name": "银行",
-    "change_pct": 1.99
+    "name": "油气开采及服务",
+    "change_pct": 2.92
    },
    {
     "name": "游戏",
-    "change_pct": 0.86
+    "change_pct": 2.61
+   },
+   {
+    "name": "影视院线",
+    "change_pct": 1.68
+   },
+   {
+    "name": "文化传媒",
+    "change_pct": 1.48
+   },
+   {
+    "name": "煤炭开采加工",
+    "change_pct": 1.27
    }
   ],
   "threshold": {
-   "up_count_threshold": 10.818037274068082,
-   "density_threshold": 0.09811355164168487,
+   "up_count_threshold": 10.876905843280356,
+   "density_threshold": 0.09834173738325205,
    "mode": "dynamic",
    "samples": 60,
    "window": {
-    "up_mean": 6.966666666666667,
-    "up_std": 7.702741214802833,
-    "dn_mean": 0.06604387660003178,
-    "dn_std": 0.06413935008330618
+    "up_mean": 7.05,
+    "up_std": 7.653811686560712,
+    "dn_mean": 0.06680822302818484,
+    "dn_std": 0.06306702871013443
    }
   },
   "gating": {
    "market_state": "normal",
    "sentiment_state": "stable",
    "max_output": 2,
-   "base_up_count_threshold": 10.818037274068082,
-   "base_density_threshold": 0.09811355164168487
+   "base_up_count_threshold": 10.876905843280356,
+   "base_density_threshold": 0.09834173738325205
   }
  }
 }

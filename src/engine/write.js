@@ -34,6 +34,19 @@ export function writeArchive(archive, filePath) {
   if (!ok) {
     throw new Error('校验失败: ' + errors.join('; '));
   }
+  // 体积纪律（见 recalc_lhb_daily.mjs）：主档不持久化派生字段 lhb_aggr——
+  // 它可由 day.lhb 现算（caliberFromDay 缺失时本就回退现算）。历史坑（2026-10-15 实录）：
+  // 管道 live 跑把新一天的 lhb_aggr 原样带进主档，audit「主档不含 lhb_aggr」
+  // 每天盘后必红 → 数据不提交、reports_html 日报停更。剥离只在本写盘入口做
+  // （非变异副本），codec 的 encodeArchive/writeArchiveSafely 保持往返无损契约不动。
+  const cleaned = {
+    ...archive,
+    all_days: (archive.all_days || []).map((d) => {
+      if (!d || !Array.isArray(d.lhb_aggr)) return d;
+      const { lhb_aggr, ...rest } = d;
+      return rest;
+    }),
+  };
   // 码表压缩 + 提子：只在**落盘时**生效（内存里始终是中文原文，口径正则才不会失配）。
   // 主档与切片都写压缩态——它们都是读盘产物，读回来统一走 decodeArchive 还原。
   //
@@ -43,8 +56,8 @@ export function writeArchive(archive, filePath) {
   //   同一份存档有了两种形态，审计断言（"主档写盘态 lhb 已提子"）在
   //   pipeline 自己写完之后反而变红。两条写盘路径必须产出同一种形态。
   //   本次由 backfill_relative.mjs 走 writeArchive 回写存量档时暴露。
-  const codes = buildReasonCodes(archive.all_days);
-  const packed = encodeArchive(archive, codes, { deflate: true });
+  const codes = buildReasonCodes(cleaned.all_days);
+  const packed = encodeArchive(cleaned, codes, { deflate: true });
   // 紧凑写盘：`rc` 是数字下标数组，加 2 空格缩进会被 JSON 展开成一行一个数字，
   // 缩进开销足以吃掉码表 92% 的收益（实测 4.99MB → 9.44MB，比压缩前还大）。
   // H-4（2026-10-07）：原子替换（同目录 tmp + rename）——裸写中途被杀会留半截主档，
