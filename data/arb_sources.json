@@ -1,43 +1,23 @@
 {
  "kind": "arb-sources",
  "version": 1,
- "generatedAt": "2026-10-12T11:33:59.136Z",
- "tradeDate": "2026-10-12",
+ "generatedAt": "2026-10-16T07:57:05.277Z",
+ "tradeDate": "2026-10-16",
  "source": "eastmoney-cb-list + tencent-quote",
  "counts": {
-  "listed": 318,
-  "quoted": 316
+  "listed": 319,
+  "quoted": 317
  },
  "items": [
   {
-   "bondCode": "123270",
-   "bondName": "盛德转债",
-   "price": 238,
-   "pct": 10.7,
-   "stockCode": "300881",
-   "stockName": "盛德鑫泰",
-   "stockPct": 0.44,
-   "gap": 10.26
-  },
-  {
-   "bondCode": "128044",
-   "bondName": "岭南转债",
-   "price": 71.372,
-   "pct": 0,
-   "stockCode": "002717",
-   "stockName": "*ST岭南",
-   "stockPct": -10,
-   "gap": 10
-  },
-  {
-   "bondCode": "118010",
-   "bondName": "洁特转债",
-   "price": 124.378,
-   "pct": -2.01,
-   "stockCode": "688026",
-   "stockName": "洁特生物",
-   "stockPct": -9.19,
-   "gap": 7.18
+   "bondCode": "123213",
+   "bondName": "天源转债",
+   "price": 225,
+   "pct": 0.9,
+   "stockCode": "301127",
+   "stockName": "武汉天源",
+   "stockPct": -8.57,
+   "gap": 9.47
   },
   {
    "bondCode": "123287",
@@ -46,8 +26,58 @@
    "pct": 0,
    "stockCode": "301132",
    "stockName": "满坤科技",
-   "stockPct": -6.2,
-   "gap": 6.2
+   "stockPct": -9.1,
+   "gap": 9.1
+  },
+  {
+   "bondCode": "123194",
+   "bondName": "百洋转债",
+   "price": 130.541,
+   "pct": 2.38,
+   "stockCode": "301015",
+   "stockName": "百洋医药",
+   "stockPct": -5.48,
+   "gap": 7.86
+  },
+  {
+   "bondCode": "123122",
+   "bondName": "富瀚转债",
+   "price": 118.9,
+   "pct": -0.49,
+   "stockCode": "300613",
+   "stockName": "富瀚微",
+   "stockPct": -8.01,
+   "gap": 7.52
+  },
+  {
+   "bondCode": "118010",
+   "bondName": "洁特转债",
+   "price": 121.523,
+   "pct": 1.27,
+   "stockCode": "688026",
+   "stockName": "洁特生物",
+   "stockPct": -5.34,
+   "gap": 6.61
+  },
+  {
+   "bondCode": "127053",
+   "bondName": "豪美转债",
+   "price": 200.5,
+   "pct": 7.98,
+   "stockCode": "002988",
+   "stockName": "豪美新材",
+   "stockPct": 1.49,
+   "gap": 6.49
+  },
+  {
+   "bondCode": "123268",
+   "bondName": "本川转债",
+   "price": 184.675,
+   "pct": -4.91,
+   "stockCode": "300964",
+   "stockName": "本川智能",
+   "stockPct": -10.79,
+   "gap": 5.88
   },
   {
    "bondCode": "127117",
@@ -56,8 +86,1168 @@
    "pct": 0,
    "stockCode": "002913",
    "stockName": "奥士康",
-   "stockPct": -6.05,
-   "gap": 6.05
+   "stockPct": -5.72,
+   "gap": 5.72
+  },
+  {
+   "bondCode": "127112",
+   "bondName": "尚太转债",
+   "price": 130.78,
+   "pct": 0.6,
+   "stockCode": "001301",
+   "stockName": "尚太科技",
+   "stockPct": -4.77,
+   "gap": 5.37
+  },
+  {
+   "bondCode": "123264",
+   "bondName": "双乐转债",
+   "price": 120.341,
+   "pct": -0.02,
+   "stockCode": "301036",
+   "stockName": "双乐股份",
+   "stockPct": -5.05,
+   "gap": 5.03
+  },
+  {
+   "bondCode": "118050",
+   "bondName": "航宇转债",
+   "price": 236.438,
+   "pct": 8.34,
+   "stockCode": "688239",
+   "stockName": "航宇科技",
+   "stockPct": 3.84,
+   "gap": 4.5
+  },
+  {
+   "bondCode": "113656",
+   "bondName": "嘉诚转债",
+   "price": 116.654,
+   "pct": 0.59,
+   "stockCode": "603535",
+   "stockName": "嘉诚国际",
+   "stockPct": -3.71,
+   "gap": 4.3
+  },
+  {
+   "bondCode": "113666",
+   "bondName": "爱玛转债",
+   "price": 118.18,
+   "pct": -0.08,
+   "stockCode": "603529",
+   "stockName": "爱玛科技",
+   "stockPct": -4.33,
+   "gap": 4.25
+  },
+  {
+   "bondCode": "118007",
+   "bondName": "山石转债",
+   "price": 135.722,
+   "pct": 0.03,
+   "stockCode": "688030",
+   "stockName": "山石网科",
+   "stockPct": -4.01,
+   "gap": 4.04
+  },
+  {
+   "bondCode": "113709",
+   "bondName": "振26转债",
+   "price": 170.824,
+   "pct": -4.16,
+   "stockCode": "603067",
+   "stockName": "振华股份",
+   "stockPct": -8.17,
+   "gap": 4.01
+  },
+  {
+   "bondCode": "123187",
+   "bondName": "超达转债",
+   "price": 178.01,
+   "pct": 0.68,
+   "stockCode": "301186",
+   "stockName": "超达装备",
+   "stockPct": -3.32,
+   "gap": 4
+  },
+  {
+   "bondCode": "118064",
+   "bondName": "联瑞转债",
+   "price": 268.014,
+   "pct": 2.02,
+   "stockCode": "688300",
+   "stockName": "XR联瑞新",
+   "stockPct": -1.84,
+   "gap": 3.86
+  },
+  {
+   "bondCode": "123247",
+   "bondName": "万凯转债",
+   "price": 156.411,
+   "pct": 5.21,
+   "stockCode": "301216",
+   "stockName": "万凯新材",
+   "stockPct": 1.52,
+   "gap": 3.69
+  },
+  {
+   "bondCode": "118022",
+   "bondName": "锂科转债",
+   "price": 111.882,
+   "pct": 0.44,
+   "stockCode": "688779",
+   "stockName": "五矿新能",
+   "stockPct": -3.2,
+   "gap": 3.64
+  },
+  {
+   "bondCode": "118059",
+   "bondName": "颀中转债",
+   "price": 158.055,
+   "pct": 2.57,
+   "stockCode": "688352",
+   "stockName": "颀中科技",
+   "stockPct": -0.96,
+   "gap": 3.53
+  },
+  {
+   "bondCode": "111002",
+   "bondName": "特纸转债",
+   "price": 129.293,
+   "pct": 1.91,
+   "stockCode": "605007",
+   "stockName": "五洲特纸",
+   "stockPct": -1.55,
+   "gap": 3.46
+  },
+  {
+   "bondCode": "118076",
+   "bondName": "先锋转债",
+   "price": 150.811,
+   "pct": 1.65,
+   "stockCode": "688605",
+   "stockName": "先锋精科",
+   "stockPct": -1.72,
+   "gap": 3.37
+  },
+  {
+   "bondCode": "113682",
+   "bondName": "益丰转债",
+   "price": 122.805,
+   "pct": 0.15,
+   "stockCode": "603939",
+   "stockName": "益丰药房",
+   "stockPct": -3.17,
+   "gap": 3.32
+  },
+  {
+   "bondCode": "111015",
+   "bondName": "东亚转债",
+   "price": 125.996,
+   "pct": -0.53,
+   "stockCode": "605177",
+   "stockName": "东亚药业",
+   "stockPct": -3.84,
+   "gap": 3.31
+  },
+  {
+   "bondCode": "127092",
+   "bondName": "运机转债",
+   "price": 262,
+   "pct": 6.24,
+   "stockCode": "001288",
+   "stockName": "运机集团",
+   "stockPct": 2.94,
+   "gap": 3.3
+  },
+  {
+   "bondCode": "123183",
+   "bondName": "海顺转债",
+   "price": 126.043,
+   "pct": 0.64,
+   "stockCode": "300501",
+   "stockName": "海顺新材",
+   "stockPct": -2.5,
+   "gap": 3.14
+  },
+  {
+   "bondCode": "123118",
+   "bondName": "惠城转债",
+   "price": 624.749,
+   "pct": 9.41,
+   "stockCode": "300779",
+   "stockName": "惠城环保",
+   "stockPct": 6.29,
+   "gap": 3.12
+  },
+  {
+   "bondCode": "118051",
+   "bondName": "皓元转债",
+   "price": 253.348,
+   "pct": -2.45,
+   "stockCode": "688131",
+   "stockName": "皓元医药",
+   "stockPct": -5.48,
+   "gap": 3.03
+  },
+  {
+   "bondCode": "118074",
+   "bondName": "特宝转债",
+   "price": 135.672,
+   "pct": 1.08,
+   "stockCode": "688278",
+   "stockName": "特宝生物",
+   "stockPct": -1.94,
+   "gap": 3.02
+  },
+  {
+   "bondCode": "113660",
+   "bondName": "寿22转债",
+   "price": 122.206,
+   "pct": 1.61,
+   "stockCode": "603896",
+   "stockName": "寿仙谷",
+   "stockPct": -1.18,
+   "gap": 2.79
+  },
+  {
+   "bondCode": "123207",
+   "bondName": "冠中转债",
+   "price": 187.766,
+   "pct": 3.62,
+   "stockCode": "300948",
+   "stockName": "冠中生态",
+   "stockPct": 0.83,
+   "gap": 2.79
+  },
+  {
+   "bondCode": "118030",
+   "bondName": "睿创转债",
+   "price": 540.228,
+   "pct": 1.13,
+   "stockCode": "688002",
+   "stockName": "睿创微纳",
+   "stockPct": -1.64,
+   "gap": 2.77
+  },
+  {
+   "bondCode": "113659",
+   "bondName": "莱克转债",
+   "price": 128.504,
+   "pct": 1.66,
+   "stockCode": "603355",
+   "stockName": "莱克电气",
+   "stockPct": -1.09,
+   "gap": 2.75
+  },
+  {
+   "bondCode": "123263",
+   "bondName": "鼎捷转债",
+   "price": 138.131,
+   "pct": 0.05,
+   "stockCode": "300378",
+   "stockName": "鼎捷数智",
+   "stockPct": -2.68,
+   "gap": 2.73
+  },
+  {
+   "bondCode": "123267",
+   "bondName": "珂玛转债",
+   "price": 165.5,
+   "pct": 1.16,
+   "stockCode": "301611",
+   "stockName": "珂玛科技",
+   "stockPct": -1.56,
+   "gap": 2.72
+  },
+  {
+   "bondCode": "118070",
+   "bondName": "南芯转债",
+   "price": 129.323,
+   "pct": 0.87,
+   "stockCode": "688484",
+   "stockName": "南芯科技",
+   "stockPct": -1.83,
+   "gap": 2.7
+  },
+  {
+   "bondCode": "123157",
+   "bondName": "科蓝转债",
+   "price": 126.2,
+   "pct": 0.16,
+   "stockCode": "300663",
+   "stockName": "科蓝软件",
+   "stockPct": -2.54,
+   "gap": 2.7
+  },
+  {
+   "bondCode": "118044",
+   "bondName": "赛特转债",
+   "price": 134.336,
+   "pct": -1.94,
+   "stockCode": "688398",
+   "stockName": "赛特新材",
+   "stockPct": -4.55,
+   "gap": 2.61
+  },
+  {
+   "bondCode": "123104",
+   "bondName": "卫宁转债",
+   "price": 122,
+   "pct": 0.33,
+   "stockCode": "300253",
+   "stockName": "卫宁健康",
+   "stockPct": -2.28,
+   "gap": 2.61
+  },
+  {
+   "bondCode": "123284",
+   "bondName": "强达转债",
+   "price": 174.25,
+   "pct": -2.78,
+   "stockCode": "301628",
+   "stockName": "强达电路",
+   "stockPct": -5.38,
+   "gap": 2.6
+  },
+  {
+   "bondCode": "123109",
+   "bondName": "昌红转债",
+   "price": 119.87,
+   "pct": 0.69,
+   "stockCode": "300151",
+   "stockName": "昌红科技",
+   "stockPct": -1.85,
+   "gap": 2.54
+  },
+  {
+   "bondCode": "123266",
+   "bondName": "博士转债",
+   "price": 126.8,
+   "pct": 0.24,
+   "stockCode": "300622",
+   "stockName": "博士眼镜",
+   "stockPct": -2.05,
+   "gap": 2.29
+  },
+  {
+   "bondCode": "113678",
+   "bondName": "中贝转债",
+   "price": 128.862,
+   "pct": 1.67,
+   "stockCode": "603220",
+   "stockName": "中贝通信",
+   "stockPct": -0.61,
+   "gap": 2.28
+  },
+  {
+   "bondCode": "113636",
+   "bondName": "甬金转债",
+   "price": 125.753,
+   "pct": 0.89,
+   "stockCode": "603995",
+   "stockName": "甬金股份",
+   "stockPct": -1.38,
+   "gap": 2.27
+  },
+  {
+   "bondCode": "113643",
+   "bondName": "风语转债",
+   "price": 138.455,
+   "pct": 0.55,
+   "stockCode": "603466",
+   "stockName": "风语筑",
+   "stockPct": -1.71,
+   "gap": 2.26
+  },
+  {
+   "bondCode": "123090",
+   "bondName": "三诺转债",
+   "price": 111.647,
+   "pct": -0.02,
+   "stockCode": "300298",
+   "stockName": "三诺生物",
+   "stockPct": -2.26,
+   "gap": 2.24
+  },
+  {
+   "bondCode": "123144",
+   "bondName": "裕兴转债",
+   "price": 120.191,
+   "pct": 0.22,
+   "stockCode": "300305",
+   "stockName": "裕兴股份",
+   "stockPct": -2.02,
+   "gap": 2.24
+  },
+  {
+   "bondCode": "123289",
+   "bondName": "中科转债",
+   "price": 100,
+   "pct": 0,
+   "stockCode": "301175",
+   "stockName": "中科环保",
+   "stockPct": -2.23,
+   "gap": 2.23
+  },
+  {
+   "bondCode": "127113",
+   "bondName": "长高转债",
+   "price": 133,
+   "pct": 1.4,
+   "stockCode": "002452",
+   "stockName": "长高电气",
+   "stockPct": -0.83,
+   "gap": 2.23
+  },
+  {
+   "bondCode": "113695",
+   "bondName": "华辰转债",
+   "price": 136.67,
+   "pct": 2.11,
+   "stockCode": "603097",
+   "stockName": "江苏华辰",
+   "stockPct": -0.11,
+   "gap": 2.22
+  },
+  {
+   "bondCode": "113704",
+   "bondName": "春风转债",
+   "price": 155.41,
+   "pct": 1.62,
+   "stockCode": "603129",
+   "stockName": "春风动力",
+   "stockPct": -0.54,
+   "gap": 2.16
+  },
+  {
+   "bondCode": "113616",
+   "bondName": "韦尔转债",
+   "price": 109.64,
+   "pct": -0.01,
+   "stockCode": "603501",
+   "stockName": "豪威集团",
+   "stockPct": -2.13,
+   "gap": 2.12
+  },
+  {
+   "bondCode": "118060",
+   "bondName": "瑞可转债",
+   "price": 144.843,
+   "pct": 1.12,
+   "stockCode": "688800",
+   "stockName": "瑞可达",
+   "stockPct": -0.93,
+   "gap": 2.05
+  },
+  {
+   "bondCode": "123172",
+   "bondName": "漱玉转债",
+   "price": 125.638,
+   "pct": 0.69,
+   "stockCode": "301017",
+   "stockName": "漱玉平民",
+   "stockPct": -1.34,
+   "gap": 2.03
+  },
+  {
+   "bondCode": "123091",
+   "bondName": "长海转债",
+   "price": 115.6,
+   "pct": 0.7,
+   "stockCode": "300196",
+   "stockName": "长海股份",
+   "stockPct": -1.29,
+   "gap": 1.99
+  },
+  {
+   "bondCode": "118072",
+   "bondName": "鼎通转债",
+   "price": 135.765,
+   "pct": 1.02,
+   "stockCode": "688668",
+   "stockName": "鼎通科技",
+   "stockPct": -0.94,
+   "gap": 1.96
+  },
+  {
+   "bondCode": "123214",
+   "bondName": "东宝转债",
+   "price": 122.42,
+   "pct": 0.59,
+   "stockCode": "300239",
+   "stockName": "东宝生物",
+   "stockPct": -1.36,
+   "gap": 1.95
+  },
+  {
+   "bondCode": "127118",
+   "bondName": "华纬转债",
+   "price": 100,
+   "pct": 0,
+   "stockCode": "001380",
+   "stockName": "华纬科技",
+   "stockPct": -1.94,
+   "gap": 1.94
+  },
+  {
+   "bondCode": "111022",
+   "bondName": "锡振转债",
+   "price": 144.612,
+   "pct": 3.75,
+   "stockCode": "605319",
+   "stockName": "无锡振华",
+   "stockPct": 1.82,
+   "gap": 1.93
+  },
+  {
+   "bondCode": "113661",
+   "bondName": "福22转债",
+   "price": 124.663,
+   "pct": 1.47,
+   "stockCode": "603806",
+   "stockName": "福斯特",
+   "stockPct": -0.46,
+   "gap": 1.93
+  },
+  {
+   "bondCode": "127104",
+   "bondName": "姚记转债",
+   "price": 131.591,
+   "pct": 0.74,
+   "stockCode": "002605",
+   "stockName": "姚记科技",
+   "stockPct": -1.18,
+   "gap": 1.92
+  },
+  {
+   "bondCode": "113673",
+   "bondName": "岱美转债",
+   "price": 178.345,
+   "pct": 0.35,
+   "stockCode": "603730",
+   "stockName": "岱美股份",
+   "stockPct": -1.54,
+   "gap": 1.89
+  },
+  {
+   "bondCode": "118061",
+   "bondName": "茂莱转债",
+   "price": 161.201,
+   "pct": 0.2,
+   "stockCode": "688502",
+   "stockName": "茂莱光学",
+   "stockPct": -1.69,
+   "gap": 1.89
+  },
+  {
+   "bondCode": "127103",
+   "bondName": "东南转债",
+   "price": 125.2,
+   "pct": 0.97,
+   "stockCode": "002135",
+   "stockName": "东南网架",
+   "stockPct": -0.88,
+   "gap": 1.85
+  },
+  {
+   "bondCode": "113043",
+   "bondName": "财通转债",
+   "price": 107.311,
+   "pct": -0.33,
+   "stockCode": "601108",
+   "stockName": "财通证券",
+   "stockPct": -2.14,
+   "gap": 1.81
+  },
+  {
+   "bondCode": "118024",
+   "bondName": "冠宇转债",
+   "price": 117.883,
+   "pct": -0.5,
+   "stockCode": "688772",
+   "stockName": "珠海冠宇",
+   "stockPct": -2.31,
+   "gap": 1.81
+  },
+  {
+   "bondCode": "113631",
+   "bondName": "皖天转债",
+   "price": 128.564,
+   "pct": 2.46,
+   "stockCode": "603689",
+   "stockName": "皖天然气",
+   "stockPct": 0.66,
+   "gap": 1.8
+  },
+  {
+   "bondCode": "110098",
+   "bondName": "南药转债",
+   "price": 130.453,
+   "pct": 1.34,
+   "stockCode": "600713",
+   "stockName": "南京医药",
+   "stockPct": -0.38,
+   "gap": 1.72
+  },
+  {
+   "bondCode": "123199",
+   "bondName": "山河转债",
+   "price": 132.709,
+   "pct": 0.7,
+   "stockCode": "300452",
+   "stockName": "山河药辅",
+   "stockPct": -1.02,
+   "gap": 1.72
+  },
+  {
+   "bondCode": "123220",
+   "bondName": "易瑞转债",
+   "price": 126.063,
+   "pct": 0.85,
+   "stockCode": "300942",
+   "stockName": "易瑞生物",
+   "stockPct": -0.79,
+   "gap": 1.64
+  },
+  {
+   "bondCode": "111012",
+   "bondName": "福新转债",
+   "price": 311.667,
+   "pct": 2.34,
+   "stockCode": "605488",
+   "stockName": "福莱新材",
+   "stockPct": 0.71,
+   "gap": 1.63
+  },
+  {
+   "bondCode": "118005",
+   "bondName": "天奈转债",
+   "price": 121.099,
+   "pct": 0.47,
+   "stockCode": "688116",
+   "stockName": "天奈科技",
+   "stockPct": -1.14,
+   "gap": 1.61
+  },
+  {
+   "bondCode": "113665",
+   "bondName": "汇通转债",
+   "price": 122.55,
+   "pct": 1.77,
+   "stockCode": "603176",
+   "stockName": "汇通集团",
+   "stockPct": 0.19,
+   "gap": 1.58
+  },
+  {
+   "bondCode": "118012",
+   "bondName": "微芯转债",
+   "price": 133.023,
+   "pct": 0.95,
+   "stockCode": "688321",
+   "stockName": "微芯生物",
+   "stockPct": -0.59,
+   "gap": 1.54
+  },
+  {
+   "bondCode": "127061",
+   "bondName": "美锦转债",
+   "price": 106,
+   "pct": 0.66,
+   "stockCode": "000723",
+   "stockName": "美锦能源",
+   "stockPct": -0.87,
+   "gap": 1.53
+  },
+  {
+   "bondCode": "113706",
+   "bondName": "金帝转债",
+   "price": 144.411,
+   "pct": 2.95,
+   "stockCode": "603270",
+   "stockName": "金帝股份",
+   "stockPct": 1.46,
+   "gap": 1.49
+  },
+  {
+   "bondCode": "113677",
+   "bondName": "华懋转债",
+   "price": 224.152,
+   "pct": -0.03,
+   "stockCode": "603306",
+   "stockName": "华懋科技",
+   "stockPct": -1.5,
+   "gap": 1.47
+  },
+  {
+   "bondCode": "123225",
+   "bondName": "翔丰转债",
+   "price": 130,
+   "pct": 1.09,
+   "stockCode": "300890",
+   "stockName": "翔丰华",
+   "stockPct": -0.38,
+   "gap": 1.47
+  },
+  {
+   "bondCode": "113058",
+   "bondName": "友发转债",
+   "price": 125.172,
+   "pct": 1.85,
+   "stockCode": "601686",
+   "stockName": "友发集团",
+   "stockPct": 0.4,
+   "gap": 1.45
+  },
+  {
+   "bondCode": "113699",
+   "bondName": "金25转债",
+   "price": 158.784,
+   "pct": 0.08,
+   "stockCode": "603979",
+   "stockName": "金诚信",
+   "stockPct": -1.37,
+   "gap": 1.45
+  },
+  {
+   "bondCode": "127047",
+   "bondName": "帝欧转债",
+   "price": 127.305,
+   "pct": -0.07,
+   "stockCode": "002798",
+   "stockName": "帝欧水华",
+   "stockPct": -1.52,
+   "gap": 1.45
+  },
+  {
+   "bondCode": "127068",
+   "bondName": "顺博转债",
+   "price": 114.98,
+   "pct": 2.66,
+   "stockCode": "002996",
+   "stockName": "顺博合金",
+   "stockPct": 1.21,
+   "gap": 1.45
+  },
+  {
+   "bondCode": "127040",
+   "bondName": "国泰转债",
+   "price": 114.83,
+   "pct": 1.17,
+   "stockCode": "002091",
+   "stockName": "江苏国泰",
+   "stockPct": -0.27,
+   "gap": 1.44
+  },
+  {
+   "bondCode": "111021",
+   "bondName": "奥锐转债",
+   "price": 127.123,
+   "pct": 0.97,
+   "stockCode": "605116",
+   "stockName": "奥锐特",
+   "stockPct": -0.43,
+   "gap": 1.4
+  },
+  {
+   "bondCode": "123150",
+   "bondName": "九强转债",
+   "price": 125.623,
+   "pct": 0.1,
+   "stockCode": "300406",
+   "stockName": "九强生物",
+   "stockPct": -1.3,
+   "gap": 1.4
+  },
+  {
+   "bondCode": "123178",
+   "bondName": "花园转债",
+   "price": 129.85,
+   "pct": 1.86,
+   "stockCode": "300401",
+   "stockName": "花园生物",
+   "stockPct": 0.46,
+   "gap": 1.4
+  },
+  {
+   "bondCode": "110081",
+   "bondName": "闻泰转债",
+   "price": 95.221,
+   "pct": 0.15,
+   "stockCode": "600745",
+   "stockName": "*ST闻泰",
+   "stockPct": -1.22,
+   "gap": 1.37
+  },
+  {
+   "bondCode": "111025",
+   "bondName": "圣泉转债",
+   "price": 128.924,
+   "pct": -0.03,
+   "stockCode": "605589",
+   "stockName": "圣泉集团",
+   "stockPct": -1.39,
+   "gap": 1.36
+  },
+  {
+   "bondCode": "110099",
+   "bondName": "福能转债",
+   "price": 139.627,
+   "pct": 1.16,
+   "stockCode": "600483",
+   "stockName": "福能股份",
+   "stockPct": -0.19,
+   "gap": 1.35
+  },
+  {
+   "bondCode": "113681",
+   "bondName": "镇洋转债",
+   "price": 132.743,
+   "pct": 0.46,
+   "stockCode": "603213",
+   "stockName": "镇洋发展",
+   "stockPct": -0.88,
+   "gap": 1.34
+  },
+  {
+   "bondCode": "123261",
+   "bondName": "普联转债",
+   "price": 139.791,
+   "pct": -0.01,
+   "stockCode": "300996",
+   "stockName": "普联软件",
+   "stockPct": -1.32,
+   "gap": 1.31
+  },
+  {
+   "bondCode": "118062",
+   "bondName": "天准转债",
+   "price": 142.003,
+   "pct": 0.63,
+   "stockCode": "688003",
+   "stockName": "天准科技",
+   "stockPct": -0.64,
+   "gap": 1.27
+  },
+  {
+   "bondCode": "123119",
+   "bondName": "康泰转2",
+   "price": 115.6,
+   "pct": 0.7,
+   "stockCode": "300601",
+   "stockName": "康泰生物",
+   "stockPct": -0.56,
+   "gap": 1.26
+  },
+  {
+   "bondCode": "111017",
+   "bondName": "蓝天转债",
+   "price": 124.385,
+   "pct": 1.39,
+   "stockCode": "605368",
+   "stockName": "蓝天燃气",
+   "stockPct": 0.15,
+   "gap": 1.24
+  },
+  {
+   "bondCode": "111004",
+   "bondName": "明新转债",
+   "price": 125.413,
+   "pct": 1.61,
+   "stockCode": "605068",
+   "stockName": "明新旭腾",
+   "stockPct": 0.38,
+   "gap": 1.23
+  },
+  {
+   "bondCode": "118016",
+   "bondName": "京源转债",
+   "price": 142.05,
+   "pct": 1.61,
+   "stockCode": "688096",
+   "stockName": "京源环保",
+   "stockPct": 0.41,
+   "gap": 1.2
+  },
+  {
+   "bondCode": "110097",
+   "bondName": "天润转债",
+   "price": 134.258,
+   "pct": -0.29,
+   "stockCode": "600419",
+   "stockName": "天润乳业",
+   "stockPct": -1.46,
+   "gap": 1.17
+  },
+  {
+   "bondCode": "113691",
+   "bondName": "和邦转债",
+   "price": 125.772,
+   "pct": 1.16,
+   "stockCode": "603077",
+   "stockName": "和邦生物",
+   "stockPct": 0,
+   "gap": 1.16
+  },
+  {
+   "bondCode": "123133",
+   "bondName": "佩蒂转债",
+   "price": 121.576,
+   "pct": 1.42,
+   "stockCode": "300673",
+   "stockName": "佩蒂股份",
+   "stockPct": 0.3,
+   "gap": 1.12
+  },
+  {
+   "bondCode": "123154",
+   "bondName": "火星转债",
+   "price": 118.421,
+   "pct": 0.7,
+   "stockCode": "300894",
+   "stockName": "火星人",
+   "stockPct": -0.42,
+   "gap": 1.12
+  },
+  {
+   "bondCode": "127070",
+   "bondName": "大中转债",
+   "price": 217.768,
+   "pct": -0.47,
+   "stockCode": "001203",
+   "stockName": "大中矿业",
+   "stockPct": -1.59,
+   "gap": 1.12
+  },
+  {
+   "bondCode": "127109",
+   "bondName": "电化转债",
+   "price": 139.8,
+   "pct": 0.31,
+   "stockCode": "002125",
+   "stockName": "湘潭电化",
+   "stockPct": -0.81,
+   "gap": 1.12
+  },
+  {
+   "bondCode": "118065",
+   "bondName": "艾为转债",
+   "price": 123.532,
+   "pct": 0.17,
+   "stockCode": "688798",
+   "stockName": "艾为电子",
+   "stockPct": -0.94,
+   "gap": 1.11
+  },
+  {
+   "bondCode": "123269",
+   "bondName": "金杨转债",
+   "price": 144.617,
+   "pct": 0.91,
+   "stockCode": "301210",
+   "stockName": "金杨精密",
+   "stockPct": -0.2,
+   "gap": 1.11
+  },
+  {
+   "bondCode": "118058",
+   "bondName": "微导转债",
+   "price": 312.108,
+   "pct": 0.99,
+   "stockCode": "688147",
+   "stockName": "微导纳米",
+   "stockPct": -0.11,
+   "gap": 1.1
+  },
+  {
+   "bondCode": "123250",
+   "bondName": "嘉益转债",
+   "price": 117.499,
+   "pct": 0.81,
+   "stockCode": "301004",
+   "stockName": "嘉益股份",
+   "stockPct": -0.29,
+   "gap": 1.1
+  },
+  {
+   "bondCode": "127046",
+   "bondName": "百润转债",
+   "price": 118.34,
+   "pct": 0.89,
+   "stockCode": "002568",
+   "stockName": "百润股份",
+   "stockPct": -0.21,
+   "gap": 1.1
+  },
+  {
+   "bondCode": "113051",
+   "bondName": "节能转债",
+   "price": 113.158,
+   "pct": 0.76,
+   "stockCode": "601016",
+   "stockName": "节能风电",
+   "stockPct": -0.33,
+   "gap": 1.09
+  },
+  {
+   "bondCode": "123243",
+   "bondName": "严牌转债",
+   "price": 258.466,
+   "pct": 0.58,
+   "stockCode": "301081",
+   "stockName": "严牌股份",
+   "stockPct": -0.49,
+   "gap": 1.07
+  },
+  {
+   "bondCode": "128142",
+   "bondName": "新乳转债",
+   "price": 109.871,
+   "pct": 0.02,
+   "stockCode": "002946",
+   "stockName": "新乳业",
+   "stockPct": -1.05,
+   "gap": 1.07
+  },
+  {
+   "bondCode": "123273",
+   "bondName": "三江转债",
+   "price": 268.599,
+   "pct": 1.28,
+   "stockCode": "301059",
+   "stockName": "金三江",
+   "stockPct": 0.24,
+   "gap": 1.04
+  },
+  {
+   "bondCode": "123193",
+   "bondName": "海能转债",
+   "price": 124.643,
+   "pct": 2.4,
+   "stockCode": "300787",
+   "stockName": "海能实业",
+   "stockPct": 1.39,
+   "gap": 1.01
+  },
+  {
+   "bondCode": "110087",
+   "bondName": "天业转债",
+   "price": 115.427,
+   "pct": 1.46,
+   "stockCode": "600075",
+   "stockName": "新疆天业",
+   "stockPct": 0.46,
+   "gap": 1
+  },
+  {
+   "bondCode": "118056",
+   "bondName": "路维转债",
+   "price": 201.928,
+   "pct": 3.14,
+   "stockCode": "688401",
+   "stockName": "路维光电",
+   "stockPct": 2.14,
+   "gap": 1
+  },
+  {
+   "bondCode": "111014",
+   "bondName": "李子转债",
+   "price": 118.285,
+   "pct": 0.21,
+   "stockCode": "605337",
+   "stockName": "李子园",
+   "stockPct": -0.77,
+   "gap": 0.98
+  },
+  {
+   "bondCode": "113680",
+   "bondName": "丽岛转债",
+   "price": 129.685,
+   "pct": 1.75,
+   "stockCode": "603937",
+   "stockName": "丽岛新材",
+   "stockPct": 0.78,
+   "gap": 0.97
+  },
+  {
+   "bondCode": "123257",
+   "bondName": "安克转债",
+   "price": 136.88,
+   "pct": 1.06,
+   "stockCode": "300866",
+   "stockName": "安克创新",
+   "stockPct": 0.09,
+   "gap": 0.97
+  },
+  {
+   "bondCode": "118015",
+   "bondName": "芯海转债",
+   "price": 120.922,
+   "pct": 0.67,
+   "stockCode": "688595",
+   "stockName": "芯海科技",
+   "stockPct": -0.28,
+   "gap": 0.95
+  },
+  {
+   "bondCode": "127099",
+   "bondName": "盛航转债",
+   "price": 126.99,
+   "pct": 1.39,
+   "stockCode": "001205",
+   "stockName": "盛航股份",
+   "stockPct": 0.44,
+   "gap": 0.95
+  },
+  {
+   "bondCode": "123155",
+   "bondName": "中陆转债",
+   "price": 121.652,
+   "pct": 0.85,
+   "stockCode": "301040",
+   "stockName": "中环海陆",
+   "stockPct": -0.09,
+   "gap": 0.94
+  },
+  {
+   "bondCode": "123271",
+   "bondName": "通合转债",
+   "price": 138,
+   "pct": 0.52,
+   "stockCode": "300491",
+   "stockName": "通合科技",
+   "stockPct": -0.41,
+   "gap": 0.93
+  },
+  {
+   "bondCode": "123281",
+   "bondName": "中仑转债",
+   "price": 136.861,
+   "pct": -0.19,
+   "stockCode": "301565",
+   "stockName": "中仑新材",
+   "stockPct": -1.09,
+   "gap": 0.9
+  },
+  {
+   "bondCode": "123158",
+   "bondName": "宙邦转债",
+   "price": 187.2,
+   "pct": -0.58,
+   "stockCode": "300037",
+   "stockName": "新宙邦",
+   "stockPct": -1.46,
+   "gap": 0.88
+  },
+  {
+   "bondCode": "127114",
+   "bondName": "宜化转债",
+   "price": 125.01,
+   "pct": 2.22,
+   "stockCode": "000422",
+   "stockName": "湖北宜化",
+   "stockPct": 1.36,
+   "gap": 0.86
   },
   {
    "bondCode": "123258",
@@ -66,48 +1256,18 @@
    "pct": 0,
    "stockCode": "300843",
    "stockName": "胜蓝股份",
-   "stockPct": -4.76,
-   "gap": 4.76
+   "stockPct": -0.85,
+   "gap": 0.85
   },
   {
-   "bondCode": "128138",
-   "bondName": "侨银转债",
-   "price": 130.251,
-   "pct": -0.45,
-   "stockCode": "002973",
-   "stockName": "侨银股份",
-   "stockPct": -5.01,
-   "gap": 4.56
-  },
-  {
-   "bondCode": "127044",
-   "bondName": "蒙娜转债",
-   "price": 112.243,
-   "pct": -0.35,
-   "stockCode": "002918",
-   "stockName": "蒙娜丽莎",
-   "stockPct": -4.89,
-   "gap": 4.54
-  },
-  {
-   "bondCode": "123207",
-   "bondName": "冠中转债",
-   "price": 184.7,
-   "pct": 3.97,
-   "stockCode": "300948",
-   "stockName": "冠中生态",
-   "stockPct": -0.42,
-   "gap": 4.39
-  },
-  {
-   "bondCode": "127047",
-   "bondName": "帝欧转债",
-   "price": 130.202,
-   "pct": -0.68,
-   "stockCode": "002798",
-   "stockName": "帝欧水华",
-   "stockPct": -4.76,
-   "gap": 4.08
+   "bondCode": "127084",
+   "bondName": "柳工转2",
+   "price": 132.655,
+   "pct": 0.85,
+   "stockCode": "000528",
+   "stockName": "柳    工",
+   "stockPct": 0,
+   "gap": 0.85
   },
   {
    "bondCode": "118077",
@@ -116,8 +1276,818 @@
    "pct": 0,
    "stockCode": "688150",
    "stockName": "莱特光电",
-   "stockPct": -4.04,
-   "gap": 4.04
+   "stockPct": -0.81,
+   "gap": 0.81
+  },
+  {
+   "bondCode": "127085",
+   "bondName": "韵达转债",
+   "price": 117.444,
+   "pct": 0.87,
+   "stockCode": "002120",
+   "stockName": "韵达股份",
+   "stockPct": 0.15,
+   "gap": 0.72
+  },
+  {
+   "bondCode": "113670",
+   "bondName": "金23转债",
+   "price": 121.005,
+   "pct": 0.69,
+   "stockCode": "603180",
+   "stockName": "金牌家居",
+   "stockPct": 0,
+   "gap": 0.69
+  },
+  {
+   "bondCode": "123262",
+   "bondName": "神宇转债",
+   "price": 123.597,
+   "pct": 0.64,
+   "stockCode": "300563",
+   "stockName": "神宇股份",
+   "stockPct": -0.05,
+   "gap": 0.69
+  },
+  {
+   "bondCode": "123259",
+   "bondName": "锦浪转02",
+   "price": 137.164,
+   "pct": 0.74,
+   "stockCode": "300763",
+   "stockName": "锦浪科技",
+   "stockPct": 0.08,
+   "gap": 0.66
+  },
+  {
+   "bondCode": "123179",
+   "bondName": "立高转债",
+   "price": 120.95,
+   "pct": 0.61,
+   "stockCode": "300973",
+   "stockName": "立高食品",
+   "stockPct": -0.04,
+   "gap": 0.65
+  },
+  {
+   "bondCode": "127105",
+   "bondName": "龙星转债",
+   "price": 124.48,
+   "pct": 1.42,
+   "stockCode": "002442",
+   "stockName": "龙星科技",
+   "stockPct": 0.81,
+   "gap": 0.61
+  },
+  {
+   "bondCode": "123165",
+   "bondName": "回天转债",
+   "price": 124.096,
+   "pct": 1.12,
+   "stockCode": "300041",
+   "stockName": "回天新材",
+   "stockPct": 0.52,
+   "gap": 0.6
+  },
+  {
+   "bondCode": "110084",
+   "bondName": "贵燃转债",
+   "price": 123.05,
+   "pct": 1.19,
+   "stockCode": "600903",
+   "stockName": "贵州燃气",
+   "stockPct": 0.64,
+   "gap": 0.55
+  },
+  {
+   "bondCode": "113067",
+   "bondName": "燃23转债",
+   "price": 122.103,
+   "pct": 1.66,
+   "stockCode": "601139",
+   "stockName": "深圳燃气",
+   "stockPct": 1.11,
+   "gap": 0.55
+  },
+  {
+   "bondCode": "113054",
+   "bondName": "绿动转债",
+   "price": 119.223,
+   "pct": 0.53,
+   "stockCode": "601330",
+   "stockName": "绿色动力",
+   "stockPct": 0,
+   "gap": 0.53
+  },
+  {
+   "bondCode": "113646",
+   "bondName": "永吉转债",
+   "price": 151.795,
+   "pct": -0.14,
+   "stockCode": "603058",
+   "stockName": "永吉股份",
+   "stockPct": -0.66,
+   "gap": 0.52
+  },
+  {
+   "bondCode": "123151",
+   "bondName": "康医转债",
+   "price": 116.254,
+   "pct": 0.13,
+   "stockCode": "300869",
+   "stockName": "康泰医学",
+   "stockPct": -0.39,
+   "gap": 0.52
+  },
+  {
+   "bondCode": "127072",
+   "bondName": "博实转债",
+   "price": 124.568,
+   "pct": 1,
+   "stockCode": "002698",
+   "stockName": "博实股份",
+   "stockPct": 0.48,
+   "gap": 0.52
+  },
+  {
+   "bondCode": "118052",
+   "bondName": "浩瀚转债",
+   "price": 132.823,
+   "pct": 1.8,
+   "stockCode": "688292",
+   "stockName": "浩瀚深度",
+   "stockPct": 1.31,
+   "gap": 0.49
+  },
+  {
+   "bondCode": "127030",
+   "bondName": "盛虹转债",
+   "price": 110.8,
+   "pct": 1.23,
+   "stockCode": "000301",
+   "stockName": "东方盛虹",
+   "stockPct": 0.75,
+   "gap": 0.48
+  },
+  {
+   "bondCode": "111026",
+   "bondName": "派克转债",
+   "price": 144.271,
+   "pct": 5.04,
+   "stockCode": "605123",
+   "stockName": "派克新材",
+   "stockPct": 4.57,
+   "gap": 0.47
+  },
+  {
+   "bondCode": "123192",
+   "bondName": "科思转债",
+   "price": 121.89,
+   "pct": 0.97,
+   "stockCode": "300856",
+   "stockName": "科思股份",
+   "stockPct": 0.5,
+   "gap": 0.47
+  },
+  {
+   "bondCode": "123131",
+   "bondName": "奥飞转债",
+   "price": 221.666,
+   "pct": -0.29,
+   "stockCode": "300738",
+   "stockName": "奥飞数据",
+   "stockPct": -0.74,
+   "gap": 0.45
+  },
+  {
+   "bondCode": "123195",
+   "bondName": "蓝晓转02",
+   "price": 157.049,
+   "pct": 1.4,
+   "stockCode": "300487",
+   "stockName": "蓝晓科技",
+   "stockPct": 0.95,
+   "gap": 0.45
+  },
+  {
+   "bondCode": "127055",
+   "bondName": "精装转债",
+   "price": 150.5,
+   "pct": 0.83,
+   "stockCode": "002989",
+   "stockName": "中天精装",
+   "stockPct": 0.38,
+   "gap": 0.45
+  },
+  {
+   "bondCode": "110095",
+   "bondName": "双良转债",
+   "price": 110.495,
+   "pct": 1.2,
+   "stockCode": "600481",
+   "stockName": "双良节能",
+   "stockPct": 0.79,
+   "gap": 0.41
+  },
+  {
+   "bondCode": "111009",
+   "bondName": "盛泰转债",
+   "price": 117.486,
+   "pct": 1.07,
+   "stockCode": "605138",
+   "stockName": "盛泰集团",
+   "stockPct": 0.69,
+   "gap": 0.38
+  },
+  {
+   "bondCode": "127059",
+   "bondName": "永东转2",
+   "price": 121.417,
+   "pct": 1.61,
+   "stockCode": "002753",
+   "stockName": "永东股份",
+   "stockPct": 1.23,
+   "gap": 0.38
+  },
+  {
+   "bondCode": "127108",
+   "bondName": "太能转债",
+   "price": 119.701,
+   "pct": 0.12,
+   "stockCode": "000591",
+   "stockName": "太阳能",
+   "stockPct": -0.24,
+   "gap": 0.36
+  },
+  {
+   "bondCode": "111003",
+   "bondName": "聚合转债",
+   "price": 131.111,
+   "pct": 1.36,
+   "stockCode": "605166",
+   "stockName": "聚合顺",
+   "stockPct": 1.02,
+   "gap": 0.34
+  },
+  {
+   "bondCode": "113702",
+   "bondName": "斯达转债",
+   "price": 131.8,
+   "pct": 0.55,
+   "stockCode": "603290",
+   "stockName": "斯达半导",
+   "stockPct": 0.23,
+   "gap": 0.32
+  },
+  {
+   "bondCode": "123124",
+   "bondName": "晶瑞转2",
+   "price": 119.491,
+   "pct": 0.41,
+   "stockCode": "300655",
+   "stockName": "晶瑞电材",
+   "stockPct": 0.1,
+   "gap": 0.31
+  },
+  {
+   "bondCode": "123189",
+   "bondName": "晓鸣转债",
+   "price": 129.518,
+   "pct": 1.98,
+   "stockCode": "300967",
+   "stockName": "晓鸣股份",
+   "stockPct": 1.67,
+   "gap": 0.31
+  },
+  {
+   "bondCode": "127060",
+   "bondName": "湘佳转债",
+   "price": 119.483,
+   "pct": 1.88,
+   "stockCode": "002982",
+   "stockName": "湘佳股份",
+   "stockPct": 1.57,
+   "gap": 0.31
+  },
+  {
+   "bondCode": "113688",
+   "bondName": "国检转债",
+   "price": 125.209,
+   "pct": 1.45,
+   "stockCode": "603060",
+   "stockName": "国检集团",
+   "stockPct": 1.15,
+   "gap": 0.3
+  },
+  {
+   "bondCode": "113633",
+   "bondName": "科沃转债",
+   "price": 110.806,
+   "pct": 0.03,
+   "stockCode": "603486",
+   "stockName": "科沃斯",
+   "stockPct": -0.26,
+   "gap": 0.29
+  },
+  {
+   "bondCode": "113070",
+   "bondName": "渝水转债",
+   "price": 121.688,
+   "pct": 1.01,
+   "stockCode": "601158",
+   "stockName": "重庆水务",
+   "stockPct": 0.73,
+   "gap": 0.28
+  },
+  {
+   "bondCode": "118013",
+   "bondName": "道通转债",
+   "price": 142.618,
+   "pct": 1.68,
+   "stockCode": "688208",
+   "stockName": "道通科技",
+   "stockPct": 1.41,
+   "gap": 0.27
+  },
+  {
+   "bondCode": "123138",
+   "bondName": "丝路转债",
+   "price": 122.997,
+   "pct": 0.15,
+   "stockCode": "300556",
+   "stockName": "丝路视觉",
+   "stockPct": -0.12,
+   "gap": 0.27
+  },
+  {
+   "bondCode": "113707",
+   "bondName": "科博转债",
+   "price": 138.379,
+   "pct": 2.69,
+   "stockCode": "603786",
+   "stockName": "科博达",
+   "stockPct": 2.45,
+   "gap": 0.24
+  },
+  {
+   "bondCode": "118073",
+   "bondName": "赛斯转债",
+   "price": 136.234,
+   "pct": 0.61,
+   "stockCode": "688480",
+   "stockName": "赛恩斯",
+   "stockPct": 0.39,
+   "gap": 0.22
+  },
+  {
+   "bondCode": "118042",
+   "bondName": "奥维转债",
+   "price": 119.815,
+   "pct": -0.45,
+   "stockCode": "688516",
+   "stockName": "奥特维",
+   "stockPct": -0.65,
+   "gap": 0.2
+  },
+  {
+   "bondCode": "110077",
+   "bondName": "洪城转债",
+   "price": 204.512,
+   "pct": 0.4,
+   "stockCode": "600461",
+   "stockName": "洪城环境",
+   "stockPct": 0.22,
+   "gap": 0.18
+  },
+  {
+   "bondCode": "123223",
+   "bondName": "九典转02",
+   "price": 127.928,
+   "pct": 0.89,
+   "stockCode": "300705",
+   "stockName": "九典制药",
+   "stockPct": 0.75,
+   "gap": 0.14
+  },
+  {
+   "bondCode": "127093",
+   "bondName": "章鼓转债",
+   "price": 124.76,
+   "pct": 0.28,
+   "stockCode": "002598",
+   "stockName": "ST章鼓",
+   "stockPct": 0.15,
+   "gap": 0.13
+  },
+  {
+   "bondCode": "123241",
+   "bondName": "欧通转债",
+   "price": 576,
+   "pct": -1.91,
+   "stockCode": "300870",
+   "stockName": "欧陆通",
+   "stockPct": -2.03,
+   "gap": 0.12
+  },
+  {
+   "bondCode": "123222",
+   "bondName": "博俊转债",
+   "price": 134.998,
+   "pct": 2.4,
+   "stockCode": "300926",
+   "stockName": "博俊科技",
+   "stockPct": 2.29,
+   "gap": 0.11
+  },
+  {
+   "bondCode": "113042",
+   "bondName": "上银转债",
+   "price": 115.527,
+   "pct": -0.32,
+   "stockCode": "601229",
+   "stockName": "上海银行",
+   "stockPct": -0.41,
+   "gap": 0.09
+  },
+  {
+   "bondCode": "118020",
+   "bondName": "芳源转债",
+   "price": 112.013,
+   "pct": 0.09,
+   "stockCode": "688148",
+   "stockName": "芳源股份",
+   "stockPct": 0,
+   "gap": 0.09
+  },
+  {
+   "bondCode": "123278",
+   "bondName": "合金转债",
+   "price": 146.984,
+   "pct": 1.35,
+   "stockCode": "300697",
+   "stockName": "电工合金",
+   "stockPct": 1.3,
+   "gap": 0.05
+  },
+  {
+   "bondCode": "123171",
+   "bondName": "共同转债",
+   "price": 123.326,
+   "pct": 1.21,
+   "stockCode": "300966",
+   "stockName": "共同药业",
+   "stockPct": 1.17,
+   "gap": 0.04
+  },
+  {
+   "bondCode": "123285",
+   "bondName": "润禾转02",
+   "price": 144.7,
+   "pct": -0.64,
+   "stockCode": "300727",
+   "stockName": "润禾材料",
+   "stockPct": -0.66,
+   "gap": 0.02
+  },
+  {
+   "bondCode": "128044",
+   "bondName": "岭南转债",
+   "price": 71.372,
+   "pct": 0,
+   "stockCode": "002717",
+   "stockName": "*ST岭南",
+   "stockPct": 0,
+   "gap": 0
+  },
+  {
+   "bondCode": "113056",
+   "bondName": "重银转债",
+   "price": 123.562,
+   "pct": 0.52,
+   "stockCode": "601963",
+   "stockName": "重庆银行",
+   "stockPct": 0.55,
+   "gap": -0.03
+  },
+  {
+   "bondCode": "128136",
+   "bondName": "立讯转债",
+   "price": 107.926,
+   "pct": 0,
+   "stockCode": "002475",
+   "stockName": "立讯精密",
+   "stockPct": 0.04,
+   "gap": -0.04
+  },
+  {
+   "bondCode": "113649",
+   "bondName": "丰山转债",
+   "price": 124.166,
+   "pct": 1.23,
+   "stockCode": "603810",
+   "stockName": "丰山集团",
+   "stockPct": 1.28,
+   "gap": -0.05
+  },
+  {
+   "bondCode": "123113",
+   "bondName": "仙乐转债",
+   "price": 112.069,
+   "pct": -0.01,
+   "stockCode": "300791",
+   "stockName": "仙乐健康",
+   "stockPct": 0.06,
+   "gap": -0.07
+  },
+  {
+   "bondCode": "123149",
+   "bondName": "通裕转债",
+   "price": 124.397,
+   "pct": 1.4,
+   "stockCode": "300185",
+   "stockName": "通裕重工",
+   "stockPct": 1.47,
+   "gap": -0.07
+  },
+  {
+   "bondCode": "123211",
+   "bondName": "阳谷转债",
+   "price": 144.997,
+   "pct": 1.56,
+   "stockCode": "300121",
+   "stockName": "阳谷华泰",
+   "stockPct": 1.65,
+   "gap": -0.09
+  },
+  {
+   "bondCode": "113652",
+   "bondName": "伟22转债",
+   "price": 116.779,
+   "pct": -0.11,
+   "stockCode": "603568",
+   "stockName": "伟明环保",
+   "stockPct": 0,
+   "gap": -0.11
+  },
+  {
+   "bondCode": "111000",
+   "bondName": "起帆转债",
+   "price": 125.198,
+   "pct": 1.69,
+   "stockCode": "605222",
+   "stockName": "起帆电缆",
+   "stockPct": 1.84,
+   "gap": -0.15
+  },
+  {
+   "bondCode": "111018",
+   "bondName": "华康转债",
+   "price": 120.955,
+   "pct": 0.85,
+   "stockCode": "605077",
+   "stockName": "华康股份",
+   "stockPct": 1.01,
+   "gap": -0.16
+  },
+  {
+   "bondCode": "123237",
+   "bondName": "佳禾转债",
+   "price": 127.338,
+   "pct": 1.22,
+   "stockCode": "300793",
+   "stockName": "佳禾智能",
+   "stockPct": 1.38,
+   "gap": -0.16
+  },
+  {
+   "bondCode": "113650",
+   "bondName": "博22转债",
+   "price": 118.25,
+   "pct": 0.44,
+   "stockCode": "603916",
+   "stockName": "苏博特",
+   "stockPct": 0.61,
+   "gap": -0.17
+  },
+  {
+   "bondCode": "127089",
+   "bondName": "晶澳转债",
+   "price": 110.428,
+   "pct": 0.3,
+   "stockCode": "002459",
+   "stockName": "晶澳科技",
+   "stockPct": 0.47,
+   "gap": -0.17
+  },
+  {
+   "bondCode": "127102",
+   "bondName": "浙建转债",
+   "price": 117.3,
+   "pct": 0.78,
+   "stockCode": "002761",
+   "stockName": "浙江建投",
+   "stockPct": 0.95,
+   "gap": -0.17
+  },
+  {
+   "bondCode": "127115",
+   "bondName": "炬申转债",
+   "price": 150.054,
+   "pct": 0.4,
+   "stockCode": "001202",
+   "stockName": "炬申股份",
+   "stockPct": 0.58,
+   "gap": -0.18
+  },
+  {
+   "bondCode": "113700",
+   "bondName": "海天转债",
+   "price": 121.949,
+   "pct": 1.03,
+   "stockCode": "603759",
+   "stockName": "海天股份",
+   "stockPct": 1.22,
+   "gap": -0.19
+  },
+  {
+   "bondCode": "127069",
+   "bondName": "小熊转债",
+   "price": 123.598,
+   "pct": 0.58,
+   "stockCode": "002959",
+   "stockName": "小熊电器",
+   "stockPct": 0.79,
+   "gap": -0.21
+  },
+  {
+   "bondCode": "123279",
+   "bondName": "天脉转债",
+   "price": 157.773,
+   "pct": -0.14,
+   "stockCode": "301626",
+   "stockName": "苏州天脉",
+   "stockPct": 0.11,
+   "gap": -0.25
+  },
+  {
+   "bondCode": "113674",
+   "bondName": "华设转债",
+   "price": 120.516,
+   "pct": 0.96,
+   "stockCode": "603018",
+   "stockName": "华设集团",
+   "stockPct": 1.22,
+   "gap": -0.26
+  },
+  {
+   "bondCode": "123076",
+   "bondName": "强力转债",
+   "price": 112.907,
+   "pct": -0.47,
+   "stockCode": "300429",
+   "stockName": "强力新材",
+   "stockPct": -0.21,
+   "gap": -0.26
+  },
+  {
+   "bondCode": "127078",
+   "bondName": "优彩转债",
+   "price": 141.664,
+   "pct": 0.56,
+   "stockCode": "002998",
+   "stockName": "优彩资源",
+   "stockPct": 0.82,
+   "gap": -0.26
+  },
+  {
+   "bondCode": "113615",
+   "bondName": "金诚转债",
+   "price": 609.489,
+   "pct": -1.64,
+   "stockCode": "603979",
+   "stockName": "金诚信",
+   "stockPct": -1.37,
+   "gap": -0.27
+  },
+  {
+   "bondCode": "110103",
+   "bondName": "申能转债",
+   "price": 138.9,
+   "pct": -0.39,
+   "stockCode": "600642",
+   "stockName": "申能股份",
+   "stockPct": -0.11,
+   "gap": -0.28
+  },
+  {
+   "bondCode": "123160",
+   "bondName": "泰福转债",
+   "price": 154.358,
+   "pct": 2.35,
+   "stockCode": "300992",
+   "stockName": "泰福泵业",
+   "stockPct": 2.63,
+   "gap": -0.28
+  },
+  {
+   "bondCode": "113701",
+   "bondName": "祥和转债",
+   "price": 139.542,
+   "pct": -0.01,
+   "stockCode": "603500",
+   "stockName": "祥和实业",
+   "stockPct": 0.29,
+   "gap": -0.3
+  },
+  {
+   "bondCode": "118067",
+   "bondName": "上26转债",
+   "price": 124.744,
+   "pct": 1.3,
+   "stockCode": "688533",
+   "stockName": "上声电子",
+   "stockPct": 1.6,
+   "gap": -0.3
+  },
+  {
+   "bondCode": "123117",
+   "bondName": "健帆转债",
+   "price": 109.362,
+   "pct": 0.17,
+   "stockCode": "300529",
+   "stockName": "健帆生物",
+   "stockPct": 0.47,
+   "gap": -0.3
+  },
+  {
+   "bondCode": "111020",
+   "bondName": "合顺转债",
+   "price": 125.755,
+   "pct": 0.69,
+   "stockCode": "605166",
+   "stockName": "聚合顺",
+   "stockPct": 1.02,
+   "gap": -0.33
+  },
+  {
+   "bondCode": "123168",
+   "bondName": "惠云转债",
+   "price": 123.1,
+   "pct": 0.95,
+   "stockCode": "300891",
+   "stockName": "惠云钛业",
+   "stockPct": 1.28,
+   "gap": -0.33
+  },
+  {
+   "bondCode": "111024",
+   "bondName": "澳弘转债",
+   "price": 247.654,
+   "pct": -6.95,
+   "stockCode": "605058",
+   "stockName": "澳弘电子",
+   "stockPct": -6.61,
+   "gap": -0.34
+  },
+  {
+   "bondCode": "113627",
+   "bondName": "太平转债",
+   "price": 109.596,
+   "pct": 0,
+   "stockCode": "603877",
+   "stockName": "太平鸟",
+   "stockPct": 0.34,
+   "gap": -0.34
+  },
+  {
+   "bondCode": "113710",
+   "bondName": "四方转债",
+   "price": 128.351,
+   "pct": 1.86,
+   "stockCode": "603339",
+   "stockName": "四方科技",
+   "stockPct": 2.21,
+   "gap": -0.35
+  },
+  {
+   "bondCode": "118031",
+   "bondName": "天23转债",
+   "price": 115.4,
+   "pct": 0.42,
+   "stockCode": "688599",
+   "stockName": "天合光能",
+   "stockPct": 0.77,
+   "gap": -0.35
+  },
+  {
+   "bondCode": "113640",
+   "bondName": "苏利转债",
+   "price": 124.277,
+   "pct": 1.9,
+   "stockCode": "603585",
+   "stockName": "苏利股份",
+   "stockPct": 2.26,
+   "gap": -0.36
   },
   {
    "bondCode": "127033",
@@ -126,538 +2096,68 @@
    "pct": 0,
    "stockCode": "002822",
    "stockName": "ST中装",
-   "stockPct": -3.83,
-   "gap": 3.83
+   "stockPct": 0.36,
+   "gap": -0.36
   },
   {
-   "bondCode": "123165",
-   "bondName": "回天转债",
-   "price": 128.4,
-   "pct": -1.63,
-   "stockCode": "300041",
-   "stockName": "回天新材",
-   "stockPct": -5.42,
-   "gap": 3.79
+   "bondCode": "118027",
+   "bondName": "宏图转债",
+   "price": 95.745,
+   "pct": -0.39,
+   "stockCode": "688066",
+   "stockName": "*ST航图",
+   "stockPct": 0,
+   "gap": -0.39
   },
   {
-   "bondCode": "111002",
-   "bondName": "特纸转债",
-   "price": 130.993,
-   "pct": -3.87,
-   "stockCode": "605007",
-   "stockName": "五洲特纸",
-   "stockPct": -7.23,
-   "gap": 3.36
+   "bondCode": "123253",
+   "bondName": "永贵转债",
+   "price": 122.76,
+   "pct": 1.56,
+   "stockCode": "300351",
+   "stockName": "永贵电器",
+   "stockPct": 1.95,
+   "gap": -0.39
   },
   {
-   "bondCode": "127031",
-   "bondName": "洋丰转债",
-   "price": 112.64,
-   "pct": -0.76,
-   "stockCode": "000902",
-   "stockName": "新洋丰",
-   "stockPct": -4.07,
-   "gap": 3.31
+   "bondCode": "118037",
+   "bondName": "上声转债",
+   "price": 122.591,
+   "pct": 1.2,
+   "stockCode": "688533",
+   "stockName": "上声电子",
+   "stockPct": 1.6,
+   "gap": -0.4
   },
   {
-   "bondCode": "111015",
-   "bondName": "东亚转债",
-   "price": 132.086,
-   "pct": -6.75,
-   "stockCode": "605177",
-   "stockName": "东亚药业",
-   "stockPct": -10,
-   "gap": 3.25
+   "bondCode": "128138",
+   "bondName": "侨银转债",
+   "price": 129.7,
+   "pct": 0.06,
+   "stockCode": "002973",
+   "stockName": "侨银股份",
+   "stockPct": 0.46,
+   "gap": -0.4
   },
   {
-   "bondCode": "123286",
-   "bondName": "国科转债",
-   "price": 100,
-   "pct": 0,
-   "stockCode": "301571",
-   "stockName": "国科天成",
-   "stockPct": -3.18,
-   "gap": 3.18
-  },
-  {
-   "bondCode": "110081",
-   "bondName": "闻泰转债",
-   "price": 98,
-   "pct": -1.66,
-   "stockCode": "600745",
-   "stockName": "*ST闻泰",
-   "stockPct": -4.8,
-   "gap": 3.14
-  },
-  {
-   "bondCode": "127030",
-   "bondName": "盛虹转债",
-   "price": 111.001,
-   "pct": -1.77,
-   "stockCode": "000301",
-   "stockName": "东方盛虹",
-   "stockPct": -4.91,
-   "gap": 3.14
-  },
-  {
-   "bondCode": "113700",
-   "bondName": "海天转债",
-   "price": 126.109,
-   "pct": -0.75,
-   "stockCode": "603759",
-   "stockName": "海天股份",
-   "stockPct": -3.64,
-   "gap": 2.89
-  },
-  {
-   "bondCode": "123235",
-   "bondName": "亿田转债",
-   "price": 171.999,
-   "pct": -5.91,
-   "stockCode": "300911",
-   "stockName": "亿田智能",
-   "stockPct": -8.8,
-   "gap": 2.89
-  },
-  {
-   "bondCode": "123285",
-   "bondName": "润禾转02",
-   "price": 156.65,
-   "pct": -3.15,
-   "stockCode": "300727",
-   "stockName": "润禾材料",
-   "stockPct": -5.97,
-   "gap": 2.82
-  },
-  {
-   "bondCode": "110087",
-   "bondName": "天业转债",
-   "price": 117.13,
-   "pct": -1.69,
-   "stockCode": "600075",
-   "stockName": "新疆天业",
-   "stockPct": -4.45,
-   "gap": 2.76
-  },
-  {
-   "bondCode": "110097",
-   "bondName": "天润转债",
-   "price": 139.346,
-   "pct": -0.24,
-   "stockCode": "600419",
-   "stockName": "天润乳业",
-   "stockPct": -3,
-   "gap": 2.76
-  },
-  {
-   "bondCode": "118020",
-   "bondName": "芳源转债",
-   "price": 115.665,
-   "pct": -1.21,
-   "stockCode": "688148",
-   "stockName": "芳源股份",
-   "stockPct": -3.86,
-   "gap": 2.65
-  },
-  {
-   "bondCode": "127105",
-   "bondName": "龙星转债",
-   "price": 127.061,
-   "pct": -1.62,
-   "stockCode": "002442",
-   "stockName": "龙星科技",
-   "stockPct": -4.26,
-   "gap": 2.64
-  },
-  {
-   "bondCode": "128136",
-   "bondName": "立讯转债",
-   "price": 107.95,
-   "pct": -0.06,
-   "stockCode": "002475",
-   "stockName": "立讯精密",
-   "stockPct": -2.67,
-   "gap": 2.61
-  },
-  {
-   "bondCode": "113680",
-   "bondName": "丽岛转债",
-   "price": 134.035,
-   "pct": -1.75,
-   "stockCode": "603937",
-   "stockName": "丽岛新材",
-   "stockPct": -4.33,
-   "gap": 2.58
+   "bondCode": "113647",
+   "bondName": "禾丰转债",
+   "price": 116.833,
+   "pct": 1.53,
+   "stockCode": "603609",
+   "stockName": "禾丰股份",
+   "stockPct": 1.95,
+   "gap": -0.42
   },
   {
    "bondCode": "123092",
    "bondName": "天壕转债",
-   "price": 115.328,
-   "pct": -0.45,
+   "price": 114.89,
+   "pct": 0.01,
    "stockCode": "300332",
    "stockName": "天壕能源",
-   "stockPct": -3.02,
-   "gap": 2.57
-  },
-  {
-   "bondCode": "118015",
-   "bondName": "芯海转债",
-   "price": 122.28,
-   "pct": -0.79,
-   "stockCode": "688595",
-   "stockName": "芯海科技",
-   "stockPct": -3.32,
-   "gap": 2.53
-  },
-  {
-   "bondCode": "127069",
-   "bondName": "小熊转债",
-   "price": 125.381,
-   "pct": -1.45,
-   "stockCode": "002959",
-   "stockName": "小熊电器",
-   "stockPct": -3.95,
-   "gap": 2.5
-  },
-  {
-   "bondCode": "113616",
-   "bondName": "韦尔转债",
-   "price": 109.653,
-   "pct": 0.04,
-   "stockCode": "603501",
-   "stockName": "豪威集团",
-   "stockPct": -2.35,
-   "gap": 2.39
-  },
-  {
-   "bondCode": "118035",
-   "bondName": "国力转债",
-   "price": 141.036,
-   "pct": -1.03,
-   "stockCode": "688103",
-   "stockName": "国力电子",
-   "stockPct": -3.36,
-   "gap": 2.33
-  },
-  {
-   "bondCode": "123196",
-   "bondName": "正元转02",
-   "price": 125.305,
-   "pct": 0.61,
-   "stockCode": "300645",
-   "stockName": "正元智慧",
-   "stockPct": -1.71,
-   "gap": 2.32
-  },
-  {
-   "bondCode": "111018",
-   "bondName": "华康转债",
-   "price": 122.299,
-   "pct": -0.65,
-   "stockCode": "605077",
-   "stockName": "华康股份",
-   "stockPct": -2.87,
-   "gap": 2.22
-  },
-  {
-   "bondCode": "113625",
-   "bondName": "江山转债",
-   "price": 115.46,
-   "pct": -0.08,
-   "stockCode": "603208",
-   "stockName": "江山欧派",
-   "stockPct": -2.29,
-   "gap": 2.21
-  },
-  {
-   "bondCode": "123216",
-   "bondName": "科顺转债",
-   "price": 122.372,
-   "pct": -0.99,
-   "stockCode": "300737",
-   "stockName": "科顺股份",
-   "stockPct": -3.16,
-   "gap": 2.17
-  },
-  {
-   "bondCode": "123288",
-   "bondName": "隆新转债",
-   "price": 100,
-   "pct": 0,
-   "stockCode": "301149",
-   "stockName": "隆华新材",
-   "stockPct": -2.12,
-   "gap": 2.12
-  },
-  {
-   "bondCode": "123178",
-   "bondName": "花园转债",
-   "price": 132.223,
-   "pct": -3.61,
-   "stockCode": "300401",
-   "stockName": "花园生物",
-   "stockPct": -5.67,
-   "gap": 2.06
-  },
-  {
-   "bondCode": "123179",
-   "bondName": "立高转债",
-   "price": 120.753,
-   "pct": -0.29,
-   "stockCode": "300973",
-   "stockName": "立高食品",
-   "stockPct": -2.35,
-   "gap": 2.06
-  },
-  {
-   "bondCode": "113659",
-   "bondName": "莱克转债",
-   "price": 128.724,
-   "pct": -1.68,
-   "stockCode": "603355",
-   "stockName": "莱克电气",
-   "stockPct": -3.69,
-   "gap": 2.01
-  },
-  {
-   "bondCode": "113693",
-   "bondName": "志邦转债",
-   "price": 120.681,
-   "pct": 0.08,
-   "stockCode": "603801",
-   "stockName": "志邦家居",
-   "stockPct": -1.9,
-   "gap": 1.98
-  },
-  {
-   "bondCode": "123213",
-   "bondName": "天源转债",
-   "price": 247.777,
-   "pct": -6.14,
-   "stockCode": "301127",
-   "stockName": "武汉天源",
-   "stockPct": -8.1,
-   "gap": 1.96
-  },
-  {
-   "bondCode": "127061",
-   "bondName": "美锦转债",
-   "price": 107.515,
-   "pct": -1.62,
-   "stockCode": "000723",
-   "stockName": "美锦能源",
-   "stockPct": -3.57,
-   "gap": 1.95
-  },
-  {
-   "bondCode": "110084",
-   "bondName": "贵燃转债",
-   "price": 126.872,
-   "pct": -2.37,
-   "stockCode": "600903",
-   "stockName": "贵州燃气",
-   "stockPct": -4.27,
-   "gap": 1.9
-  },
-  {
-   "bondCode": "127116",
-   "bondName": "瑞鹄转02",
-   "price": 100,
-   "pct": 0,
-   "stockCode": "002997",
-   "stockName": "瑞鹄模具",
-   "stockPct": -1.9,
-   "gap": 1.9
-  },
-  {
-   "bondCode": "113638",
-   "bondName": "台21转债",
-   "price": 118.724,
-   "pct": -0.48,
-   "stockCode": "603055",
-   "stockName": "台华新材",
-   "stockPct": -2.37,
-   "gap": 1.89
-  },
-  {
-   "bondCode": "127096",
-   "bondName": "泰坦转债",
-   "price": 397.252,
-   "pct": -2.82,
-   "stockCode": "003036",
-   "stockName": "泰坦股份",
-   "stockPct": -4.62,
-   "gap": 1.8
-  },
-  {
-   "bondCode": "113699",
-   "bondName": "金25转债",
-   "price": 179.006,
-   "pct": -3.16,
-   "stockCode": "603979",
-   "stockName": "金诚信",
-   "stockPct": -4.92,
-   "gap": 1.76
-  },
-  {
-   "bondCode": "123260",
-   "bondName": "卓镁转债",
-   "price": 138.347,
-   "pct": -3.23,
-   "stockCode": "301398",
-   "stockName": "星源卓镁",
-   "stockPct": -4.99,
-   "gap": 1.76
-  },
-  {
-   "bondCode": "127027",
-   "bondName": "能化转债",
-   "price": 109.894,
-   "pct": -0.17,
-   "stockCode": "000552",
-   "stockName": "甘肃能化",
-   "stockPct": -1.93,
-   "gap": 1.76
-  },
-  {
-   "bondCode": "123192",
-   "bondName": "科思转债",
-   "price": 122.414,
-   "pct": -0.07,
-   "stockCode": "300856",
-   "stockName": "科思股份",
-   "stockPct": -1.78,
-   "gap": 1.71
-  },
-  {
-   "bondCode": "113627",
-   "bondName": "太平转债",
-   "price": 110.232,
-   "pct": -0.26,
-   "stockCode": "603877",
-   "stockName": "太平鸟",
-   "stockPct": -1.95,
-   "gap": 1.69
-  },
-  {
-   "bondCode": "123180",
-   "bondName": "浙矿转债",
-   "price": 126.12,
-   "pct": -0.61,
-   "stockCode": "300837",
-   "stockName": "浙矿股份",
-   "stockPct": -2.3,
-   "gap": 1.69
-  },
-  {
-   "bondCode": "127114",
-   "bondName": "宜化转债",
-   "price": 127.607,
-   "pct": -1.86,
-   "stockCode": "000422",
-   "stockName": "湖北宜化",
-   "stockPct": -3.55,
-   "gap": 1.69
-  },
-  {
-   "bondCode": "123263",
-   "bondName": "鼎捷转债",
-   "price": 145.858,
-   "pct": -1.31,
-   "stockCode": "300378",
-   "stockName": "鼎捷数智",
-   "stockPct": -2.98,
-   "gap": 1.67
-  },
-  {
-   "bondCode": "123080",
-   "bondName": "海波转债",
-   "price": 120.779,
-   "pct": -0.46,
-   "stockCode": "300517",
-   "stockName": "海波重科",
-   "stockPct": -2.06,
-   "gap": 1.6
-  },
-  {
-   "bondCode": "123168",
-   "bondName": "惠云转债",
-   "price": 124.644,
-   "pct": -1.33,
-   "stockCode": "300891",
-   "stockName": "惠云钛业",
-   "stockPct": -2.9,
-   "gap": 1.57
-  },
-  {
-   "bondCode": "110085",
-   "bondName": "通22转债",
-   "price": 111.371,
-   "pct": -0.35,
-   "stockCode": "600438",
-   "stockName": "通威股份",
-   "stockPct": -1.89,
-   "gap": 1.54
-  },
-  {
-   "bondCode": "118032",
-   "bondName": "建龙转债",
-   "price": 120.5,
-   "pct": -0.82,
-   "stockCode": "688357",
-   "stockName": "建龙微纳",
-   "stockPct": -2.31,
-   "gap": 1.49
-  },
-  {
-   "bondCode": "123173",
-   "bondName": "恒锋转债",
-   "price": 136.1,
-   "pct": -0.66,
-   "stockCode": "300605",
-   "stockName": "恒锋信息",
-   "stockPct": -2.14,
-   "gap": 1.48
-  },
-  {
-   "bondCode": "127103",
-   "bondName": "东南转债",
-   "price": 129.02,
-   "pct": -2.4,
-   "stockCode": "002135",
-   "stockName": "东南网架",
-   "stockPct": -3.82,
-   "gap": 1.42
-  },
-  {
-   "bondCode": "123225",
-   "bondName": "翔丰转债",
-   "price": 135.229,
-   "pct": -1.95,
-   "stockCode": "300890",
-   "stockName": "翔丰华",
-   "stockPct": -3.33,
-   "gap": 1.38
-  },
-  {
-   "bondCode": "118034",
-   "bondName": "晶能转债",
-   "price": 114.073,
-   "pct": -0.45,
-   "stockCode": "688223",
-   "stockName": "晶科能源",
-   "stockPct": -1.8,
-   "gap": 1.35
-  },
-  {
-   "bondCode": "118024",
-   "bondName": "冠宇转债",
-   "price": 118.942,
-   "pct": -0.96,
-   "stockCode": "688772",
-   "stockName": "珠海冠宇",
-   "stockPct": -2.3,
-   "gap": 1.34
+   "stockPct": 0.43,
+   "gap": -0.42
   },
   {
    "bondCode": "113711",
@@ -666,148 +2166,768 @@
    "pct": 0,
    "stockCode": "603125",
    "stockName": "常青科技",
-   "stockPct": -1.31,
-   "gap": 1.31
+   "stockPct": 0.47,
+   "gap": -0.47
   },
   {
-   "bondCode": "113066",
-   "bondName": "平煤转债",
-   "price": 136.146,
-   "pct": -1,
-   "stockCode": "601666",
-   "stockName": "平煤股份",
-   "stockPct": -2.23,
-   "gap": 1.23
+   "bondCode": "127054",
+   "bondName": "双箭转债",
+   "price": 117.128,
+   "pct": 1.57,
+   "stockCode": "002381",
+   "stockName": "双箭股份",
+   "stockPct": 2.06,
+   "gap": -0.49
   },
   {
-   "bondCode": "118069",
-   "bondName": "爱科转债",
-   "price": 146.306,
-   "pct": -2.14,
-   "stockCode": "688092",
-   "stockName": "爱科科技",
-   "stockPct": -3.36,
-   "gap": 1.22
-  },
-  {
-   "bondCode": "111004",
-   "bondName": "明新转债",
-   "price": 128.572,
-   "pct": -2.03,
-   "stockCode": "605068",
-   "stockName": "明新旭腾",
-   "stockPct": -3.22,
-   "gap": 1.19
-  },
-  {
-   "bondCode": "123264",
-   "bondName": "双乐转债",
-   "price": 121.36,
-   "pct": -0.07,
-   "stockCode": "301036",
-   "stockName": "双乐股份",
-   "stockPct": -1.26,
-   "gap": 1.19
-  },
-  {
-   "bondCode": "110092",
-   "bondName": "三房转债",
-   "price": 71.825,
-   "pct": -0.33,
-   "stockCode": "600370",
-   "stockName": "*ST三房",
-   "stockPct": -1.49,
-   "gap": 1.16
-  },
-  {
-   "bondCode": "127109",
-   "bondName": "电化转债",
-   "price": 145.611,
-   "pct": -1.89,
-   "stockCode": "002125",
-   "stockName": "湘潭电化",
-   "stockPct": -3.01,
-   "gap": 1.12
-  },
-  {
-   "bondCode": "127038",
-   "bondName": "国微转债",
-   "price": 110.302,
-   "pct": -0.49,
-   "stockCode": "002049",
-   "stockName": "紫光国微",
-   "stockPct": -1.57,
-   "gap": 1.08
-  },
-  {
-   "bondCode": "123114",
-   "bondName": "三角转债",
-   "price": 118.28,
-   "pct": -0.3,
-   "stockCode": "300775",
-   "stockName": "三角防务",
-   "stockPct": -1.37,
-   "gap": 1.07
-  },
-  {
-   "bondCode": "118022",
-   "bondName": "XD锂科转",
-   "price": 114.244,
-   "pct": -0.94,
-   "stockCode": "688779",
-   "stockName": "五矿新能",
-   "stockPct": -2,
-   "gap": 1.06
-  },
-  {
-   "bondCode": "123214",
-   "bondName": "东宝转债",
-   "price": 126.21,
-   "pct": -2.01,
-   "stockCode": "300239",
-   "stockName": "东宝生物",
-   "stockPct": -3.07,
-   "gap": 1.06
-  },
-  {
-   "bondCode": "123088",
-   "bondName": "威唐转债",
-   "price": 114.875,
-   "pct": -0.09,
-   "stockCode": "300707",
-   "stockName": "威唐工业",
-   "stockPct": -1.12,
-   "gap": 1.03
-  },
-  {
-   "bondCode": "113633",
-   "bondName": "科沃转债",
-   "price": 111.034,
-   "pct": 0.03,
-   "stockCode": "603486",
-   "stockName": "科沃斯",
-   "stockPct": -0.99,
-   "gap": 1.02
+   "bondCode": "113694",
+   "bondName": "清源转债",
+   "price": 119.434,
+   "pct": 1.24,
+   "stockCode": "603628",
+   "stockName": "清源股份",
+   "stockPct": 1.75,
+   "gap": -0.51
   },
   {
    "bondCode": "123276",
    "bondName": "久吾转02",
-   "price": 147.19,
-   "pct": -2.03,
+   "price": 138.902,
+   "pct": 0.94,
    "stockCode": "300631",
    "stockName": "久吾高科",
-   "stockPct": -3.05,
-   "gap": 1.02
+   "stockPct": 1.45,
+   "gap": -0.51
   },
   {
-   "bondCode": "118067",
-   "bondName": "上26转债",
-   "price": 126.52,
-   "pct": -0.32,
-   "stockCode": "688533",
-   "stockName": "上声电子",
-   "stockPct": -1.33,
-   "gap": 1.01
+   "bondCode": "118035",
+   "bondName": "国力转债",
+   "price": 138.853,
+   "pct": 1.79,
+   "stockCode": "688103",
+   "stockName": "国力电子",
+   "stockPct": 2.32,
+   "gap": -0.53
+  },
+  {
+   "bondCode": "123270",
+   "bondName": "盛德转债",
+   "price": 199.31,
+   "pct": 1.74,
+   "stockCode": "300881",
+   "stockName": "盛德鑫泰",
+   "stockPct": 2.27,
+   "gap": -0.53
+  },
+  {
+   "bondCode": "127082",
+   "bondName": "亚科转债",
+   "price": 125.274,
+   "pct": 1.53,
+   "stockCode": "002540",
+   "stockName": "亚太科技",
+   "stockPct": 2.08,
+   "gap": -0.55
+  },
+  {
+   "bondCode": "110093",
+   "bondName": "神马转债",
+   "price": 115.46,
+   "pct": 0.89,
+   "stockCode": "600810",
+   "stockName": "神马股份",
+   "stockPct": 1.49,
+   "gap": -0.6
+  },
+  {
+   "bondCode": "113705",
+   "bondName": "豪26转债",
+   "price": 125.314,
+   "pct": 1,
+   "stockCode": "603809",
+   "stockName": "豪能股份",
+   "stockPct": 1.63,
+   "gap": -0.63
+  },
+  {
+   "bondCode": "118036",
+   "bondName": "力合转债",
+   "price": 133.282,
+   "pct": 1.5,
+   "stockCode": "688589",
+   "stockName": "力合微",
+   "stockPct": 2.13,
+   "gap": -0.63
+  },
+  {
+   "bondCode": "123275",
+   "bondName": "肇民转债",
+   "price": 125.23,
+   "pct": 1.52,
+   "stockCode": "301000",
+   "stockName": "肇民科技",
+   "stockPct": 2.15,
+   "gap": -0.63
+  },
+  {
+   "bondCode": "113066",
+   "bondName": "平煤转债",
+   "price": 131.967,
+   "pct": 0.97,
+   "stockCode": "601666",
+   "stockName": "平煤股份",
+   "stockPct": 1.61,
+   "gap": -0.64
+  },
+  {
+   "bondCode": "127110",
+   "bondName": "广核转债",
+   "price": 134.04,
+   "pct": 0.24,
+   "stockCode": "003816",
+   "stockName": "中国广核",
+   "stockPct": 0.88,
+   "gap": -0.64
+  },
+  {
+   "bondCode": "127034",
+   "bondName": "绿茵转债",
+   "price": 116.1,
+   "pct": -0.42,
+   "stockCode": "002887",
+   "stockName": "绿茵生态",
+   "stockPct": 0.25,
+   "gap": -0.67
+  },
+  {
+   "bondCode": "123255",
+   "bondName": "鼎龙转债",
+   "price": 266.001,
+   "pct": -0.85,
+   "stockCode": "300054",
+   "stockName": "鼎龙股份",
+   "stockPct": -0.16,
+   "gap": -0.69
+  },
+  {
+   "bondCode": "123280",
+   "bondName": "三鑫转债",
+   "price": 137.371,
+   "pct": 1.1,
+   "stockCode": "300453",
+   "stockName": "三鑫医疗",
+   "stockPct": 1.79,
+   "gap": -0.69
+  },
+  {
+   "bondCode": "123290",
+   "bondName": "申菱转债",
+   "price": 100,
+   "pct": 0,
+   "stockCode": "301018",
+   "stockName": "申菱环境",
+   "stockPct": 0.7,
+   "gap": -0.7
+  },
+  {
+   "bondCode": "127064",
+   "bondName": "杭氧转债",
+   "price": 132.324,
+   "pct": 3.01,
+   "stockCode": "002430",
+   "stockName": "杭氧股份",
+   "stockPct": 3.74,
+   "gap": -0.73
+  },
+  {
+   "bondCode": "113052",
+   "bondName": "兴业转债",
+   "price": 111.998,
+   "pct": -0.25,
+   "stockCode": "601166",
+   "stockName": "兴业银行",
+   "stockPct": 0.49,
+   "gap": -0.74
+  },
+  {
+   "bondCode": "113638",
+   "bondName": "台21转债",
+   "price": 116.663,
+   "pct": 1.63,
+   "stockCode": "603055",
+   "stockName": "台华新材",
+   "stockPct": 2.39,
+   "gap": -0.76
+  },
+  {
+   "bondCode": "123277",
+   "bondName": "玉禾转债",
+   "price": 129.986,
+   "pct": 0.77,
+   "stockCode": "300815",
+   "stockName": "玉禾田",
+   "stockPct": 1.53,
+   "gap": -0.76
+  },
+  {
+   "bondCode": "118063",
+   "bondName": "金05转债",
+   "price": 125.291,
+   "pct": -0.3,
+   "stockCode": "688676",
+   "stockName": "金盘科技",
+   "stockPct": 0.47,
+   "gap": -0.77
+  },
+  {
+   "bondCode": "113693",
+   "bondName": "志邦转债",
+   "price": 118.677,
+   "pct": 0.05,
+   "stockCode": "603801",
+   "stockName": "志邦家居",
+   "stockPct": 0.83,
+   "gap": -0.78
+  },
+  {
+   "bondCode": "123265",
+   "bondName": "耐普转02",
+   "price": 126.17,
+   "pct": 0.45,
+   "stockCode": "300818",
+   "stockName": "耐普矿机",
+   "stockPct": 1.26,
+   "gap": -0.81
+  },
+  {
+   "bondCode": "113049",
+   "bondName": "长汽转债",
+   "price": 106.386,
+   "pct": 0.04,
+   "stockCode": "601633",
+   "stockName": "长城汽车",
+   "stockPct": 0.86,
+   "gap": -0.82
+  },
+  {
+   "bondCode": "123229",
+   "bondName": "艾录转债",
+   "price": 126.029,
+   "pct": 0.58,
+   "stockCode": "301062",
+   "stockName": "上海艾录",
+   "stockPct": 1.43,
+   "gap": -0.85
+  },
+  {
+   "bondCode": "110086",
+   "bondName": "精工转债",
+   "price": 118.004,
+   "pct": 1.28,
+   "stockCode": "600496",
+   "stockName": "精工钢构",
+   "stockPct": 2.18,
+   "gap": -0.9
+  },
+  {
+   "bondCode": "123274",
+   "bondName": "维科转债",
+   "price": 125.7,
+   "pct": 1.06,
+   "stockCode": "301499",
+   "stockName": "维科精密",
+   "stockPct": 1.97,
+   "gap": -0.91
+  },
+  {
+   "bondCode": "123283",
+   "bondName": "丰茂转债",
+   "price": 148.5,
+   "pct": 0.42,
+   "stockCode": "301459",
+   "stockName": "丰茂股份",
+   "stockPct": 1.34,
+   "gap": -0.92
+  },
+  {
+   "bondCode": "110102",
+   "bondName": "江农转债",
+   "price": 131.832,
+   "pct": 0.92,
+   "stockCode": "600389",
+   "stockName": "XD江山股",
+   "stockPct": 1.88,
+   "gap": -0.96
+  },
+  {
+   "bondCode": "127088",
+   "bondName": "赫达转债",
+   "price": 144.327,
+   "pct": 0.79,
+   "stockCode": "002810",
+   "stockName": "山东赫达",
+   "stockPct": 1.75,
+   "gap": -0.96
+  },
+  {
+   "bondCode": "113053",
+   "bondName": "隆22转债",
+   "price": 110.862,
+   "pct": 0.14,
+   "stockCode": "601012",
+   "stockName": "隆基绿能",
+   "stockPct": 1.11,
+   "gap": -0.97
+  },
+  {
+   "bondCode": "118034",
+   "bondName": "晶能转债",
+   "price": 110.025,
+   "pct": 0.11,
+   "stockCode": "688223",
+   "stockName": "晶科能源",
+   "stockPct": 1.1,
+   "gap": -0.99
+  },
+  {
+   "bondCode": "127056",
+   "bondName": "中特转债",
+   "price": 119.016,
+   "pct": 0.53,
+   "stockCode": "000708",
+   "stockName": "中信特钢",
+   "stockPct": 1.54,
+   "gap": -1.01
+  },
+  {
+   "bondCode": "123215",
+   "bondName": "铭利转债",
+   "price": 117.674,
+   "pct": 0.35,
+   "stockCode": "301268",
+   "stockName": "铭利达",
+   "stockPct": 1.38,
+   "gap": -1.03
+  },
+  {
+   "bondCode": "110101",
+   "bondName": "宝钛转债",
+   "price": 132.815,
+   "pct": 1.63,
+   "stockCode": "600456",
+   "stockName": "宝钛股份",
+   "stockPct": 2.68,
+   "gap": -1.05
+  },
+  {
+   "bondCode": "123272",
+   "bondName": "中汽转债",
+   "price": 136.318,
+   "pct": 2.75,
+   "stockCode": "301215",
+   "stockName": "中汽股份",
+   "stockPct": 3.8,
+   "gap": -1.05
+  },
+  {
+   "bondCode": "123282",
+   "bondName": "震裕转02",
+   "price": 130.02,
+   "pct": 1.91,
+   "stockCode": "300953",
+   "stockName": "震裕科技",
+   "stockPct": 2.96,
+   "gap": -1.05
+  },
+  {
+   "bondCode": "113703",
+   "bondName": "翔26转债",
+   "price": 124.229,
+   "pct": 0.84,
+   "stockCode": "603112",
+   "stockName": "华翔股份",
+   "stockPct": 1.93,
+   "gap": -1.09
+  },
+  {
+   "bondCode": "123142",
+   "bondName": "申昊转债",
+   "price": 118.28,
+   "pct": 0.41,
+   "stockCode": "300853",
+   "stockName": "申昊科技",
+   "stockPct": 1.5,
+   "gap": -1.09
+  },
+  {
+   "bondCode": "123288",
+   "bondName": "隆新转债",
+   "price": 100,
+   "pct": 0,
+   "stockCode": "301149",
+   "stockName": "隆华新材",
+   "stockPct": 1.14,
+   "gap": -1.14
+  },
+  {
+   "bondCode": "127050",
+   "bondName": "麒麟转债",
+   "price": 117.091,
+   "pct": 0.99,
+   "stockCode": "002984",
+   "stockName": "森麒麟",
+   "stockPct": 2.16,
+   "gap": -1.17
+  },
+  {
+   "bondCode": "113062",
+   "bondName": "常银转债",
+   "price": 124.976,
+   "pct": -0.23,
+   "stockCode": "601128",
+   "stockName": "常熟银行",
+   "stockPct": 0.98,
+   "gap": -1.21
+  },
+  {
+   "bondCode": "110092",
+   "bondName": "三房转债",
+   "price": 71.915,
+   "pct": 0.24,
+   "stockCode": "600370",
+   "stockName": "*ST三房",
+   "stockPct": 1.46,
+   "gap": -1.22
+  },
+  {
+   "bondCode": "127080",
+   "bondName": "声迅转债",
+   "price": 224.869,
+   "pct": 2.77,
+   "stockCode": "003004",
+   "stockName": "声迅股份",
+   "stockPct": 4.02,
+   "gap": -1.25
+  },
+  {
+   "bondCode": "127098",
+   "bondName": "欧晶转债",
+   "price": 117.932,
+   "pct": 0.9,
+   "stockCode": "001269",
+   "stockName": "欧晶科技",
+   "stockPct": 2.16,
+   "gap": -1.26
+  },
+  {
+   "bondCode": "123196",
+   "bondName": "正元转02",
+   "price": 123.107,
+   "pct": 0.89,
+   "stockCode": "300645",
+   "stockName": "正元智慧",
+   "stockPct": 2.16,
+   "gap": -1.27
+  },
+  {
+   "bondCode": "118069",
+   "bondName": "爱科转债",
+   "price": 140.724,
+   "pct": 0.79,
+   "stockCode": "688092",
+   "stockName": "爱科科技",
+   "stockPct": 2.08,
+   "gap": -1.29
+  },
+  {
+   "bondCode": "127027",
+   "bondName": "能化转债",
+   "price": 109.733,
+   "pct": -0.09,
+   "stockCode": "000552",
+   "stockName": "甘肃能化",
+   "stockPct": 1.24,
+   "gap": -1.33
+  },
+  {
+   "bondCode": "123245",
+   "bondName": "集智转债",
+   "price": 298.99,
+   "pct": 1.94,
+   "stockCode": "300553",
+   "stockName": "集智股份",
+   "stockPct": 3.33,
+   "gap": -1.39
+  },
+  {
+   "bondCode": "118071",
+   "bondName": "华峰转债",
+   "price": 174.314,
+   "pct": -4.64,
+   "stockCode": "688200",
+   "stockName": "华峰测控",
+   "stockPct": -3.23,
+   "gap": -1.41
+  },
+  {
+   "bondCode": "127031",
+   "bondName": "洋丰转债",
+   "price": 113.124,
+   "pct": 0.73,
+   "stockCode": "000902",
+   "stockName": "新洋丰",
+   "stockPct": 2.22,
+   "gap": -1.49
+  },
+  {
+   "bondCode": "127062",
+   "bondName": "垒知转债",
+   "price": 120.496,
+   "pct": 0.7,
+   "stockCode": "002398",
+   "stockName": "垒知集团",
+   "stockPct": 2.21,
+   "gap": -1.51
+  },
+  {
+   "bondCode": "123252",
+   "bondName": "银邦转债",
+   "price": 121.501,
+   "pct": 1.33,
+   "stockCode": "300337",
+   "stockName": "银邦股份",
+   "stockPct": 2.87,
+   "gap": -1.54
+  },
+  {
+   "bondCode": "123173",
+   "bondName": "恒锋转债",
+   "price": 133.5,
+   "pct": 0.08,
+   "stockCode": "300605",
+   "stockName": "恒锋信息",
+   "stockPct": 1.67,
+   "gap": -1.59
+  },
+  {
+   "bondCode": "118032",
+   "bondName": "建龙转债",
+   "price": 120.478,
+   "pct": 0.72,
+   "stockCode": "688357",
+   "stockName": "建龙微纳",
+   "stockPct": 2.32,
+   "gap": -1.6
+  },
+  {
+   "bondCode": "113048",
+   "bondName": "晶科转债",
+   "price": 111.967,
+   "pct": 0.26,
+   "stockCode": "601778",
+   "stockName": "晶科科技",
+   "stockPct": 1.88,
+   "gap": -1.62
+  },
+  {
+   "bondCode": "118068",
+   "bondName": "迪威转债",
+   "price": 122.932,
+   "pct": -0.36,
+   "stockCode": "688377",
+   "stockName": "迪威尔",
+   "stockPct": 1.27,
+   "gap": -1.63
+  },
+  {
+   "bondCode": "127049",
+   "bondName": "希望转2",
+   "price": 107.64,
+   "pct": 0.35,
+   "stockCode": "000876",
+   "stockName": "新 希 望",
+   "stockPct": 1.98,
+   "gap": -1.63
+  },
+  {
+   "bondCode": "113625",
+   "bondName": "江山转债",
+   "price": 115.661,
+   "pct": 0.11,
+   "stockCode": "603208",
+   "stockName": "江山欧派",
+   "stockPct": 1.75,
+   "gap": -1.64
+  },
+  {
+   "bondCode": "113648",
+   "bondName": "巨星转债",
+   "price": 111.963,
+   "pct": 1.22,
+   "stockCode": "603477",
+   "stockName": "巨星农牧",
+   "stockPct": 2.93,
+   "gap": -1.71
+  },
+  {
+   "bondCode": "113610",
+   "bondName": "灵康转债",
+   "price": 131.538,
+   "pct": -1.91,
+   "stockCode": "603669",
+   "stockName": "灵康药业",
+   "stockPct": -0.14,
+   "gap": -1.77
+  },
+  {
+   "bondCode": "123180",
+   "bondName": "浙矿转债",
+   "price": 125.192,
+   "pct": 0.6,
+   "stockCode": "300837",
+   "stockName": "浙矿股份",
+   "stockPct": 2.43,
+   "gap": -1.83
+  },
+  {
+   "bondCode": "118075",
+   "bondName": "奥普转债",
+   "price": 141.445,
+   "pct": -1.9,
+   "stockCode": "688686",
+   "stockName": "奥普特",
+   "stockPct": -0.06,
+   "gap": -1.84
+  },
+  {
+   "bondCode": "123224",
+   "bondName": "宇邦转债",
+   "price": 127.693,
+   "pct": 0.72,
+   "stockCode": "301266",
+   "stockName": "宇邦新材",
+   "stockPct": 2.57,
+   "gap": -1.85
+  },
+  {
+   "bondCode": "127038",
+   "bondName": "国微转债",
+   "price": 111.298,
+   "pct": 0.19,
+   "stockCode": "002049",
+   "stockName": "紫光国微",
+   "stockPct": 2.07,
+   "gap": -1.88
+  },
+  {
+   "bondCode": "127045",
+   "bondName": "牧原转债",
+   "price": 114.6,
+   "pct": 1.49,
+   "stockCode": "002714",
+   "stockName": "牧原股份",
+   "stockPct": 3.4,
+   "gap": -1.91
+  },
+  {
+   "bondCode": "127044",
+   "bondName": "蒙娜转债",
+   "price": 112.301,
+   "pct": 0.37,
+   "stockCode": "002918",
+   "stockName": "蒙娜丽莎",
+   "stockPct": 2.33,
+   "gap": -1.96
+  },
+  {
+   "bondCode": "123175",
+   "bondName": "百畅转债",
+   "price": 108.044,
+   "pct": 0.88,
+   "stockCode": "300614",
+   "stockName": "百川畅银",
+   "stockPct": 2.85,
+   "gap": -1.97
+  },
+  {
+   "bondCode": "127083",
+   "bondName": "山路转债",
+   "price": 120.866,
+   "pct": 2.34,
+   "stockCode": "000498",
+   "stockName": "山东路桥",
+   "stockPct": 4.43,
+   "gap": -2.09
+  },
+  {
+   "bondCode": "123216",
+   "bondName": "科顺转债",
+   "price": 118.79,
+   "pct": 1.24,
+   "stockCode": "300737",
+   "stockName": "科顺股份",
+   "stockPct": 3.34,
+   "gap": -2.1
+  },
+  {
+   "bondCode": "113059",
+   "bondName": "福莱转债",
+   "price": 114.38,
+   "pct": 0.23,
+   "stockCode": "601865",
+   "stockName": "福莱特",
+   "stockPct": 2.38,
+   "gap": -2.15
+  },
+  {
+   "bondCode": "113671",
+   "bondName": "武进转债",
+   "price": 119.58,
+   "pct": 0.04,
+   "stockCode": "603878",
+   "stockName": "武进不锈",
+   "stockPct": 2.19,
+   "gap": -2.15
+  },
+  {
+   "bondCode": "127095",
+   "bondName": "广泰转债",
+   "price": 136.6,
+   "pct": 1.56,
+   "stockCode": "002111",
+   "stockName": "威海广泰",
+   "stockPct": 3.83,
+   "gap": -2.27
+  },
+  {
+   "bondCode": "113692",
+   "bondName": "保隆转债",
+   "price": 130.287,
+   "pct": 7.71,
+   "stockCode": "603197",
+   "stockName": "保隆科技",
+   "stockPct": 9.99,
+   "gap": -2.28
+  },
+  {
+   "bondCode": "110085",
+   "bondName": "通22转债",
+   "price": 109.951,
+   "pct": -0.27,
+   "stockCode": "600438",
+   "stockName": "通威股份",
+   "stockPct": 2.07,
+   "gap": -2.34
+  },
+  {
+   "bondCode": "113655",
+   "bondName": "欧22转债",
+   "price": 117.916,
+   "pct": -0.07,
+   "stockCode": "603833",
+   "stockName": "欧派家居",
+   "stockPct": 2.4,
+   "gap": -2.47
   },
   {
    "bondCode": "113575",
@@ -816,2358 +2936,248 @@
    "pct": 0,
    "stockCode": "603377",
    "stockName": "ST东时",
-   "stockPct": -0.98,
-   "gap": 0.98
-  },
-  {
-   "bondCode": "123144",
-   "bondName": "裕兴转债",
-   "price": 122.933,
-   "pct": -1.41,
-   "stockCode": "300305",
-   "stockName": "裕兴股份",
-   "stockPct": -2.38,
-   "gap": 0.97
-  },
-  {
-   "bondCode": "123265",
-   "bondName": "耐普转02",
-   "price": 128.622,
-   "pct": -1,
-   "stockCode": "300818",
-   "stockName": "耐普矿机",
-   "stockPct": -1.97,
-   "gap": 0.97
-  },
-  {
-   "bondCode": "113696",
-   "bondName": "伯25转债",
-   "price": 126.133,
-   "pct": -0.92,
-   "stockCode": "603596",
-   "stockName": "伯特利",
-   "stockPct": -1.87,
-   "gap": 0.95
-  },
-  {
-   "bondCode": "118065",
-   "bondName": "艾为转债",
-   "price": 123.739,
-   "pct": -1.89,
-   "stockCode": "688798",
-   "stockName": "艾为电子",
-   "stockPct": -2.84,
-   "gap": 0.95
-  },
-  {
-   "bondCode": "123229",
-   "bondName": "艾录转债",
-   "price": 128.265,
-   "pct": -0.69,
-   "stockCode": "301062",
-   "stockName": "上海艾录",
-   "stockPct": -1.63,
-   "gap": 0.94
-  },
-  {
-   "bondCode": "113661",
-   "bondName": "福22转债",
-   "price": 128.098,
-   "pct": -0.67,
-   "stockCode": "603806",
-   "stockName": "福斯特",
-   "stockPct": -1.6,
-   "gap": 0.93
-  },
-  {
-   "bondCode": "123271",
-   "bondName": "通合转债",
-   "price": 144.972,
-   "pct": -5.64,
-   "stockCode": "300491",
-   "stockName": "通合科技",
-   "stockPct": -6.57,
-   "gap": 0.93
-  },
-  {
-   "bondCode": "123119",
-   "bondName": "康泰转2",
-   "price": 116.5,
-   "pct": -1.1,
-   "stockCode": "300601",
-   "stockName": "康泰生物",
-   "stockPct": -2.01,
-   "gap": 0.91
-  },
-  {
-   "bondCode": "118031",
-   "bondName": "天23转债",
-   "price": 116.186,
-   "pct": -0.44,
-   "stockCode": "688599",
-   "stockName": "天合光能",
-   "stockPct": -1.34,
-   "gap": 0.9
-  },
-  {
-   "bondCode": "127068",
-   "bondName": "顺博转债",
-   "price": 115.295,
-   "pct": -0.09,
-   "stockCode": "002996",
-   "stockName": "顺博合金",
-   "stockPct": -0.99,
-   "gap": 0.9
-  },
-  {
-   "bondCode": "118016",
-   "bondName": "京源转债",
-   "price": 145.49,
-   "pct": -2.84,
-   "stockCode": "688096",
-   "stockName": "京源环保",
-   "stockPct": -3.72,
-   "gap": 0.88
-  },
-  {
-   "bondCode": "123273",
-   "bondName": "三江转债",
-   "price": 286.6,
-   "pct": -3.1,
-   "stockCode": "301059",
-   "stockName": "金三江",
-   "stockPct": -3.98,
-   "gap": 0.88
-  },
-  {
-   "bondCode": "111003",
-   "bondName": "聚合转债",
-   "price": 134.057,
-   "pct": -0.91,
-   "stockCode": "605166",
-   "stockName": "聚合顺",
-   "stockPct": -1.78,
-   "gap": 0.87
-  },
-  {
-   "bondCode": "113671",
-   "bondName": "武进转债",
-   "price": 122.183,
-   "pct": -0.79,
-   "stockCode": "603878",
-   "stockName": "武进不锈",
-   "stockPct": -1.64,
-   "gap": 0.85
-  },
-  {
-   "bondCode": "127102",
-   "bondName": "浙建转债",
-   "price": 118.643,
-   "pct": -0.34,
-   "stockCode": "002761",
-   "stockName": "浙江建投",
-   "stockPct": -1.17,
-   "gap": 0.83
-  },
-  {
-   "bondCode": "127085",
-   "bondName": "韵达转债",
-   "price": 118.8,
-   "pct": 0.07,
-   "stockCode": "002120",
-   "stockName": "韵达股份",
-   "stockPct": -0.72,
-   "gap": 0.79
-  },
-  {
-   "bondCode": "128142",
-   "bondName": "新乳转债",
-   "price": 110.339,
-   "pct": -0.2,
-   "stockCode": "002946",
-   "stockName": "新乳业",
-   "stockPct": -0.98,
-   "gap": 0.78
-  },
-  {
-   "bondCode": "113059",
-   "bondName": "福莱转债",
-   "price": 116.296,
-   "pct": 0.02,
-   "stockCode": "601865",
-   "stockName": "福莱特",
-   "stockPct": -0.75,
-   "gap": 0.77
-  },
-  {
-   "bondCode": "110100",
-   "bondName": "龙建转债",
-   "price": 117.168,
-   "pct": 0.46,
-   "stockCode": "600853",
-   "stockName": "龙建股份",
-   "stockPct": -0.3,
-   "gap": 0.76
-  },
-  {
-   "bondCode": "118005",
-   "bondName": "天奈转债",
-   "price": 123.285,
-   "pct": -0.14,
-   "stockCode": "688116",
-   "stockName": "天奈科技",
-   "stockPct": -0.9,
-   "gap": 0.76
-  },
-  {
-   "bondCode": "127070",
-   "bondName": "大中转债",
-   "price": 230,
-   "pct": -5.93,
-   "stockCode": "001203",
-   "stockName": "大中矿业",
-   "stockPct": -6.69,
-   "gap": 0.76
-  },
-  {
-   "bondCode": "127078",
-   "bondName": "优彩转债",
-   "price": 151.62,
-   "pct": -2.26,
-   "stockCode": "002998",
-   "stockName": "优彩资源",
-   "stockPct": -3.01,
-   "gap": 0.75
-  },
-  {
-   "bondCode": "111020",
-   "bondName": "合顺转债",
-   "price": 128.682,
-   "pct": -1.04,
-   "stockCode": "605166",
-   "stockName": "聚合顺",
-   "stockPct": -1.78,
-   "gap": 0.74
-  },
-  {
-   "bondCode": "118037",
-   "bondName": "上声转债",
-   "price": 123.487,
-   "pct": -0.61,
-   "stockCode": "688533",
-   "stockName": "上声电子",
-   "stockPct": -1.33,
-   "gap": 0.72
-  },
-  {
-   "bondCode": "127046",
-   "bondName": "百润转债",
-   "price": 119.004,
-   "pct": -1.73,
-   "stockCode": "002568",
-   "stockName": "百润股份",
-   "stockPct": -2.45,
-   "gap": 0.72
-  },
-  {
-   "bondCode": "113647",
-   "bondName": "禾丰转债",
-   "price": 115.391,
-   "pct": 0.06,
-   "stockCode": "603609",
-   "stockName": "禾丰股份",
-   "stockPct": -0.63,
-   "gap": 0.69
-  },
-  {
-   "bondCode": "118027",
-   "bondName": "宏图转债",
-   "price": 102.146,
-   "pct": -3.77,
-   "stockCode": "688066",
-   "stockName": "*ST航图",
-   "stockPct": -4.46,
-   "gap": 0.69
-  },
-  {
-   "bondCode": "123076",
-   "bondName": "强力转债",
-   "price": 118,
-   "pct": 0.58,
-   "stockCode": "300429",
-   "stockName": "强力新材",
-   "stockPct": -0.1,
-   "gap": 0.68
-  },
-  {
-   "bondCode": "111009",
-   "bondName": "盛泰转债",
-   "price": 118.93,
-   "pct": -0.8,
-   "stockCode": "605138",
-   "stockName": "盛泰集团",
-   "stockPct": -1.46,
-   "gap": 0.66
-  },
-  {
-   "bondCode": "123253",
-   "bondName": "永贵转债",
-   "price": 125.586,
-   "pct": -0.62,
-   "stockCode": "300351",
-   "stockName": "永贵电器",
-   "stockPct": -1.28,
-   "gap": 0.66
-  },
-  {
-   "bondCode": "113708",
-   "bondName": "曙26转债",
-   "price": 130.741,
-   "pct": -1.83,
-   "stockCode": "603019",
-   "stockName": "中科曙光",
-   "stockPct": -2.48,
-   "gap": 0.65
-  },
-  {
-   "bondCode": "113051",
-   "bondName": "节能转债",
-   "price": 114.467,
-   "pct": -0.6,
-   "stockCode": "601016",
-   "stockName": "节能风电",
-   "stockPct": -1.23,
-   "gap": 0.63
-  },
-  {
-   "bondCode": "127059",
-   "bondName": "永东转2",
-   "price": 123.216,
-   "pct": -1.72,
-   "stockCode": "002753",
-   "stockName": "永东股份",
-   "stockPct": -2.35,
-   "gap": 0.63
-  },
-  {
-   "bondCode": "127089",
-   "bondName": "晶澳转债",
-   "price": 113.753,
-   "pct": 0.19,
-   "stockCode": "002459",
-   "stockName": "晶澳科技",
-   "stockPct": -0.44,
-   "gap": 0.63
-  },
-  {
-   "bondCode": "127025",
-   "bondName": "冀东转债",
-   "price": 105.867,
-   "pct": 0.02,
-   "stockCode": "000401",
-   "stockName": "金隅冀东",
-   "stockPct": -0.55,
-   "gap": 0.57
-  },
-  {
-   "bondCode": "123172",
-   "bondName": "漱玉转债",
-   "price": 127.798,
-   "pct": -1.47,
-   "stockCode": "301017",
-   "stockName": "漱玉平民",
-   "stockPct": -2.02,
-   "gap": 0.55
-  },
-  {
-   "bondCode": "123223",
-   "bondName": "九典转02",
-   "price": 130.151,
-   "pct": -1.71,
-   "stockCode": "300705",
-   "stockName": "九典制药",
-   "stockPct": -2.23,
-   "gap": 0.52
-  },
-  {
-   "bondCode": "111014",
-   "bondName": "李子转债",
-   "price": 119.787,
-   "pct": -0.57,
-   "stockCode": "605337",
-   "stockName": "李子园",
-   "stockPct": -1.07,
-   "gap": 0.5
-  },
-  {
-   "bondCode": "123151",
-   "bondName": "康医转债",
-   "price": 117.223,
-   "pct": -0.4,
-   "stockCode": "300869",
-   "stockName": "康泰医学",
-   "stockPct": -0.9,
-   "gap": 0.5
-  },
-  {
-   "bondCode": "127082",
-   "bondName": "亚科转债",
-   "price": 128.882,
-   "pct": -0.7,
-   "stockCode": "002540",
-   "stockName": "亚太科技",
-   "stockPct": -1.17,
-   "gap": 0.47
-  },
-  {
-   "bondCode": "110093",
-   "bondName": "神马转债",
-   "price": 116.652,
-   "pct": -0.02,
-   "stockCode": "600810",
-   "stockName": "神马股份",
-   "stockPct": -0.47,
-   "gap": 0.45
-  },
-  {
-   "bondCode": "123199",
-   "bondName": "山河转债",
-   "price": 136.36,
-   "pct": -2.13,
-   "stockCode": "300452",
-   "stockName": "山河药辅",
-   "stockPct": -2.58,
-   "gap": 0.45
-  },
-  {
-   "bondCode": "113053",
-   "bondName": "隆22转债",
-   "price": 112.962,
-   "pct": -0.63,
-   "stockCode": "601012",
-   "stockName": "隆基绿能",
-   "stockPct": -1.07,
-   "gap": 0.44
-  },
-  {
-   "bondCode": "123133",
-   "bondName": "佩蒂转债",
-   "price": 125.458,
-   "pct": -0.99,
-   "stockCode": "300673",
-   "stockName": "佩蒂股份",
-   "stockPct": -1.42,
-   "gap": 0.43
-  },
-  {
-   "bondCode": "127093",
-   "bondName": "章鼓转债",
-   "price": 127.04,
-   "pct": -0.72,
-   "stockCode": "002598",
-   "stockName": "ST章鼓",
-   "stockPct": -1.15,
-   "gap": 0.43
-  },
-  {
-   "bondCode": "113665",
-   "bondName": "汇通转债",
-   "price": 123.511,
-   "pct": -0.88,
-   "stockCode": "603176",
-   "stockName": "汇通集团",
-   "stockPct": -1.3,
-   "gap": 0.42
-  },
-  {
-   "bondCode": "118012",
-   "bondName": "微芯转债",
-   "price": 138.118,
-   "pct": -2.43,
-   "stockCode": "688321",
-   "stockName": "微芯生物",
-   "stockPct": -2.84,
-   "gap": 0.41
-  },
-  {
-   "bondCode": "118068",
-   "bondName": "迪威转债",
-   "price": 123.731,
-   "pct": 0.03,
-   "stockCode": "688377",
-   "stockName": "迪威尔",
-   "stockPct": -0.37,
-   "gap": 0.4
-  },
-  {
-   "bondCode": "127108",
-   "bondName": "太能转债",
-   "price": 121.3,
-   "pct": 0.4,
-   "stockCode": "000591",
-   "stockName": "太阳能",
-   "stockPct": 0,
-   "gap": 0.4
-  },
-  {
-   "bondCode": "111021",
-   "bondName": "奥锐转债",
-   "price": 130.503,
-   "pct": -1.77,
-   "stockCode": "605116",
-   "stockName": "奥锐特",
-   "stockPct": -2.15,
-   "gap": 0.38
-  },
-  {
-   "bondCode": "113067",
-   "bondName": "燃23转债",
-   "price": 123.283,
-   "pct": -0.25,
-   "stockCode": "601139",
-   "stockName": "深圳燃气",
-   "stockPct": -0.62,
-   "gap": 0.37
-  },
-  {
-   "bondCode": "123175",
-   "bondName": "百畅转债",
-   "price": 111.252,
-   "pct": -0.91,
-   "stockCode": "300614",
-   "stockName": "百川畅银",
-   "stockPct": -1.27,
-   "gap": 0.36
-  },
-  {
-   "bondCode": "123262",
-   "bondName": "神宇转债",
-   "price": 124.401,
-   "pct": -0.84,
-   "stockCode": "300563",
-   "stockName": "神宇股份",
-   "stockPct": -1.19,
-   "gap": 0.35
-  },
-  {
-   "bondCode": "113703",
-   "bondName": "翔26转债",
-   "price": 131.924,
-   "pct": -1.07,
-   "stockCode": "603112",
-   "stockName": "华翔股份",
-   "stockPct": -1.4,
-   "gap": 0.33
-  },
-  {
-   "bondCode": "118058",
-   "bondName": "微导转债",
-   "price": 296.691,
-   "pct": 0.96,
-   "stockCode": "688147",
-   "stockName": "微导纳米",
-   "stockPct": 0.63,
-   "gap": 0.33
-  },
-  {
-   "bondCode": "127088",
-   "bondName": "赫达转债",
-   "price": 153.5,
-   "pct": -5.6,
-   "stockCode": "002810",
-   "stockName": "山东赫达",
-   "stockPct": -5.89,
-   "gap": 0.29
-  },
-  {
-   "bondCode": "118070",
-   "bondName": "南芯转债",
-   "price": 133.632,
-   "pct": -3.11,
-   "stockCode": "688484",
-   "stockName": "南芯科技",
-   "stockPct": -3.39,
-   "gap": 0.28
-  },
-  {
-   "bondCode": "123150",
-   "bondName": "九强转债",
-   "price": 128.9,
-   "pct": -1.53,
-   "stockCode": "300406",
-   "stockName": "九强生物",
-   "stockPct": -1.81,
-   "gap": 0.28
-  },
-  {
-   "bondCode": "113634",
-   "bondName": "珀莱转债",
-   "price": 119.38,
-   "pct": 0.55,
-   "stockCode": "603605",
-   "stockName": "珀莱雅",
-   "stockPct": 0.28,
-   "gap": 0.27
-  },
-  {
-   "bondCode": "127111",
-   "bondName": "金威转债",
-   "price": 128.774,
-   "pct": -1.69,
-   "stockCode": "002626",
-   "stockName": "金达威",
-   "stockPct": -1.95,
-   "gap": 0.26
-  },
-  {
-   "bondCode": "113688",
-   "bondName": "国检转债",
-   "price": 128.834,
-   "pct": -1.17,
-   "stockCode": "603060",
-   "stockName": "国检集团",
-   "stockPct": -1.42,
-   "gap": 0.25
-  },
-  {
-   "bondCode": "118036",
-   "bondName": "力合转债",
-   "price": 136.203,
-   "pct": -1.63,
-   "stockCode": "688589",
-   "stockName": "力合微",
-   "stockPct": -1.88,
-   "gap": 0.25
-  },
-  {
-   "bondCode": "113640",
-   "bondName": "苏利转债",
-   "price": 125.973,
-   "pct": -1.52,
-   "stockCode": "603585",
-   "stockName": "苏利股份",
-   "stockPct": -1.76,
-   "gap": 0.24
-  },
-  {
-   "bondCode": "118052",
-   "bondName": "浩瀚转债",
-   "price": 135.7,
-   "pct": -2.07,
-   "stockCode": "688292",
-   "stockName": "浩瀚深度",
-   "stockPct": -2.31,
-   "gap": 0.24
-  },
-  {
-   "bondCode": "123154",
-   "bondName": "火星转债",
-   "price": 120.705,
-   "pct": 0.34,
-   "stockCode": "300894",
-   "stockName": "火星人",
-   "stockPct": 0.1,
-   "gap": 0.24
-  },
-  {
-   "bondCode": "113615",
-   "bondName": "金诚转债",
-   "price": 689.086,
-   "pct": -4.7,
-   "stockCode": "603979",
-   "stockName": "金诚信",
-   "stockPct": -4.92,
-   "gap": 0.22
-  },
-  {
-   "bondCode": "123091",
-   "bondName": "长海转债",
-   "price": 119.888,
-   "pct": -2.52,
-   "stockCode": "300196",
-   "stockName": "长海股份",
-   "stockPct": -2.74,
-   "gap": 0.22
-  },
-  {
-   "bondCode": "127055",
-   "bondName": "精装转债",
-   "price": 161.601,
-   "pct": -4.54,
-   "stockCode": "002989",
-   "stockName": "中天精装",
-   "stockPct": -4.76,
-   "gap": 0.22
-  },
-  {
-   "bondCode": "113656",
-   "bondName": "嘉诚转债",
-   "price": 116.401,
-   "pct": -0.42,
-   "stockCode": "603535",
-   "stockName": "嘉诚国际",
-   "stockPct": -0.63,
-   "gap": 0.21
-  },
-  {
-   "bondCode": "127062",
-   "bondName": "垒知转债",
-   "price": 121.549,
-   "pct": -0.51,
-   "stockCode": "002398",
-   "stockName": "垒知集团",
-   "stockPct": -0.71,
-   "gap": 0.2
-  },
-  {
-   "bondCode": "127099",
-   "bondName": "盛航转债",
-   "price": 129.65,
-   "pct": -1.21,
-   "stockCode": "001205",
-   "stockName": "盛航股份",
-   "stockPct": -1.38,
-   "gap": 0.17
-  },
-  {
-   "bondCode": "110102",
-   "bondName": "江农转债",
-   "price": 136.727,
-   "pct": -1.77,
-   "stockCode": "600389",
-   "stockName": "江山股份",
-   "stockPct": -1.93,
-   "gap": 0.16
+   "stockPct": 2.65,
+   "gap": -2.65
+  },
+  {
+   "bondCode": "123235",
+   "bondName": "亿田转债",
+   "price": 158.87,
+   "pct": 4.25,
+   "stockCode": "300911",
+   "stockName": "亿田智能",
+   "stockPct": 6.97,
+   "gap": -2.72
   },
   {
    "bondCode": "113686",
    "bondName": "泰瑞转债",
-   "price": 143.203,
-   "pct": -0.79,
+   "price": 139.106,
+   "pct": 1.13,
    "stockCode": "603289",
    "stockName": "泰瑞机器",
-   "stockPct": -0.94,
-   "gap": 0.15
-  },
-  {
-   "bondCode": "110077",
-   "bondName": "洪城转债",
-   "price": 205.708,
-   "pct": 1.93,
-   "stockCode": "600461",
-   "stockName": "洪城环境",
-   "stockPct": 1.79,
-   "gap": 0.14
-  },
-  {
-   "bondCode": "123259",
-   "bondName": "锦浪转02",
-   "price": 146.677,
-   "pct": 1.02,
-   "stockCode": "300763",
-   "stockName": "锦浪科技",
-   "stockPct": 0.9,
-   "gap": 0.12
-  },
-  {
-   "bondCode": "113666",
-   "bondName": "爱玛转债",
-   "price": 119.172,
-   "pct": 0.15,
-   "stockCode": "603529",
-   "stockName": "爱玛科技",
-   "stockPct": 0.04,
-   "gap": 0.11
-  },
-  {
-   "bondCode": "123282",
-   "bondName": "震裕转02",
-   "price": 136.501,
-   "pct": -3.53,
-   "stockCode": "300953",
-   "stockName": "震裕科技",
-   "stockPct": -3.63,
-   "gap": 0.1
-  },
-  {
-   "bondCode": "127034",
-   "bondName": "绿茵转债",
-   "price": 118.95,
-   "pct": -1.98,
-   "stockCode": "002887",
-   "stockName": "绿茵生态",
-   "stockPct": -2.08,
-   "gap": 0.1
-  },
-  {
-   "bondCode": "123281",
-   "bondName": "中仑转债",
-   "price": 146.666,
-   "pct": -2.35,
-   "stockCode": "301565",
-   "stockName": "中仑新材",
-   "stockPct": -2.43,
-   "gap": 0.08
-  },
-  {
-   "bondCode": "113070",
-   "bondName": "渝水转债",
-   "price": 122.307,
-   "pct": 0.04,
-   "stockCode": "601158",
-   "stockName": "重庆水务",
-   "stockPct": 0,
-   "gap": 0.04
-  },
-  {
-   "bondCode": "123277",
-   "bondName": "玉禾转债",
-   "price": 137.73,
-   "pct": -1.84,
-   "stockCode": "300815",
-   "stockName": "玉禾田",
-   "stockPct": -1.85,
-   "gap": 0.01
-  },
-  {
-   "bondCode": "113655",
-   "bondName": "欧22转债",
-   "price": 118.991,
-   "pct": -0.16,
-   "stockCode": "603833",
-   "stockName": "欧派家居",
-   "stockPct": -0.16,
-   "gap": 0
-  },
-  {
-   "bondCode": "127049",
-   "bondName": "希望转2",
-   "price": 108.081,
-   "pct": -0.29,
-   "stockCode": "000876",
-   "stockName": "新 希 望",
-   "stockPct": -0.29,
-   "gap": 0
-  },
-  {
-   "bondCode": "123113",
-   "bondName": "仙乐转债",
-   "price": 112.354,
-   "pct": -0.18,
-   "stockCode": "300791",
-   "stockName": "仙乐健康",
-   "stockPct": -0.16,
-   "gap": -0.02
-  },
-  {
-   "bondCode": "123274",
-   "bondName": "维科转债",
-   "price": 131.704,
-   "pct": -1.79,
-   "stockCode": "301499",
-   "stockName": "维科精密",
-   "stockPct": -1.76,
-   "gap": -0.03
-  },
-  {
-   "bondCode": "118039",
-   "bondName": "煜邦转债",
-   "price": 126.368,
-   "pct": -0.73,
-   "stockCode": "688597",
-   "stockName": "煜邦电力",
-   "stockPct": -0.65,
-   "gap": -0.08
-  },
-  {
-   "bondCode": "127050",
-   "bondName": "麒麟转债",
-   "price": 118.13,
-   "pct": -0.42,
-   "stockCode": "002984",
-   "stockName": "森麒麟",
-   "stockPct": -0.31,
-   "gap": -0.11
-  },
-  {
-   "bondCode": "113650",
-   "bondName": "博22转债",
-   "price": 118.348,
-   "pct": -0.9,
-   "stockCode": "603916",
-   "stockName": "苏博特",
-   "stockPct": -0.78,
-   "gap": -0.12
-  },
-  {
-   "bondCode": "111017",
-   "bondName": "蓝天转债",
-   "price": 126.813,
-   "pct": -0.71,
-   "stockCode": "605368",
-   "stockName": "蓝天燃气",
-   "stockPct": -0.58,
-   "gap": -0.13
-  },
-  {
-   "bondCode": "123193",
-   "bondName": "海能转债",
-   "price": 125.637,
-   "pct": -1.27,
-   "stockCode": "300787",
-   "stockName": "海能实业",
-   "stockPct": -1.14,
-   "gap": -0.13
-  },
-  {
-   "bondCode": "113681",
-   "bondName": "镇洋转债",
-   "price": 135.245,
-   "pct": -0.57,
-   "stockCode": "603213",
-   "stockName": "镇洋发展",
-   "stockPct": -0.43,
-   "gap": -0.14
-  },
-  {
-   "bondCode": "113631",
-   "bondName": "皖天转债",
-   "price": 130.13,
-   "pct": -0.8,
-   "stockCode": "603689",
-   "stockName": "皖天然气",
-   "stockPct": -0.64,
-   "gap": -0.16
-  },
-  {
-   "bondCode": "113698",
-   "bondName": "凯众转债",
-   "price": 130.401,
-   "pct": -0.67,
-   "stockCode": "603037",
-   "stockName": "凯众股份",
-   "stockPct": -0.5,
-   "gap": -0.17
-  },
-  {
-   "bondCode": "127064",
-   "bondName": "杭氧转债",
-   "price": 134.466,
-   "pct": 0.63,
-   "stockCode": "002430",
-   "stockName": "杭氧股份",
-   "stockPct": 0.81,
-   "gap": -0.18
-  },
-  {
-   "bondCode": "110095",
-   "bondName": "双良转债",
-   "price": 111.274,
-   "pct": -0.69,
-   "stockCode": "600481",
-   "stockName": "双良节能",
-   "stockPct": -0.5,
-   "gap": -0.19
-  },
-  {
-   "bondCode": "123109",
-   "bondName": "昌红转债",
-   "price": 121,
-   "pct": -4.22,
-   "stockCode": "300151",
-   "stockName": "昌红科技",
-   "stockPct": -4.03,
-   "gap": -0.19
-  },
-  {
-   "bondCode": "123122",
-   "bondName": "富瀚转债",
-   "price": 121.004,
-   "pct": -1.78,
-   "stockCode": "300613",
-   "stockName": "富瀚微",
-   "stockPct": -1.58,
-   "gap": -0.2
-  },
-  {
-   "bondCode": "113043",
-   "bondName": "财通转债",
-   "price": 109.28,
-   "pct": -1.07,
-   "stockCode": "601108",
-   "stockName": "财通证券",
-   "stockPct": -0.86,
-   "gap": -0.21
-  },
-  {
-   "bondCode": "123158",
-   "bondName": "宙邦转债",
-   "price": 209.4,
-   "pct": -7.43,
-   "stockCode": "300037",
-   "stockName": "新宙邦",
-   "stockPct": -7.22,
-   "gap": -0.21
-  },
-  {
-   "bondCode": "113610",
-   "bondName": "灵康转债",
-   "price": 124.803,
-   "pct": -3.55,
-   "stockCode": "603669",
-   "stockName": "灵康药业",
-   "stockPct": -3.3,
-   "gap": -0.25
-  },
-  {
-   "bondCode": "123280",
-   "bondName": "三鑫转债",
-   "price": 139.211,
-   "pct": -1.99,
-   "stockCode": "300453",
-   "stockName": "三鑫医疗",
-   "stockPct": -1.74,
-   "gap": -0.25
-  },
-  {
-   "bondCode": "110103",
-   "bondName": "申能转债",
-   "price": 142.417,
-   "pct": 0.95,
-   "stockCode": "600642",
-   "stockName": "申能股份",
-   "stockPct": 1.21,
-   "gap": -0.26
-  },
-  {
-   "bondCode": "113048",
-   "bondName": "晶科转债",
-   "price": 112.071,
-   "pct": -1.15,
-   "stockCode": "601778",
-   "stockName": "晶科科技",
-   "stockPct": -0.89,
-   "gap": -0.26
-  },
-  {
-   "bondCode": "113702",
-   "bondName": "斯达转债",
-   "price": 136.674,
-   "pct": -3.15,
-   "stockCode": "603290",
-   "stockName": "斯达半导",
-   "stockPct": -2.87,
-   "gap": -0.28
-  },
-  {
-   "bondCode": "127054",
-   "bondName": "双箭转债",
-   "price": 119.01,
-   "pct": -1.4,
-   "stockCode": "002381",
-   "stockName": "双箭股份",
-   "stockPct": -1.06,
-   "gap": -0.34
-  },
-  {
-   "bondCode": "118007",
-   "bondName": "山石转债",
-   "price": 139.756,
-   "pct": -2.14,
-   "stockCode": "688030",
-   "stockName": "山石网科",
-   "stockPct": -1.76,
-   "gap": -0.38
-  },
-  {
-   "bondCode": "123215",
-   "bondName": "铭利转债",
-   "price": 120.418,
-   "pct": -0.55,
-   "stockCode": "301268",
-   "stockName": "铭利达",
-   "stockPct": -0.17,
-   "gap": -0.38
-  },
-  {
-   "bondCode": "123278",
-   "bondName": "合金转债",
-   "price": 156.435,
-   "pct": -3.61,
-   "stockCode": "300697",
-   "stockName": "电工合金",
-   "stockPct": -3.19,
-   "gap": -0.42
-  },
-  {
-   "bondCode": "118062",
-   "bondName": "天准转债",
-   "price": 145.362,
-   "pct": -1.87,
-   "stockCode": "688003",
-   "stockName": "天准科技",
-   "stockPct": -1.39,
-   "gap": -0.48
-  },
-  {
-   "bondCode": "123090",
-   "bondName": "三诺转债",
-   "price": 111.675,
-   "pct": 0,
-   "stockCode": "300298",
-   "stockName": "三诺生物",
-   "stockPct": 0.48,
-   "gap": -0.48
-  },
-  {
-   "bondCode": "123189",
-   "bondName": "晓鸣转债",
-   "price": 130.51,
-   "pct": -1.96,
-   "stockCode": "300967",
-   "stockName": "晓鸣股份",
-   "stockPct": -1.46,
-   "gap": -0.5
-  },
-  {
-   "bondCode": "127060",
-   "bondName": "湘佳转债",
-   "price": 122.018,
-   "pct": -1.04,
-   "stockCode": "002982",
-   "stockName": "湘佳股份",
-   "stockPct": -0.54,
-   "gap": -0.5
-  },
-  {
-   "bondCode": "113710",
-   "bondName": "四方转债",
-   "price": 130.058,
-   "pct": -3.08,
-   "stockCode": "603339",
-   "stockName": "四方科技",
-   "stockPct": -2.57,
-   "gap": -0.51
-  },
-  {
-   "bondCode": "113058",
-   "bondName": "友发转债",
-   "price": 126.192,
-   "pct": -0.52,
-   "stockCode": "601686",
-   "stockName": "友发集团",
-   "stockPct": 0,
-   "gap": -0.52
-  },
-  {
-   "bondCode": "123072",
-   "bondName": "乐歌转债",
-   "price": 119.908,
-   "pct": 0.02,
-   "stockCode": "300729",
-   "stockName": "乐歌股份",
-   "stockPct": 0.55,
-   "gap": -0.53
-  },
-  {
-   "bondCode": "123124",
-   "bondName": "晶瑞转2",
-   "price": 124.737,
-   "pct": -1.33,
-   "stockCode": "300655",
-   "stockName": "晶瑞电材",
-   "stockPct": -0.79,
-   "gap": -0.54
-  },
-  {
-   "bondCode": "110099",
-   "bondName": "福能转债",
-   "price": 143.192,
-   "pct": -0.92,
-   "stockCode": "600483",
-   "stockName": "福能股份",
-   "stockPct": -0.36,
-   "gap": -0.56
-  },
-  {
-   "bondCode": "113692",
-   "bondName": "保隆转债",
-   "price": 123.121,
-   "pct": -1.06,
-   "stockCode": "603197",
-   "stockName": "保隆科技",
-   "stockPct": -0.49,
-   "gap": -0.57
-  },
-  {
-   "bondCode": "123275",
-   "bondName": "肇民转债",
-   "price": 130.254,
-   "pct": -1.46,
-   "stockCode": "301000",
-   "stockName": "肇民科技",
-   "stockPct": -0.89,
-   "gap": -0.57
-  },
-  {
-   "bondCode": "113691",
-   "bondName": "和邦转债",
-   "price": 130.686,
-   "pct": -2.84,
-   "stockCode": "603077",
-   "stockName": "和邦生物",
-   "stockPct": -2.24,
-   "gap": -0.6
-  },
-  {
-   "bondCode": "127040",
-   "bondName": "国泰转债",
-   "price": 115.388,
-   "pct": -0.14,
-   "stockCode": "002091",
-   "stockName": "江苏国泰",
-   "stockPct": 0.52,
-   "gap": -0.66
-  },
-  {
-   "bondCode": "111000",
-   "bondName": "起帆转债",
-   "price": 127.446,
-   "pct": -1.68,
-   "stockCode": "605222",
-   "stockName": "起帆电缆",
-   "stockPct": -0.98,
-   "gap": -0.7
-  },
-  {
-   "bondCode": "113705",
-   "bondName": "豪26转债",
-   "price": 128.801,
-   "pct": -1.42,
-   "stockCode": "603809",
-   "stockName": "豪能股份",
-   "stockPct": -0.71,
-   "gap": -0.71
-  },
-  {
-   "bondCode": "127072",
-   "bondName": "博实转债",
-   "price": 126.673,
-   "pct": -2.06,
-   "stockCode": "002698",
-   "stockName": "博实股份",
-   "stockPct": -1.34,
-   "gap": -0.72
-  },
-  {
-   "bondCode": "113674",
-   "bondName": "华设转债",
-   "price": 122.63,
-   "pct": -0.57,
-   "stockCode": "603018",
-   "stockName": "华设集团",
-   "stockPct": 0.19,
-   "gap": -0.76
-  },
-  {
-   "bondCode": "123183",
-   "bondName": "海顺转债",
-   "price": 127.887,
-   "pct": -1.46,
-   "stockCode": "300501",
-   "stockName": "海顺新材",
-   "stockPct": -0.7,
-   "gap": -0.76
-  },
-  {
-   "bondCode": "123155",
-   "bondName": "中陆转债",
-   "price": 125.25,
-   "pct": -0.41,
-   "stockCode": "301040",
-   "stockName": "中环海陆",
-   "stockPct": 0.36,
-   "gap": -0.77
-  },
-  {
-   "bondCode": "118030",
-   "bondName": "睿创转债",
-   "price": 526.244,
-   "pct": -5.72,
-   "stockCode": "688002",
-   "stockName": "睿创微纳",
-   "stockPct": -4.93,
-   "gap": -0.79
-  },
-  {
-   "bondCode": "113660",
-   "bondName": "寿22转债",
-   "price": 121.181,
-   "pct": -0.19,
-   "stockCode": "603896",
-   "stockName": "寿仙谷",
-   "stockPct": 0.61,
-   "gap": -0.8
-  },
-  {
-   "bondCode": "123171",
-   "bondName": "共同转债",
-   "price": 126.153,
-   "pct": -1.37,
-   "stockCode": "300966",
-   "stockName": "共同药业",
-   "stockPct": -0.57,
-   "gap": -0.8
-  },
-  {
-   "bondCode": "127110",
-   "bondName": "广核转债",
-   "price": 136.15,
-   "pct": -0.35,
-   "stockCode": "003816",
-   "stockName": "中国广核",
-   "stockPct": 0.45,
-   "gap": -0.8
-  },
-  {
-   "bondCode": "123160",
-   "bondName": "泰福转债",
-   "price": 158.39,
-   "pct": -4.01,
-   "stockCode": "300992",
-   "stockName": "泰福泵业",
-   "stockPct": -3.19,
-   "gap": -0.82
-  },
-  {
-   "bondCode": "123266",
-   "bondName": "博士转债",
-   "price": 131.968,
-   "pct": -1.18,
-   "stockCode": "300622",
-   "stockName": "博士眼镜",
-   "stockPct": -0.34,
-   "gap": -0.84
-  },
-  {
-   "bondCode": "123209",
-   "bondName": "聚隆转债",
-   "price": 153.946,
-   "pct": -1.36,
-   "stockCode": "300644",
-   "stockName": "南京聚隆",
-   "stockPct": -0.5,
-   "gap": -0.86
-  },
-  {
-   "bondCode": "118072",
-   "bondName": "鼎通转债",
-   "price": 149.196,
-   "pct": -5.51,
-   "stockCode": "688668",
-   "stockName": "鼎通科技",
-   "stockPct": -4.56,
-   "gap": -0.95
-  },
-  {
-   "bondCode": "123252",
-   "bondName": "银邦转债",
-   "price": 124.799,
-   "pct": -1.07,
-   "stockCode": "300337",
-   "stockName": "银邦股份",
-   "stockPct": -0.11,
-   "gap": -0.96
-  },
-  {
-   "bondCode": "127104",
-   "bondName": "姚记转债",
-   "price": 134.721,
-   "pct": 0.09,
-   "stockCode": "002605",
-   "stockName": "姚记科技",
-   "stockPct": 1.08,
-   "gap": -0.99
-  },
-  {
-   "bondCode": "113670",
-   "bondName": "金23转债",
-   "price": 121.354,
-   "pct": -1.69,
-   "stockCode": "603180",
-   "stockName": "金牌家居",
-   "stockPct": -0.69,
-   "gap": -1
-  },
-  {
-   "bondCode": "123224",
-   "bondName": "宇邦转债",
-   "price": 131.277,
-   "pct": -1.3,
-   "stockCode": "301266",
-   "stockName": "宇邦新材",
-   "stockPct": -0.29,
-   "gap": -1.01
-  },
-  {
-   "bondCode": "123157",
-   "bondName": "科蓝转债",
-   "price": 129.566,
-   "pct": -1.69,
-   "stockCode": "300663",
-   "stockName": "科蓝软件",
-   "stockPct": -0.65,
-   "gap": -1.04
-  },
-  {
-   "bondCode": "118066",
-   "bondName": "统联转债",
-   "price": 123.127,
-   "pct": -1.01,
-   "stockCode": "688210",
-   "stockName": "统联精密",
-   "stockPct": 0.04,
-   "gap": -1.05
-  },
-  {
-   "bondCode": "113062",
-   "bondName": "常银转债",
-   "price": 126.948,
-   "pct": 0.52,
-   "stockCode": "601128",
-   "stockName": "常熟银行",
-   "stockPct": 1.61,
-   "gap": -1.09
-  },
-  {
-   "bondCode": "118073",
-   "bondName": "赛斯转债",
-   "price": 137.931,
-   "pct": -3.3,
-   "stockCode": "688480",
-   "stockName": "赛恩斯",
-   "stockPct": -2.21,
-   "gap": -1.09
-  },
-  {
-   "bondCode": "123117",
-   "bondName": "健帆转债",
-   "price": 109.471,
-   "pct": 0.01,
-   "stockCode": "300529",
-   "stockName": "健帆生物",
-   "stockPct": 1.12,
-   "gap": -1.11
-  },
-  {
-   "bondCode": "111022",
-   "bondName": "锡振转债",
-   "price": 150.579,
-   "pct": -1.07,
-   "stockCode": "605319",
-   "stockName": "无锡振华",
-   "stockPct": 0.05,
-   "gap": -1.12
-  },
-  {
-   "bondCode": "113695",
-   "bondName": "华辰转债",
-   "price": 138.803,
-   "pct": -1.41,
-   "stockCode": "603097",
-   "stockName": "江苏华辰",
-   "stockPct": -0.27,
-   "gap": -1.14
-  },
-  {
-   "bondCode": "127095",
-   "bondName": "广泰转债",
-   "price": 135.542,
-   "pct": -2.12,
-   "stockCode": "002111",
-   "stockName": "威海广泰",
-   "stockPct": -0.97,
-   "gap": -1.15
-  },
-  {
-   "bondCode": "113678",
-   "bondName": "中贝转债",
-   "price": 129.152,
-   "pct": -2.1,
-   "stockCode": "603220",
-   "stockName": "中贝通信",
-   "stockPct": -0.94,
-   "gap": -1.16
-  },
-  {
-   "bondCode": "123118",
-   "bondName": "惠城转债",
-   "price": 600.28,
-   "pct": -1.88,
-   "stockCode": "300779",
-   "stockName": "惠城环保",
-   "stockPct": -0.69,
-   "gap": -1.19
-  },
-  {
-   "bondCode": "127053",
-   "bondName": "豪美转债",
-   "price": 197.999,
-   "pct": -2.36,
-   "stockCode": "002988",
-   "stockName": "豪美新材",
-   "stockPct": -1.16,
-   "gap": -1.2
-  },
-  {
-   "bondCode": "118042",
-   "bondName": "奥维转债",
-   "price": 123.332,
-   "pct": 0,
-   "stockCode": "688516",
-   "stockName": "奥特维",
-   "stockPct": 1.22,
-   "gap": -1.22
-  },
-  {
-   "bondCode": "123220",
-   "bondName": "易瑞转债",
-   "price": 128.221,
-   "pct": -1.07,
-   "stockCode": "300942",
-   "stockName": "易瑞生物",
-   "stockPct": 0.15,
-   "gap": -1.22
-  },
-  {
-   "bondCode": "123194",
-   "bondName": "百洋转债",
-   "price": 134.617,
-   "pct": -1.06,
-   "stockCode": "301015",
-   "stockName": "百洋医药",
-   "stockPct": 0.19,
-   "gap": -1.25
-  },
-  {
-   "bondCode": "113042",
-   "bondName": "上银转债",
-   "price": 117.14,
-   "pct": 0.14,
-   "stockCode": "601229",
-   "stockName": "上海银行",
-   "stockPct": 1.45,
-   "gap": -1.31
-  },
-  {
-   "bondCode": "127084",
-   "bondName": "柳工转2",
-   "price": 133,
-   "pct": 0.01,
-   "stockCode": "000528",
-   "stockName": "柳    工",
-   "stockPct": 1.32,
-   "gap": -1.31
-  },
-  {
-   "bondCode": "123243",
-   "bondName": "严牌转债",
-   "price": 265.066,
-   "pct": -4.99,
-   "stockCode": "301081",
-   "stockName": "严牌股份",
-   "stockPct": -3.67,
-   "gap": -1.32
-  },
-  {
-   "bondCode": "111025",
-   "bondName": "圣泉转债",
-   "price": 135.213,
-   "pct": -3.01,
-   "stockCode": "605589",
-   "stockName": "圣泉集团",
-   "stockPct": -1.65,
-   "gap": -1.36
-  },
-  {
-   "bondCode": "123149",
-   "bondName": "通裕转债",
-   "price": 128.1,
-   "pct": 0.06,
-   "stockCode": "300185",
-   "stockName": "通裕重工",
-   "stockPct": 1.42,
-   "gap": -1.36
-  },
-  {
-   "bondCode": "123237",
-   "bondName": "佳禾转债",
-   "price": 130.714,
-   "pct": -1.18,
-   "stockCode": "300793",
-   "stockName": "佳禾智能",
-   "stockPct": 0.26,
-   "gap": -1.44
-  },
-  {
-   "bondCode": "118064",
-   "bondName": "联瑞转债",
-   "price": 270.531,
-   "pct": -5.21,
-   "stockCode": "688300",
-   "stockName": "联瑞新材",
-   "stockPct": -3.76,
-   "gap": -1.45
-  },
-  {
-   "bondCode": "123142",
-   "bondName": "申昊转债",
-   "price": 123.731,
-   "pct": -0.62,
-   "stockCode": "300853",
-   "stockName": "申昊科技",
-   "stockPct": 0.83,
-   "gap": -1.45
-  },
-  {
-   "bondCode": "113648",
-   "bondName": "巨星转债",
-   "price": 112.28,
-   "pct": -0.37,
-   "stockCode": "603477",
-   "stockName": "巨星农牧",
-   "stockPct": 1.15,
-   "gap": -1.52
-  },
-  {
-   "bondCode": "110086",
-   "bondName": "精工转债",
-   "price": 119.703,
-   "pct": -0.63,
-   "stockCode": "600496",
-   "stockName": "精工钢构",
-   "stockPct": 0.9,
-   "gap": -1.53
-  },
-  {
-   "bondCode": "111026",
-   "bondName": "派克转债",
-   "price": 150.301,
-   "pct": -3.68,
-   "stockCode": "605123",
-   "stockName": "派克新材",
-   "stockPct": -2.14,
-   "gap": -1.54
-  },
-  {
-   "bondCode": "123267",
-   "bondName": "珂玛转债",
-   "price": 173.287,
-   "pct": -2.7,
-   "stockCode": "301611",
-   "stockName": "珂玛科技",
-   "stockPct": -1.16,
-   "gap": -1.54
-  },
-  {
-   "bondCode": "127080",
-   "bondName": "声迅转债",
-   "price": 234.888,
-   "pct": -1.5,
-   "stockCode": "003004",
-   "stockName": "声迅股份",
-   "stockPct": 0.05,
-   "gap": -1.55
-  },
-  {
-   "bondCode": "110098",
-   "bondName": "南药转债",
-   "price": 132.169,
-   "pct": 0.39,
-   "stockCode": "600713",
-   "stockName": "南京医药",
-   "stockPct": 1.95,
-   "gap": -1.56
-  },
-  {
-   "bondCode": "127056",
-   "bondName": "中特转债",
-   "price": 120.5,
-   "pct": -0.03,
-   "stockCode": "000708",
-   "stockName": "中信特钢",
-   "stockPct": 1.53,
-   "gap": -1.56
-  },
-  {
-   "bondCode": "113694",
-   "bondName": "清源转债",
-   "price": 122.323,
-   "pct": -0.71,
-   "stockCode": "603628",
-   "stockName": "清源股份",
-   "stockPct": 0.97,
-   "gap": -1.68
-  },
-  {
-   "bondCode": "118060",
-   "bondName": "瑞可转债",
-   "price": 155.591,
-   "pct": -2.83,
-   "stockCode": "688800",
-   "stockName": "瑞可达",
-   "stockPct": -1.11,
-   "gap": -1.72
-  },
-  {
-   "bondCode": "123222",
-   "bondName": "博俊转债",
-   "price": 138.31,
-   "pct": -1.72,
-   "stockCode": "300926",
-   "stockName": "博俊科技",
-   "stockPct": 0,
-   "gap": -1.72
+   "stockPct": 3.96,
+   "gap": -2.83
+  },
+  {
+   "bondCode": "113696",
+   "bondName": "伯25转债",
+   "price": 124.5,
+   "pct": 1.84,
+   "stockCode": "603596",
+   "stockName": "伯特利",
+   "stockPct": 4.7,
+   "gap": -2.86
   },
   {
    "bondCode": "123107",
    "bondName": "温氏转债",
-   "price": 110.47,
-   "pct": -0.12,
+   "price": 109.9,
+   "pct": 0.5,
    "stockCode": "300498",
    "stockName": "温氏股份",
-   "stockPct": 1.61,
-   "gap": -1.73
+   "stockPct": 3.46,
+   "gap": -2.96
   },
   {
-   "bondCode": "123211",
-   "bondName": "阳谷转债",
-   "price": 147.128,
-   "pct": -0.42,
-   "stockCode": "300121",
-   "stockName": "阳谷华泰",
-   "stockPct": 1.43,
-   "gap": -1.85
+   "bondCode": "123114",
+   "bondName": "三角转债",
+   "price": 118.259,
+   "pct": 0.91,
+   "stockCode": "300775",
+   "stockName": "三角防务",
+   "stockPct": 3.9,
+   "gap": -2.99
   },
   {
-   "bondCode": "123255",
-   "bondName": "鼎龙转债",
-   "price": 301,
-   "pct": -3.55,
-   "stockCode": "300054",
-   "stockName": "鼎龙股份",
-   "stockPct": -1.7,
-   "gap": -1.85
+   "bondCode": "118066",
+   "bondName": "统联转债",
+   "price": 118.693,
+   "pct": -0.06,
+   "stockCode": "688210",
+   "stockName": "统联精密",
+   "stockPct": 3.02,
+   "gap": -3.08
   },
   {
-   "bondCode": "123268",
-   "bondName": "本川转债",
-   "price": 197.996,
-   "pct": 0.33,
-   "stockCode": "300964",
-   "stockName": "本川智能",
-   "stockPct": 2.2,
-   "gap": -1.87
+   "bondCode": "127025",
+   "bondName": "冀东转债",
+   "price": 105.884,
+   "pct": -0.02,
+   "stockCode": "000401",
+   "stockName": "金隅冀东",
+   "stockPct": 3.11,
+   "gap": -3.13
   },
   {
-   "bondCode": "123195",
-   "bondName": "蓝晓转02",
-   "price": 161.414,
-   "pct": -3.69,
-   "stockCode": "300487",
-   "stockName": "蓝晓科技",
-   "stockPct": -1.77,
-   "gap": -1.92
-  },
-  {
-   "bondCode": "110101",
-   "bondName": "宝钛转债",
-   "price": 132.507,
-   "pct": -1.85,
-   "stockCode": "600456",
-   "stockName": "宝钛股份",
-   "stockPct": 0.16,
-   "gap": -2.01
-  },
-  {
-   "bondCode": "113052",
-   "bondName": "兴业转债",
-   "price": 113.354,
-   "pct": 0.13,
-   "stockCode": "601166",
-   "stockName": "兴业银行",
-   "stockPct": 2.16,
-   "gap": -2.03
-  },
-  {
-   "bondCode": "127045",
-   "bondName": "牧原转债",
-   "price": 116.45,
-   "pct": -0.45,
-   "stockCode": "002714",
-   "stockName": "牧原股份",
-   "stockPct": 1.61,
-   "gap": -2.06
-  },
-  {
-   "bondCode": "113054",
-   "bondName": "绿动转债",
-   "price": 121.224,
-   "pct": -1.14,
-   "stockCode": "601330",
-   "stockName": "绿色动力",
-   "stockPct": 0.97,
-   "gap": -2.11
-  },
-  {
-   "bondCode": "118063",
-   "bondName": "金05转债",
-   "price": 131.715,
-   "pct": -0.79,
-   "stockCode": "688676",
-   "stockName": "金盘科技",
-   "stockPct": 1.32,
-   "gap": -2.11
-  },
-  {
-   "bondCode": "118075",
-   "bondName": "奥普转债",
-   "price": 158.945,
-   "pct": -6,
-   "stockCode": "688686",
-   "stockName": "奥普特",
-   "stockPct": -3.88,
-   "gap": -2.12
-  },
-  {
-   "bondCode": "123245",
-   "bondName": "集智转债",
-   "price": 322,
-   "pct": -4.45,
-   "stockCode": "300553",
-   "stockName": "集智股份",
-   "stockPct": -2.32,
-   "gap": -2.13
-  },
-  {
-   "bondCode": "123241",
-   "bondName": "欧通转债",
-   "price": 660.509,
-   "pct": -6.65,
-   "stockCode": "300870",
-   "stockName": "欧陆通",
-   "stockPct": -4.49,
-   "gap": -2.16
-  },
-  {
-   "bondCode": "113646",
-   "bondName": "永吉转债",
-   "price": 154.299,
-   "pct": -0.33,
-   "stockCode": "603058",
-   "stockName": "永吉股份",
-   "stockPct": 1.85,
-   "gap": -2.18
-  },
-  {
-   "bondCode": "123284",
-   "bondName": "强达转债",
-   "price": 188.2,
-   "pct": -6.61,
-   "stockCode": "301628",
-   "stockName": "强达电路",
-   "stockPct": -4.42,
-   "gap": -2.19
-  },
-  {
-   "bondCode": "127115",
-   "bondName": "炬申转债",
-   "price": 159.154,
-   "pct": -2.52,
-   "stockCode": "001202",
-   "stockName": "炬申股份",
-   "stockPct": -0.33,
-   "gap": -2.19
-  },
-  {
-   "bondCode": "127098",
-   "bondName": "欧晶转债",
-   "price": 120.61,
-   "pct": -0.55,
-   "stockCode": "001269",
-   "stockName": "欧晶科技",
-   "stockPct": 1.66,
-   "gap": -2.21
-  },
-  {
-   "bondCode": "113636",
-   "bondName": "甬金转债",
-   "price": 126.62,
-   "pct": -1.18,
-   "stockCode": "603995",
-   "stockName": "甬金股份",
-   "stockPct": 1.08,
-   "gap": -2.26
-  },
-  {
-   "bondCode": "127113",
-   "bondName": "长高转债",
-   "price": 144.373,
-   "pct": -1.55,
-   "stockCode": "002452",
-   "stockName": "长高电气",
-   "stockPct": 0.71,
-   "gap": -2.26
-  },
-  {
-   "bondCode": "111012",
-   "bondName": "福新转债",
-   "price": 341.825,
-   "pct": -6.42,
-   "stockCode": "605488",
-   "stockName": "福莱新材",
-   "stockPct": -4.12,
-   "gap": -2.3
-  },
-  {
-   "bondCode": "118059",
-   "bondName": "颀中转债",
-   "price": 173.648,
-   "pct": -5.34,
-   "stockCode": "688352",
-   "stockName": "颀中科技",
-   "stockPct": -3.02,
-   "gap": -2.32
-  },
-  {
-   "bondCode": "113709",
-   "bondName": "振26转债",
-   "price": 173.101,
-   "pct": -4.82,
-   "stockCode": "603067",
-   "stockName": "振华股份",
-   "stockPct": -2.48,
-   "gap": -2.34
-  },
-  {
-   "bondCode": "110090",
-   "bondName": "爱迪转债",
-   "price": 123.5,
-   "pct": 0.69,
-   "stockCode": "600933",
-   "stockName": "爱柯迪",
-   "stockPct": 3.08,
-   "gap": -2.39
-  },
-  {
-   "bondCode": "123131",
-   "bondName": "奥飞转债",
-   "price": 233.88,
-   "pct": -3.28,
-   "stockCode": "300738",
-   "stockName": "奥飞数据",
-   "stockPct": -0.88,
-   "gap": -2.4
-  },
-  {
-   "bondCode": "113707",
-   "bondName": "科博转债",
-   "price": 140.927,
-   "pct": -2.51,
-   "stockCode": "603786",
-   "stockName": "科博达",
-   "stockPct": -0.05,
-   "gap": -2.46
-  },
-  {
-   "bondCode": "127092",
-   "bondName": "运机转债",
-   "price": 291.8,
-   "pct": -3.15,
-   "stockCode": "001288",
-   "stockName": "运机集团",
-   "stockPct": -0.59,
-   "gap": -2.56
-  },
-  {
-   "bondCode": "127112",
-   "bondName": "尚太转债",
-   "price": 134.601,
-   "pct": -0.36,
-   "stockCode": "001301",
-   "stockName": "尚太科技",
-   "stockPct": 2.35,
-   "gap": -2.71
-  },
-  {
-   "bondCode": "123104",
-   "bondName": "卫宁转债",
-   "price": 123.579,
-   "pct": -0.1,
-   "stockCode": "300253",
-   "stockName": "卫宁健康",
-   "stockPct": 2.62,
-   "gap": -2.72
-  },
-  {
-   "bondCode": "113706",
-   "bondName": "金帝转债",
-   "price": 157.097,
-   "pct": -4.16,
-   "stockCode": "603270",
-   "stockName": "金帝股份",
-   "stockPct": -1.4,
-   "gap": -2.76
-  },
-  {
-   "bondCode": "118013",
-   "bondName": "道通转债",
-   "price": 158.001,
-   "pct": -0.94,
-   "stockCode": "688208",
-   "stockName": "道通科技",
-   "stockPct": 1.84,
-   "gap": -2.78
-  },
-  {
-   "bondCode": "123272",
-   "bondName": "中汽转债",
-   "price": 139.226,
-   "pct": -1.19,
-   "stockCode": "301215",
-   "stockName": "中汽股份",
-   "stockPct": 1.65,
-   "gap": -2.84
-  },
-  {
-   "bondCode": "113652",
-   "bondName": "伟22转债",
-   "price": 118.499,
-   "pct": -0.54,
-   "stockCode": "603568",
-   "stockName": "伟明环保",
-   "stockPct": 2.44,
-   "gap": -2.98
-  },
-  {
-   "bondCode": "118061",
-   "bondName": "茂莱转债",
-   "price": 170.069,
-   "pct": -1.09,
-   "stockCode": "688502",
-   "stockName": "茂莱光学",
-   "stockPct": 1.94,
-   "gap": -3.03
-  },
-  {
-   "bondCode": "113049",
-   "bondName": "长汽转债",
-   "price": 106.188,
-   "pct": 0.03,
-   "stockCode": "601633",
-   "stockName": "长城汽车",
-   "stockPct": 3.19,
-   "gap": -3.16
-  },
-  {
-   "bondCode": "123247",
-   "bondName": "万凯转债",
-   "price": 170.222,
-   "pct": -6.85,
-   "stockCode": "301216",
-   "stockName": "万凯新材",
-   "stockPct": -3.67,
-   "gap": -3.18
-  },
-  {
-   "bondCode": "118074",
-   "bondName": "特宝转债",
-   "price": 146.229,
-   "pct": -4.92,
-   "stockCode": "688278",
-   "stockName": "特宝生物",
-   "stockPct": -1.69,
-   "gap": -3.23
-  },
-  {
-   "bondCode": "118056",
-   "bondName": "路维转债",
-   "price": 225.284,
-   "pct": -5.9,
-   "stockCode": "688401",
-   "stockName": "路维光电",
-   "stockPct": -2.59,
-   "gap": -3.31
-  },
-  {
-   "bondCode": "123257",
-   "bondName": "安克转债",
-   "price": 142,
-   "pct": -0.98,
-   "stockCode": "300866",
-   "stockName": "安克创新",
-   "stockPct": 2.33,
-   "gap": -3.31
-  },
-  {
-   "bondCode": "123250",
-   "bondName": "嘉益转债",
-   "price": 118.7,
-   "pct": -0.53,
-   "stockCode": "301004",
-   "stockName": "嘉益股份",
-   "stockPct": 3.05,
-   "gap": -3.58
-  },
-  {
-   "bondCode": "113643",
-   "bondName": "风语转债",
-   "price": 138.242,
-   "pct": -0.83,
-   "stockCode": "603466",
-   "stockName": "风语筑",
-   "stockPct": 2.83,
-   "gap": -3.66
-  },
-  {
-   "bondCode": "113704",
-   "bondName": "春风转债",
-   "price": 159.51,
-   "pct": -0.33,
-   "stockCode": "603129",
-   "stockName": "春风动力",
-   "stockPct": 3.44,
-   "gap": -3.77
-  },
-  {
-   "bondCode": "118076",
-   "bondName": "先锋转债",
-   "price": 167.166,
-   "pct": -5.24,
-   "stockCode": "688605",
-   "stockName": "先锋精科",
-   "stockPct": -1.37,
-   "gap": -3.87
-  },
-  {
-   "bondCode": "123261",
-   "bondName": "普联转债",
-   "price": 146.15,
-   "pct": -3.77,
-   "stockCode": "300996",
-   "stockName": "普联软件",
-   "stockPct": 0.17,
-   "gap": -3.94
-  },
-  {
-   "bondCode": "123071",
-   "bondName": "天能转债",
-   "price": 114.919,
-   "pct": 0.02,
-   "stockCode": "300569",
-   "stockName": "天能重工",
-   "stockPct": 4.01,
-   "gap": -3.99
-  },
-  {
-   "bondCode": "113679",
-   "bondName": "芯能转债",
-   "price": 124.852,
-   "pct": -0.52,
-   "stockCode": "603105",
-   "stockName": "芯能科技",
-   "stockPct": 3.48,
-   "gap": -4
+   "bondCode": "113634",
+   "bondName": "珀莱转债",
+   "price": 118.749,
+   "pct": 0.75,
+   "stockCode": "603605",
+   "stockName": "XD珀莱雅",
+   "stockPct": 3.9,
+   "gap": -3.15
   },
   {
    "bondCode": "127037",
    "bondName": "银轮转债",
-   "price": 377.597,
-   "pct": -5.41,
+   "price": 322.028,
+   "pct": -3.18,
    "stockCode": "002126",
    "stockName": "银轮股份",
-   "stockPct": -1.4,
-   "gap": -4.01
+   "stockPct": 0.1,
+   "gap": -3.28
   },
   {
-   "bondCode": "123138",
-   "bondName": "丝路转债",
-   "price": 124.198,
-   "pct": -0.21,
-   "stockCode": "300556",
-   "stockName": "丝路视觉",
-   "stockPct": 3.82,
-   "gap": -4.03
+   "bondCode": "110090",
+   "bondName": "爱迪转债",
+   "price": 121.925,
+   "pct": 1.44,
+   "stockCode": "600933",
+   "stockName": "爱柯迪",
+   "stockPct": 4.96,
+   "gap": -3.52
   },
   {
-   "bondCode": "113056",
-   "bondName": "重银转债",
-   "price": 125.13,
-   "pct": 0.65,
-   "stockCode": "601963",
-   "stockName": "重庆银行",
-   "stockPct": 4.77,
-   "gap": -4.12
+   "bondCode": "113698",
+   "bondName": "凯众转债",
+   "price": 127.805,
+   "pct": 2.58,
+   "stockCode": "603037",
+   "stockName": "凯众股份",
+   "stockPct": 6.41,
+   "gap": -3.83
   },
   {
-   "bondCode": "123283",
-   "bondName": "丰茂转债",
-   "price": 152,
-   "pct": -6.24,
-   "stockCode": "301459",
-   "stockName": "丰茂股份",
-   "stockPct": -2.06,
-   "gap": -4.18
+   "bondCode": "127096",
+   "bondName": "泰坦转债",
+   "price": 286.266,
+   "pct": -4.93,
+   "stockCode": "003036",
+   "stockName": "泰坦股份",
+   "stockPct": -0.77,
+   "gap": -4.16
   },
   {
-   "bondCode": "123269",
-   "bondName": "金杨转债",
-   "price": 148.4,
-   "pct": -0.67,
-   "stockCode": "301210",
-   "stockName": "金杨精密",
-   "stockPct": 3.52,
+   "bondCode": "113679",
+   "bondName": "芯能转债",
+   "price": 125.765,
+   "pct": 1.99,
+   "stockCode": "603105",
+   "stockName": "芯能科技",
+   "stockPct": 6.18,
    "gap": -4.19
   },
   {
-   "bondCode": "118044",
-   "bondName": "赛特转债",
-   "price": 145.729,
-   "pct": -4.55,
-   "stockCode": "688398",
-   "stockName": "赛特新材",
-   "stockPct": -0.15,
-   "gap": -4.4
+   "bondCode": "123080",
+   "bondName": "海波转债",
+   "price": 120.122,
+   "pct": 0.02,
+   "stockCode": "300517",
+   "stockName": "海波重科",
+   "stockPct": 4.34,
+   "gap": -4.32
   },
   {
-   "bondCode": "113682",
-   "bondName": "益丰转债",
-   "price": 124.889,
-   "pct": -0.52,
-   "stockCode": "603939",
-   "stockName": "益丰药房",
-   "stockPct": 3.91,
-   "gap": -4.43
+   "bondCode": "123209",
+   "bondName": "聚隆转债",
+   "price": 150.562,
+   "pct": 3.41,
+   "stockCode": "300644",
+   "stockName": "南京聚隆",
+   "stockPct": 7.85,
+   "gap": -4.44
   },
   {
-   "bondCode": "123187",
-   "bondName": "超达转债",
-   "price": 181.8,
-   "pct": -4.57,
-   "stockCode": "301186",
-   "stockName": "超达装备",
-   "stockPct": 0.33,
+   "bondCode": "127111",
+   "bondName": "金威转债",
+   "price": 129.014,
+   "pct": 2.8,
+   "stockCode": "002626",
+   "stockName": "金达威",
+   "stockPct": 7.39,
+   "gap": -4.59
+  },
+  {
+   "bondCode": "113708",
+   "bondName": "曙26转债",
+   "price": 127.02,
+   "pct": 0.31,
+   "stockCode": "603019",
+   "stockName": "中科曙光",
+   "stockPct": 5.21,
    "gap": -4.9
+  },
+  {
+   "bondCode": "110100",
+   "bondName": "龙建转债",
+   "price": 118.688,
+   "pct": 1.89,
+   "stockCode": "600853",
+   "stockName": "龙建股份",
+   "stockPct": 7.16,
+   "gap": -5.27
   },
   {
    "bondCode": "123176",
    "bondName": "精测转2",
-   "price": 350.553,
-   "pct": -5.69,
+   "price": 310.2,
+   "pct": -6.09,
    "stockCode": "300567",
    "stockName": "精测电子",
-   "stockPct": -0.73,
-   "gap": -4.96
+   "stockPct": -0.76,
+   "gap": -5.33
   },
   {
-   "bondCode": "118051",
-   "bondName": "皓元转债",
-   "price": 282.63,
-   "pct": -7.36,
-   "stockCode": "688131",
-   "stockName": "皓元医药",
-   "stockPct": -2.32,
-   "gap": -5.04
+   "bondCode": "123088",
+   "bondName": "威唐转债",
+   "price": 114.74,
+   "pct": 0.13,
+   "stockCode": "300707",
+   "stockName": "威唐工业",
+   "stockPct": 5.93,
+   "gap": -5.8
   },
   {
-   "bondCode": "113701",
-   "bondName": "祥和转债",
-   "price": 148.232,
-   "pct": 4.39,
-   "stockCode": "603500",
-   "stockName": "祥和实业",
-   "stockPct": 9.96,
-   "gap": -5.57
+   "bondCode": "127116",
+   "bondName": "瑞鹄转02",
+   "price": 135.365,
+   "pct": -5.34,
+   "stockCode": "002997",
+   "stockName": "瑞鹄模具",
+   "stockPct": 1.96,
+   "gap": -7.3
   },
   {
-   "bondCode": "127083",
-   "bondName": "山路转债",
-   "price": 122.52,
-   "pct": -0.15,
-   "stockCode": "000498",
-   "stockName": "山东路桥",
-   "stockPct": 5.69,
-   "gap": -5.84
+   "bondCode": "118039",
+   "bondName": "煜邦转债",
+   "price": 125.401,
+   "pct": 3.24,
+   "stockCode": "688597",
+   "stockName": "煜邦电力",
+   "stockPct": 10.61,
+   "gap": -7.37
   },
   {
-   "bondCode": "118050",
-   "bondName": "航宇转债",
-   "price": 227.649,
-   "pct": -12.09,
-   "stockCode": "688239",
-   "stockName": "航宇科技",
-   "stockPct": -6.07,
-   "gap": -6.02
+   "bondCode": "123260",
+   "bondName": "卓镁转债",
+   "price": 144.5,
+   "pct": 6.03,
+   "stockCode": "301398",
+   "stockName": "星源卓镁",
+   "stockPct": 13.68,
+   "gap": -7.65
   },
   {
-   "bondCode": "123279",
-   "bondName": "天脉转债",
-   "price": 166.563,
-   "pct": -2.59,
-   "stockCode": "301626",
-   "stockName": "苏州天脉",
-   "stockPct": 3.53,
-   "gap": -6.12
-  },
-  {
-   "bondCode": "111024",
-   "bondName": "澳弘转债",
-   "price": 188.469,
-   "pct": -3.3,
-   "stockCode": "605058",
-   "stockName": "澳弘电子",
-   "stockPct": 2.91,
-   "gap": -6.21
-  },
-  {
-   "bondCode": "113649",
-   "bondName": "丰山转债",
-   "price": 130.518,
-   "pct": 0.83,
-   "stockCode": "603810",
-   "stockName": "丰山集团",
-   "stockPct": 7.18,
-   "gap": -6.35
-  },
-  {
-   "bondCode": "113677",
-   "bondName": "华懋转债",
-   "price": 250.024,
-   "pct": -8.63,
-   "stockCode": "603306",
-   "stockName": "华懋科技",
-   "stockPct": -1.91,
-   "gap": -6.72
-  },
-  {
-   "bondCode": "118071",
-   "bondName": "华峰转债",
-   "price": 191.781,
-   "pct": -5.19,
-   "stockCode": "688200",
-   "stockName": "华峰测控",
-   "stockPct": 1.91,
-   "gap": -7.1
-  },
-  {
-   "bondCode": "113673",
-   "bondName": "岱美转债",
-   "price": 190.609,
-   "pct": 0.32,
-   "stockCode": "603730",
-   "stockName": "岱美股份",
-   "stockPct": 7.87,
-   "gap": -7.55
+   "bondCode": "123286",
+   "bondName": "国科转债",
+   "price": 100,
+   "pct": 0,
+   "stockCode": "301571",
+   "stockName": "国科天成",
+   "stockPct": 9.44,
+   "gap": -9.44
   }
  ]
 }
