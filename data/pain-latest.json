@@ -1,134 +1,184 @@
 {
- "date": "2026-09-29",
- "prevZtCount": 57,
+ "date": "2026-10-14",
+ "prevZtCount": 36,
  "perf": {
-  "n": 57,
-  "universe": 57,
+  "n": 36,
+  "universe": 36,
   "missing": 0,
   "reliable": true,
-  "avg": 1.3,
-  "median": 0,
-  "lossRatio": 0.49,
-  "worst": -10,
-  "best": 20.01,
-  "limitUpAgain": 14,
-  "limitDown": 3,
-  "bigLoss": 4,
+  "avg": -0.86,
+  "median": -1.11,
+  "lossRatio": 0.61,
+  "worst": -10.03,
+  "best": 19.93,
+  "limitUpAgain": 5,
+  "limitDown": 5,
+  "bigLoss": 8,
   "note": null
  },
  "advance": {
-  "n": 10,
-  "kept": 6,
-  "failed": 4,
-  "failRate": 0.4,
+  "n": 15,
+  "kept": 2,
+  "failed": 13,
+  "failRate": 0.87,
   "byTier": {
    "2": {
-    "n": 7,
-    "kept": 4,
-    "failed": 3,
-    "failRate": 0.43
+    "n": 11,
+    "kept": 2,
+    "failed": 9,
+    "failRate": 0.82
    },
    "3": {
     "n": 1,
-    "kept": 1,
-    "failed": 0,
-    "failRate": 0
+    "kept": 0,
+    "failed": 1,
+    "failRate": 1
    },
    "4+": {
-    "n": 2,
-    "kept": 1,
-    "failed": 1,
-    "failRate": 0.5
+    "n": 3,
+    "kept": 0,
+    "failed": 3,
+    "failRate": 1
    }
   },
   "reliable": true,
-  "maxLb": 6,
+  "maxLb": 4,
   "detail": [
    {
-    "code": "600825",
-    "lb": 6,
-    "chg": 9.99,
-    "kept": true
-   },
-   {
-    "code": "603949",
+    "code": "002696",
     "lb": 4,
-    "chg": -9.98,
+    "chg": -9.97,
     "kept": false
    },
    {
-    "code": "000678",
+    "code": "603096",
+    "lb": 4,
+    "chg": -9.68,
+    "kept": false
+   },
+   {
+    "code": "002343",
+    "lb": 4,
+    "chg": 4.71,
+    "kept": false
+   },
+   {
+    "code": "603968",
     "lb": 3,
-    "chg": 9.98,
-    "kept": true
-   },
-   {
-    "code": "002912",
-    "lb": 2,
-    "chg": -8.65,
+    "chg": -6.12,
     "kept": false
    },
    {
-    "code": "600032",
+    "code": "600847",
     "lb": 2,
-    "chg": -5.75,
+    "chg": -10.03,
     "kept": false
    },
    {
-    "code": "600488",
+    "code": "001318",
     "lb": 2,
-    "chg": -3.04,
+    "chg": -10.02,
     "kept": false
    },
    {
-    "code": "600241",
+    "code": "600202",
     "lb": 2,
-    "chg": 9.95,
+    "chg": -5.42,
+    "kept": false
+   },
+   {
+    "code": "000823",
+    "lb": 2,
+    "chg": -2.36,
+    "kept": false
+   },
+   {
+    "code": "002860",
+    "lb": 2,
+    "chg": -0.71,
+    "kept": false
+   },
+   {
+    "code": "601188",
+    "lb": 2,
+    "chg": -0.63,
+    "kept": false
+   },
+   {
+    "code": "000668",
+    "lb": 2,
+    "chg": 1.57,
+    "kept": false
+   },
+   {
+    "code": "002813",
+    "lb": 2,
+    "chg": 3.75,
+    "kept": false
+   },
+   {
+    "code": "600391",
+    "lb": 2,
+    "chg": 5.5,
+    "kept": false
+   },
+   {
+    "code": "000530",
+    "lb": 2,
+    "chg": 9.96,
     "kept": true
    },
    {
-    "code": "000011",
+    "code": "002917",
     "lb": 2,
-    "chg": 9.97,
-    "kept": true
-   },
-   {
-    "code": "002242",
-    "lb": 2,
-    "chg": 10.04,
-    "kept": true
-   },
-   {
-    "code": "301190",
-    "lb": 2,
-    "chg": 20.01,
+    "chg": 10.01,
     "kept": true
    }
   ],
   "note": null
  },
  "bigLoss": {
-  "n": 4,
+  "n": 8,
   "list": [
    {
-    "code": "605058",
-    "name": "澳弘电子",
-    "chg": -10
+    "code": "600847",
+    "name": "万里股份",
+    "chg": -10.03
    },
    {
-    "code": "605258",
-    "name": "协和电子",
-    "chg": -10
+    "code": "001318",
+    "name": "阳光乳业",
+    "chg": -10.02
    },
    {
-    "code": "603949",
-    "name": "雪龙集团",
-    "chg": -9.98
+    "code": "603258",
+    "name": "电魂网络",
+    "chg": -9.99
    },
    {
-    "code": "002912",
-    "name": "中新赛克",
-    "chg": -8.65
+    "code": "002552",
+    "name": "宝鼎科技",
+    "chg": -9.99
+   },
+   {
+    "code": "002696",
+    "name": "百洋股份",
+    "chg": -9.97
+   },
+   {
+    "code": "603096",
+    "name": "新经典",
+    "chg": -9.68
+   },
+   {
+    "code": "001216",
+    "name": "华瓷股份",
+    "chg": -9.54
+   },
+   {
+    "code": "605189",
+    "name": "富春染织",
+    "chg": -8.63
    }
   ]
  },
@@ -136,18 +186,18 @@
   "n": 1,
   "list": [
    {
-    "code": "002799",
-    "name": "环球印务",
-    "chg": -3.05,
-    "amplitude": 15.8
+    "code": "603968",
+    "name": "醋化股份",
+    "chg": -6.12,
+    "amplitude": 15.3
    }
   ]
  },
- "scanned": 57,
+ "scanned": 36,
  "verdict": {
-  "level": "normal",
-  "label": "多空拉锯",
-  "reason": "昨涨停今日翻绿 49%、高位板晋级失败 40%，追高盈亏各半"
+  "level": "severe",
+  "label": "亏钱效应显著",
+  "reason": "昨涨停今日翻绿 61%、高位板晋级失败 87%，追高者整体受损"
  },
  "thresholds": {
   "BIG_LOSS_PCT": -7,
@@ -158,6 +208,6 @@
   "NEUTRAL_BAND": 0.1,
   "MIN_SAMPLE": 5
  },
- "generatedAt": "2026-10-07T13:14:34.062Z",
- "curDate": "2026-09-30"
+ "generatedAt": "2026-10-16T17:14:21.684Z",
+ "curDate": "2026-10-16"
 }
