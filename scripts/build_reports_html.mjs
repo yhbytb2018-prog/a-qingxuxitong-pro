@@ -51,10 +51,13 @@ const arbSources = readJson('data/arb_sources.json');      // 转债/正股联�
 const hotNews = readJson('data/hot_news.json');            // 热点题材快讯（fetch_hot_news.mjs）
 const prejudgeDetail = readJson('data/prejudge_detail.json'); // 盘中预判明细（fetch_prejudge_data.mjs）
 
-// 交易日：--date > signals 口径 > intraday 口径；推不出则退出（不猜日期）
+// 交易日：--date > signals/intraday 两档取较新（盘中拍点 signals 仍是上一交易日，intraday 已滚当日）；推不出则退出（不猜日期）
+const signalsTradeDate = signals?.meta?.tradeDate || null;
+const intradayTradeDate = intraday?.tradeDate || null;
 const tradeDate = dateArg
-  || signals?.meta?.tradeDate || null
-  || intraday?.tradeDate || null;
+  || (signalsTradeDate && intradayTradeDate ? (intradayTradeDate > signalsTradeDate ? intradayTradeDate : signalsTradeDate) : null)
+  || signalsTradeDate
+  || intradayTradeDate;
 if (!tradeDate) {
   console.error('[reports-html] 推不出交易日（signals/intraday 均无 tradeDate），退出');
   process.exit(1);
