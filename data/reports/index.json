@@ -17,11 +17,11 @@
    "is_sample": true
   },
   "intraday": {
-   "date": "2026-10-21",
-   "file": "intraday_2026-10-21.json",
+   "date": "2026-10-22",
+   "file": "intraday_2026-10-22.json",
    "is_sample": true
   }
  },
- "generatedAt": "2026-10-21T05:49:29.053Z",
+ "generatedAt": "2026-10-22T05:37:47.997Z",
  "sampleNote": "首屏示例：首次打开页面时显示 2026-09-30 报告（docs/ai_report_module_design.md §3.4）"
 }
