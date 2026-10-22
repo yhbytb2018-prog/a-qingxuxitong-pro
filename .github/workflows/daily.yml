@@ -4,6 +4,17 @@ on:
   schedule:
     - cron: '30 10 * * 1-5'   # 北京 18:30（UTC 10:30），仅周一至五；盘后首抓（部分源可能未出当日数据）
     - cron: '0 13 * * 1-5'    # 北京 21:00（UTC 13:00），晚间补抓：深证日K/龙虎榜等延迟数据齐后重抓当日并覆盖，合并时同日替换 + 全档重算
+    # ★ 盘后备拍（2026-10-22 cron 丢拍实录）：10-20 起平台连续三天未触发 '30 10'/'0 13'
+    #   （18:30 拍点 Actions 里只有 tick run，smoke/build 全 skipped 且显示 success——静默断更），
+    #   14 栏目日报停在 20261019。加两条同语义备拍：不是排除对象（smoke/build 的排除式 if
+    #   不含它们 → 照常跑全链路；intraday/premarket/us-close 的 == 式 if 天然不匹配 → 自动跳过）。
+    #   重复跑是幂等的：同日文件后跑覆盖先跑、指纹去重防重推、无变化跳过提交。
+    - cron: '15 11 * * 1-5'   # 北京 19:15 备拍①：18:30 主拍丢了就这里补
+    - cron: '15 14 * * 1-5'   # 北京 22:15 备拍②：21:00 主拍丢了就这里补（含盘后 AI 报告推送）
+    # ★ 盘后断更守卫（2026-10-22）：北京 23:50 终检——若当日为交易日而 reports_html 缺当日文件，
+    #   企微 + issue 双通道告警（scripts/check_reports_gap.mjs）。观察者不是门禁：恒 exit 0。
+    #   ⚠ 本 cron 必须加进 smoke/build 的排除式 if（否则 23:50 会误跑全量管道）。
+    - cron: '50 15 * * 1-5'
     # ★ 美股收盘档（2026-10-01 事故修复）：北京次日 04:30 = 美东 16:30（收盘 + 30 分钟结算缓冲）。
     #   为什么必须单独一条：上面 21:00 那次跑在北京 21:00 = 美东 09:00，**美股还没开盘**
     #   （09:30 开），数据源给的是盘前占位（last==prevClose、open/high/low=0）。
@@ -82,7 +93,7 @@ jobs:
   smoke:
     # S3-6：盘中推送三时点（'15 2' / '45 5,6'）已加排除——冒烟是盘前 08:30 摸门语义，
     # 盘中重跑纯浪费且占 daily-sentiment 并发槽（会延迟同拍 intraday job）。
-    if: github.event.schedule != '0,30 1-7 * * 1-5' && github.event.schedule != '5 1 * * 1-5' && github.event.schedule != '15 2 * * 1-5' && github.event.schedule != '45 5,6 * * 1-5'
+    if: github.event.schedule != '0,30 1-7 * * 1-5' && github.event.schedule != '5 1 * * 1-5' && github.event.schedule != '15 2 * * 1-5' && github.event.schedule != '45 5,6 * * 1-5' && github.event.schedule != '50 15 * * 1-5'
     runs-on: ubuntu-latest
     # 5 → 8：重试兜底后最坏路径 = 首跑（≤2 分钟）+ 60s 退避 + 重跑，留足余量不误触超时。
     timeout-minutes: 8
@@ -150,7 +161,7 @@ jobs:
       # UTC 00:30 = 北京 08:30：抓东财 7x24 快讯 + 聚合涨停题材 → 生成热点新闻栏目页
       #   → 推企微晨报（指纹防重推）。新闻 7x24 无交易日语义，工作日每天都抓。
       # 2026-10-13 窗口化（防 GitHub cron 延迟丢拍）：N∈[0030,1000) 且当日文件缺失才生成——
-      #   本 job 只在 00:30/10:30/13:00/20:30 四个拍点运行（smoke 的 if 已排除其余 cron），
+      #   本 job 只在 00:30/10:30/11:15/13:00/14:15/20:30 六个拍点运行（smoke 的 if 已排除其余 cron），
       #   10:30 起的拍点 N≥1030 不在窗内，窗内运行唯一对应「08:30 拍点（含延迟）」或手动
       #   dispatch；已出则跳过（幂等，push 侧另有指纹去重）。
       - name: 热点题材新闻抓取+推送（北京 08:30 拍点 · 窗口缺失补生成）
@@ -200,7 +211,8 @@ jobs:
       github.event.schedule != '30 0 * * 1-5' &&
       github.event.schedule != '5 1 * * 1-5' &&
       github.event.schedule != '15 2 * * 1-5' &&
-      github.event.schedule != '45 5,6 * * 1-5'
+      github.event.schedule != '45 5,6 * * 1-5' &&
+      github.event.schedule != '50 15 * * 1-5'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -328,7 +340,7 @@ jobs:
       # 不如等 2.5 小时推全量（"收盘 5 分钟"语义由页面即时轨 15:05 版补位，
       # 双轨时点约束见设计文档 §3.3）。指纹去重保证 21:00 与 18:30 内容未变时不重推。
       - name: 推送盘后/周报 AI 报告（企微 + 指纹防风暴）
-        if: github.event.schedule == '0 13 * * 1-5' || github.event_name == 'workflow_dispatch'
+        if: github.event.schedule == '0 13 * * 1-5' || github.event.schedule == '15 14 * * 1-5' || github.event_name == 'workflow_dispatch'
         env:
           OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
         run: node scripts/push_ai_report.mjs --latest post_market --latest weekly
@@ -561,3 +573,27 @@ jobs:
             # 显式触发部署（GITHUB_TOKEN 的 push 不产生 push 触发事件，头注 actions: write 处有实录）
             curl -fsS -X POST -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "https://api.github.com/repos/${{ github.repository }}/actions/workflows/deploy-pages.yml/dispatches" -d '{"ref":"main"}' || echo "⚠ deploy-pages 显式触发失败（数据已提交；下次 bot 提交补部署，或手动 Run deploy-pages）"
           fi
+
+  reports_guard:
+    # ── 盘后 14 栏目日报断更守卫（2026-10-22 cron 丢拍实录）───────────────────
+    #   北京 23:50 终检：当日为交易日而 reports_html 缺当日文件 → 企微 + issue 双通道
+    #   告警。背景：10-20 起平台连续三天未触发 '30 10'/'0 13'，smoke/build 全 skipped
+    #   且显示 success（跳过不报警），14 栏目日报静默停在 20261019——本 job 是全链
+    #   备拍（19:15/22:15）之后的最后触达面。
+    #   纪律：观察者不是门禁——脚本恒 exit 0（+ continue-on-error 双保险），绝不拖红；
+    #   判定在 src/reports_gap.js 纯函数层，日历未覆盖当天/非交易日 → 静默跳过不臆测。
+    #   workflow_dispatch 可手动演练（--date 缺省取北京当天）。
+    if: github.event.schedule == '50 15 * * 1-5' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 盘后日报断更检查（缺当日文件 → 企微+issue，观察者恒绿）
+        continue-on-error: true
+        env:
+          OPS_WEBHOOK: ${{ secrets.OPS_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/check_reports_gap.mjs
