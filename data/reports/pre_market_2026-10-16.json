@@ -4,7 +4,7 @@
  "trigger": "schedule",
  "urgent": false,
  "date": "2026-10-16",
- "generated_at": "2026-10-26T05:52:19.944Z",
+ "generated_at": "2026-10-27T06:04:56.423Z",
  "generated_by": "ci",
  "status": "degraded",
  "track": "A",
@@ -136,13 +136,13 @@
    {
     "key": "a50",
     "name": "富时中国A50期货",
-    "chgPct": -0.003786,
+    "chgPct": 0.001711,
     "state": "ok"
    },
    {
     "key": "sox",
     "name": "费城半导体指数",
-    "chgPct": 0.004425,
+    "chgPct": 0.028201999999999998,
     "state": "ok"
    }
   ],
@@ -157,18 +157,18 @@
    "executed": true
   },
   "overnight_exposure": {
-   "a50_chgPct": -0.003786,
+   "a50_chgPct": 0.001711,
    "posGap": 0.2,
    "us_close": {
-    "dji": -0.012348,
-    "spx": -0.005187000000000001,
-    "ixic": -0.002058
+    "dji": 0.0028039999999999996,
+    "spx": 0.006964000000000001,
+    "ixic": 0.008246
    },
    "cn_overnight": {
-    "hxc": -0.008372000000000001,
-    "fxi": -0.004314
+    "hxc": 0.006306000000000001,
+    "fxi": 0.00619
    },
-   "cnh_chgPct": 0
+   "cnh_chgPct": -0.000015
   },
   "key_levels": null,
   "events_today": null,
