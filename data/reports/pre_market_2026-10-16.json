@@ -4,7 +4,7 @@
  "trigger": "schedule",
  "urgent": false,
  "date": "2026-10-16",
- "generated_at": "2026-11-26T09:15:58.646Z",
+ "generated_at": "2026-11-27T09:31:38.682Z",
  "generated_by": "ci",
  "status": "degraded",
  "track": "A",
@@ -136,7 +136,7 @@
    {
     "key": "a50",
     "name": "富时中国A50期货",
-    "chgPct": 0.006981,
+    "chgPct": -0.00037699999999999995,
     "state": "ok"
    },
    {
@@ -157,7 +157,7 @@
    "executed": true
   },
   "overnight_exposure": {
-   "a50_chgPct": 0.006981,
+   "a50_chgPct": -0.00037699999999999995,
    "posGap": 0.2,
    "us_close": {
     "dji": 0.0032840000000000005,
@@ -168,7 +168,7 @@
     "hxc": 0.018715,
     "fxi": -0.004136
    },
-   "cnh_chgPct": -0.00042
+   "cnh_chgPct": 0.000691
   },
   "key_levels": null,
   "events_today": null,
